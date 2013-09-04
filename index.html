@@ -1,0 +1,594 @@
+<title>COMP 520 Home Page</title>
+<table border=5 cellspacing=5 cellpadding=5 width=100%>
+<tr><td colspan=2 align=center><br>
+
+<table border=0 cellspacing=0 cellpadding=0 width=100%>
+<td align=center>
+<font size="+5"><b>COMP 520 Compiler Design</b></font>
+<p>
+<font size="+4"><b>Fall 2013</b></font>
+<p>
+
+Some of the links to future exercises, deliverables,
+milestones, and slides are broken but will be updated in due time.
+This website is still being updated, but the content is mostly correct.
+
+Please refer to this web page weekly to review the course material and
+to check for updated links.  
+
+<p>
+<code>
+<p>
+</td>
+</tr>
+<tr>
+<td>
+<h2> Academic Integrity at McGill University </h2>
+
+McGill University values academic integrity. Therefore all students
+must understand the meaning and consequences of cheating, plagiarism
+and other academic offences under the Code of Student Conduct and
+Disciplinary Procedures (see <a
+href="http://www.mcgill.ca/integrity/">
+http://www.mcgill.ca/integrity/</a> for more information).  A helpful
+article on how to avoid plagiarism can be found at: <a
+href="http://www.mcgill.ca/integrity/studentguide/">http://www.mcgill.ca/integrity/studentguide/</a>.
+<p>
+In terms of this course, 
+<strong> part </strong> of your responsibility is to ensure that you put the
+name of the author on all code that is submitted.  By putting your name on
+the code you are indicating that it is completely your own work.   If you
+use some third-party code you must have permission to use it and you must
+clearly indicate the source of the code.  
+</td>
+</tr>
+
+<tr>
+<td>
+<p>
+<h2> Announcements: </h2>
+
+<ul>
+
+<!-- announcements from 2002 -->
+<!-- <li> Nov 20,  Updated information for the WIG report, follow the link -->
+<!-- in box for end of the course at bottom of page.  WIG compiler due Friday, -->
+<!-- November 29,  WIG report due Wednesday, December 4.  -->
+<!-- <li> Oct 16,  I sent e-mail to the whole class, but all people with -->
+<!-- hotmail address had their e-mail rejected. -->
+<!-- <li> Oct 16, WIG benchmarks and WIG scanner/parser milestone updated, -->
+<!-- see Milestone for week 7.  -->
+<!-- <li> Oct 16, no class on Friday, October 18th.  I will be out of town -->
+<!-- giving a keynote presentation at APICS 2002.    -->
+<!-- <li> Oct 16, 2002 Joos Benchmarks are avaliable at  -->
+<!-- <code>~/hendren/JOOSBenchmarks/Fall02</code>.   The subdirectories showing -->
+<!-- the results of peephole opts will soon be added.    -->
+<!-- <li> Oct 8, WIG/CGI milestone modified so that you must submit both your -->
+<!-- WIG service and your CGI script. -->
+<!-- <li> Oct 4, WIG examples fixed... permission on cgi-bin directory must be 711, -->
+<!-- for more info see SOCS page  -->
+<!--  <a href="http://www.cs.mcgill.ca/socsinfo/cgiperl/">cgi/perl howto</a> -->
+<!-- <li> Sept 27, for deliverable 1, you only have to submit by e-mail,  I -->
+<!-- forgot to arrange for a submission box.  Sorry about that.  Laurie -->
+<!-- <li> Sept 26, groups listed below under link for People.  Find your group -->
+<!-- number for submitting Deliverable 1. -->
+<!-- <li> Sept 17, instructions for how to use Joos, Java, SableCC and Soot have -->
+<!-- been updated,  see the "How to" links below in the JOOS and WIG boxes.   -->
+<!-- Everything "should" work on both the Sun servers and the FreeBSD machines. -->
+<!-- Please try them out and report problems to the instructor. -->
+
+<!-- announcements from 2004 -->
+<!-- <li> Nov 10, Chris had added more scripts to the joos benchmarks to make it easy to run the peephole patterns on the A-, A+ and your Joos compilers.   Please -->
+<!-- see  -->
+<!-- <a href= -->
+<!-- "http://www.sable.mcgill.ca/~hendren/520/bench2004/fall2004/joos/README"> -->
+<!-- http://www.sable.mcgill.ca/~hendren/520/bench2004/fall2004/joos/README</a>  for -->
+<!-- instructions on how to use it.   -->
+<!-- <p> -->
+<!-- You will find the new tar-ball, with the new peephole scripts at: -->
+<!-- <a href= -->
+<!-- "http://www.sable.mcgill.ca/~hendren/520/bench2004/fall2004-0.5.tar.gz"> -->
+<!-- http://www.sable.mcgill.ca/~hendren/520/bench2004/fall2004-0.5.tar.gz</a>.  -->
+<!-- These have all been upacked in the directory: -->
+<!-- <p> -->
+<!-- <a href= -->
+<!-- "http://www.sable.mcgill.ca/~hendren/520/bench2004/fall2004/"> -->
+<!-- http://www.sable.mcgill.ca/~hendren/520/bench2004/fall2004/</a> -->
+
+
+<!-- <li> Nov 5, Chris has made a few improvements to benchmarks available as in point below.  You probably want to refresh and take a new copy of the .tar.gz file. -->
+<!-- <li> Nov 3, Joos and Wig benchmarks are available at: -->
+<!-- <a href="http://www.sable.mcgill.ca/~hendren/520/bench2004/"> -->
+<!-- http://www.sable.mcgill.ca/~hendren/520/bench2004/ </a>.  You may -->
+<!-- take the entire suite by grabbing the file <code> fall2004.tar.gz </code>,  -->
+<!-- or you may browse the directories.   Chris Pickett has also prepared some -->
+<!-- scripts which you may find useful -- check out the subdirectory -->
+<!-- <code> fall2004/joos </code>.  Any questions you have about the benchmarks -->
+<!-- or how to run them should be directed to Chris. -->
+
+<!-- <li> Use bsdwig4, bsdwig18, bsdperfectwig on lab4 BSD machines (and then compile the resulting file on freebsd.cs.mcgill.ca).   Or, use wig4, wig18, perfectwig -->
+<!-- on a SUN server (willy,mimi) and then compile resulting file on freebsd.cs.mcgill.ca.  wig10 should work anywhere that Java runs ..., but generated code must be -->
+<!-- compiled on freebsd.cs.mcgill.ca. -->
+<!-- <li> Oct 5, updated information about WIG compilers sent in e-mail.  A copy of the message is <a href="wigmail.txt"> found here </a>.  -->
+<!-- <li> Oct 2, <strong> IMPORTANT INFO about WIG compilers </strong>.  Please read -->
+<!-- <a href="WIGupdates.html"> these important updates </a> -->
+<!-- <li> Oct 2, svn documents updated. <a href="svn-crashcourse.html"> (html) </a>  -->
+<!-- ---  <a href="svn-crashcourse.pdf"> (pdf) </a> -->
+<!-- <li> Sept 30, <strong> NO CLASS ON WEDNESDAY OCTOBER 6 </strong> -->
+<!-- <li> Sept 30 , <strong> TENTATIVE</strong> Final Exam Timetable has COMP 520 final exam scheduled for Tuesday Dec 07, 14:00.   The date and time may -->
+<!-- still change,  keep a watch on <a href="http://www.mcgill.ca/student-records/exam -->
+<!-- "> http://www.mcgill.ca/student-records/exam</a> -->
+
+<!-- <li> Sept 25, SOCS has an svn server now, and you might prefer to use  -->
+<!-- svn instead of cvs (I prefer svn myself).  Kacper has kindly written a small  -->
+<!-- document with all of the basics for using svn, it can be found  -->
+<!-- <a href="svn-crashcourse.html"> here </a>. -->
+<!-- <li> Sept 25, JOOS grammar,  if you are getting parse errors for your -->
+<!-- JOOS programs, remember that your can find the exact grammar of JOOS in  -->
+<!-- <a href="http://www.cs.mcgill.ca/~hendren/JOOS1.1/A-/joos.y">bison</a>  -->
+<!-- form or  -->
+<!-- <a href="http://www.cs.mcgill.ca/~hendren/SableCC/JJOOS/src/joos.sablecc">sablecc</a> form. -->
+
+<!-- <li> Sept 21, instructions for using Eclipse.  Eclipse is an open source -->
+<!-- development environment, with some very nice features for developing Java -->
+<!-- projects.  If you are interested in using Eclipse, you can get more information -->
+<!-- and download it from <a href="http://www.eclipse.org"> http://www.eclipse.org </a>.  Patrick has kindly provided the basic instructions on how to set up -->
+<!-- a project and use ant and cvs with that project.  His directions are found -->
+<!-- <a href="HowToUseEclipse.txt"> here </a>.  -->
+
+<!-- <li> Sept 20, for all of you using SableCC, I suggest that you join the -->
+<!-- SableCC-user mailing list.  You may post precise questions there, and you -->
+<!-- may review the prior postings.  Since there is a current lack of documentation -->
+<!-- on SableCC3, posting relevant questions would be of benefit to other users -->
+<!-- and the SableCC3 developers.   See <a href="http://sablecc.org/lists/control/listinfo/sablecc-user/"> http://sablecc.org/lists/control/listinfo/sablecc-user/ -->
+<!-- </a> for information on how to subscribe to the list and how to review -->
+<!-- the archives. -->
+<!-- <li> Sept 15, JJOOS for SableCC version 3 is all working now.  Thanks to -->
+<!-- Etienne Gagnon for his help.   Give SableCC 3 a try and see how you like -->
+<!-- it.  Further instructions  <a href="howtosablecc.html"> here </a>. -->
+<!-- <li> Sept 15, I have gone through all of the course web site and updated links and software.  I think everything should be ok now.  Please let me know of any -->
+<!-- problems,  or any links which might be interesting to add.  LJH -->
+<!-- <li> Sept 13, Milestone 0 is due this Friday.   -->
+<!-- <li> Sept 13, Make sure you put -lfl as the <strong> last </strong> -->
+<!-- argument for your compilation and linking of a flex scanner.   -->
+<!-- For example,  a simple scanner would be compiled by  -->
+<!-- <pre> -->
+<!-- flex exp.l -->
+<!-- gcc lex.yy.c -o mylexer -lfl -->
+<!-- </pre> -->
+
+<!-- To see a sample makefile and small scanner and parser, refer to  -->
+<!-- <a href="EXP/C"> this directory </a>.   You can grab all required files in -->
+<!-- a tar bundle as <a href="EXP/C/exp.tar">exp.tar</a>.  If you use the tar -->
+<!-- file, be sure to extract it inside a <strong> new </strong> directory. -->
+
+<!-- <li> 2007-09-22: The Tiny expressions milestone is posted and due on -->
+<!--   Friday, Sept 28th. -->
+<!-- <li> 2007-09-19: The exercises for week 3 are due on Monday, Sept. 24th. -->
+<!-- <li> 2007-09-17: Peng has helped get the source code for the Tiny expression language and -->
+<!-- sample evaluators available, and has provided SableCC installation -->
+<!-- instructions. -->
+<!-- <li> 2007-09-17: The group formation milestone is posted, and is due on -->
+<!-- Friday Sept. 21st. -->
+<!-- <li> 2007-09-10: The exercises for week 2 are due on Monday, Sept. 17th. -->
+<!-- <li> 2007-09-05: The exercises for week 1 are due on Friday, Sept. 7th. -->
+<!-- <li> 2007-09-05: The first class is Wednesday, Sept 5th, ENGTR 0060, -->
+<!-- 11:35-12:25.  Be sure to come on time and be ready to take some notes. -->
+
+<!-- Announcements from 2010 -->
+<!-- <li> A page describing the <a href="final.html">final</a> was added. </li> -->
+<!-- <li> The Tiny milestone has been extended until Sunday at midnight! </li> -->
+
+<!-- Announcements from 2012 -->
+
+<li> 2012-12-08: Sample final solutions <a href="sample-solution.pdf">here</a>.</li>
+<li> 2012-11-22: Added some sample final questions <a href="sample.pdf">here</a>.</li>
+<li> 2012-10-15: Updated midterm date: October 26 (still in-class). </li>
+<li> 2012-10-12: Added link to paper about bytecode verification under section for week 8. </li>
+<li> 2012-09-21: Updated Tiny example milestone to say you should use SableCC3,
+not SableCC2.</li>
+<li> 2012-09-14: Midterm date posted: October 23 (in-class). </li>
+<li> 2012-09-07: Some interesting links about scanning were added under the section for Week 2. </li>
+
+</ul>
+
+</td>
+</tr>
+</table>
+</td></tr>
+
+<tr>
+<td valign=top>
+<h2><font ><font >About this course</font></font></h2><font >
+<font >
+<a href="out.html">Official course description</a><br>
+<a href="philosophy.html">Philosophy of the course</a><br>
+<a href="availability.html">Availability</a><p>
+</td>
+
+<td valign=top><h2><font ><font >People</font></font></h2><font >
+    Lecturer (Matthieu Dubet)<br />
+    <!-- a href="ta.html" -->Teaching assistant (Vineet Kumar)<!-- /a--><br>
+    <!-- a href="ta.html" -->Teaching assistant (Ismail Badawi)<!-- /a--><br>
+</td>
+</tr>
+
+<tr>
+<td valign=top>
+<h2>Printed Readings</h2>
+<a href="printed.html">Course text (readings)</a><br>
+<a href="slides.html">Lecture notes </a> <br>
+</td>
+
+<td valign=top>
+<h2>Deadlines and Important Dates</h2>
+<a href="assignments.html">Deliverables, milestones, and exercises</a><br>
+<a href="#WEEKBYWEEK">Week by week schedule</a><br>
+<a href="midterm.html">Midterm</a><br>
+</td>
+</tr>
+
+<tr>
+<td valign=top>
+<h2><font ><font >Project <img src="images/joos32.gif"></font></font></h2><font >
+<a href="joosproj.html">The project description</a><br>
+<a href="a-source.html">The A- source code (flex/bison/C)</a><br>
+<a href="a-source_java.html">The A- source code (SableCC/Java)</a><br>
+<a href="a+proj.html">The A+ project</a><br>
+<a href="a+bin.html">The A+ binary</a><br>
+<a href="joosex.html">JOOS examples </a><br>
+<a href="joos/joos/lib">JOOS library source </a> <br>
+<a href="jooslib.html">JOOS extern classes </a><p>
+<a href="howtojoosjava.html">How to run Java and JOOS programs</a> <br><p>
+<a href="howtosvn.html">How to use Subversion</a><br>
+</td>
+<td valign=top>
+<h2><font ><font >Project <img src="images/wig32.gif"></font></font></h2><font >
+<a href="wigproj.html">The project description </a><br>
+<a href="wiggrammar.txt">Original WIG grammar </a> <br>
+<a href="wiggrammar_bison.txt"> Yacc-style grammar, most conflicts solved </a> <br>
+<a href="wiggrammar_sablecc.txt"> Sablecc-style grammar (version 2)</a> <br>
+<a href="howtosablecc.html"> How to run SableCC </a> <br>
+<a href="wigex.html">WIG examples</a><br>
+<a href="howtowig.html">How to compile and run WIG services</a><br>
+<br>
+<a href="http://www.brics.dk/bigwig/index.html">The 
+<code>&lt;bigwig&gt;</code> project</a><br>
+<a href="http://www.bell-labs.com/project/MAWL/mawl.html">The Mawl project</a><p>
+</td>
+</tr>
+<tr>
+<td valign=top>
+<h2><font ><font >Peephole contest</font></font></h2><font >
+<img src="images/smiley.gif" align=texttop> <a href="peeprules.html">Rules and prizes</a><br>
+<img src="images/smiley.gif" align=texttop> <a href="peepresult.html">Results and Winners </a><p>
+</td>
+<td valign=top>
+<h2><font ><font >Online documentation</font></font></h2><font >
+<a href="http://www.cs.princeton.edu/~appel/modern/c/software/flex/flex_toc.html">The <font face=courier><code>flex</code></font> scanner generator</a><br>
+<a href="http://www.cs.princeton.edu/~appel/modern/c/software/bison/bison_toc.html">The <font face=courier><code>bison</code></font> parser generator</a><br>
+<a href="http://www.sablecc.org">The <font face=courier><code>SableCC</code></font> compiler generator</a><br>
+<a href="http://java.sun.com/docs/books/jls/second_edition/html/jTOC.doc.html">The Java language specification</a><br>
+<a href="http://java.sun.com/docs/books/vmspec/2nd-edition/html/VMSpecTOC.doc.html">The Java virtual machine</a><br>
+<a href="http://java.sun.com/j2se/1.4.2/docs/api/">The Java API documentation</a><br>
+<p> 
+<a href="http://www.murdoch.edu.au/trainweb/guides/guides.html"> HTML User Guides </a> <br>
+<a href="http://docs.rinet.ru/CGI_Programming/">CGI Programming </a> <br>
+<a href="http://www.w3.org/TR/REC-html40/">The HTML 4.0
+specification</a><br>
+<a href="http://hoohoo.ncsa.uiuc.edu/cgi/interface.html">The CGI specification</a><br>
+<p>
+<em>Under The Hood articles:</em>
+<UL> 
+<LI><a href="http://www.javaworld.com/javaworld/jw-09-1996/jw-09-bytecodes.html">Bytecode basics </a>
+<LI><a href="http://www.javaworld.com/javaworld/jw-06-1996/jw-06-vm.html">The lean, mean virtual machine</a> 
+<LI><a href="http://www.javaworld.com/javaworld/jw-07-1996/jw-07-classfile.html">The Java class file lifestyle</a>
+<LI> <a href="http://www.javaworld.com/javaworld/jw-08-1996/jw-08-gc.html">Java's garbage-collected heap</a> 
+</UL>
+</td>
+</tr>
+
+<tr><td colspan=2 align=center><br>
+<table border=0 cellspacing=0 cellpadding=0 width=100%>
+<td align=center>
+<font size="+5"><b>Week by week <a name="WEEKBYWEEK"> </b></font>
+</td>
+</table>
+</td></tr>
+
+<tr>
+<td valign=top>
+<h2><font ><font >Week 1: Introduction and Scanners</font></font></h2><font >
+
+<font face=courier><font face=courier><pre>
+   September 2012
+ S  M Tu  W Th  F  S
+          5  6  7  8
+             *  *  
+</pre></font></font>
+<p>
+<a href="slides/intro.pdf">Slides</a>, <a
+href="slides/intro-4.pdf">4-on-1</a><br>
+<p>
+<img src="images/sidea.gif"> <a href="exercises/intro.html">Exercises</a> <p>
+<img src="images/sbook.gif"> Reading C1: Louden, Chapter 1 <br>
+<img src="images/sbook.gif"> Reading C2: Appel, Chapter 2 <br> 
+<img src="images/sbook.gif"> Reading O1: Flex <p> Students who do not
+have a background in regular languages and finite
+state automata<br> should review this material on their own.  A
+good online resource may be
+found <a href="http://www.cl.cam.ac.uk/Teaching/2003/RLFA/">here</a>.<br>
+This review should be done ASAP.<br><br>
+Additionally, all students must read ALL of the material in<br>
+Chapters 1 and 2 of <a href="http://svnbook.red-bean.com/">Version
+Control with Subversion</a>.
+
+</td>
+
+<!--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --->
+
+<td valign=top>
+
+<h2><font ><font >Week 2: Scanners and parsers</font></font></h2><font >
+
+<font face=courier><font face=courier><pre>
+   September 2012
+ S  M Tu  W Th  F  S
+ 9 10 11 12 13 14 15
+       *     *  *
+</pre></font></font>
+<p>
+<a href="slides/scanparse.pdf">Slides</a>, <a href="slides/scanparse-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/scanparse.html">Exercises</a><p>
+<img src="images/sbook.gif"> Reading C3: Louden, Chapter 3 <br>
+<img src="images/sbook.gif"> Reading C4: Appel, Chapter 3.2-3.5 <br>
+<p>
+<a href="http://matt.might.net/articles/standalone-lexers-with-lex/">Standalone lexers with lex: synopsis, examples, and pitfalls</a> <br>
+<a href="http://www.youtube.com/watch?v=HxaD_trXwRE">Lexical Scanning in Go - Rob Pike (51:17)</a> <br>
+<a href="http://research.swtch.com/yyerror">Generating Good Syntax Errors</a> <br>
+</td>
+</tr>
+<!--- ================================================================ --->
+
+<tr>
+
+<td valign=top>
+<h2><font ><font >Week 3: Abstract syntax trees and SableCC</font></font></h2><font >
+
+<font face=courier><font face=courier><pre>
+   September 2012
+ S  M Tu  W Th  F  S
+16 17 18 19 20 21 22
+       *     *  * 
+</pre></font></font>
+<p>
+<a href="slides/ast.pdf">Slides</a>, <a href="slides/ast-4.pdf">4-on-1</a><br>
+<a href="sablecc.ps"> SableCC Slides </a> <p>
+<a href="tiny">Tiny expression language source code</a>
+
+<p>
+<src="images/sidea.gif"> <a href="exercises/ast.html">Exercises</a><p>
+<img src="images/sbook.gif"> Reading O2: Bison <br>
+<img src="images/sbook.gif"> Reading O3: SableCC, Gagnon, Chapters 3-6<p>
+
+<img src="images/check_in.gif"> WIG milestone: <a href="milestones/groups.html">form groups and begin planning</a><p>
+</td>
+
+<!--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --->
+
+<td valign=top>
+<h2><font ><font >Week 4: <img src="images/joos32.gif"></font></font></h2><font >
+
+<font face=courier><font face=courier><pre>
+   September 2012
+ S  M Tu  W Th  F  S
+23 24 25 26 27 28 29
+       *     *  * 
+</pre></font></font>
+<p>
+
+<a href="slides/joos.pdf">Slides</a>, <a href="slides/joos-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/joos.html">Exercises</a><p>
+<img src="images/check_in.gif"> WIG milestone: <a
+href="milestones/tiny.html">Try out each toolset on a Tiny example</a><p>
+</td>
+</tr>
+
+<!--- ================================================================ --->
+
+<tr>
+<td valign=top>
+<h2><font ><font >Week 5: <img src="images/wig32.gif"></font></font></h2><font >
+<font face=courier><font face=courier><pre>
+    October 2012
+ S  M Tu  W Th  F  S
+    1  2  3  4  5  6
+       *     *  *
+</pre></font></font>
+<p>
+<a href="slides/wig.pdf">Slides</a>, <a href="slides/wig-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/wig.html">Exercises</a><p>
+<img src="images/check_in.gif"> JOOS deliverable: <a href="deliverables/JOOSbenchmark.html">benchmark programs</a> <br>
+<img src="images/check_in.gif"> JOOS deliverable: <a href="deliverables/JOOSscanparse.html">comments and desugaring</a><p>
+<img src="images/sbook.gif"> Reading O4: HTML<br>
+<img src="images/sbook.gif"> Reading O5: CGI <p>
+</td>
+
+<!--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --->
+
+<td valign=top>
+<h2><font ><font >Week 6: Symbol tables</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+    October 2012
+ S  M Tu  W Th  F  S
+ 7  8  9 10 11 12 13
+       *     *  *
+</pre></font></font>
+<p>
+Regular Lecture slides: <a href="slides/symbol.pdf">Slides</a>, <a href="slides/symbol-4.pdf">4-on-1</a><p>
+Special lecture slides: <a href="slides/attributes-print.pdf">Slides</a>, <a href="slides/attributes-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/symbol.html">Exercises</a><p>
+<img src="images/check_in.gif"> WIG milestone: <a href="milestones/WIGcgi.html">CGI vs. WIG</a><p>
+<img src="images/sbook.gif"> Reading C5, Louden, Chapter 6.3 <p>
+</td>
+</tr>
+
+<!--- ================================================================ --->
+
+<tr>
+<td valign=top>
+<h2><font ><font >Week 7: Type checking</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+    October 2012
+ S  M Tu  W Th  F  S
+14 15 16 17 18 19 20
+       *     *  *
+</pre></font></font>
+<p>
+<a href="slides/typecheck.pdf">Slides</a>, <a href="slides/typecheck-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/typecheck.html">Exercises</a><p>
+<img src="images/check_in.gif"> WIG milestone: <a href="milestones/WIGscanparse.html">scanner and
+parser</a><p>
+<img src="images/sbook.gif"> Reading C6, Louden, Chapter 6.4<p>
+</td>
+
+<!--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --->
+
+<td valign=top>
+<h2><font ><font >Week 8: Virtual machines</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+    October 2012
+ S  M Tu  W Th  F  S
+21 22 23 24 25 26 27
+       *     * **
+               midterm
+</pre></font></font>
+<p>
+<a href="slides/virtualmachines.pdf">Slides</a>, <a href="slides/virtualmachines-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/virtualmachines.html">Exercises</a><p>
+<img src="images/check_in.gif"> WIG milestone: <a href="milestones/WIGsymbol.html">symbol tables</a><br><br>
+<a href="http://gallium.inria.fr/~xleroy/publi/bytecode-verification-JAR.pdf">Java bytecode verification: algorithms and formalizations</a> <br>
+<a href="http://www.ics.uci.edu/~franz/Site/pubs-pdf/ICS-TR-03-23.pdf">A Denial of Service Attack on the Java Bytecode Verifier</a> <br>
+<a href="http://www.bodden.de/wordpress/wp-content/uploads/2008/03/bodden-javados.pdf">COMP523 report on bytecode verification and the above exploit</a>
+</td>
+</tr>
+
+<!--- ================================================================ --->
+
+<tr>
+<td valign=top>
+<h2><font ><font >Week 9: Code generation</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+    October 2012
+ S  M Tu  W Th  F  S
+28 29 30 31 
+       *   
+
+	November 2012
+ S  M Tu  W Th  F  S
+             1  2  3
+             *  *
+</pre></font></font>
+<p>
+<a href="slides/codegen.pdf">Slides</a>, <a href="slides/codegen-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/codegen.html">Exercises</a><p>
+<img src="images/check_in.gif"> WIG milestone: <a href="milestones/WIGtypecheck.html">type checking</a><p>
+<img src="images/check_in.gif"> <a href="midterm.html">midterm</a><p>
+</td>
+
+<!--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --->
+
+<td valign=top>
+<h2><font ><font >Week 10: Optimization</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+   November 2012
+ S  M Tu  W Th  F  S
+ 4  5  6  7  8  9 10
+       *     *  *
+</pre></font></font>
+<p>
+<a href="slides/optimization.pdf">Slides</a>, <a href="slides/optimization-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/optimization.html">Exercises</a><p>
+<img src="images/check_in.gif"> JOOS deliverable: <a href="deliverables/JOOSstack.html">stack limits</a><p>
+</td>
+</tr>
+
+<!--- ================================================================ --->
+
+<tr>
+<td valign=top>
+<h2><font ><font >Week 11: Garbage collection</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+   November 2012
+ S  M Tu  W Th  F  S
+11 12 13 14 15 16 17
+       *     *  *
+</pre></font></font>
+<p>
+<a href="slides/gc.pdf">Slides</a>, <a href="slides/gc-4.pdf">4-on-1</a><p>
+<img src="images/sidea.gif"> <a href="exercises/gc.html">Exercises</a><p>
+<img src="images/sbook.gif"> Reading C7, Appel, Chapter 13 <p>
+</td>
+
+<!--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --->
+
+<td valign=top>
+<h2><font ><font >Week 12: Native code generation</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+   November 2012
+ S  M Tu  W Th  F  S
+18 19 20 21 22 23 24
+       *     *  *
+</pre></font></font>
+<p>
+<a href="slides/nativecodegen.pdf">Slides</a>, <a href="slides/nativecodegen-4.pdf">4-on-1</a><p>
+<img src="images/check_in.gif"> JOOS deliverable: <a href="deliverables/JOOSpeep.html">peephole patterns</a> <p>
+</td>
+</tr>
+
+<!--- ================================================================ --->
+
+<tr>
+<td valign=top>
+<h2><font ><font >Week 13: Static analysis</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+   November 2012
+ S  M Tu  W Th  F  S
+25 26 27 28 29 30
+       *     *  *
+</pre>
+</font></font>
+
+<br>
+<img src="images/check_in.gif"> WIG deliverable: <a href="deliverables/WIGcompiler.html">compiler</a><br>
+<img src="images/check_in.gif"> WIG deliverable: <a href="deliverables/WIGreport.html">report</a> <p>
+<p>
+<a href="slides/staticanalysis.pdf">Slides</a>, <a href="slides/staticanalysis-4.pdf">4-on-1</a><p>
+<img src="images/sbook.gif"> Reading C8: Appel, Chapter 10 <p>
+</td>
+
+<!--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx --->
+
+<td valign=top>
+<h2><font ><font >Week 14: Presenting your
+compilers</font></font></h2><font >
+<font face=courier><font face=courier><pre>
+   December 2012
+ S  M Tu  W Th  F  S
+ 2  3  4  
+       * 
+</pre></font></font>
+
+Group meetings will be scheduled on Monday and Tuesday.<br>
+<p>
+</td>
+</tr>
+</table>
+
+<p>
+<table border=5 cellspacing=5 cellpadding=5 width=100%>
+<tr><td>
+Maintained by Matthieu Dubet
+<a href="index.html">[HOME]</a>
+</td></tr>
+</table>
