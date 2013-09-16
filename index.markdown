@@ -13,14 +13,14 @@ You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs52
 # Lectures slides
 
 First week :
-[Syllabus] (outline.pdf)
-[Introduction] (intro.pdf)
-[Abstract Syntax Tree] (ast.pdf) (I've mainly use the blackboard here so the slides are incomplete)
+* [Syllabus] (outline.pdf)
+* [Introduction] (slides/intro.pdf)
+* [Abstract Syntax Tree] (slides/ast.pdf) (I've mainly use the blackboard here so the slides are incomplete)
 
 Second week:
-[Lexer and Parser] (scanparser.pdf)
+* [Lexer and Parser] (slides/scanparse.pdf)
 
 
 # Interesting links
-* http://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html
-* http://stackoverflow.com/questions/4092280/what-advantages-do-ll-parsers-have-over-lr-parsers
+* [LL and LR demystified](http://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html)
+* [Stack overflow question comparing LL and LR] (http://stackoverflow.com/questions/4092280/what-advantages-do-ll-parsers-have-over-lr-parsers)
