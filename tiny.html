@@ -1,0 +1,104 @@
+<head>
+<title>WIG milestone: Try out each toolset on a Tiny example</title>
+</head>
+
+The purpose of this milestone is to make sure that your group
+functions well together, to get each toolset installed and working on
+a small example, and to help you compare between toolsets and
+languages.  You must make these changes for <b>each</b> of
+flex/bison/C, SableCC 3/Java, and if you do not wish to use either of
+those, additionally whatever third toolset you are thinking of using
+for your WIG project (e.g. XText, PLY, flex/bison/C++,
+etc.).  In other words, every group must do the exercises for
+flex+bison and SableCC 3, and some groups will elect to do them for a
+third toolset/language combination as well.
+<p>
+
+You must do the following for each evaluator:<ol>
+
+<li>Extend the Tiny expressions with a modulo
+    operator <font face=courier><code>%</code></font> and
+    an <font face=courier><code>abs(&lt;exp&gt;)</code></font>
+    function.
+
+<li>Extend the Tiny expressions with an exponentiation operator
+          <tt>**</tt>. Note that this operator is right-associative,
+i.e. <tt>2**3**4</tt> is to be parsed as <tt>2**(3**4)</tt>. Also note
+that this operator has higher precedence than all other numeric
+operators.
+
+<li>Fix the pretty printer to output the minimal number of parentheses
+required to preserve the semantics of the expression: not too few and
+not too many.  You should include support for the additional operators
+from the previous steps.
+
+<li>Introduce a unary minus
+operator <font face=courier><code>-&lt;exp&gt;</code></font> as
+syntactic sugar for the
+expression <font face=courier><code>0-&lt;exp&gt;</code></font>. This
+means that unary minus should be defined in the grammar, but not in
+the abstract syntax trees, meaning there should be no changes to the
+pretty printer or evaluator.  This question is somewhat tricky in
+SableCC; there is no way in an AST transformation to create a '0' node. You can
+either a) create a null node and then use a later pass that replaces it
+with zero, or b) perform a post pass that fixes up any unary minus nodes
+directly.
+
+<li>The evaluator currently tries to determine the value of the input
+expression.  Fix it to:<p>
+
+<ol>
+<li>Handle division by constant zero properly.  This means that an
+error message should be printed for evaluating <font
+face=courier><code>&lt;l_exp&gt; / &lt;r_exp&gt;</code></font> where
+<font face=courier><code>&lt;r_exp&gt;</code></font> evaluates to
+zero.
+
+<li>Handle partial evaluation of expressions involving identifiers.
+For instance, <font face=courier><code>a + 3 * 4</code></font> should
+evaluate to <font face=courier><code>a + 12</code></font> and no error
+message should be printed.
+
+<li>Perform basic algebra on identifiers.  For instance, <font
+face=courier><code>0 * a</code></font> should evaluate to <font
+face=courier><code>0</code></font>.
+
+</ol>
+</ol>
+
+Include extra tests in the <font
+face=courier><code>testcases</code></font> file that demonstrate your
+ability to handle good and bad input appropriately.  Running <font
+face=courier><code>make check</code></font> will create a file called
+<font face=courier><code>result</code></font> that will contain the
+output.  We will combine the testcases from all groups and use them to
+test your improved Tiny expression evaluators.<p>
+
+Finally, based on your experiences, answer the following questions for
+your milestone report:<p>
+
+<ol>
+<li>Which toolset you will use for the WIG project?
+
+<li>What was frustrating about this milestone?  Difficult?  Time
+consuming?  Boring?  Easy?  Interesting?  Fun?  You can include
+discussion of things such as using version control, group
+coordination, and environment setup.
+
+<li>What devious extension to the Tiny expressions should we ask
+students for next year?
+</ol>
+
+The original Tiny source code is here: <a href="../tiny/">tiny</a>.
+You should import that in your Git repository.
+
+The milestone report should be checked in as
+reports/tiny.txt, ASCII-only, 80 characters wide.
+
+<p>
+This milestone is due by an espilon before midnight on Sunday 
+(let's say lim 23:59:9999 .. of Sunday 22th September 2013).
+With next week assignment, it will count
+for 5% of your grade. Marks will be
+generously deducted for late submissions.
+<p>
