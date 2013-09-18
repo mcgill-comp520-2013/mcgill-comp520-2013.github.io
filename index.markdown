@@ -9,9 +9,10 @@ The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/
 # Assignments
 
 * [Extending the Tiny evaluator](tiny.html) 
-Due by Sunday night
 
-* ... TBA
+Due by Sunday 22th September at night
+
+* Nothing here (yet)
 
 # Old material
 
@@ -26,6 +27,7 @@ First week :
 
 Second week:
 * [Lexer and Parser] (slides/scanparse.pdf)
+* [Code generation] ()
 
 
 # Interesting links
