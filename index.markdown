@@ -9,8 +9,9 @@ The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/
 # Assignments
 
 * [Extending the Tiny evaluator](tiny.html) 
+* [WIG vs CGI] (wigcgi.html)
 
-Due by Sunday 22th September at night
+Due before class on Monday 30th September 
 
 * Nothing here (yet)
 
@@ -27,10 +28,14 @@ First week :
 
 Second week:
 * [Lexer and Parser] (slides/scanparse.pdf)
-* [Code generation] ()
+
+Third week:
+* [WIG] (slides/wig.pdf)
+* [Symbol Table] (slides/symbol.pdf)
 
 
 # Interesting links
 * [LL and LR demystified](http://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html)
 * [Stack overflow question comparing LL and LR] (http://stackoverflow.com/questions/4092280/what-advantages-do-ll-parsers-have-over-lr-parsers)
 * [GCC switchs from LALR to recursive descent] (http://gcc.gnu.org/gcc-3.4/changes.html#cplusplus)
+* [Clang recursive descent parser] (https://github.com/chapuni/clang/blob/master/lib/Parse/ParseExpr.cpp)
