@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# lkwig - runs the lkwig compiler
+#      - assumes WIGDIR is set
+
+case $OSTYPE in
+    freebsd*)
+    $WIGDIR/bin/lkwig-freebsd6.2 $*
+    ;;
+    solaris*)
+    $WIGDIR/bin/lkwig-solaris2.8 $*
+    ;;
+    linux*)
+    $WIGDIR/bin/lkwig-linux-gnu $*
+    ;;
+    darwin*)
+    $WIGDIR/bin/lkwig-darwin8.0 $*
+    ;;
+    *)
+    echo Unknown system.  Please email your TA with specific details.
+    ;;
+esac

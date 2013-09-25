@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# wig4 - runs the wig4 compiler
+#      - assumes WIGDIR is set
+
+case $OSTYPE in
+    freebsd*)
+    $WIGDIR/bin/wig4-freebsd6.2 $*
+    ;;
+    solaris*)
+    $WIGDIR/bin/wig4-solaris2.8 $*
+    ;;
+    linux*)
+    $WIGDIR/bin/wig4-linux-gnu $*
+    ;;
+    darwin*)
+    $WIGDIR/bin/wig4-darwin8.0 $*
+    ;;
+    *)
+    echo Unknown system.  Please email your TA with specific details.
+    ;;
+esac

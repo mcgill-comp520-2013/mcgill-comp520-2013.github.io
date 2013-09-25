@@ -4,13 +4,9 @@
 For this milestone you must:
 <ol>
 
-<li>Make sure you all understand the CGI protocol, at least as far as
-described in the reading for Week 5, <a
+<li>Make sure you all understand the CGI protocol, <a
 href="http://condor.cc.ku.edu/~grobe/docs/forms-intro.shtml">An
 instantaneous introduction to CGI scripts and HTML forms</a>.
-
-<li>Set up an environment for compiling and running WIG programs
-  following <a href="../howtowig.html">these instructions</a>.
 
 <li>Write a WIG service benchmark, and provide a link to it running
 somewhere.  Your WIG service should be interactive and attempt to take
@@ -18,10 +14,10 @@ advantage of WIG language features.  We will be grading it for
 meaningful feature coverage, clarity, documentation, correctness, and
 originality.  However, please do not worry about your program doing
 everything possible with WIG unless you really want it to.  You can
-see the example programs in the <a href="../wig/">wig/</a> directory
-as well as old WIG <a href="../benchmarks/">benchmarks</a> for
-reference.  You can test your WIG service using the binary versions of
-existing WIG compilers, assuming your environment is set up properly.
+see the example WIG programs in the <a href="wig/benchmarks/">wig/</a> directory.
+You can test your WIG service using the binary versions of
+existing WIG compilers (<a href="wig/bin/">here</a>), 
+assuming your environment is set up properly.
 
 <li>Write a CGI script that implements some WIG service (i.e.
 "compile" a WIG service manually), and provide a link to it running
@@ -31,7 +27,7 @@ you should include the service you are starting from.  You can use any
 language, and you should discuss how a compiler might go about
 generating this code starting from a WIG service, and what extra
 complications might be required to translate your actual WIG
-benchmark.  Your choice of language here does not commit you to using
+benchmark.  Your choice of target language here does not commit you to using
 it as your WIG compiler target.
 
 <li>Read the WIG project description and grammar and report on what
@@ -43,27 +39,14 @@ with your actual experience after completing the project.
 </ol>
 <p>
 
-You should check in the source code for question 3 into
-<code>group-X/wig/benchmark/</code> and the source code for question 4
-into <code>group-X/wig/cgi/</code>.  You should also check in a
-<code>group-X/wig/benchmark/README</code> file to accompany your WIG
-benchmark.  You should finally check in a milestone report that
-addresses tasks 3--5 as group-X/reports/cgi_vs_wig.txt.  Your
+You should check in the source code for your WIG benchmark into
+a folder <code>wig/benchmark/</code> in your Git repository,
+and the source code for your CGI executable
+into <code>wig/cgi/</code>.  You should also check in a
+<code>wig/benchmark/README</code> file to accompany your WIG
+benchmark.  You should finally check in a milestone report in
+reports/cgi_vs_wig.txt.  Your
 milestone will not be complete until all of these things have been
-received.  Following good Subversion practice, you should not check in
+received.  Following good practice, you should not check in
 any automatically generated files.  On the other hand, if you want to
 use non-text media files, it is fine to check those in.
-<p>
-
-This milestone is small and you should be able to complete it quickly.
-You should take the time now to ensure that you are familiar with
-either SableCC, Flex and Bison, or whatever your chosen implementation
-toolset is, because you will be writing the WIG scanner, parser, and
-pretty printer for the next milestone.  If possible, get started on
-the next milestone early, because it will probably take you somewhat
-longer than this one.
-<p>
-
-This milestone is due by midnight on Friday of Week 6.  It will count for 5%
-of your grade.  Marks will be generously deducted for late
-submissions.

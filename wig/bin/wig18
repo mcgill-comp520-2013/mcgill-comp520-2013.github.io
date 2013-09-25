@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# wig18 - runs the wig18 compiler
+#       - assumes WIGDIR is set
+
+if test "$*" = ""; then
+    echo Usage: wig18 file.wig
+    exit
+fi
+
+case $OSTYPE in
+    freebsd*)
+    $WIGDIR/bin/wig18-freebsd6.2 $*
+    ;;
+    solaris*)
+    $WIGDIR/bin/wig18-solaris2.8 $*
+    ;;
+    linux*)
+    $WIGDIR/bin/wig18-linux-gnu $*
+    ;;
+    darwin*)
+    $WIGDIR/bin/wig18-darwin8.0 $*
+    ;;
+    *)
+    echo Unknown system.  Please email your TA with specific details.
+    ;;
+esac

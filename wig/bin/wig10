@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# wig10 - runs the wig10 compiler
+#       - assumes WIGDIR is set
+#       - examines MANIFEST.MF inside jar file to find main class
+
+if test "$*" = ""; then
+    echo Usage: wig10 file.wig
+    exit
+fi
+
+java -jar $WIGDIR/bin/wig10-classes.jar $* 

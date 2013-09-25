@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#
+# pwig - runs the pwig compiler
+#      - assumes WIGDIR is set
+
+if test "$*" = ""; then
+    echo Usage: pwig file.wig
+                pwig -h        # built-in help
+    exit
+fi
+
+case $OSTYPE in
+    freebsd*)
+    $WIGDIR/bin/pwig-freebsd6.2 $*
+    ;;
+    solaris*)
+    $WIGDIR/bin/pwig-solaris2.8 $*
+    ;;
+    linux*)
+    $WIGDIR/bin/pwig-linux-gnu $*
+    ;;
+    darwin*)
+    $WIGDIR/bin/pwig-darwin8.0 $*
+    ;;
+    *)
+    echo Unknown system.  Please email your TA with specific details.
+    ;;
+esac
