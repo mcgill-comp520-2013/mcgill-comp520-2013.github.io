@@ -13,23 +13,16 @@ The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/
 
 Due before class on Monday 30th September 
 
-* Nothing here (yet)
-
 # Old material
 
 You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs520/2012/)
 
 # Lectures slides
 
-First week :
 * [Syllabus] (outline.pdf)
 * [Introduction] (slides/intro.pdf)
 * [Abstract Syntax Tree] (slides/ast.pdf) (I've mainly use the blackboard here so the slides are incomplete)
-
-Second week:
 * [Lexer and Parser] (slides/scanparse.pdf)
-
-Third week:
 * [WIG] (slides/wig.pdf)
 * [Symbol Table] (slides/symbol.pdf)
 
