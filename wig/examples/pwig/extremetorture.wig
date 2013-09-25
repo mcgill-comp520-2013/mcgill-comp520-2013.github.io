@@ -1,0 +1,198 @@
+service {
+
+  const html ShowSchema1 = <html> <body>
+    <[message]> b: <[b]>  i: <[i]>  s: <[s]>  </body> </html>;
+
+  const html ShowSchema2 = <html> <body>
+   <[message]>  b: <[b]>  i: <[i]>  </body> </html>;
+
+  const html ShowSchema2i = <html> <body>
+   <[message]>  i: <[i]>  </body> </html>;
+
+  const html ShowSchema3 = <html> <body>
+   <[message]>  b: <[b]>  s: <[s]>  </body> </html>;
+
+ const html ShowSchema4 = <html> <body>
+   <[message]>  s: <[s]>  </body> </html>;
+
+  const html PrintString = <html> <body>
+   <[message]>  </body> </html>;
+
+  const html Showeqtuples = <html> <body>
+  result of the == operation on tuples is:
+   <[equality]>  </body> </html>;
+
+
+  const html Done = <html> <body> Done! </body> </html>;
+
+  schema Scm1 {
+    bool b;
+    int i;
+    string s;
+  }
+
+  schema Scm2 {
+    bool b;
+    int i;
+  }
+
+  schema Scm3 {
+    bool b;
+    string s;
+  }
+
+  schema Scm4 {
+    string s;
+  }
+
+  tuple Scm2 globaltuple2;
+  tuple Scm3 globaltuple3;
+  tuple Scm1 globaltuple1;	
+
+  tuple Scm1 returntuplefunction(tuple Scm2 tuple2, tuple Scm3 tuple3){	
+	
+   /* combine tuple2 and tuple3.   tuple2 and tuple3 must agree on the types of
+       attributes they have in common.    return tuple will contain the union
+       of tuple2 and tuple3's attributes.  tuple3's attributes are taken
+       whenever there is a common attribute.  */
+     
+    return (globaltuple1 = tuple2 << tuple3);   /* return tuple should be equal to tuple { b=false,i=87,s="foo" } */ 
+  } 	
+
+  session test1() {   
+    tuple Scm1 t1;
+    tuple Scm2 t2, t3;
+    /* create a tuple of type Scm1  and show it */
+    t1 = tuple { b=true, i=87,  s="foo" };
+    show plug ShowSchema1[message = "t1 is: ", b = t1.b, i = t1.i,   s=t1.s];
+
+    /* create a new tuple t2,  keeping fields b and i, and show it */
+    t2 = (t1 \+ (b, i));    /* keep b and i */
+    show plug ShowSchema2[message = "t2 is: ", b  = t2.b, i=t2.i];
+
+    /* create a new tuple t3, throwing away field s, and show it */
+    t3 = (t1 \- s);    /* throw away s */
+    show plug ShowSchema2[message = "t3 is: ", b = t3.b, i=t3.i];
+
+    /* here: t2 and t3 should be equal, can your compiler check? */
+    exit Done;
+  }
+
+  session test2() {   
+    tuple  Scm1 g1;
+    tuple  Scm2 g2;
+    tuple  Scm3 g3; 
+
+    /* create an show g2 */
+    g2 = tuple { b=true, i=87 };
+    show plug ShowSchema2[message = "g2 is: ", b = g2.b, i = g2.i]; 
+
+    /* create and show g3 */
+    g3 = tuple { b=false, s="foo" };
+    show plug ShowSchema3[message = "g3 is: ", b=g3.b,  s = g3.s]; 
+
+   /* combine g2 and g3.   g2 and g3 must agree on the types of
+       attributes they have in common.    g1 will contain the union
+       of g2 and g3's attributes.  g3's attributes are taken
+       whenever there is a common attribute.  */
+   g1 = g2 << g3;   /* g1 should be equal to tuple { b=false,i=87,s="foo" } */ 
+   show plug ShowSchema1[message = "g1 is: ",b = g1.b, i = g1.i, s=g1.s];
+   exit Done;
+  }
+
+ session test3() {   /*test tuple as globals*/
+
+    /* create an show globaltuple2 */
+    globaltuple2 = tuple { b=true, i=87 };
+    show plug ShowSchema2[message = "globaltuple2 is: ", b = globaltuple2.b, i = globaltuple2.i]; 
+
+    /* create and show globaltuple3 */
+    globaltuple3 = tuple { b=false, s="foo" };
+    show plug ShowSchema3[message = "globaltuple3 is: ", b=globaltuple3.b,  s = globaltuple3.s]; 
+
+   /* combine globaltuple2 and globaltuple3.   globaltuple2 and globaltuple3 must agree on the types of
+       attributes they have in common.    globaltuple1 will contain the union
+       of globaltuple2 and globaltuple3's attributes.  globaltuple3's attributes are taken
+       whenever there is a common attribute.  */
+   globaltuple1 = globaltuple2 << globaltuple3;   /* globaltuple1 should be equal to tuple { b=false,i=87,s="foo" } */ 
+   show plug ShowSchema1[message = "globaltuple1 is: ",b = globaltuple1.b, i = globaltuple1.i, s=globaltuple1.s];
+   exit Done;
+  }
+
+ session test4() {   /*test tuple as globals and tuples as return values and parameters to functions*/
+    tuple Scm1 lctuple1;
+    tuple Scm2 lctuple2;
+    int i;
+	
+    lctuple2.i=0;
+
+    for(i=0; i<3; i++){
+   	lctuple2.i++;
+    }
+    
+    show plug ShowSchema2i[message = "after the for loop, lctuple2 field i is: ", i = lctuple2.i]; 
+
+    /* create an show globaltuple2 */
+    globaltuple2 = tuple { b=true, i=87 };
+    show plug ShowSchema2[message = "globaltuple2 is: ", b = globaltuple2.b, i = globaltuple2.i]; 
+
+    /* create and show globaltuple3 */
+    globaltuple3 = tuple { b=false, s="foo" };
+    show plug ShowSchema3[message = "globaltuple3 is: ", b=globaltuple3.b,  s = globaltuple3.s]; 
+
+   /* combine globaltuple2 and globaltuple3.   globaltuple2 and globaltuple3 must agree on the types of
+       attributes they have in common.    globaltuple1 will contain the union
+       of globaltuple2 and globaltuple3's attributes.  globaltuple3's attributes are taken
+       whenever there is a common attribute.  */
+
+   /*call to the function*/
+   lctuple1=returntuplefunction(globaltuple2, globaltuple3);
+
+   show plug ShowSchema1[message = "tuple returned by the function globaltuple1 is: ",b = lctuple1.b, i = lctuple1.i, s=lctuple1.s];
+   exit Done;
+  }
+
+ session test5() {   /*nested operations*/
+    tuple Scm1 lctuple1;
+    tuple Scm2 lctuple2;
+    tuple Scm3 lctuple3;
+    tuple Scm4 lctuple4;
+
+    globaltuple1 = tuple {b=true, i=8, s="a string"};
+    lctuple1 = tuple {b=true, i=8, s="a string"};
+
+    show plug Showeqtuples[equality=(lctuple1==globaltuple1)];
+
+    /* create an show globaltuple2 */
+    lctuple2 = tuple { b=true, i=87 };
+    show plug ShowSchema2[message= "this message wont be shown because message plug is filled another time after!!", message = "lctuple2 is: ", b = lctuple2.b, i = lctuple2.i]; 
+
+    /* create and show globaltuple3 */
+    lctuple3 = tuple { b=false, s="foo" };
+    show plug ShowSchema3[message = "lctuple3 is: ", b=lctuple3.b,  s = lctuple3.s]; 
+
+   /* combine globaltuple2 and globaltuple3.   globaltuple2 and globaltuple3 must agree on the types of
+       attributes they have in common.    globaltuple1 will contain the union
+       of globaltuple2 and globaltuple3's attributes.  globaltuple3's attributes are taken
+       whenever there is a common attribute.  */
+
+   lctuple1=globaltuple1<<lctuple2<<lctuple3;
+
+   show plug Showeqtuples[equality=(lctuple1==globaltuple1)];
+
+   lctuple4=(lctuple2<<lctuple3<<globaltuple1)\-(b,i);
+
+   show plug ShowSchema4[message = "tuple after the operation lctuple4=(lctuple2 INFINF lctuple3 INFINF lctuple1) \\- (b,i) is: ", s=lctuple4.s];
+   exit Done;
+  }
+
+/* -----------------------------------------------------------
+    Other things to check.
+           - tuples as globals
+           - tuples as return values and parameters to functions
+           - nested operations like (t1 << t2)  \- f
+                                    t1 << t2 << t3
+           - equality of tuples
+   --------------------------------------------------------------
+*/
+}

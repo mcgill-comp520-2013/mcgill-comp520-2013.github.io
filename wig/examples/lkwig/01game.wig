@@ -1,0 +1,118 @@
+service {
+  const html Init = <html> 
+<body bgcolor="#3070a0">
+	<center>
+    Please enter the Fibbonacci number <b><i><[current]></b></i>:
+    <input name="guess" type="text" size=2>
+	</center>
+  </body></html>;
+  
+  const html Fail = <html>
+<body bgcolor="#3070a0">
+	<center>
+    No, wrong answer, you are dumb.
+    You should have entered <[correct]> for the <[current]> Fibbonacci number.
+</center>
+	 </body> </html>;
+  const html Record = <html>
+<body bgcolor="#3070a0">
+	<center>
+    That makes you the new record holder,
+    beating the old record of <[old]> guesses.
+    <p>
+	<img src="http://tacos.sus.mcgill.ca/~erik/hiscore.jpg" align="right">
+
+    Please enter your name for the hi-score list
+    <input name="name" type="text" size=20>
+	</center>
+  </body> </html>;
+
+  const html Finish = <html>
+<body bgcolor="#3070a0">
+	<center>
+	<img src="http://tacos.sus.mcgill.ca/images/cat4.jpg"><p>
+	
+    You really could have done better.
+
+	<a href="game18.cgi?HiScore">Hall of Champions</a>
+	</center>
+  </body> </html>;
+
+  const html List = <html><body bgcolor="#3070a0">
+	<center>
+
+	<img src="http://tacos.sus.mcgill.ca/~erik/winner.jpg" align="right">
+    In <[plays]> plays of this game, the record
+    holder is <[holder]> with <[record]> guesses.
+	</center>
+  </body> </html>;
+
+  int plays, record;
+  int seed;
+  string holder;
+  string localholder;
+
+  int fibbonacci(int current) {
+	int x;
+	int y;
+	int z;
+	int tmp;
+	int i;
+
+	x = 1;
+	y = 1;
+	z = 1;
+	i = 1;
+
+	if(current == 0) {
+	  return 1;
+	}
+
+	if(current == 1) {
+	  return 1;
+	}
+
+	i = 2;
+	while(i <= current) {
+	  tmp = z;
+	  z = x + y;
+	  x = y;
+	  y = z;
+
+	  i = i + 1;
+	}	
+
+	return z;
+  }
+	
+  session Play() {
+    int current;
+    int correct;
+    int guess;
+
+    current = 0;
+    correct = 1;
+
+    while(correct == 1) {
+      show plug Init[current = current] receive[guess = guess];
+      if(fibbonacci(current) != guess) {
+	correct = 0;
+      }
+      current = current + 1;
+    }
+
+    correct = fibbonacci(current);
+    show plug Fail[correct = correct, current = current-1];
+
+    if (record==0 || record<current-1) {
+       show plug Record[old = record] receive [localholder = name];
+       holder = localholder;
+       record = current-1;
+    }
+    exit Finish;
+  }
+
+  session HiScore() {
+    exit plug List[plays = plays,holder = holder,record = record];
+  } 
+}

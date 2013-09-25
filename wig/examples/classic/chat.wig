@@ -1,0 +1,63 @@
+service {
+  const html Logon = <html> <body>
+    <h1>Welcome to The Chat Room</h1>
+    Please enter your on-line name:
+    <input name="name" type="text" size=25>
+  </body> </html>;
+
+  const html Update = <html> <body>
+    <h1>The Chat Room Service</h1>
+    <hr>
+    <b>Messages so far:</b>
+    <p>
+    <[msg0]><p><[msg1]><p><[msg2]><p><[msg3]><p><[msg4]><p><[msg5]><p>
+    <hr>
+    <b>Your new message:</b>
+    <p>
+    <input name="msg" type="text" size=40>
+    <p>
+    <hr>
+    <p>
+    <input name="quit" type="radio" value="yes"> Quit now
+  </body> </html>;
+
+  const html ByeBye = <html> <body>
+    <h1>Thanks for using The Chat Room</h1>
+    You made <[conns]> connections
+    and wrote <[msgs]> messages.
+  </body> </html>;
+
+  string msg0,msg1,msg2,msg3,msg4,msg5;
+
+  session Chat() {
+    string name,msg,quit;
+    int connections, written;
+
+    connections = 0;
+    written = 0; 
+    quit = "no";
+    show Logon receive [name = name];
+    while (quit!="yes") {
+      show plug Update[msg0 = msg0, 
+                       msg1 = msg1, 
+                       msg2 = msg2, 
+                       msg3 = msg3, 
+                       msg4 = msg4, 
+                       msg5 = msg5]
+      receive[msg = msg, quit = quit]; 
+      connections = connections+1;
+      if (msg!="") {
+        written = written+1;
+        msg0 = msg1;
+        msg1 = msg2;
+        msg2 = msg3;
+        msg3 = msg4;
+        msg4 = msg5;
+        msg5 = name + "> " + msg;
+      }
+    }
+    exit plug ByeBye[conns = connections,
+                     msgs = written];
+  }
+}
+

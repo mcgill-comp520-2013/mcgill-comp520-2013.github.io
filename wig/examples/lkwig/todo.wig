@@ -1,0 +1,118 @@
+service {
+  const html Login = <html> <body>
+    <h1>Welcome to the Personal Todo List CGI </h1>
+    <p>
+    Enter your user name:
+    <input name="username" type="text" size=25>
+    <p>
+    Enter your password:
+    <input name="password" type="text" size=25>
+  </body> </html>;
+
+  const html incorrect = <html> <body>
+    <h1>I'm sorry <[username]>, permission denied! </h1>
+  </body> </html>;
+
+ const html delete = <html> <body>
+    <h1>Deleting todo entry: <[deleteValue]> </h1>
+  </body> </html>;
+
+  const html Update = <html> <body>
+    <h1>Personal TODO List</h1>
+    <hr>
+    <b>Stored TODO messages:</b>
+    <p>
+    <[msg0]><p><[msg1]><p><[msg2]><p><[msg3]><p><[msg4]><p><[msg5]><p>
+    <hr>
+    <b>New TODO (TODO #, Message):</b>
+    <p>
+    <input name="insertValue" type="text" size=2>
+    <input name="todo" type="text" size=40>
+    <p>
+    <hr>
+    <b>Delete TODO #:</b>
+    <p>
+    <input name="deleteValue" type="text" size=2>
+    <p>
+    <hr>
+    <p>
+    <input name="quit" type="radio" value="yes"> Quit now
+  </body> </html>;
+
+  const html ByeBye = <html> <body>
+    <h1>Thanks for using The Personal TODO List</h1>
+    You made <[conns]> connections
+    and wrote <[msgs]> messages.
+  </body> </html>;
+
+  string msg0,msg1,msg2,msg3,msg4,msg5;
+
+  session todo() {
+    string username, password;
+    string msg;
+    string quit;
+    int connections;
+    int written;
+    int insertValue, deleteValue;
+    bool correct;
+
+    connections = 0;
+    correct = false;
+    written = 0; 
+    quit = "no";
+    
+    while (!correct)
+    {
+       show Login receive [username = username, password = password];
+       if (username == "guest" && password == "guest")
+          correct = true;
+ 
+       if (!correct)
+         show plug incorrect [username = username];
+    }
+    
+   
+    while (quit!="yes") {
+      show plug Update[msg0 = "TODO 1: " + msg0, 
+                       msg1 = "TODO 2: " + msg1, 
+                       msg2 = "TODO 3: " + msg2, 
+                       msg3 = "TODO 4: " + msg3, 
+                       msg4 = "TODO 5: " + msg4, 
+                       msg5 = "TODO 6: " + msg5]
+      receive[msg = todo, insertValue = insertValue, deleteValue = deleteValue, quit = quit]; 
+      connections = connections+1;
+      
+      if (msg!="") {
+        if (insertValue < 1 && insertValue > 6 ){
+            written = written+1;
+            msg0 = msg1;
+            msg1 = msg2;
+            msg2 = msg3;
+            msg3 = msg4;
+            msg4 = msg5;
+            msg5 = msg;
+        }
+        else if( insertValue == 1 ) msg0 = msg;           
+        else if( insertValue == 2 ) msg1 = msg;   
+        else if( insertValue == 3 ) msg2 = msg;   
+        else if( insertValue == 4 ) msg3 = msg;   
+        else if( insertValue == 5 ) msg4 = msg;      
+        else if( insertValue == 6 ) msg5 = msg;
+      }
+      
+      if (deleteValue >= 1 && deleteValue <= 6 ) {
+        show plug delete[ deleteValue = deleteValue ]; 
+        if( deleteValue == 1 ) msg0 = "";           
+        if( deleteValue == 2 ) msg1 = "";   
+        if( deleteValue == 3 ) msg2 = "";   
+        if( deleteValue == 4 ) msg3 = "";   
+        if( deleteValue == 5 ) msg4 = "";      
+        if( deleteValue == 6 ) msg5 = "";      
+      }
+      
+    }
+    exit plug ByeBye[conns = connections,
+                     msgs = written];
+  }
+}
+

@@ -1,0 +1,18 @@
+service {
+  html InputName = <html>
+    Enter your name: <input type=text name="your_name"><br>
+    Enter your age: <input type=text name="your_age">
+  </html>;
+
+  html OutputName = <html>
+    Your name is <b><[your_name]></b> and you are <b><[your_age]></b> years old.
+  </html>;
+
+  session Enter() {
+    int age;
+    string name;
+
+    show InputName receive [name = your_name, age = your_age];
+    exit OutputName <[your_name = name, your_age = age];
+  }
+}

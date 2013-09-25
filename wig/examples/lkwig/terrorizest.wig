@@ -1,0 +1,93 @@
+/* broken wigcode for symbol analysis error-provocation */
+
+service{ 
+	/* hole 'ho' already defined (x2),
+	 * select with name "foob" already defined,
+	 * "HO" shouldn't clash with "ho" 
+	 * there's a select and an input here with no name
+	 * */
+	
+	const html Foob = <html><body>
+	Foo! <[ho]> <[hi]> <[ho]>
+	<input type="text" name="inseed" size=8>foo
+	<input type="text" name="inseed" size=8>bar
+	<input type="radio" name="inseed">
+	<select link=rel name="foob"> <option>a</option>
+	<option>b<[ho]> <[HO]></option> <[a]> </select>
+	<select foo=bar name="foob"> </select>
+	<select foooo=foo name="bar"> foo</select>
+	<!-- foobarfob-->
+	</body></html>;
+
+	const html Foob = <html>foo</html>; /* already defined */
+
+	schema Foob { bool b1; int b1; string s;} /* already defined */
+	schema Suck { bool b1; bool foo; string foo;} /* member foo already defined */
+	schema Suck { int a; int b;} /* "Suck" already defined here */
+	schema t_int { string a; string b;} /* ooh dear */
+
+	int Foob;	/* Foob already defined */
+	int bar;
+	string bar; /* bar already defined */
+
+	int testscope;
+	
+	int funcname(int name, bool name){
+		int a,a; /* a already defined */
+		string a,b; /* a already defined */
+		string name; /* shadows parameter */
+
+		c = r;   /* c nor r defined here */
+		
+		return -1;
+	}
+	/* no schema name "Yada", "bar" not a schema*/
+	tuple Yada nada(tuple bar bie, tuple Suck aduck){
+		return bie;
+	}
+
+	/* "Foob" not a schema */
+	tuple Foob yaya(tuple t_int int_t){
+		return int_t;
+	}
+
+	/* "funcname" not a schema */
+	tuple Suck baya(tuple funcname foo){
+		return foo;
+	}
+	
+	string funcname(string a, string b){ /* funcname already defined */
+		return;
+	}
+
+	session sess(){
+		
+		int testscope;
+		
+		
+		int a;
+		tuple Foob f1; /* no such schema Foob */
+		tuple Suck s2;
+		tuple Bar fly; /* no such schema Bar */
+		tuple t_int bool_t; /* hehehe */
+		int int_t;
+		string funcname;
+
+		funcname = "-->";
+		int_t = bool_t;
+		funcname(funcname); /* funcname is a function and a variable- should work */
+		funcall(foo); /* not defined funcall nor foo*/
+		bool_t.a = 5;
+		/* FARK is not a hole, a is plugged twice, soon is not an input */
+		show plug Foob [ ho = s2.b, a = s2.a, a = a, HO = s2.a, FARK = s2.a] receive [ s2.b = inseed, s2.a = foob, s3.B = soon];
+		
+		farsk(blah); // function call "blah" not declared here
+		
+		r = s2.c; /* r not declared, c not a member of schema Suck */
+		exit Foosb; /* no such html document Foosb */
+	}
+
+	session sess(){ /* sess already defined */
+		exit Foob;
+	}
+}

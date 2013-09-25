@@ -1,0 +1,47 @@
+/* b0rked wigcode to provoke use-before-initialization (ass)checking */
+service{
+	const html Ass = <html>
+	This is where we check ass <[hole1]> <[hole2]>
+	what's goin on
+	<input type="text" name="in">foobs
+	</body>
+	</html>;
+	
+	schema Skumm{
+		int abc;
+		string def;
+		bool tones;
+	}
+
+	int intvar;
+	bool boolvar;
+	string superstring;
+
+	void checkass(string la, int ant, bool bah, tuple Skumm grog){
+		int over;
+		bool my;
+		string dead;
+		tuple Skumm s;
+
+		if(my) /* my not defined */
+			dead = "cgta";
+		else
+			over = 1337;
+		dead = dead + dead; /* dead might not be defined */
+		/* intvar and grog.abc are globals, so always initialized.
+		 * tuple fields are also always initialized. 'over' isn't. */
+		over = intvar + grog.abc / s.abc % over; 
+		(grog << s);
+		(s \- (def,tones));
+	}
+
+	session AssCheck(){
+		int not;
+		bool really;
+		string what;
+		show plug Ass[ hole1 = what, hole2 = not] receive [ what = in ];
+		/* hmm, what else can we test? */
+		(what);
+		exit Ass;
+	}
+}

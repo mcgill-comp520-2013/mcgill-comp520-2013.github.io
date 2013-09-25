@@ -1,0 +1,94 @@
+service{
+	const html Begin =  <html>
+        
+    <body bgcolor="#ffffff" background="write014.jpg">
+	
+      <p><b><font size="+1">This is a tool for all people having trouble with Fahrenheight/Celsius Temperature conversions.</font></b></p>
+      <p>(think of all the times you had 96 degree temperature when anybody having above 42 is cosidered seriously dead :) </p>
+      <p>input a value  <input type="text" name="orig_val" size="10"><select name="from" size="1">
+	  <option value="°F">°F</option>
+	  <option value="°C">°C</option>
+	  <option value="°K">°K</option>
+	</select> </p>
+      <hr>
+      <p></p>
+	
+    </body>
+    
+  </html>;
+	const html ToChoice = <html>
+    
+    <body bgcolor="#ffffff" background="write014.jpg">
+    <p><b><font size="+1"> SO - you whish for a conversion ...</font></b></p>
+    <p>Convert <[orig_val]>  <[from]> to <select name="to" size="1">
+	  <option value="°F">°F</option>
+	  <option value="°C">°C</option>
+	  <option value="°K">°K</option>
+	</select> </p>
+    <hr>
+	
+    </body>
+
+  </html>;
+	const html Result =  <html>
+	<body bgcolor="#ffffff" background="write014.jpg">
+    	<p><b> Our \"computationally intensive\" algorithm gives the following result: <b></p>
+	<p><[orig_val]> <[from]> = <[result]><[to]> </p>
+	<p></p>
+	
+    <hr>
+	<p><input type="radio" name="quit" value="1">Quit</p>
+    </body>
+  </html>;
+
+
+	const html End =  <html>
+	<body bgcolor="#ffffff" background="write014.jpg">
+    	<p><b> Than you for using our script <[count]> times <b></p>
+	<p> Please continue on your quest for Knowledge : </p>
+	<A HREF="http://www.google.com">Google</A>
+	
+	<p></p>
+	
+    <hr>
+
+    </body>
+  </html>;
+
+	session Conversion(){
+		int orig_val, result, quit, count;
+		string from, to, opt;
+		int type;
+		orig_val=0;
+		result =99;
+		quit=0;
+		count =0;
+		while(quit!=1){
+			show Begin receive[orig_val=orig_val, from = from];
+		
+			show plug ToChoice[orig_val = orig_val, from= from]  receive[to = to];
+			if(from=="°F"){
+				if(to=="°C")  { result = ((orig_val -32)*5)/9; }
+				else if(to=="°K")  { result = ((orig_val -32)*5)/9 + 273; }
+				else { result = orig_val;}
+			}
+			else if(from == "°C"){
+				if(to == "°F"){ result = ((orig_val*9)/5)+32;}
+				else if(to == "°K"){ result = (orig_val + 273); }
+				else{ result = orig_val;}
+			}
+			else if(from == "°K"){
+				if(to == "°C"){ result = (orig_val - 273); }
+				else if(to == "°F"){ result = ((orig_val -273)*9)/5 + 32 ; }
+				else { result = orig_val; }
+			}
+			show plug Result [from = from, orig_val = orig_val, to = to , result = result] 
+				receive [quit = quit];
+			count = count +1;
+		}
+		exit plug End [count = count];
+		
+		
+	}
+}
+	

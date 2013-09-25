@@ -1,0 +1,185 @@
+service{
+	const html welcome = <html> <body bgcolor="#FFCC66"> <title>MILESTONE NO.2</title>
+			<p align="center">
+				<font face="Times New Roman" size=4>
+				<B>Welcome to PAPER/SCISSORS/STONE GAME CENTER</B>
+				<BR>
+				<BR>
+			</P>
+			
+			<P align="center">
+				<B>Please enter your name:</B>
+				<input type = "text" name="name" size = 20> <BR>
+				<BR>
+			</P>
+			<p align="left">
+				<input type=radio name ="ans" value="1"> <B><i>PAPER <BR>
+				<input type=radio name ="ans" value="2"> SCISSORS <BR>
+				<input type=radio name ="ans" value="3"> STONE <BR><BR>
+				<input type=radio name ="ans" value="4"> QUIT<BR><BR></B></i>
+			<BR><BR><BR><font size=2>
+			<i>*Instructions: Please enter your name, then choose one of PAPER,
+			<BR>SCISSORS OR STONE, then press Continue.
+			</p>
+			</font>
+			</body>
+			</html>;//THE FIRST PAGE
+
+	const html win = <html> <body bgcolor="#FFCC66"> <title> MILESTONES NO.2 </title>
+			<p align="center">
+				<font face="Times New Roman" size="4">
+				<I><B>CONGRATULATION!!! <[name]></I></B>
+				<BR>COMPUTER HAS A <B><[compAns]>.</B>
+				<BR>& YOU HAVE A <B><[userAns]>.</B>
+				<BR>WIN: <[w]> out of <[c]>
+				<BR>DRAW: <[d]> LOST: <[l]>
+				
+				<BR>
+			</p>
+			<i>
+			<p align="left">
+			<B>
+				<input type=radio name ="ans" value="1"> PAPER <BR>
+				<input type=radio name ="ans" value="2"> SCISSORS <BR>
+				<input type=radio name ="ans" value="3"> STONE <BR><BR></B>
+				<input type=radio name="ans" value="4"> QUIT<BR><BR>
+				
+			</i>
+			</font>
+			</body>
+			</html>;//THE "win" page will appear if the user wins the game
+
+	const html lost = <html> <body bgcolor="#FFCC66"> <title> MILESTONES NO.2 </title>
+			<p align="center">
+				<font face="Times New Roman" size="4">
+				<I><B>SORRY... <[name]></I>
+				<BR>COMPUTER HAS A <B><[compAns]>.</B>
+				<BR>& YOU HAVE A <B><[userAns]>.</B>
+				<BR>WIN: <[w]> out of <[c]>
+				<BR>DRAW: <[d]> LOST: <[l]>
+				<BR></B>
+			</p>
+			<i>
+			<p align="left">
+			<B>
+				<input type=radio name ="ans" value="1"> PAPER <BR>
+				<input type=radio name ="ans" value="2"> SCISSORS <BR>
+				<input type=radio name ="ans" value="3"> STONE <BR><BR>
+				<input type=radio name="ans" value="4"> QUIT<BR><BR>
+			</B>
+			</p>
+			</i>
+			</font>
+			</body>
+			</html>;//THE "lost" page will appear if the user lost the game
+
+	const html draw =<html> <body bgcolor="#FFCC66"> <title> MILESTONES NO.2 </title>
+			<p align="center">
+				<font face="Times New Roman" size="4">
+				<I><B>DRAW man !!! <[name]></I></B>
+				<BR>COMPUTER HAS A <B><[compAns]>. </B>
+				<BR>& YOU HAVE A <B><[userAns]>.</B>
+				<BR>WIN: <[w]> out of <[c]>
+				<BR>DRAW: <[d]> LOST: <[l]><BR>
+			</p>
+			<i>
+			<p align="left">
+			<B>
+				<input type=radio name ="ans" value="1"> PAPER <BR>
+				<input type=radio name ="ans" value="2"> SCISSORS <BR>
+				<input type=radio name ="ans" value="3"> STONE <BR><BR></B>
+				<input type=radio name="ans" value="4"> QUIT<BR><BR>
+				
+			</p>
+			</i>
+			</font>
+			</body>
+			</html>;//THE "draw" page will appear if the user draws the game
+
+
+	const html finish = <html><body bgcolor="#FFCC66"><font face="Times New Roman" size="5">
+				<p align="center">
+				<B>Thank you <[name]> for playing this <i>"great"</i> game <BR>
+				Your score is you win <[w]> out of <[c]></B></p>
+				<BR>
+				<BR>
+				<BR>
+				</font>
+				<font face="Times New Roman" size="3">
+				<i>If you have any comment or question about this game please send 
+				<a href="mailto:bjoe_chan@hotmail.com">ME</a> an e-mail. <BR>Thank you very much.</i>
+				</font>
+				<BR>
+				<BR>
+				<font size="2">
+				<a href="http://www.cs.mcgill.ca/~schan35/cgi-bin/game10.cgi?Play">GO BACK AND PLAY AGAIN!!!!!</a><BR>
+				<a href="http://www.mcgill.ca">GO TO MCGILL UNIVERSITY'S HOME PAGE.</a>
+				</body></html>; //THE "finish" page will appear if the user press quit in the game
+	int seed;
+
+	int Random()
+	{
+		
+		seed = (25173*seed+13849)%65535;
+		return seed;
+	}
+
+
+	session Play(){
+		int ans;	//Player's answer
+		int compAns;	//comp's Ans
+		int count;	//Counter for the number of the games
+		int winNum;	//Number of the win games
+		int drawNum;	//Number of the draw games
+		int lostNum;	//Number of the lost games
+
+		string name;	//Name of the user
+		string comp;	//Computer's decision
+		string userAns;	//user's decision
+
+		count = 0;
+		winNum = 0;
+		drawNum = 0;
+
+		comp="";
+		name = "";
+		userAns="";
+
+		show welcome receive[name=name, ans=ans];
+
+		seed = ans + 1000;
+
+		while(ans<4)
+		{
+			compAns=(Random()+count*winNum*drawNum)%3+1;
+			count = count+1;
+			
+			if(compAns==1) comp="PAPER";		
+			else if(compAns==2) comp="SCISSORS";		
+			else comp="STONE";			
+			
+			if(ans==1) userAns="PAPER";
+			else if(ans==2) userAns="SCISSORS";
+			else userAns="STONE";
+						
+			if(compAns==ans){
+				drawNum=drawNum+1;
+				lostNum=count-(winNum+drawNum);
+				show plug draw[name=name,compAns=comp,userAns=userAns,w=winNum,c=count,d=drawNum,l=lostNum] receive[ans=ans];
+			}
+			else if((compAns>ans)||(compAns==1&&ans==3)){
+				lostNum=count-(winNum+drawNum);
+				show plug lost [name=name,compAns=comp,userAns=userAns,w=winNum,c=count,d=drawNum,l=lostNum] receive[ans=ans];
+			}
+			else{
+				winNum = winNum + 1;
+				lostNum=count-(winNum+drawNum);
+				show plug win [name=name,compAns=comp,userAns=userAns,w=winNum,c=count,d=drawNum,l=lostNum] receive[ans=ans];
+			
+			}
+
+
+		}
+		exit plug finish [name=name,w=winNum,c=count];
+	}
+}

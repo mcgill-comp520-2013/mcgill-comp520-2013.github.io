@@ -1,0 +1,63 @@
+service {
+  shared string question;
+  shared int yes, no;
+
+  const int WIDTH = 500;
+
+  html NoVotes = <html>
+    <h1>No one has voted yet!</h1>
+  </html>;
+
+  html Setup = <html>
+    <h1>The Polling Service</h1>
+    What is the question:
+    <input type="text" name="question" size=50>?
+  </html>;
+
+  html Form = <html>
+    <h1>The Polling Service</h1>
+    <b><[question]>?</b>
+    <p>
+    <input type="radio" name="answer" value="true"> Yes /
+    <input type="radio" name="answer" value="false"> No
+  </html>;
+
+  html Chart = <html>
+    <h1>The Polling Service</h1>
+    <b><[question]>?</b>
+    <p>
+    Yes <hr align=left size=20 width=[yes_ratio] noshade><[yes]><p>
+    No <hr align=left size=20 width=[no_ratio] noshade><[no]>
+  </html>;
+
+  session New() {
+    string q;
+    show Setup receive[q = question];
+    question = q;
+    yes = no = 0;
+    exit <html>New vote started!</html>;
+  }
+
+  session Display() {
+    string q;
+    int y,n;
+
+    q = question;
+    y = yes;
+    n = no;
+    if (y+n==0) exit NoVotes;
+    exit Chart <[question = q, 
+		 yes = y,
+		 no = n,
+		 yes_ratio = (WIDTH*y)/(y+n),
+		 no_ratio = (WIDTH*n)/(y+n)];
+  }
+
+  session Vote() {
+    bool answer;
+    show Form <[question = question] receive [answer = answer];
+    if (answer) yes++; 
+    else no++;
+    Display();
+  }
+}

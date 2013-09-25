@@ -1,0 +1,400 @@
+service {
+
+  const html Welcome = <html> <body>
+   <h1><center>Welcome to use My Wig Test !</h1>
+   <hr>
+   <h3>You are NO. <strong> <[no]></strong> visitor!</h3>
+   <p>Please input your name:
+   <input name="name" type="text" size=20>
+  </body> </html>;
+
+   const html Init = <html> <body>
+   <h1><center>We are going to initial the number for polling !</h1>
+   <hr>
+   <h3>Done!!!</h3>
+   
+  </body> </html>;
+
+   const html InformationInput = <html> <body>
+   <h1><center>Please input your information here!</h1>
+   
+
+   <table width=100% border=0>
+   <tr><td font face=Arial size=-1 >First Name:</font></td>
+   <td width=70%>
+   <input type=text name="firstname" value="" size=10 maxlength=50 >&nbsp;&nbsp;
+   <tr><td font face=Arial size=-1 >Last Name: </font></td>
+   <td width=70%>
+   <input type=text name="lastname" value="" size=10 maxlength=50 ></tr>
+   
+
+   <tr><td> Language
+   <td><select name="language">
+   <option value="en">English
+   <option value="ch">Chinese
+   <option value="da">Danish
+   <option value="fr">French
+   <option value="gr">Germany
+   <option value="gre">Greek
+   <option value="ita">Italy
+   </select></td>
+   
+
+
+   <tr><td width=30% align=right>
+   <font face=Arial size=-1 >Zip/Postal Code:</font></td>
+   <td width=70% nowrap>
+   <input type=text name="post" value="" size=8 maxlength=15 >&nbsp;&nbsp;&nbsp;
+   </td></tr>
+   <td>
+    <font face=Arial size=-1 >Gender:</font>
+    <td>
+    <input type="radio"  name="gender" value="female" checked size=10 >Female
+    <input type="radio"  name="gender" value="male" size=10 >Male
+    </td></tr>
+
+
+   
+   </table>
+   
+   </body> </html>;
+
+   
+   const html ShowInformation =<html><body>
+   <h1><center>Please check your information!</h1>
+   <BR><BR>
+   <h2>
+    Your firstname is: <[firstname]>
+   <br><br>
+   
+   Your lastname is: <[lastname]> 
+   <br><br>
+   Your prefered language is: <[lang]> 
+   <br><br>
+    Your postal code is: <[post]>
+   <br><br>
+   Your gender is <[gender]>
+   </h2>
+   <br><br>
+   <h3>Is your information correct?
+    <input type="radio"  name="correct" value="yes" size=10 >Yes. That's right.
+    <input type="radio"  name="correct" value="no" checked size=10 >No. I will correct it.    
+   </body></html>;
+
+   const html Choose = <html> <body bgcolor="#2800ff">
+     
+   <h1><center>Hello, <[name]></h1>
+   <hr>
+    
+   <h3>Please choose one: <strong> </h3></hr>
+   <table border=2 cellspacing=5 cellpadding=10 bgcolor="#CCCCCC" text="#000000">
+   <tr><td>
+   <br>
+    <input type="radio"  name="choice" value=1 checked size=10 > 1. Information Input 
+    <BR>
+    <input type="radio"  name="choice" value=2 size=10> 2. Tuple        Test
+    <BR>
+    <input type="radio"  name="choice" value=3 size=10 >3. Poll
+    <BR>
+    <input type="radio"  name="choice" value=4 size=10 >4. Quit
+    </table><br>
+  </body> </html>;
+
+   const html ShowSchema1 = <html> <body>
+    <h1><center>This is for testing tuples!</h1>
+    <BR>
+    <h4>We have tuple <[message]> which is:
+    <br><br> 
+     b: <[b]> 
+    <br><br>
+     i: <[i]>
+    <br><br>  s: <[s]> 
+     </body> </html>;
+
+   const html ShowSchema2 = <html> <body>
+   
+ <h1><center>This is for testing tuples!</h1>
+    <BR>
+    <h4>We have tuple <[message1]> which is:
+    <br><br> 
+     b: <[b1]> 
+    <br><br>
+     i: <[i1]>
+    <br><br>  s: <[s]> 
+   <BR> Now we tranfer it to t2 by <strong>keep</strong> b and i
+     <h4>So we have tuple <[message2]> which is:
+    <br><br> 
+     b: <[b2]> 
+    <br><br>
+     i: <[i2]>
+    <br><br>    
+ </body> </html>;
+
+   const html ShowSchema3 = <html> <body>
+    <h1><center>This is for testing tuples!</h1>
+    <BR>
+    <h4>We have tuple <[message1]> which is:
+    <br><br> 
+     b: <[b1]> 
+    <br><br>
+     i: <[i1]>
+    <br><br>  s: <[s]> 
+   <BR> Now we tranfer it to t3 by <strong> throw <h2>s</h2> away </strong>!
+     <h4>So we have tuple <[message2]> which is:
+    <br><br> 
+     b: <[b2]> 
+    <br><br>
+     i: <[i2]>
+    <br><br>    
+    
+ </body> </html>;
+
+
+    const html ShowSchema4 = <html> <body>
+    <h1><center>This is for testing tuples!</h1>
+    <BR>
+    <h4>We have tuple <[message1]> which is:
+    <br><br> 
+     b: <[b1]> 
+    <br><br>
+     i: <[i1]>
+    <br><br>
+     s: <[s1]>
+    <br> tuple  <[message2]> which is:
+    <br><br> 
+     b: <[b2]> 
+    <br><br>
+     i:  <[i2]>    
+    <br>and tuple  <[message3]> which is:
+    <br><br> 
+     b: <[b3]> 
+    <br><br>
+     s:  <[s3]>     
+    
+     </body> </html>;
+
+    const html ShowSchema5 = <html> <body>
+    <h1><center>This is for testing tuples!</h1>
+    <BR>
+    <h4>Now we execute g1= g2&lt;&lt;g3, the result is
+    
+    <br>and tuple  <[message]> which is:
+    <br><br> 
+     b: <[b]> 
+    <br><br> 
+     i: <[i]> 
+    <br><br>
+     s:  <[s]> </h4>    
+    
+     </body> </html>;
+
+    const html ShowSchema6 = <html> <body>
+    <h1><center>This is for testing tuples!</h1>
+    <BR>
+    <h4>This time we use g4=g1&lt;&lt;g2&lt;&lt;g3, the result is
+    
+    <br>and tuple  <[message]> which is:
+    <br><br> 
+     b: <[b]> 
+    <br><br> 
+     i: <[i]> 
+    <br><br>
+     s:  <[s]> </h4>    
+    
+     </body> </html>;
+
+  
+
+   const html Poll = <html> <body>
+   <h3><center>Please choose your favorite picture!</h3>
+   <p>1.<img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/dog1.jpg">
+    <input type="radio"  name="favor" value=1 size=10 >   Vote for this.
+   <p>2.<img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/pic1.jpg">
+   <input type="radio"  name="favor" value=2 size=10 >   Vote for this.
+   <p>3.<img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/dog3.jpg">
+   <input type="radio"  name="favor" value=3 size=10 >   Vote for this.
+   <p>4.<img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/koala.jpg">
+   <input type="radio"  name="favor" value=4 size=10 >   Vote for this.
+   <p>5.<img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/polar.jpg">
+   <input type="radio"  name="favor" value=5 size=10 >   Vote for this.
+   <center>
+    
+   </body> </html>;
+
+   const html PollResult = <html> <body>
+   
+   <h1> <center>Poll Result</h1>
+   <BR>
+   <p><h3> You voted for picture <[pict]>!
+   <BR>
+   <p><[fav1]> people vote for <img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/dog1.jpg"> picture 1 
+   <p><[fav2]> people vote for <img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/pic1.jpg"> picture 2
+   <p><[fav3]> people vote for <img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/dog3.jpg"> picture 3
+   <p><[fav4]> people vote for <img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/koala.jpg"> picture 4 
+   <p><[fav5]> people vote for <img src="http://www.cs.mcgill.ca/~lli31/cgi-bin/polar.jpg"> picture 5
+    </h3>
+ 
+     </body> </html>;
+   
+   
+   const html Byebye = <html> <body>
+   <h1> <center>Byebye <[name]> </h1>
+ 
+     </body> </html>;
+   
+   
+
+    schema Scm1 {
+      bool b;
+      int i;
+      string s;
+    }
+
+    schema Scm2 {
+      bool b;
+      int i;
+    }
+
+    schema Scm3 {
+      bool b;
+      string s;
+    }
+
+  
+   
+  int counter;
+  int fav1,fav2,fav3,fav4,fav5;
+  
+
+  int incrementCounter()
+  { 
+    
+    counter=counter+1; 
+    return(counter);
+  }
+
+  session Access() {
+
+    string name,lang,firstname,lastname,post,gender,answer;
+    int ch,favor,current_counter;
+    tuple Scm1 t1,g1,g4;
+    tuple Scm2 t2, t3,g2;
+    tuple Scm3 g3;
+    ch=0;
+    favor=0;
+    answer="no";    
+    g1 = tuple { b=false, i=23,s="foo" };
+    current_counter=incrementCounter();    
+    show plug Welcome[no = current_counter]
+              receive[name=name];
+    show plug Choose [name=name]
+                    receive[ch=choice];
+    while (ch!=4){
+       if (ch==1){
+         while (answer=="no"){
+         show InformationInput receive[lang=language,
+                                       firstname=firstname,
+                                       lastname=lastname,
+                                       post=post,
+                                       gender=gender];
+         show plug ShowInformation [firstname=firstname,
+                                    lastname=lastname,
+                                    post=post,
+                                    lang=lang,
+                                    gender=gender]
+                                    receive [answer=correct];
+         ch=0;
+         }
+        
+       }
+
+       if (ch==2) {
+        t1 = tuple { b=true, i=87,  s="foo" };
+        show plug ShowSchema1[message = "t1  ",
+                              b = t1.b, 
+                              i = t1.i, 
+                              s=t1.s];
+
+    /* create a new tuple t2,  keeping fields b and i, and show it */
+        t2 = (t1 \+ (b, i));    /* keep b and i */
+        show plug ShowSchema2[message1 = "t1 ",
+                              b1 = t1.b, 
+                              i1 = t1.i, 
+                              s=t1.s,
+                              message2 = "t2  ",
+                              b2  = t2.b, 
+                              i2=t2.i];
+
+    /* create a new tuple t3, throwing away field s, and show it */
+        t3 = (t1 \- s);    /* throw away s */
+        show plug ShowSchema3[message1 = "t1  ",
+                              b1 = t1.b, 
+                              i1 = t1.i, 
+                              s=t1.s,
+                              message2 = "t3  ",
+                              b2 = t3.b, i2=t3.i];
+      
+  /* create an show g2 */
+        g2 = tuple { b=true, i=87 };
+        g3 = tuple { b=false, s="foo" };
+        show plug ShowSchema4[
+                           message1 = "g1 ",
+                           b1 = g1.b,
+                           i1 = g1.i,
+                           s1= g1.s,
+                           message2 = "g2 ",
+                           b2 = g2.b,
+                           i2 = g2.i,
+                           message3= "g3 ",
+                           b3 =g3.b,
+                           s3=g3.s]; 
+
+    
+   /* combine g2 and g3.   g2 and g3 must agree on the types of
+       attributes they have in common.    g1 will contain the union
+       of g2 and g3's attributes.  g3's attributes are taken
+       whenever there is a common attribute.  */
+        g1 = g2 << g3;
+   /* g1 should be equal to tuple { b=false,i=87,s="foo" } */ 
+        show plug ShowSchema5[message = "g1 ",b = g1.b, i = g1.i, s=g1.s];
+       
+       g2 = tuple { b=true, i=100 };
+       g3 = tuple { b=false, s="new_foo" };
+       g4=g1<<g2<<g3;
+      show plug ShowSchema6[message = "g4  ",b = g4.b, i = g4.i, s=g4.s];
+      }
+ 
+      if (ch==3){
+         show Poll receive[favor=favor];
+         if (favor==1) fav1=fav1+1;
+         if (favor==2) fav2=fav2+1;
+         if (favor==3) fav3=fav3+1;
+         if (favor==4) fav4=fav4+1;
+         if (favor==5) fav5=fav5+1;
+         show plug PollResult [pict=favor,
+                              fav1=fav1,
+                              fav2=fav2,
+                              fav3=fav3,
+                              fav4=fav4,
+                              fav5=fav5];
+                      
+      }
+
+      
+    show plug Choose [name=name]
+                   receive[ch=choice];  
+    }
+     
+   exit plug  Byebye[name=name];
+  }
+
+  session Initial(){
+  fav1=0;
+  fav2=0;
+  fav3=0;
+  fav4=0;
+  fav5=0; 
+  exit Init;  
+  }
+     
+}

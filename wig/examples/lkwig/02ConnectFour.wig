@@ -1,0 +1,311 @@
+// COMP 520: Deliverable CGI vs WIG
+// GROUP 2 : Anatole Le and Lin Wang
+
+service {
+    const html welcome = 
+        <html> <body> 
+            <p>Do you want to play the game Connect Four?</p>
+        </body></html>;
+
+    const html play = 
+        <html> <body>
+        <p>Input the column you want to play (1-7): 
+        <input name="column" type="text" size=2>
+        <br>
+        </p>
+        <table align=center border=2 bordercolor=black>
+            <tr><td width=15><[c1r6]><td width=15><[c2r6]><td width=15><[c3r6]><td
+            width=15><[c4r6]><td width=15><[c5r6]><td width=15><[c6r6]><td width=15><[c7r6]></tr>
+            <tr><td><[c1r5]><td><[c2r5]><td><[c3r5]><td><[c4r5]><td><[c5r5]><td><[c6r5]><td><[c7r5]></tr>
+            <tr><td><[c1r4]><td><[c2r4]><td><[c3r4]><td><[c4r4]><td><[c5r4]><td><[c6r4]><td><[c7r4]></tr>
+            <tr><td><[c1r3]><td><[c2r3]><td><[c3r3]><td><[c4r3]><td><[c5r3]><td><[c6r3]><td><[c7r3]></tr>
+            <tr><td><[c1r2]><td><[c2r2]><td><[c3r2]><td><[c4r2]><td><[c5r2]><td><[c6r2]><td><[c7r2]></tr>
+            <tr><td><[c1r1]><td><[c2r1]><td><[c3r1]><td><[c4r1]><td><[c5r1]><td><[c6r1]><td><[c7r1]></tr>
+        </table>
+        <table align=center>
+            <tr align=center><td width=17>1<td width=17>2<td width=17>3<td
+            width=17>4<td width=17>5<td width=17>6<td width=17>7</tr>
+        </table>
+        <p>
+        <br>
+        Do you want to quit (yes/no)?
+        <input name="quit" type="text" size=3>
+        </body></html>;
+
+    const html end = 
+        <html> <body> 
+            <p>Game finished.</p>
+        </body></html>;
+
+    schema columnValues {
+        string row1;
+        string row2;
+        string row3;
+        string row4;
+        string row5;
+        string row6;
+    }
+
+// The column values of the board 
+    tuple columnValues column1;
+    tuple columnValues column2;
+    tuple columnValues column3;
+    tuple columnValues column4;
+    tuple columnValues column5;
+    tuple columnValues column6;
+    tuple columnValues column7;
+
+    int seed;
+
+// Init the board
+    void initGlobals() {
+        seed = 10;
+
+        column1.row1 = "&nbsp"; column1.row2 = "&nbsp"; column1.row3 = "&nbsp";
+        column1.row4 = "&nbsp"; column1.row5 = "&nbsp"; column1.row6 = "&nbsp";
+
+        column2.row1 = "&nbsp"; column2.row2 = "&nbsp"; column2.row3 = "&nbsp";
+        column2.row4 = "&nbsp"; column2.row5 = "&nbsp"; column2.row6 = "&nbsp";
+
+        column3.row1 = "&nbsp"; column3.row2 = "&nbsp"; column3.row3 = "&nbsp";
+        column3.row4 = "&nbsp"; column3.row5 = "&nbsp"; column3.row6 = "&nbsp";
+
+        column4.row1 = "&nbsp"; column4.row2 = "&nbsp"; column4.row3 = "&nbsp";
+        column4.row4 = "&nbsp"; column4.row5 = "&nbsp"; column4.row6 = "&nbsp";
+
+        column5.row1 = "&nbsp"; column5.row2 = "&nbsp"; column5.row3 = "&nbsp";
+        column5.row4 = "&nbsp"; column5.row5 = "&nbsp"; column5.row6 = "&nbsp";
+
+        column6.row1 = "&nbsp"; column6.row2 = "&nbsp"; column6.row3 = "&nbsp";
+        column6.row4 = "&nbsp"; column6.row5 = "&nbsp"; column6.row6 = "&nbsp";
+
+        column7.row1 = "&nbsp"; column7.row2 = "&nbsp"; column7.row3 = "&nbsp";
+        column7.row4 = "&nbsp"; column7.row5 = "&nbsp"; column7.row6 = "&nbsp";
+    }
+
+// Computer plays randomly
+    int nextRandomColumn() { 
+        int current;
+        seed = (25173 * seed + 13849) % 7;
+        return seed + 1;
+    }
+
+// update the board, put a value in the bottom most empty spot in a column
+    void updateBoard(int column, string player) {
+        if (column == 1) {
+            if (column1.row1 == "&nbsp") {
+                column1.row1 = player;
+            } else {
+                if (column1.row2 == "&nbsp") {
+                    column1.row2 = player;
+                } else {
+                    if (column1.row3 == "&nbsp") {
+                        column1.row3 = player;
+                    } else {
+                        if (column1.row4 == "&nbsp") {
+                            column1.row4 = player;
+                        } else {
+                            if (column1.row5 == "&nbsp") {
+                                column1.row5 = player;
+                            } else {
+                                if (column1.row6 == "&nbsp") {
+                                    column1.row6 = player;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (column == 2) {
+            if (column2.row1 == "&nbsp") {
+                column2.row1 = player;
+            } else {
+                if (column2.row2 == "&nbsp") {
+                    column2.row2 = player;
+                } else {
+                    if (column2.row3 == "&nbsp") {
+                        column2.row3 = player;
+                    } else {
+                        if (column2.row4 == "&nbsp") {
+                            column2.row4 = player;
+                        } else {
+                            if (column2.row5 == "&nbsp") {
+                                column2.row5 = player;
+                            } else {
+                                if (column2.row6 == "&nbsp") {
+                                    column2.row6 = player;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (column == 3) {
+            if (column3.row1 == "&nbsp") {
+                column3.row1 = player;
+            } else {
+                if (column3.row2 == "&nbsp") {
+                    column3.row2 = player;
+                } else {
+                    if (column3.row3 == "&nbsp") {
+                        column3.row3 = player;
+                    } else {
+                        if (column3.row4 == "&nbsp") {
+                            column3.row4 = player;
+                        } else {
+                            if (column3.row5 == "&nbsp") {
+                                column3.row5 = player;
+                            } else {
+                                if (column3.row6 == "&nbsp") {
+                                    column3.row6 = player;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (column == 4) {
+            if (column4.row1 == "&nbsp") {
+                column4.row1 = player;
+            } else {
+                if (column4.row2 == "&nbsp") {
+                    column4.row2 = player;
+                } else {
+                    if (column4.row3 == "&nbsp") {
+                        column4.row3 = player;
+                    } else {
+                        if (column4.row4 == "&nbsp") {
+                            column4.row4 = player;
+                        } else {
+                            if (column4.row5 == "&nbsp") {
+                                column4.row5 = player;
+                            } else {
+                                if (column4.row6 == "&nbsp") {
+                                    column4.row6 = player;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (column == 5) {
+            if (column5.row1 == "&nbsp") {
+                column5.row1 = player;
+            } else {
+                if (column5.row2 == "&nbsp") {
+                    column5.row2 = player;
+                } else {
+                    if (column5.row3 == "&nbsp") {
+                        column5.row3 = player;
+                    } else {
+                        if (column5.row4 == "&nbsp") {
+                            column5.row4 = player;
+                        } else {
+                            if (column5.row5 == "&nbsp") {
+                                column5.row5 = player;
+                            } else {
+                                if (column5.row6 == "&nbsp") {
+                                    column5.row6 = player;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (column == 6) {
+            if (column6.row1 == "&nbsp") {
+                column6.row1 = player;
+            } else {
+                if (column6.row2 == "&nbsp") {
+                    column6.row2 = player;
+                } else {
+                    if (column6.row3 == "&nbsp") {
+                        column6.row3 = player;
+                    } else {
+                        if (column6.row4 == "&nbsp") {
+                            column6.row4 = player;
+                        } else {
+                            if (column6.row5 == "&nbsp") {
+                                column6.row5 = player;
+                            } else {
+                                if (column6.row6 == "&nbsp") {
+                                    column6.row6 = player;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (column == 7) {
+            if (column7.row1 == "&nbsp") {
+                column7.row1 = player;
+            } else {
+                if (column7.row2 == "&nbsp") {
+                    column7.row2 = player;
+                } else {
+                    if (column7.row3 == "&nbsp") {
+                        column7.row3 = player;
+                    } else {
+                        if (column7.row4 == "&nbsp") {
+                            column7.row4 = player;
+                        } else {
+                            if (column7.row5 == "&nbsp") {
+                                column7.row5 = player;
+                            } else {
+                                if (column7.row6 == "&nbsp") {
+                                    column7.row6 = player;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+// Check if any empty spot left
+    bool gameFinished() {
+        if (column1.row6!="&nbsp" && column2.row6!="&nbsp" && column3.row6!="&nbsp" &&
+            column4.row6!="&nbsp" && column5.row6!="&nbsp" && column6.row6!="&nbsp" &&
+            column7.row6!="&nbsp") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    session Game() {
+        int column;
+        string quit;
+        initGlobals();
+        quit = "";
+        while (!gameFinished() && quit != "yes") {
+            show plug play [c1r1 = column1.row1, c1r2 = column1.row2, c1r3 = column1.row3, 
+                            c1r4 = column1.row4, c1r5 = column1.row5, c1r6 = column1.row6,
+                            c2r1 = column2.row1, c2r2 = column2.row2, c2r3 = column2.row3,
+                            c2r4 = column2.row4, c2r5 = column2.row5, c2r6 = column2.row6,
+                            c3r1 = column3.row1, c3r2 = column3.row2, c3r3 = column3.row3,
+                            c3r4 = column3.row4, c3r5 = column3.row5, c3r6 = column3.row6,
+                            c4r1 = column4.row1, c4r2 = column4.row2, c4r3 = column4.row3,
+                            c4r4 = column4.row4, c4r5 = column4.row5, c4r6 = column4.row6,
+                            c5r1 = column5.row1, c5r2 = column5.row2, c5r3 = column5.row3,
+                            c5r4 = column5.row4, c5r5 = column5.row5, c5r6 = column5.row6,
+                            c6r1 = column6.row1, c6r2 = column6.row2, c6r3 = column6.row3,
+                            c6r4 = column6.row4, c6r5 = column6.row5, c6r6 = column6.row6,
+                            c7r1 = column7.row1, c7r2 = column7.row2, c7r3 = column7.row3,
+                            c7r4 = column7.row4, c7r5 = column7.row5, c7r6 = column7.row6]
+                receive [column = column, quit = quit];
+            if (column >= 1 && column <=7) {
+                updateBoard(column, "P");
+                updateBoard(nextRandomColumn(), "C");
+            }
+        }
+        exit end;
+    }
+}

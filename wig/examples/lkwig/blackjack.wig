@@ -1,0 +1,300 @@
+service{
+	const html EnterSeed = <html> <body>
+		Please enter seed: <input type="text" name="inseed" size=8>
+		</body> </html>;
+	
+	const html ShowSeed = <html> <body>
+		The random seed has been set to <[number]>
+		</body> </html>;
+		
+	const html Number = <html> <head><title>Random Number</head><body>
+		The new number is: <[number]>
+		</body> </html>;
+	
+	const html ShowHands = <html> <head> <title>Blackjack</title></head>
+	<body> 
+	House has:<br>
+	<[ho1]> X <br>
+	You have: <br>
+	<[mo1]>  <[mo2]> <[mo3]> <[mo4]> <[mo5]> <[mo6]> <[mo7]> <[mo8]> <[mo9]> <[mo10]> <[mo11]> <br>
+	That's a score of: <[moscore]> <br>
+	<input type="radio" name="action" value="hitme">Hit Me!
+	<input type="radio" name="action" value="wimpout">Stay.
+	</body></html>;
+
+	const html FinalHands = <html> <head> <title>Blackjack</title></head>
+	<body> 
+	House has:<br>
+	<[ho1]> <[ho2]> <[ho3]> <[ho4]> <[ho5]> <[ho6]> <[ho7]> <[ho8]> <[ho9]> <br>
+	House score: <[hoscore]> <br>
+	You have: <br>
+	<[mo1]>  <[mo2]> <[mo3]> <[mo4]> <[mo5]> <[mo6]> <[mo7]> <[mo8]> <[mo9]> <[mo10]> <[mo11]> <br>
+	That's a score of: <[moscore]> <br>
+	</body></html>;
+
+
+	const html Error = <html> <head> <title>Error</title></head>
+		<body>
+		Something bad happened.
+		</body></html>;
+
+	const html Busted = <html> <head> <title>Busted!</head>
+		<body>
+		You busted, sucka. You got <[score]>. Dealer takes all.<br>
+		Select to play again: <input type="radio" name="retry" value="true">
+		</body></html>;
+
+	const html DealerBusted = <html> <head> <title>Ya win!</head>
+		<body>
+		The dealer busted with a score of <[score]>. You win. Pimp.<br>
+
+		Select to play again: <input type="radio" name="retry" value="true">
+		</body></html>;
+		
+	const html YouWin = <html> <head> <title>You win!</head>
+		<body>
+		You won with <[moscore]> over the dealer's <[hoscore]>. Niiice.<br>
+
+		Select to play again: <input type="radio" name="retry" value="true">
+		</body></html>;
+	
+	const html YouLose = <html> <head> <title>You lose!</head>
+		<body>
+		You lost, loser. Dealer has <[hoscore]> over your <[moscore]>.<br>
+
+		Select to play again: <input type="radio" name="retry" value="true">
+		</body></html>;
+
+	const html YouTie = <html> <head> <title>You win!</head>
+		<body>
+		You tie at <[score]> with the dealer.<br>
+
+		Select to play again: <input type="radio" name="retry" value="true">
+		</body></html>;
+
+	const html SeeYa = <html> <head> <title>See ya</head>
+		<body>
+		Thanks for playin. Late.
+		</body></html>;
+
+	int seed;
+	bool seenace;
+
+	int newRandom() {
+		seed = seed * 1103515245 + 12345;
+		seed = (seed / 65536);
+		seed = seed % 32768;
+		return seed;
+	}
+	
+	int drawCard() {
+		int card;
+		card = newRandom();
+		card = card * 13;
+		card = card / 32767;
+		if (card < 0) {
+			card = card * -1;
+		}
+		return card + 1;
+	}
+
+	// Returns the value of cards
+	// 0  1  2  3  4  5  6  7  8  9 10 11 12 13
+	// X  A  2  3  4  5  6  7  8  9 10  J  Q  K
+	int scoreCard(int card) {
+		if (card == 1 && seenace){
+			return 1;
+		}
+		if (card == 1 && !seenace){
+			seenace = true;
+			return 11;
+		}
+		else if (card == 11 || card == 12 || card == 13){
+			return 10;
+		}
+		else return card;
+	}
+
+	int scoreHand(int m1, int m2, int m3, int m4, int m5, int m6, int m7, int m8, int m9, int m10, int m11){
+		int score;
+		score = 0;
+
+		score = scoreCard(m1) + scoreCard(m2) + scoreCard(m3) + scoreCard(m4) + scoreCard(m5) + scoreCard(m6) + scoreCard(m7) + scoreCard(m8) + scoreCard(m9) + scoreCard(m10) + scoreCard(m11);
+
+		if (seenace && score > 21) {
+			score = score - 10;
+		}
+		seenace = false;
+		return score;
+	}
+
+	// Translate a card number to a card string
+	string itos(int i){
+		if (i == 0){
+			return " ";
+		}else if (i == 1){
+			return "A";
+		}else if (i == 11){
+			return "J";
+		}else if (i == 12){
+			return "Q";
+		}else if (i == 13){
+			return "K";
+		}else if (i == 2){
+			return "2";
+		}else if (i == 3){
+			return "3";
+		}else if (i == 4){
+			return "4";
+		}else if (i == 5){
+			return "5";
+		}else if (i == 6){
+			return "6";
+		}else if (i == 7){
+			return "7";
+		}else if (i == 8){
+			return "8";
+		}else if (i == 9){
+			return "9";
+		}else if (i == 10){
+			return "10";
+		}else {
+			return "";
+		}
+	}
+
+	session Seed() {
+		show EnterSeed receive[seed = inseed];
+		exit plug ShowSeed[number = seed];
+	}
+
+
+	session Rand() {
+		int no;
+		no = drawCard();
+		exit plug Number[number = no];
+	}
+
+	session Blackjack() {
+		int h1,h2,h3,h4,h5,h6,h7,h8,h9;
+		int m1,m2,m3,m4,m5,m6,m7,m8,m9,m10,m11;
+		int myscore,dealscore;
+		bool stay;
+		string action,again;
+		again = "true";
+		
+		while (again == "true"){
+			again = "noblow";
+			seenace = false;
+			stay = false;
+			myscore = 0;
+			dealscore = 0;
+			
+			if (seed == 0){
+				show EnterSeed receive[seed = inseed];
+			}
+		
+			// initial deal
+			m1 = drawCard();
+			h1 = drawCard();
+			m2 = drawCard();
+			h2 = drawCard();
+			
+			m3 = 0;
+			h3 = 0;
+			m4 = 0;
+			h4 = 0;
+			m5 = 0;
+			h5 = 0;
+			m6 = 0;
+			h6 = 0;
+			m7 = 0;
+			h7 = 0;
+			m8 = 0;
+			h8 = 0;
+			m9 = 0;
+			h9 = 0;
+			m10 = 0;
+			m11 = 0;
+			
+			myscore = scoreHand(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10,m11);
+			dealscore = scoreHand(h1,h2,h3,h4,h5,h6,h7,h8,h9,0,0);
+			
+			// Oh my lord is this ugly.
+			while (!stay && myscore < 22){
+				show plug ShowHands[mo1=itos(m1),mo2=itos(m2),mo3=itos(m3),mo4=itos(m4),mo5=itos(m5),mo6=itos(m6),mo7=itos(m7),mo8=itos(m8),mo9=itos(m9),mo10=itos(m10),mo11=itos(m11),moscore=myscore,ho1=itos(h1)] receive[action = action];
+	
+				if (action == "wimpout"){
+					stay = true;
+				}else if (action == "hitme"){
+					if (m2 == 0){
+						m2 = drawCard();
+					}else if (m3 == 0){
+						m3 = drawCard();
+					}else if (m4 == 0){
+						m4 = drawCard();
+					}else if (m5 == 0){
+						m5 = drawCard();
+					}else if (m6 == 0){
+						m6 = drawCard();
+					}else if (m7 == 0){
+						m7 = drawCard();
+					}else if (m8 == 0){
+						m8 = drawCard();
+					}else if (m9 == 0){
+						m9 = drawCard();
+					}else if (m10 == 0){
+						m10 = drawCard();
+					}else if (m11 == 0){
+						m11 = drawCard();
+					}else{
+						show Error;
+					}
+				}
+				myscore = scoreHand(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10,m11);
+			}
+			
+			if (myscore > 21){
+				show plug Busted[score=myscore] receive[again = retry];
+			}else{
+				while(dealscore < 17){
+					if (h2 == 0){
+						h2 = drawCard();
+					}else if (h3 == 0){
+						h3 = drawCard();
+					}else if (h4 == 0){
+						h4 = drawCard();
+					}else if (h5 == 0){
+						h5 = drawCard();
+					}else if (h6 == 0){
+						h6 = drawCard();
+					}else if (h7 == 0){
+						h7 = drawCard();
+					}else if (h8 == 0){
+						h8 = drawCard();
+					}else if (h9 == 0){
+						h9 = drawCard();
+					}else{
+						show Error;
+					}
+				dealscore = scoreHand(h1,h2,h3,h4,h5,h6,h7,h8,h9,0,0);
+			}
+	
+			show plug FinalHands[mo1=itos(m1),mo2=itos(m2),mo3=itos(m3),mo4=itos(m4),mo5=itos(m5),mo6=itos(m6),mo7=itos(m7),mo8=itos(m8),mo9=itos(m9),mo10=itos(m10),mo11=itos(m11),moscore=myscore,ho1=itos(h1),ho2=itos(h2),ho3=itos(h3),ho4=itos(h4),ho5=itos(h5),ho6=itos(h6),ho7=itos(h7),ho8=itos(h8),ho9=itos(h9),hoscore=dealscore];
+	
+	
+				if (dealscore > 21){
+					show plug DealerBusted[score = dealscore] receive[again = retry];
+				}else if (myscore > dealscore){
+					show plug YouWin[moscore = myscore, hoscore = dealscore] receive[again = retry];
+				}else if (myscore < dealscore){
+					show plug YouLose[moscore = myscore, hoscore = dealscore] receive[again = retry];
+				}else{
+					show plug YouTie[score = myscore] receive[again = retry];
+				}
+			}
+		}
+		
+		exit SeeYa;
+	}
+}

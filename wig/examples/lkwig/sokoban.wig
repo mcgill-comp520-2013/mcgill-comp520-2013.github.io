@@ -1,0 +1,965 @@
+service {
+   const html Game = 
+			<html><body><h1>Sokoban</h1>
+                        <[board]>
+	       		<input type="radio" name="move" value="1">Up
+	                <br>
+			<input type="radio" name="move" value="2">Down
+			<br>
+			<input type="radio" name="move" value="3">Left
+	                <br>
+			<input type="radio" name="move" value="4">Right
+			<br></body></html>;
+/*
+			<br>
+			<input type="radio" name="move" value="5">Undo
+			</body></html>;
+*/
+
+   const html GameExit =    <html><body><h1>Sokoban</h1>
+                        <[board]>
+                        You won!!!
+			</body></html>;
+    
+   //representation of a row
+   schema row{
+          int a;int b;int c;int d;int e;int f;int g;int h;
+          int i;int j;int k;int l;int m;int n;int o;int p;
+          int q;int r;int s;int t;
+
+   }
+   tuple row row1,row2,row3,row4,row5,row6,row7,row8,row9,row10;
+   int curRow, curCol, meOverDot, boxOverDot, boxGrabbed;
+
+   /*associates an int with a figure to display*/
+   string resolveItem(int itemType){
+      string s,m,o,p,a,x;
+      /*
+      s=" ";
+      m="%";
+      o="o";
+      p=".";
+      a="@";
+      x="x";
+      */
+      s="<img src=void.png>";
+      m="<img src=wall.png>";
+      o="<img src=box.png>";
+      p="<img src=goal.png>";
+      a="<img src=man.png>";
+      x="x";
+      if(itemType==0)
+          return(s);
+      else if(itemType==1)
+          return(m);
+      else if(itemType==2)
+          return(o);
+      else if(itemType==3)
+          return(p);
+      else if(itemType==4)
+          return(a);
+      return(x);
+   }
+   /*returns an int representing of the position type*/
+   int getItemType(tuple row s,int i){
+       if(i==1)
+         return(s.a);
+       else if(i==2)
+         return(s.b);
+       else if(i==3)
+         return(s.c);
+       else if(i==4)
+         return(s.d);
+       else if(i==5)
+         return(s.e);
+       else if(i==6)
+         return(s.f);
+       else if(i==7)
+         return(s.g);
+       else if(i==8)
+         return(s.h);
+       else if(i==9)
+         return(s.i);
+       else if(i==10)
+         return(s.j);
+       else if(i==11)
+         return(s.k);
+       else if(i==12)
+         return(s.l);
+       else if(i==13)
+         return(s.m);
+       else if(i==14)
+         return(s.n);
+       else if(i==15)
+         return(s.o);
+       else if(i==16)
+         return(s.p);
+       else if(i==17)
+         return(s.q);
+       else if(i==18)
+         return(s.r);
+       else if(i==19)
+         return(s.s);
+       else if(i==20)
+         return(s.t);
+       return(10);
+   }   
+   /*set the position type at row/col*/
+   void setItemType(int row,int col,int type){
+     if(row==1){  
+       if(col==1)
+         row1.a = type;
+       else if(col==2)
+         row1.b= type;
+       else if(col==3)
+         row1.c= type;
+       else if(col==4)
+         row1.d= type;
+       else if(col==5)
+         row1.e= type;
+       else if(col==6)
+         row1.f= type;
+       else if(col==7)
+         row1.g= type;
+       else if(col==8)
+         row1.h= type;
+       else if(col==9)
+         row1.i= type;
+       else if(col==10)
+         row1.j= type;
+       else if(col==11)
+         row1.k= type;
+       else if(col==12)
+         row1.l= type;
+       else if(col==13)
+         row1.m= type;
+       else if(col==14)
+         row1.n= type;
+       else if(col==15)
+         row1.o= type;
+       else if(col==16)
+         row1.p= type;
+       else if(col==17)
+         row1.q= type;
+       else if(col==18)
+         row1.r= type;
+       else if(col==19)
+         row1.s= type;
+       else if(col==20)
+         row1.t= type;
+     }
+     else if(row==2){  
+       if(col==1)
+         row2.a = type;
+       else if(col==2)
+         row2.b= type;
+       else if(col==3)
+         row2.c= type;
+       else if(col==4)
+         row2.d= type;
+       else if(col==5)
+         row2.e= type;
+       else if(col==6)
+         row2.f= type;
+       else if(col==7)
+         row2.g= type;
+       else if(col==8)
+         row2.h= type;
+       else if(col==9)
+         row2.i= type;
+       else if(col==10)
+         row2.j= type;
+       else if(col==11)
+         row2.k= type;
+       else if(col==12)
+         row2.l= type;
+       else if(col==13)
+         row2.m= type;
+       else if(col==14)
+         row2.n= type;
+       else if(col==15)
+         row2.o= type;
+       else if(col==16)
+         row2.p= type;
+       else if(col==17)
+         row2.q= type;
+       else if(col==18)
+         row2.r= type;
+       else if(col==19)
+         row2.s= type;
+       else if(col==20)
+         row2.t= type;
+     }
+     else if(row==3){  
+       if(col==1)
+         row3.a = type;
+       else if(col==2)
+         row3.b= type;
+       else if(col==3)
+         row3.c= type;
+       else if(col==4)
+         row3.d= type;
+       else if(col==5)
+         row3.e= type;
+       else if(col==6)
+         row3.f= type;
+       else if(col==7)
+         row3.g= type;
+       else if(col==8)
+         row3.h= type;
+       else if(col==9)
+         row3.i= type;
+       else if(col==10)
+         row3.j= type;
+       else if(col==11)
+         row3.k= type;
+       else if(col==12)
+         row3.l= type;
+       else if(col==13)
+         row3.m= type;
+       else if(col==14)
+         row3.n= type;
+       else if(col==15)
+         row3.o= type;
+       else if(col==16)
+         row3.p= type;
+       else if(col==17)
+         row3.q= type;
+       else if(col==18)
+         row3.r= type;
+       else if(col==19)
+         row3.s= type;
+       else if(col==20)
+         row3.t= type;
+     }
+     else if(row==4){  
+       if(col==1)
+         row4.a = type;
+       else if(col==2)
+         row4.b= type;
+       else if(col==3)
+         row4.c= type;
+       else if(col==4)
+         row4.d= type;
+       else if(col==5)
+         row4.e= type;
+       else if(col==6)
+         row4.f= type;
+       else if(col==7)
+         row4.g= type;
+       else if(col==8)
+         row4.h= type;
+       else if(col==9)
+         row4.i= type;
+       else if(col==10)
+         row4.j= type;
+       else if(col==11)
+         row4.k= type;
+       else if(col==12)
+         row4.l= type;
+       else if(col==13)
+         row4.m= type;
+       else if(col==14)
+         row4.n= type;
+       else if(col==15)
+         row4.o= type;
+       else if(col==16)
+         row4.p= type;
+       else if(col==17)
+         row4.q= type;
+       else if(col==18)
+         row4.r= type;
+       else if(col==19)
+         row4.s= type;
+       else if(col==20)
+         row4.t= type;
+     }
+     else if(row==5){  
+       if(col==1)
+         row5.a = type;
+       else if(col==2)
+         row5.b= type;
+       else if(col==3)
+         row5.c= type;
+       else if(col==4)
+         row5.d= type;
+       else if(col==5)
+         row5.e= type;
+       else if(col==6)
+         row5.f= type;
+       else if(col==7)
+         row5.g= type;
+       else if(col==8)
+         row5.h= type;
+       else if(col==9)
+         row5.i= type;
+       else if(col==10)
+         row5.j= type;
+       else if(col==11)
+         row5.k= type;
+       else if(col==12)
+         row5.l= type;
+       else if(col==13)
+         row5.m= type;
+       else if(col==14)
+         row5.n= type;
+       else if(col==15)
+         row5.o= type;
+       else if(col==16)
+         row5.p= type;
+       else if(col==17)
+         row5.q= type;
+       else if(col==18)
+         row5.r= type;
+       else if(col==19)
+         row5.s= type;
+       else if(col==20)
+         row5.t= type;
+     }
+     else if(row==6){  
+       if(col==1)
+         row6.a = type;
+       else if(col==2)
+         row6.b= type;
+       else if(col==3)
+         row6.c= type;
+       else if(col==4)
+         row6.d= type;
+       else if(col==5)
+         row6.e= type;
+       else if(col==6)
+         row6.f= type;
+       else if(col==7)
+         row6.g= type;
+       else if(col==8)
+         row6.h= type;
+       else if(col==9)
+         row6.i= type;
+       else if(col==10)
+         row6.j= type;
+       else if(col==11)
+         row6.k= type;
+       else if(col==12)
+         row6.l= type;
+       else if(col==13)
+         row6.m= type;
+       else if(col==14)
+         row6.n= type;
+       else if(col==15)
+         row6.o= type;
+       else if(col==16)
+         row6.p= type;
+       else if(col==17)
+         row6.q= type;
+       else if(col==18)
+         row6.r= type;
+       else if(col==19)
+         row6.s= type;
+       else if(col==20)
+         row6.t= type;
+     }
+     else if(row==7){  
+       if(col==1)
+         row7.a = type;
+       else if(col==2)
+         row7.b= type;
+       else if(col==3)
+         row7.c= type;
+       else if(col==4)
+         row7.d= type;
+       else if(col==5)
+         row7.e= type;
+       else if(col==6)
+         row7.f= type;
+       else if(col==7)
+         row7.g= type;
+       else if(col==8)
+         row7.h= type;
+       else if(col==9)
+         row7.i= type;
+       else if(col==10)
+         row7.j= type;
+       else if(col==11)
+         row7.k= type;
+       else if(col==12)
+         row7.l= type;
+       else if(col==13)
+         row7.m= type;
+       else if(col==14)
+         row7.n= type;
+       else if(col==15)
+         row7.o= type;
+       else if(col==16)
+         row7.p= type;
+       else if(col==17)
+         row7.q= type;
+       else if(col==18)
+         row7.r= type;
+       else if(col==19)
+         row7.s= type;
+       else if(col==20)
+         row7.t= type;
+     }
+     else if(row==8){  
+       if(col==1)
+         row8.a = type;
+       else if(col==2)
+         row8.b= type;
+       else if(col==3)
+         row8.c= type;
+       else if(col==4)
+         row8.d= type;
+       else if(col==5)
+         row8.e= type;
+       else if(col==6)
+         row8.f= type;
+       else if(col==7)
+         row8.g= type;
+       else if(col==8)
+         row8.h= type;
+       else if(col==9)
+         row8.i= type;
+       else if(col==10)
+         row8.j= type;
+       else if(col==11)
+         row8.k= type;
+       else if(col==12)
+         row8.l= type;
+       else if(col==13)
+         row8.m= type;
+       else if(col==14)
+         row8.n= type;
+       else if(col==15)
+         row8.o= type;
+       else if(col==16)
+         row8.p= type;
+       else if(col==17)
+         row8.q= type;
+       else if(col==18)
+         row8.r= type;
+       else if(col==19)
+         row8.s= type;
+       else if(col==20)
+         row8.t= type;
+     }
+     else if(row==9){  
+       if(col==1)
+         row9.a = type;
+       else if(col==2)
+         row9.b= type;
+       else if(col==3)
+         row9.c= type;
+       else if(col==4)
+         row9.d= type;
+       else if(col==5)
+         row9.e= type;
+       else if(col==6)
+         row9.f= type;
+       else if(col==7)
+         row9.g= type;
+       else if(col==8)
+         row9.h= type;
+       else if(col==9)
+         row9.i= type;
+       else if(col==10)
+         row9.j= type;
+       else if(col==11)
+         row9.k= type;
+       else if(col==12)
+         row9.l= type;
+       else if(col==13)
+         row9.m= type;
+       else if(col==14)
+         row9.n= type;
+       else if(col==15)
+         row9.o= type;
+       else if(col==16)
+         row9.p= type;
+       else if(col==17)
+         row9.q= type;
+       else if(col==18)
+         row9.r= type;
+       else if(col==19)
+         row9.s= type;
+       else if(col==20)
+         row9.t= type;
+     }
+     else if(row==10){  
+       if(col==1)
+         row10.a = type;
+       else if(col==2)
+         row10.b= type;
+       else if(col==3)
+         row10.c= type;
+       else if(col==4)
+         row10.d= type;
+       else if(col==5)
+         row10.e= type;
+       else if(col==6)
+         row10.f= type;
+       else if(col==7)
+         row10.g= type;
+       else if(col==8)
+         row10.h= type;
+       else if(col==9)
+         row10.i= type;
+       else if(col==10)
+         row10.j= type;
+       else if(col==11)
+         row10.k= type;
+       else if(col==12)
+         row10.l= type;
+       else if(col==13)
+         row10.m= type;
+       else if(col==14)
+         row10.n= type;
+       else if(col==15)
+         row10.o= type;
+       else if(col==16)
+         row10.p= type;
+       else if(col==17)
+         row10.q= type;
+       else if(col==18)
+         row10.r= type;
+       else if(col==19)
+         row10.s= type;
+       else if(col==20)
+         row10.t= type;
+     }
+   } 
+   /*sets the html representation of the board (surrent state)*/
+   string getBoardTable(){
+     int i,item;
+     string s;
+     i=1;
+     s = "<table border=0 cellspacing=0 cellpadding=0>";
+
+       s = s + "<tr align=center colspan=22>";
+       while(i<=20){
+         item = getItemType(row1,i);
+         s = s + "<td>" + resolveItem(item) + "</td>";
+         i=i+1;
+       }
+       i=1;
+       s = s + "</tr><tr align=center colspan=22>";
+    while(i<=20){
+       item = getItemType(row2,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+     i=1;
+     s = s + "</tr><tr align=center colspan=22>";
+     while(i<=20){
+       item = getItemType(row3,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+     i=1;
+     s = s + "</tr><tr align=center colspan=22>";
+     while(i<=20){
+       item = getItemType(row4,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+     i=1;
+     s = s + "</tr><tr align=center colspan=22>";
+     while(i<=20){
+       item = getItemType(row5,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+     i=1;
+     s = s + "</tr><tr align=center colspan=22>";
+     while(i<=20){
+       item = getItemType(row6,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+     i=1;
+     s = s + "</tr><tr align=center colspan=22>";
+     while(i<=20){
+       item = getItemType(row7,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+     i=1;
+     s = s + "</tr><tr align=center colspan=22>";
+     while(i<=20){
+       item = getItemType(row8,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+     i=1;
+     s = s + "</tr><tr align=center colspan=22>";
+     while(i<=20){
+       item = getItemType(row9,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+     i=1;
+     s = s + "</tr><tr align=center colspan=22>";
+     while(i<=20){
+       item = getItemType(row10,i);
+       s = s + "<td>" + resolveItem(item) + "</td>";
+       i=i+1;
+     }
+
+     s = s + "</table><br>";
+     return(s);
+   }
+   
+   /*test which way we wanna go and call appropriate function*/
+   int applyMove(int mv){
+     if(mv==1){//Up
+	if(curRow==3)
+	  moveUp(row2,row1);
+	else if(curRow==4)
+	  moveUp(row3,row2);
+	else if(curRow==5)
+	  moveUp(row4,row3);
+	else if(curRow==6)
+	  moveUp(row5,row4);
+	else if(curRow==7)
+	  moveUp(row6,row5);
+	else if(curRow==8)
+	  moveUp(row7,row6);
+	else if(curRow==9)
+	  moveUp(row8,row7);
+       return(0);
+     }	
+     else if(mv==2){//Down
+	if(curRow==2)
+	  moveDown(row3,row4);
+	else if(curRow==3)
+	  moveDown(row4,row5);
+	else if(curRow==4)
+	  moveDown(row5,row6);
+	else if(curRow==5)
+	  moveDown(row6,row7);
+	else if(curRow==6)
+	  moveDown(row7,row8);
+	else if(curRow==7)
+	  moveDown(row8,row9);
+	else if(curRow==8)
+	  moveDown(row9,row10);
+       return(0);
+     }	
+     else if(mv==3){//Left
+	if(curRow==1)
+	  moveLeft(row1);
+	else if(curRow==2)
+	  moveLeft(row2);
+	else if(curRow==3)
+	  moveLeft(row3);
+	else if(curRow==4)
+	  moveLeft(row4);
+	else if(curRow==5)
+	  moveLeft(row5);
+	else if(curRow==6)
+	  moveLeft(row6);
+	else if(curRow==7)
+	  moveLeft(row7);
+	else if(curRow==8)
+	  moveLeft(row8);
+	else if(curRow==9)
+	  moveLeft(row9);
+	else if(curRow==10)
+	  moveLeft(row10);
+          
+       return(0);
+     }	
+     else if(mv==4){//Right
+	if(curRow==1)
+	  moveRight(row1);
+	else if(curRow==2)
+	  moveRight(row2);
+	else if(curRow==3)
+	  moveRight(row3);
+	else if(curRow==4)
+	  moveRight(row4);
+	else if(curRow==5)
+	  moveRight(row5);
+	else if(curRow==6)
+	  moveRight(row6);
+	else if(curRow==7)
+	  moveRight(row7);
+	else if(curRow==8)
+	  moveRight(row8);
+	else if(curRow==9)
+	  moveRight(row9);
+	else if(curRow==10)
+	  moveRight(row10);
+       return(0);
+     }	
+     else if(mv==5){//Undo (Not Implemented!)
+       if(boxGrabbed==1){
+         boxGrabbed=0;
+       }
+       return(0);
+     }
+     return(0);
+   }
+
+   /*Move to the left*/
+   void moveLeft(tuple row r){
+     int atLeft,atLeftOfBox;
+     atLeft = getItemType(r,curCol-1);
+     if(atLeft==0){
+        if(meOverDot==1){
+           	setItemType(curRow,curCol,3);
+                meOverDot=0;
+        }
+        else
+ 	  setItemType(curRow,curCol,0);
+	setItemType(curRow,curCol-1,4);
+	curCol=curCol-1;
+     }
+     else if(atLeft==2){
+       atLeftOfBox=getItemType(r,curCol-2);
+       if(atLeftOfBox==0){
+        if(meOverDot==1){
+          setItemType(curRow,curCol,3);
+          meOverDot=0;
+        }
+        else
+ 	  setItemType(curRow,curCol,0);
+        if(boxOverDot==1)
+          meOverDot=1;
+          
+	setItemType(curRow,curCol-2,2);
+	setItemType(curRow,curCol-1,4);
+	curCol=curCol-1;
+        boxOverDot=0;
+       }
+       if(atLeftOfBox==3){
+         if(meOverDot==1)
+           setItemType(curRow,curCol,3);
+         else
+  	   setItemType(curRow,curCol,0);
+         if(boxOverDot==1)
+           meOverDot=1;
+         else
+           meOverDot=0;
+	 setItemType(curRow,curCol-2,2);
+	 setItemType(curRow,curCol-1,4);
+         boxOverDot=1;
+	 curCol=curCol-1;
+       }
+     }	
+     else if(atLeft==3){
+       if(meOverDot==1)
+         setItemType(curRow,curCol,3);
+       else
+         setItemType(curRow,curCol,0);
+       setItemType(curRow,curCol-1,4);
+       meOverDot=1;
+       curCol=curCol-1;
+     }
+   } 
+
+   /*Move to the right*/
+   void moveRight(tuple row r){
+     int atRight,atRightOfBox;
+     atRight = getItemType(r,curCol+1);
+     if(atRight==0){
+        if(meOverDot==1){
+           	setItemType(curRow,curCol,3);
+                meOverDot=0;
+        }
+        else
+ 	  setItemType(curRow,curCol,0);
+
+	setItemType(curRow,curCol+1,4);
+	curCol=curCol+1;
+     }
+     else if(atRight==2){
+       atRightOfBox=getItemType(r,curCol+2);
+       if(atRightOfBox==0){
+        if(meOverDot==1){
+          setItemType(curRow,curCol,3);
+          meOverDot=0;
+        }
+        else
+ 	  setItemType(curRow,curCol,0);
+        if(boxOverDot==1)
+          meOverDot=1;
+	setItemType(curRow,curCol+2,2);
+	setItemType(curRow,curCol+1,4);
+	curCol=curCol+1;
+        boxOverDot=0;
+       }
+       if(atRightOfBox==3){
+         if(meOverDot==1)
+           setItemType(curRow,curCol,3);
+         else
+  	   setItemType(curRow,curCol,0);
+         if(boxOverDot==1)
+           meOverDot=1;
+         else
+           meOverDot=0;
+	 setItemType(curRow,curCol+2,2);
+	 setItemType(curRow,curCol+1,4);
+         boxOverDot=1;
+	 curCol=curCol+1;
+       }
+     }
+     else if(atRight==3){
+       if(meOverDot==1)
+         setItemType(curRow,curCol,3);
+       else
+         setItemType(curRow,curCol,0);
+       setItemType(curRow,curCol+1,4);
+       meOverDot=1;
+       curCol=curCol+1;
+     }
+   } 
+
+   /*Move up*/
+   void moveUp(tuple row rUp, tuple row rUpBox){
+     int upthere,upOfBox;
+     upthere = getItemType(rUp,curCol);
+     if(upthere==0){
+        if(meOverDot==1){
+           	setItemType(curRow,curCol,3);
+                meOverDot=0;
+        }
+        else
+ 	  setItemType(curRow,curCol,0);
+
+	setItemType(curRow-1,curCol,4);
+        curRow = curRow-1;
+     }
+     else if(upthere==2){
+       upOfBox=getItemType(rUpBox,curCol);
+       if(upOfBox==0){
+        if(meOverDot==1){
+          setItemType(curRow,curCol,3);
+          meOverDot=0;
+        }
+        else
+ 	  setItemType(curRow,curCol,0);
+        if(boxOverDot==1)
+          meOverDot=1;
+
+	setItemType(curRow-2,curCol,2);
+	setItemType(curRow-1,curCol,4);
+        curRow = curRow-1;
+        boxOverDot=0;
+       }
+       if(upOfBox==3){
+         if(meOverDot==1)
+           setItemType(curRow,curCol,3);
+         else
+  	   setItemType(curRow,curCol,0);
+         if(boxOverDot==1)
+           meOverDot=1;
+         else
+           meOverDot=0;
+	 setItemType(curRow-2,curCol,2);
+	 setItemType(curRow-1,curCol,4);
+         boxOverDot=1;
+         curRow = curRow-1;
+       }
+     }
+     else if(upthere==3){
+       if(meOverDot==1)
+         setItemType(curRow,curCol,3);
+       else
+         setItemType(curRow,curCol,0);
+       setItemType(curRow-1,curCol,4);
+       meOverDot=1;
+       curRow = curRow-1;
+     }
+   }
+
+   /*Mode down*/
+   void moveDown(tuple row rDown,tuple row rDownBox){
+     int downthere,downOfBox;
+     downthere = getItemType(rDown,curCol);
+     if(downthere==0){
+        if(meOverDot==1){
+           	setItemType(curRow,curCol,3);
+                meOverDot=0;
+        }
+        else
+ 	  setItemType(curRow,curCol,0);
+	setItemType(curRow+1,curCol,4);
+        curRow = curRow+1;
+     }
+     else if(downthere==2){
+       downOfBox=getItemType(rDownBox,curCol);
+       if(downOfBox==0){
+        if(meOverDot==1){
+          setItemType(curRow,curCol,3);
+          meOverDot=0;
+        }
+        else
+ 	  setItemType(curRow,curCol,0);
+        if(boxOverDot==1)
+          meOverDot=1;
+
+	setItemType(curRow+2,curCol,2);
+	setItemType(curRow+1,curCol,4);
+ 	setItemType(curRow,curCol,0);
+        curRow = curRow+1;
+        boxOverDot=0;
+       }
+       if(downOfBox==3){
+         if(meOverDot==1)
+           setItemType(curRow,curCol,3);
+         else
+  	   setItemType(curRow,curCol,0);
+         if(boxOverDot==1)
+           meOverDot=1;
+         else
+           meOverDot=0;
+	 setItemType(curRow+2,curCol,2);
+	 setItemType(curRow+1,curCol,4);
+         boxOverDot=1;
+         curRow = curRow+1;
+       }
+     }
+     else if(downthere==3){
+       if(meOverDot==1)
+         setItemType(curRow,curCol,3);
+       else
+         setItemType(curRow,curCol,0);
+       setItemType(curRow+1,curCol,4);
+       meOverDot=1;
+       curRow = curRow+1;
+     }
+   }
+
+   /*The session. It starts a game, and loops infinitely (for now...)
+     It does not detect end of game!*/
+   session Move() {
+     string brd;
+     int mv,status;
+     /*Initiaalize*/
+     row1 = tuple{a=1,b=1,c=1,d=1,e=1,f=1,g=1,h=1,i=1,j=1,k=1,l=1,m=0,n=0,o=0,p=0,q=0,r=0,s=0,t=0};
+     row2 = tuple{a=1,b=3,c=3,d=0,e=0,f=1,g=0,h=0,i=0,j=0,k=0,l=1,m=1,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     row3 = tuple{a=1,b=3,c=3,d=0,e=0,f=1,g=0,h=2,i=0,j=0,k=2,l=0,m=0,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     row4 = tuple{a=1,b=3,c=3,d=0,e=0,f=1,g=2,h=1,i=1,j=1,k=1,l=0,m=0,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     row5 = tuple{a=1,b=3,c=3,d=0,e=0,f=0,g=0,h=4,i=0,j=1,k=1,l=0,m=0,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     row6 = tuple{a=1,b=3,c=3,d=0,e=0,f=1,g=0,h=1,i=0,j=0,k=2,l=0,m=1,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     row7 = tuple{a=1,b=1,c=1,d=1,e=1,f=1,g=0,h=1,i=1,j=2,k=0,l=2,m=0,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     row8 = tuple{a=0,b=0,c=1,d=0,e=2,f=0,g=0,h=2,i=0,j=2,k=0,l=2,m=0,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     row9 = tuple{a=0,b=0,c=1,d=0,e=0,f=0,g=0,h=1,i=0,j=0,k=0,l=0,m=0,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     row10 = tuple{a=0,b=0,c=1,d=1,e=1,f=1,g=1,h=1,i=1,j=1,k=1,l=1,m=1,n=1,o=0,p=0,q=0,r=0,s=0,t=0};
+     meOverDot=0;
+     boxOverDot=0;
+     boxGrabbed=0;
+     curRow=5;
+     curCol=8;
+     status=0;
+     /*main loop*/
+     while(status==0){
+       brd = getBoardTable();
+       show plug Game[board=brd] receive[mv = move];
+       status = applyMove(mv);
+     }
+     
+     exit plug GameExit[board=brd];
+   }   
+   
+}

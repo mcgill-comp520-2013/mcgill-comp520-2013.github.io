@@ -1,0 +1,201 @@
+service {
+  const html Welcome = <html>
+                         <head>
+                           <title>Welcome - Lottery Chances Calculator</title>
+                         </head>
+                         <body>
+                           <center><b>Welcome!</b></center><br><br>
+                           This is a lottery probability script designed
+                           to show some of WIG's functionality. Click the
+                           button to proceed.<br><br>
+                           <i>Bruno Dufour, Wen Hsin Chang and Vincent
+                           Chapdelaine-Counture<br>
+                           Group 07</i>
+                         </body>
+                        </html>;
+
+  const html GetRange = <html>
+                          <head>
+                            <title>Range - Lottery Chances Calculator</title>
+                          </head>
+                          <body>
+                            Please indicate the range of numbers used in your lottery
+                            game by entering the maximum number that is allowed. The range
+                            for the game will then be interpreted as 1..MAX:<br>
+                            <input name="Nval" type="text" size="4">
+                          </body>
+                        </html>;
+
+  const html GetPick = <html>
+                          <head>
+                            <title>Pick - Lottery Chances Calculator</title>
+                          </head>
+                          <body>
+                            Please indicate how many numbers will be drawn in your lottery game:<br>
+                            <input name="nval" type="text" size="4"><br>
+                          </body>
+                        </html>;
+
+  const html GetChosen = <html>
+                          <head>
+                            <title>Chosen - Lottery Chances Calculator</title>
+                          </head>
+                          <body>
+                            Please indicate how many numbers you are allowed to choose in your
+                            lottery game:<br>
+                            <input name="mval" type="text" size="4">
+                          </body>
+                        </html>;
+
+  const html GetMatch = <html>
+                            <head>
+                              <title>Match - Lottery Chances Calculator</title>
+                            </head>
+                            <body>
+                              Please indicate how many of the numbers you have
+                              chosen must match those that were drawn:<br>
+                              <input name="kval" type="text" size="4">
+                            </body>
+                          </html>;
+
+  const html RangeErr = <html>
+                          <head>
+                            <title>Erroneous Range - Lottery Chances Calculator</title>
+                          </head>
+                          <body>
+                            You have made an incorrect entry. The range must be an integer
+                            greater than 1 and at most <[maxN]>.Please enter a correct value
+                            in the box below:<br>
+                            <input name="Nval" type="text" size="4">
+                          </body>
+                        </html>;
+
+  const html PickErr = <html>
+                          <head>
+                            <title>Erroneous Pick - Lottery Chances Calculator</title>
+                          </head>
+                          <body>
+                            You have made an incorrect entry. Your lottery game has has at most
+                            <[N]> values available to you. You can only draw that many numbers,
+                            and you need at most 1... Please enter a number between 1 and
+                            <[N1]><br>
+                            <input name="nval" type="text" size="4">
+                          </body>
+                        </html>;
+
+  const html ChosenErr = <html>
+                          <head>
+                            <title>Erroneous Chosen - Lottery Chances Calculator</title>
+                          </head>
+                          <body>
+                            You have made an incorrect entry. Your lottery game has has at most
+                            <[n]> values available to you. You can only choose that many numbers,
+                            and you need at most 1... Please enter a number between 1 and
+                            <[n1]><br>
+                            <input name="mval" type="text" size="4">
+                          </body>
+                        </html>;
+
+  const html MatchErr = <html>
+                          <head>
+                            <title>Erroneous Match - Lottery Chances Calculator</title>
+                          </head>
+                          <body>
+                            You have made an incorrect entry. You have specified that you will
+                            choose <[m]> numbers. You must look at the case where at least 1 of them and
+                            no more then <[m1]> of them match the drawn numbers. Please enter a number between
+                            1 and <[m2]><br>
+                            <input name="kval" type="text" size="4">
+                          </body>
+                        </html>;
+
+  const html ShowResult = <html>
+                          <head>
+                            <title>Result - Lottery Chances Calculator</title>
+                          </head>
+                          <body>
+                            <center><b>Lottery Chances Calculator Results</b></center><br><br>
+                            <ul>
+                              <li>Your lottery game uses numbers from 1 to <[N]>
+                              <li><[n]> numbers will be drawn
+                              <li>You will choose <[m]> numbers
+                              <li>You asked for the chances that <[k]> of these numbers match
+                                  the ones that were drawn.
+                            </ul>
+                            <br><br>
+                            Your chances are thus: <[prob]> : 1 !!
+                          </body>
+                        </html>;
+
+  int MAX_N;
+  int MAX_n;
+
+  int partialFact(int n, int k)
+  {
+    int result,i;
+    result=1;
+
+    if (k < 1) k=1;
+
+    i = n;
+    while (i > k) {
+      result = result * i;
+      i = i - 1;
+    }
+
+    return result;
+  }
+
+  int P(int N, int n, int m, int k) {
+    int result;
+
+    result=partialFact(N, N-n)/partialFact(n, 1);
+
+    result=result*partialFact(k, 1);
+    result=result/partialFact(m, m-k);
+
+    result=result*partialFact(n-k, 1);
+    result=result/partialFact(N-m, N-m-(n-k));
+
+    return (result);
+  }
+
+  session Lottery( ) {
+    int res;
+    int minval;
+    int gblN, gbln, gblm, gblk;
+    MAX_N = 20;
+    MAX_n = 7;
+
+    show Welcome;
+
+    show GetRange receive [gblN = Nval];
+    while ((gblN < 1) || (gblN > MAX_N)) {
+      show plug RangeErr [maxN = MAX_N] receive [gblN = Nval];
+    }
+
+    show GetPick receive [gbln = nval];
+    if(gblN > MAX_n) {
+      minval = MAX_n;
+    } else {
+      minval = gblN;
+    }
+    while ((gbln < 1) || (gbln > minval)) {
+      show plug PickErr [N=minval, N1 = minval] receive [gbln = nval];
+    }
+
+    show GetChosen receive [gblm = mval];
+    while ((gblm < 1) || (gblm > gbln)) {
+      show plug ChosenErr [n = gbln, n1 = gbln] receive [gblm = mval];
+    }
+    show GetMatch receive [gblk = kval];
+
+    while ((gblk < 1) || (gblk > gblm)) {
+      show plug MatchErr [m=gblm, m1 = gblm, m2 = gblm] receive [gblk = kval];
+    }
+
+    res = P(gblN, gbln, gblm, gblk);
+
+    exit plug ShowResult [N = gblN, n = gbln, m = gblm, k = gblk, prob = res];
+  }
+}

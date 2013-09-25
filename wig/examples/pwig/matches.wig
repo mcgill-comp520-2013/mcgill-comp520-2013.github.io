@@ -1,0 +1,160 @@
+service{
+
+ const html Welcome = <html> <body>
+    Welcome to the matches  game!
+    <br>Here are the rules:
+    <br>Each player must in turn remove any number of matches from a single 
+    <br>pile. T    he winner is the one that removes the last match. <br>
+    <center><IMG SRC="http://www.cs.mcgill.ca/~jguguy/lemminggolf.gif"></center>
+    <br>
+    <H2>N.B Here we could of adopted an optimal strategy wich consists of
+    <br>starting with an even # of packs, let the player start. Always 
+        do
+    <br>the exact move he previously did on another pack that has the same
+      # of matches
+    <br>that the pack he just manipulated
+    <br>We always do an opposite move to the players last move and we will
+        always win
+    <br>We didn't do this here because we want the player to win.
+  </body> </html>;
+   
+ const html Illegal = <html> <body>
+  Illegal move, game OVER
+  </body> </html>;
+
+ const html Won = <html> <body>
+    You won!
+  </body> </html>;
+ 
+ const html Lost = <html> <body>
+    You LOST!
+  </body> </html>;
+
+ const html Pick = <html> <body>
+     Who are aloud to pick in only one of these packs.
+	<br>Pack1: <[pack1]>.
+	<br>Pack2: <[pack2]>.
+	<br>Pack3: <[pack3]>.
+	<br>Pack4: <[pack4]>.
+	<br>Pack5: <[pack5]>.
+       	<br>
+    <p> 
+    Please choose  a pack with matches in it from 1 to 5:<br>
+	 <input type="radio" name="pack_choice" value="1">Pack 1
+         <br>
+                <input type="radio" name="pack_choice" value="2">Pack 2
+                <br>
+                <input type="radio" name="pack_choice" value="3">Pack 3
+                <br>
+                <input type="radio" name="pack_choice" value="4">Pack 4
+                <br>
+	 <input type="radio" name="pack_choice" value="5">Pack 5
+                <br>
+                <br>
+                
+
+               
+    
+    Please choose the number of matches you want to get out of<br>
+    the pack(smaller than the # in the pack and greater than zero:
+    <input name="no_choice" type="text" size=1>	
+  </body> </html>;
+
+
+  const html Fin = <html> <body>   
+  Thanks for playing this game!
+  <center ><h2> <a href="matches18.cgi?Play">Start</a></h2>
+  <center ><h2> <a href="http://www.cs.mcgill.ca/~jguguy">back home page</a></h2>
+  <p>                                             
+  </body> </html>; 
+
+
+int seed, total;
+
+
+int nextRandom(int x)
+{  int current;
+    if(x == 1) return(1);
+    seed = ((25173*seed + 13849) % x) + 1;
+    return(seed);
+}
+
+
+ 
+int Manipulate_Pack(int pack, int j)
+{  
+
+ if(j>pack || j<1){ show Illegal;  exit Fin; }
+ else pack = pack - j;
+
+ if (pack == 0) total = total -1; 
+ return (pack);
+}
+
+void check(int x){if(x == 0) total = total - 1;}
+
+session Play() {
+     int  i, j;
+   
+   int  pack1, pack2 , pack3, pack4, pack5;
+
+
+   total = 5;
+   pack1 = pack2 = pack3 = pack4 = pack5 = 10; 
+  
+     show Welcome;
+ 
+     seed = 7;    
+
+     while( pack1 !=0  || pack2 != 0 || pack3 != 0 || pack4 != 0 || pack5 != 0)     {
+        show  plug Pick [pack1 = pack1, pack2 = pack2, pack3 = pack3, pack4 = pack4 , pack5 = pack5]
+                   receive[i = pack_choice, j = no_choice];
+        
+	
+	
+	if(i==1){ pack1 = Manipulate_Pack(pack1, j);}
+        if(i==2){ pack2 = Manipulate_Pack(pack2, j); }
+       	if(i==3){pack3 = Manipulate_Pack(pack3, j);}
+	if(i==4){pack4 = Manipulate_Pack(pack4, j);}
+	if(i==5){pack5 = Manipulate_Pack(pack5, j);	}
+
+         if(total == 0)
+           {show Won; exit Fin;}
+        
+	if(total == 1){
+          if(pack1 != 0) pack1 = 0;
+          if(pack2 != 0) pack2 = 0;
+	  if(pack3 != 0) pack3 = 0;
+	  if(pack4 != 0) pack4 = 0;
+	  if(pack5 != 0) pack5 = 0;
+      	}
+	    
+        if(pack1 != 0){
+	  pack1 = pack1 - nextRandom(pack1);
+	  check(pack1);
+	}
+	else if(pack2 != 0){
+	  pack2 = pack2 - nextRandom(pack2);
+	  check(pack2);
+	}
+       	else if(pack3 != 0){
+	  pack3 = pack3 - nextRandom(pack3);
+	   check(pack3);
+        }
+        else if(pack4 != 0){
+	  pack4 = pack4 - nextRandom(pack4);
+	  check(pack4);
+	}
+	else if(pack5 != 0){
+	  pack5 = pack5 - nextRandom(pack5);
+	  check(pack5);
+	}
+	
+     }
+     show Lost;
+
+ 
+     
+     exit Fin;
+   }
+}

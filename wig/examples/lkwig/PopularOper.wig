@@ -1,0 +1,71 @@
+
+service {
+  const html firstPage = <html> <body>
+
+	Give your name please: <input type="text" name="name"> <br>
+	<br>
+	<br>
+
+	Contribution that you like to make <input type="text" name="contribution">
+
+	Operation that you would like <br>	
+	Plus:<input type="radio" checked name="oper" value="plus">
+	Minus:<input type="radio" name="oper" value="minus">
+	Multiply:<input type="radio" name="oper" value="mul">
+	<br>
+	<br>
+
+  </body> </html>;
+
+
+  const html secondPage = <html> <body>
+     Thanks <[name]> for contributing in this noble cause.
+     <i>Total contribution is: <[total]></i>
+     <i>Favourite operator has been: <[favoper]></i>
+  </body> </html>;
+
+
+  int globalValue;
+  int plusCounter;
+  int minusCounter;
+  int mulCounter;
+
+  session Magic() {
+    int contrib;
+    string op;
+    string name;
+    string fav;
+
+    show firstPage receive[name=name, contrib=contribution, op=oper];
+
+    if (op == "plus")
+    {	
+	plusCounter = plusCounter+1;
+	globalValue = globalValue + contrib;
+    }
+    if (op == "minus")
+    {	
+	minusCounter = minusCounter+1;
+	globalValue = globalValue - contrib;
+    }
+    if (op == "mul")
+    {	
+	mulCounter = mulCounter+1;
+	if(globalValue==0)
+	{
+	  globalValue=1;
+	}
+
+	globalValue = globalValue * contrib;
+    }
+
+    if ((plusCounter >= minusCounter)&&(plusCounter >= mulCounter))	
+	fav = "Plus";
+    if ((minusCounter>=plusCounter)&&(minusCounter >= mulCounter))	
+	fav = "Minus";
+    if ((mulCounter >= minusCounter)&&(mulCounter >= plusCounter))	
+	fav = "Multiply";
+
+    exit plug secondPage[name=name,total=globalValue,favoper=fav];
+  }
+}

@@ -1,0 +1,305 @@
+service {
+	
+	const html start = 
+		<html>
+			<head>Welcome to COMP520 Story Time!</head>
+			<body>
+				<p>This will make a customized story about you. You will help build the story by
+				deciding <br>where the story will go and by providing most of the nouns, adjectives 
+				and verbs.<br>  Your words will be easily seen throughout the story as they will be
+				writtin in italics.  <p>Please start by entering all of the following information: <p>
+
+				First Name: <input type="text" name="fname"><br>
+				Gender: <br>
+					Male<input type="radio" name="gender" value="male">
+					Female<input type="radio" name="gender" value="female">
+					<br>
+				Class: <select name="class">
+					<Option> Compiler Design 
+					<Option> Understanding Planet Earth
+					<Option> Physics of Vibration
+					<Option> Sexual Ethics
+					<Option> Contemporary British Fiction
+				</select><br>
+				Prof. Name: <input type="text" name="profname"><br>
+
+				<p>Please Note:  As we do not know most of this story's content, we cannot guarantee 
+				that this <br>story is politically correct.  We apalogize in advance if this story 
+				contains anything offensive.
+			</body>
+		</html>;
+
+	const html error = 
+		<html>
+			<body>
+				<H1><font color="red">ERROR!!!!!!</font></h1>
+				<p>Please check your information and try again.
+			</body>
+		</html>;
+
+	const html words = 
+		<html>
+			<body>
+				Please give us some words to "plug" into our story.<p>
+				Give us 3 nouns: 	<input type="text" name="noun1" size="6">  
+							<input type="text" name="noun2" size="6">  
+							<input type="text" name="noun3" size="6"><p>
+				And 3 adjectives: 	<input type="text" name="adj1" size="6"> 
+							<input type="text" name="adj2" size="6"> 
+							<input type="text" name="adj3" size="6"><p>
+				Finally, we need 3 verbs: 	<input type="text" size="6" name="verb1"> 
+								<input type="text" size="6" name="verb2"> 
+								<input type="text" size="6" name="verb3"><p>
+			</body>
+		</html>;
+
+	
+	const html storyPart1 = 
+		<html>
+			<body>
+				This is a story about a McGill student named <i><[fname1]></i> and <[his_her1]> trials 
+				and tribulations in <i><[class]></i>.<br> You see, this class is very 
+				<i><b><[adj1]></b></i>, 
+				and if <i><[fname2]></i> would have known this, <[he_she1]> never would have registered 
+				for it in the first place.<p>
+				At first, the class seemed like it wouldn't be very much work. In fact, <i><[fname3]></i> 
+				had heard from <[his_her2]> friends that this would be the easier<br>class at McGill. 
+				It would be even easier than <i><[noun1]></i>, if you can believe that!<p>
+				Imagine <i><[fname4]>'s</i> suprise when the very first days of class, there was a 
+				<i><[noun2]></i> on the floor right next to <[him_her]>. <br>To make things worse, 
+				<[he_she2]> immediately began to <i><[verb1]></i> as best <[he_she3]> knew how. 
+				The whole class 
+				turned to look at the <i><[adj2]></i> new student in their class. <br>How embarrasing. 
+				<i><[fname6]></i> turned so red, <[he_she4]> looked like a <i><[adj3]> <[noun3]></i>.<p>
+				What should <i><[fname5]></i> do now?  Should <[he_she5]>:<br>
+					<input type="radio" name="choice" value="a">
+					run out of the classroom and transfer to a school in BC, or<br>
+					<input type="radio" name="choice" value="b">	
+					start to laugh and announce that the entire class is on Candid Camera.
+			</body>
+		</html>;
+
+	const html storyPart2a = 
+		<html>
+			<body>
+				Evidently, <i><[fname1]></i> gets embarrassed easily!  Well that's fine.<p>
+				After <i><[fname2]></i> chooses to <i><[verb1]></i> at <[his_her1]> new school for a 
+				few years, <[he_she1]> realizes that BC is really very <i><[adj1]></i>.  <br>Every 
+				<i><[noun1]></i> is too <i><[adj2]></i>, which really annoys <[him_her1]>.
+				<[fname3]> had planned to <i><[verb2]></i> while in BC,<br> but since <[he_she4]> is not
+				allowed to use <[his_her4]> <i><[noun3]></i> to <i><[verb3]></i>, <[he_she5]> decides 
+				that this is not the city for <[him_her3]>.<br>
+				So <[he_she2]> decides it would be best for <[him_her2]> and <[his_her2]> <i><[noun2]></i>
+				to return to the east coast,<br>where at least everything is <i><[adj3]></i>.
+				<p>Upon <[his_her3]> return, <[he_she3]> finds that:<br>
+					<input type="radio" name="choice" value="a">
+					aliens resembling <[jen_brad]> have landed in the West Island and 
+					are taking over the city, or<br>
+					<input type="radio" name="choice" value="b">	
+					The school's water supply has been contaminated with a bizarre mix of e.coli
+					bacteria and botox, and only the <[adj5]>, yet very <i><[adj4]> <[noun4]> </i>
+					can save the day.<br>
+			</body>
+		</html>;
+
+	const html storyPart2b = 
+		<html>
+			<body>
+				<i><[fname1]></i> explains that the camera is hidden in the <i><[noun1]></i> in 
+				the corner of the room. <br><i><[profname1]></i> gets very excited about appearing on
+				television, and decides to <i><[verb1]></i> <br>with <i><[fname2]></i>.  Other students 
+				see this as a <i><[adj1]></i> opportunity and decide to <i><[verb2]></i>.<br>
+				To please everyone, <i><[fname4]></i> tells the class that if anyone does <br>not want to
+				be on TV, he or she can <i><[verb3]></i> and <i><[fname3]></i> will make sure this 
+			   	student's <br>face is blurred.  Still, some students are quite <i><[adj2]></i> and 
+				one student even throws <br>a <i><[noun2]></i>!  <i><[profname2]></i> attempts to calm 
+				the <i><[adj3]></i> students, and in the process trips over a <i><[noun3]></i>.
+				<p>In an attempt to help, <i><[fname5]></i> decides tell the class that:<br>
+					<input type="radio" name="choice" value="a">
+					aliens resembling <[jen_brad]> have landed in the West Island and 
+					are taking over the city, or<br>
+					<input type="radio" name="choice" value="b">	
+					The school's water supply has been contaminated with a bizarre mix of e.coli
+					bacteria and botox, and only the <[adj5]>, yet very <i><[adj4]> <[noun4]> </i>
+					can save the day.
+					<br> 
+			</body>
+		</html>;
+
+	const html storyPart3a =
+		<html>
+			<body>
+				In a rare instance of mass hypnosis, the whole class room believes every word
+ 				<i><[fname1]></i> says and everybody <i><[verb1]></i>s at the same time,
+				 since the person who can save the day is not here.  A <i><[adj1]></i> 
+				 <i><[jen_brad1]></i>  comes in the room, and <i><[fname2]></i> and his classmates
+				 suddenly become <i><[adj2]></i>.<br>
+				You're a <[adj3]> <i><[noun3]></i>, someone shouts. No I just play one on TV,
+				<i><[jshe_bhe1]></i> replies. Everybody expects more <i><[jen_brad2]>s</i> to
+				 <i><[verb2]></i>. <i><[jen_brad3]></i> looks around,  Oh no is this <i><[class1]></i>?
+				I took this class, <i><[profname1]></i> ate my children and broke my <i><[noun2]></i>, then
+				<i><[profname2]></i> began to <i><[verb3]></i> around my head...Aaaah!
+				 <i><[jen_brad4]></i> collapses on the <i><[noun1]></i>, visibly shaken by the pleasant
+				memory.<br>
+				<br>
+				<i><[jshe_bhe2]></i> lies on the ground until students for Television in Society slowly
+				start drifting in, like zombies after human flesh<br>
+				<br>
+				<p>Happy End.<br>
+			</body>
+		</html>;
+
+	const html storyPart3b =
+		<html>
+			<body>
+				Well, it was funny at the time. It stopped being funny when people started to lose
+				feeling in their faces and began to resemble Sunday <i><[noun1]></i>s on a <i><[adj1]></i>
+				day.  A fortunate few, however, were used to taking  e.coli pills  as a 
+				dietary supplement and <i><[fname1]></i> saw one of them  <i><[verb1]></i> in celebration
+				 and <i><[verb2]></i> their <i><[noun2]></i> every which way. It was all
+				 so...<i><[adj2]></i>. <i><[fname2]></i> spotted a renowned plastic surgeon who
+				 bore a resemblance to a <i><[adj3]></i> <i><[noun3]></i>, and had a habit of
+				 pausing in mid-conversation to <i><[verb3]></i> for no reason. No one could complain 
+				 though, since he was able to neutralize the water supply and
+				 water the garden on the same day. 
+				<br>
+				<br>
+				<p>The End.<br>
+			</body>
+		</html>;
+				
+						
+	string fname, class, profname, his_her, he_she, mr_ms, him_her, gender, jen_brad, jshe_bhe;
+	session Start() {
+		string noun1, noun2, noun3, adj1, adj2, adj3, verb1, verb2, verb3, choice; 
+
+		show start receive[fname = fname, class = class, profname = profname, gender = gender];
+
+		if (gender == "female") {
+			his_her = "her";
+			he_she = "she";
+			him_her = "her";
+			jen_brad = "Brad Pitt";
+			jshe_bhe = "he";
+		}
+		if (gender == "male") {
+			his_her = "his";
+			he_she = "he";
+			him_her = "him";
+			jen_brad = "Jennifer Aniston";
+			jshe_bhe = "she";
+		}
+
+		while (fname == "" || class == "" || profname == "" || gender == "") {
+			show error;
+			show start receive[fname = fname, class = class, profname = profname, 
+					   gender = gender];
+		}
+		
+		show words receive[noun1 = noun1, noun2 = noun2, noun3 = noun3, adj1 = adj1, adj2 = adj2, 
+				   adj3 = adj3, verb1 = verb1, verb2 = verb2, verb3 = verb3];
+		show plug storyPart1[fname1 = fname, fname2 = fname, fname3 = fname, fname4 = fname, fname5 = fname,
+					 his_her1 = his_her, his_her2 = his_her, class = class, adj1 = adj1, 
+					 he_she1 = he_she, he_she2 = he_she, he_she3 = he_she, he_she4 = he_she, 
+					 noun1 = noun1, noun2 = noun2, him_her = him_her, verb1 = verb1, adj2 = adj2, 
+					 adj3 = adj3, noun3 = noun3, fname6 = fname, he_she5 = he_she]
+					receive[choice = choice];
+
+		while (choice == "")
+		{
+			show error;
+			show plug storyPart1[fname1 = fname, fname2 = fname, fname3 = fname, fname4 = fname, 
+					          fname5 = fname, his_her1 = his_her, his_her2 = his_her, class = class,
+					          adj1 = adj1, he_she1 = he_she, he_she2 = he_she, he_she3 = he_she, 
+						  he_she4 = he_she, noun1 = noun1, noun2 = noun2, him_her = him_her, 
+						  verb1 = verb1, adj2 = adj2, adj3 = adj3, noun3 = noun3, fname6 = fname,
+						  he_she5 = he_she]
+					         receive[choice = choice];
+		}
+
+		show words receive[noun1 = noun1, noun2 = noun2, noun3 = noun3, adj1 = adj1, adj2 = adj2, 
+				   adj3 = adj3, verb1 = verb1, verb2 = verb2, verb3 = verb3];
+
+		if (choice == "a") 
+		{
+			show plug storyPart2a[fname1 = fname, fname2 = fname, verb1 = verb1, verb2 = verb2,
+					      his_her1 = his_her, his_her2 = his_her, his_her3 = his_her,
+					      he_she1 = he_she, he_she2 = he_she, he_she3 = he_she,
+					      adj1 = adj1, adj2 = adj2, adj3 = adj3, him_her1 = him_her,
+				  	      him_her2 = him_her, noun1 = noun1, noun2 = noun2,
+					      jen_brad = jen_brad, fname3 = fname, verb3 = verb3,
+					      his_her4 = his_her,he_she4 = he_she, he_she5 = he_she,
+					      him_her3 = him_her, noun3 = noun3, noun4= noun2, adj4 = adj2, adj5 = adj1]
+					     receive[choice = choice];
+
+			while (choice == "")
+			{
+				show error;
+				show plug storyPart2a[fname1 = fname, fname2 = fname, verb1 = verb1, verb2 = verb2,
+					      his_her1 = his_her, his_her2 = his_her, his_her3 = his_her,
+					      he_she1 = he_she, he_she2 = he_she, he_she3 = he_she,
+					      adj1 = adj1, adj2 = adj2, adj3 = adj3, him_her1 = him_her,
+				  	      him_her2 = him_her, noun1 = noun1, noun2 = noun2,
+					      jen_brad = jen_brad, fname3 = fname, verb3 = verb3, his_her4 = his_her,
+					      he_she4 = he_she, he_she5 = he_she, him_her3 = him_her, noun3 = noun3,
+					      noun4= noun2, adj4 = adj2, adj5 = adj1]
+					     receive[choice = choice];
+			}
+		}
+		else
+		{ 
+			if (choice == "b")
+			{
+				show plug storyPart2b[fname1 = fname, fname2 = fname, fname4 = fname, fname5 = fname, 
+					      noun1 = noun1, noun2 = noun2, noun3 = noun3, fname3 = fname,
+					      profname1 = profname, profname2 = profname, verb1 = verb1, verb2 = verb2,
+					      verb3 = verb3, adj1 = adj1, adj2 = adj2, adj3 = adj3, jen_brad = jen_brad,
+					      noun4= noun2, adj4 = adj2, adj5 = adj1]
+					     receive[choice = choice];
+
+				while (choice == "")
+				{
+					show error;
+					show plug storyPart2b[fname1 = fname, fname2 = fname, fname4 = fname, 
+					      fname5 = fname, 
+					      noun1 = noun1, noun2 = noun2, noun3 = noun3, fname3 = fname,
+					      profname1 = profname, profname2 = profname, verb1 = verb1, verb2 = verb2,
+					      verb3 = verb3, adj1 = adj1, adj2 = adj2, adj3 = adj3, jen_brad = jen_brad,
+					      noun4= noun2, adj4 = adj2, adj5 = adj1]
+					     receive[choice = choice];
+				}
+			}
+		}
+		
+		show words receive[noun1 = noun1, noun2 = noun2, noun3 = noun3, adj1 = adj1, adj2 = adj2, 
+				   adj3 = adj3, verb1 = verb1, verb2 = verb2, verb3 = verb3];
+
+		if (choice == "a")
+			{
+
+			    show plug storyPart3a[fname1 = fname, fname2 = fname, profname1= profname, profname2=profname, 
+					      noun1 = noun1, noun2 = noun2, noun3 = noun3, jshe_bhe1=jshe_bhe,
+					      verb1 = verb1,
+					      verb2 = verb2, verb3 = verb3, adj1 = adj1, adj2 = adj2, adj3 = adj3, 
+					      jen_brad1 = jen_brad, jen_brad2 = jen_brad, jen_brad3= jen_brad,
+					      jen_brad4 = jen_brad, jshe_bhe2= jshe_bhe, class1 = class];   
+			}			
+		
+		else
+		{
+			if (choice == "b")
+			{
+			  show plug storyPart3b[fname1 = fname, fname2 = fname,
+					      noun1 = noun1, noun2 = noun2, noun3 = noun3,
+					      verb1 = verb1, verb2 = verb2,
+					      verb3 = verb3, adj1 = adj1, adj2 = adj2, adj3 = adj3];
+					 
+
+			}
+
+
+	
+		}
+		
+	}
+}

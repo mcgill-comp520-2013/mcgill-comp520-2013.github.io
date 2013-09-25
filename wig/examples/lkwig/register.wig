@@ -1,0 +1,40 @@
+service {
+  schema Person {
+    bool is_male;
+    int age;
+    string name;
+  }
+  shared tuple Person person;
+
+  html RegistrationDoc = <html>
+    <h1>Please Register</h1>
+    <hr>
+    Name: <input type=text name=name><br>
+    Age:  <input type=text name=age size=3><br>
+    Male: <input type=radio name=is_male value=true> /
+    Female: <input type=radio name=is_male value=false>
+    <p>
+    Last registered person was <b><[last_name]></b>.<br>
+    <[gender]> is <[last_age]> year<[pl]> old.
+  </html>;
+
+  html ThankYouDoc = <html>
+    Thank you for registering <b><[name]></b>.
+  </html>;
+
+  session Register() {
+    tuple Person p;
+    string pl, gender;
+    html H;
+
+    p = person;
+    H = RegistrationDoc <[last_name=p.name, last_age=p.age];
+    if (p.is_male) gender = "He";
+    else gender = "She";
+    if (p.age!=1) pl = "s";
+    H = H <[pl = pl, gender=gender];
+    show H receive [p.name=name, p.age=age, p.is_male=is_male];
+    person = p;
+    exit ThankYouDoc <[name=p.name];
+  }
+}

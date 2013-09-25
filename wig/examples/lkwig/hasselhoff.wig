@@ -1,0 +1,239 @@
+service
+{
+	const html welcome = <html><body>
+		<center>
+		<p>Welcome to Hasselhoff Hangman!
+		<p><img src="dave_welcome.gif">
+		</center>
+		</body></html>;
+
+	const html screen = <html><body>
+		<center>
+		The word is: <[b1]><[b2]><[b3]><[b4]><[b5]>
+		<p>Please guess a letter: <input size="1" maxlength="1" type="text" name="guess">
+		<p>Number of tries left: <[tries_left]>
+		<p><[img_tag]>
+		</center>
+		</body></html>;
+
+	const html win = <html><body>
+		<center>
+		<p>You win!
+		<p>The word was: <[word]>
+		<p>Play again? (y/n) <input type="text" name="play_again" size="1" maxlength="1">
+		<p><img src="dave_win.gif">
+		</center>
+		</body></html>;
+	
+	const html lose = <html><body>
+                <center>
+                <p>You lose!
+                <p>The word was: <[word]>
+		<p>Play again? (y/n) <input type="text" name="play_again" size="1" maxlength="1">
+		<p><img src="dave_lose.gif">
+                </center>
+                </body></html>;
+
+	const html done = <html><body>
+		<center>
+		Thank you for playing Hasselhoff Hangman!
+		</center>
+		</body></html>;
+
+	schema Word
+	{
+		string the_word;
+		string l1;
+		string l2;
+		string l3;
+		string l4;
+		string l5;
+		string b1;
+		string b2;
+		string b3;
+		string b4;
+		string b5;
+	}
+
+	int counter;
+
+	string make_img_tag(
+		int tries_left
+	)
+	{
+		int pic_num;
+		pic_num = 5 - tries_left;
+
+		if (pic_num == 0)
+			return "<img src=dave0.gif>";
+		else if (pic_num == 1)
+			return "<img src=dave1.gif>";
+		else if (pic_num == 2)
+			return "<img src=dave2.gif>";
+		else if (pic_num == 3)
+			return "<img src=dave3.gif>";
+		return "<img src=dave4.gif>";
+	}
+
+	bool play_with_word(
+		string _the_word,
+		string _l1,
+                string _l2,
+                string _l3,
+                string _l4,
+                string _l5,
+                string _b1,
+                string _b2,
+                string _b3,
+                string _b4,
+                string _b5
+	)
+	{
+		string l1,l2,l3,l4,l5;
+                string b1,b2,b3,b4,b5;
+		string guess,play_again,img_tag;
+		bool at_least_one_correct;
+		int tries_left, num_correct;
+
+		l1 = _l1;
+		l2 = _l2;
+		l3 = _l3;
+		l4 = _l4;
+		l5 = _l5;
+
+		b1 = _b1;
+		b2 = _b2;
+		b3 = _b3;
+		b4 = _b4;
+		b5 = _b5;
+
+		tries_left = 5;
+		num_correct = 0;
+
+		while ((tries_left > 0) && (num_correct < 5))
+		{
+			at_least_one_correct = false;
+
+			img_tag = make_img_tag(tries_left);
+	
+			show plug screen [b1=b1, b2=b2, b3=b3, b4=b4, b5=b5,
+					tries_left=tries_left,img_tag=img_tag] receive[guess=guess];
+
+	                if(guess == l1)
+        	        {
+                	        b1=guess;
+                        	num_correct = num_correct + 1;
+	                        at_least_one_correct = true;
+        	        }
+                	if(guess == l2)
+	                {
+        	                b2=guess;
+                	        num_correct = num_correct + 1;
+                        	at_least_one_correct = true;
+	                }
+        	        if(guess == l3)
+                	{
+                        	b3 = guess;
+	                        num_correct = num_correct + 1;
+        	                at_least_one_correct = true;
+                	}
+	                if(guess == l4)
+        	        {
+                	        b4 = guess;
+                        	num_correct = num_correct + 1;
+	                        at_least_one_correct = true;
+        	        }
+                	if(guess == l5)
+	                {
+        	                b5 = guess;
+                	        num_correct = num_correct + 1;
+                        	at_least_one_correct = true;
+	                }
+ 	
+        	        if (! at_least_one_correct)
+                	{
+                        	tries_left = tries_left - 1;
+	                }
+		}
+
+		if (num_correct == 5)
+		{
+			show plug win[word=_the_word] receive[play_again=play_again];
+		}
+		else
+		{
+			show plug lose[word=_the_word] receive[play_again=play_again];
+		}
+		
+		if (play_again == "n")
+		{
+			return false;
+		}
+		
+		return true;
+	}
+
+	session Play()
+	{
+		tuple Word w1, w2, w3, w4, w5;
+		bool play_again;
+
+		w1 = tuple {the_word="class", l1="c", l2="l", l3="a", l4="s", l5="s", b1="_", b2="_", b3="_", b4="_", b5="_"};
+		w2 = tuple {the_word="hello", l1="h", l2="e", l3="l", l4="l", l5="o", b1="_", b2="_", b3="_", b4="_", b5="_"};
+		w3 = tuple {the_word="fries", l1="f", l2="r", l3="i", l4="e", l5="s", b1="_", b2="_", b3="_", b4="_", b5="_"};
+		w4 = tuple {the_word="tiger", l1="t", l2="i", l3="g", l4="e", l5="r", b1="_", b2="_", b3="_", b4="_", b5="_"};
+		w5 = tuple {the_word="lemon", l1="l", l2="e", l3="m", l4="o", l5="n", b1="_", b2="_", b3="_", b4="_", b5="_"};
+
+		show welcome;
+		
+		play_again = true;
+
+		while (play_again)
+		{
+			counter = (counter + 1) % 5;
+
+			if (counter == 0)
+			{
+				play_again = play_with_word(
+					w1.the_word,
+					w1.l1, w1.l2, w1.l3, w1.l4, w1.l5,
+					w1.b1, w1.b2, w1.b3, w1.b4, w1.b5
+				);
+			}
+			if (counter == 1)
+			{
+				play_again = play_with_word(
+					w2.the_word,
+					w2.l1, w2.l2, w2.l3, w2.l4, w2.l5,
+					w2.b1, w2.b2, w2.b3, w2.b4, w2.b5
+				);
+			}
+			if (counter == 2)
+			{
+				play_again = play_with_word(
+					w3.the_word,
+					w3.l1, w3.l2, w3.l3, w3.l4, w3.l5,
+					w3.b1, w3.b2, w3.b3, w3.b4, w3.b5
+				);
+			}
+			if (counter == 3)
+			{
+				play_again = play_with_word(
+					w4.the_word,
+					w4.l1, w4.l2, w4.l3, w4.l4, w4.l5,
+					w4.b1, w4.b2, w4.b3, w4.b4, w4.b5
+				);
+			}
+			if (counter == 4)
+			{
+				play_again = play_with_word(
+					w5.the_word,
+                                        w5.l1, w5.l2, w5.l3, w5.l4, w5.l5,
+                                        w5.b1, w5.b2, w5.b3, w5.b4, w5.b5
+				);
+			}
+		}
+
+		exit done;
+	}
+}

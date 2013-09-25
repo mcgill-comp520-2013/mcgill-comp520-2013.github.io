@@ -1,0 +1,131 @@
+service {
+
+  const html DisplayCurrentWord = <html> <body>
+    At this moment you have found the following letters:
+
+    <p><[l1]><[l2]><[l3]><[l4]><[l5]><[l6]><[l7]><[l8]>
+
+    <p> And you have <[guess]> guess(es) remaining to find it!
+    Please enter the letter of your choice:
+    <input name="choice" type="text" size="1">
+    </body> </html>;
+
+
+  const html DisplayWin = <html> <body>
+    CONGRATULATIONS!!! You have found the right word.
+
+    <p> <img src="http://a736.g.akamaitech.net/7/736/633/40001189589517/oscar.com/images/home/oscar_home_05.gif">
+    </body> </html>;
+
+  const html DisplayLose = <html> <body>
+    Sorry... You did not find the word fast enough.
+
+    <p> <img src="http://wanousoubi.multimania.com/images/pendu.jpg">
+    </body> </html>;
+
+  session Play() {
+    int guess_remain;
+    int find;
+
+    string l1;
+    string l2;
+    string l3;
+    string l4;
+    string l5;
+    string l6;
+    string l7;
+    string l8;
+
+    string current_letter;
+
+    int l1val;
+    int l2val;
+    int l3val;
+    int l4val;
+    int l5val;
+    int l6val;
+    int l7val;
+    int l8val;
+
+    guess_remain = 10;
+    find         = 0;	
+
+    l1="*";
+    l2="*";
+    l3="*";
+    l4="*";
+    l5="*";
+    l6="*";
+    l7="*";
+    l8="*";
+
+    l1val = l2val = l3val = l4val = l5val = l6val = l7val = l8val = 0;
+        
+    while(guess_remain>0 && find==0) {
+      show plug DisplayCurrentWord[
+        l1 = l1,
+        l2 = l2,
+        l3 = l3,
+        l4 = l4,
+        l5 = l5,
+        l6 = l6,
+        l7 = l7,
+        l8 = l8,
+        guess = guess_remain]
+        receive[current_letter = choice];
+                
+      if(current_letter == "c" || current_letter == "C") {
+        l1    = "C";
+	l1val = 1;
+        guess_remain = guess_remain + 1;
+      }
+      if(current_letter == "o" || current_letter == "O") {
+        l2    = "O";
+	l2val = 1;
+        guess_remain = guess_remain + 1;
+      }
+      if(current_letter == "m"|| current_letter == "M") {
+        l3    = "M";
+	l3val = 1;
+        guess_remain = guess_remain + 1;
+      }
+      if(current_letter == "p"|| current_letter == "P") {
+        l4    = "P";
+	l4val = 1;
+        guess_remain = guess_remain + 1;
+      }
+      if(current_letter == "i"|| current_letter == "I") {
+        l5    = "I";
+	l5val = 1;
+        guess_remain = guess_remain + 1;
+      }
+      if(current_letter == "l"|| current_letter == "L") {
+        l6    = "L";
+	l6val = 1;
+        guess_remain = guess_remain + 1;
+      }
+      if(current_letter == "e"|| current_letter == "E") {
+        l7    = "E";
+	l7val = 1;
+        guess_remain = guess_remain + 1;
+      }
+      if(current_letter == "r"|| current_letter == "R") {
+        l8    = "R";
+	l8val = 1;
+        guess_remain = guess_remain + 1;	
+      }
+
+      guess_remain = guess_remain - 1;
+
+      if(l1val + l2val + l3val + l4val + l5val + l6val + l7val + l8val == 8) {
+        find = 1;
+      }
+    }
+
+    if(find == 1) {
+      exit DisplayWin;
+    } else {
+      exit DisplayLose;
+    }
+  }
+}

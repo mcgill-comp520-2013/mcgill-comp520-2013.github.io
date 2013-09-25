@@ -1,0 +1,70 @@
+/* broken wigcode for weeder provocation */
+
+service {
+	
+	/* inputs and selects should have a name - 
+	 * but they should have no more than one.
+	 * inputs need a type, but likewise, it doesn't make sense
+	 * to declare more than one.
+	 * Select bodies should not have other inputs in them */
+	const html Nah = <html><body>
+		Lalalala
+		<input type="text" type="radio" name="foob" name="bar">
+		<select foo="bar"> <input type="text" name="foo" name="snafoo"></select>
+		<input foo>
+		<select bar></select>
+		</body></html>;
+
+	/* what use is an empty schema? */
+	schema soo { }
+
+	/* check for void types! */
+	schema soo {
+		void a;
+		void s;
+		string b;
+	}
+
+	tuple soo what;
+	void notavar;
+	int badass;
+
+	/* should return a value, no? */
+	string interestingString(void isnot, void atype){
+	}
+
+	int interestingInt(void stfu){
+		void tootrue;
+		int bar;
+		
+		show Nah;
+
+		exit Nah;
+
+		if (tootrue){
+			return bar;
+		}else{
+			exit Nah;
+		}
+	}
+
+	bool interestingBool(void saywaht){
+		bool hello;
+
+		hello = false;
+		/* oops. forgot to return again */
+	}
+
+	session notsoclose() {
+		void toofar;
+		tuple soo when;
+		toofar = 134;
+			
+		/* should exit, now shouldn't it? */
+		if (toofar){
+			toofar = toofar + 1;
+		}else{
+			exit Nah;
+		}
+	}
+}

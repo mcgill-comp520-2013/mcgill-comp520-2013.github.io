@@ -1,0 +1,97 @@
+service {
+  const html Arrange = <html> <body>
+    <h1>A Simple Date Arragement</h1>
+    <p>
+    Enter time for today:
+    <input type="text" name="sdate" size=10>
+    <p>
+    Enter the business you need to handle:
+    <input type="text" name="smatter" size=20>
+    <p>
+  </body> </html>;
+
+  const html ShowDates1 = <html> <body>
+    <h1>Your arrangement for todoDate:(One thing)</h1>
+    <p>
+    <[apt0]> :  <[todo0]>
+    <p>
+    Would you like to continue to arrange another business (yes or no)?
+    <input type="text" name="cont" size=5>
+  </body> </html>;
+const html ShowDates2 = <html> <body>
+    <h1>Your arrangement for todoDate:(Two things)</h1>
+    <p>
+    <[apt0]> :  <[todo0]>
+    <p>
+    <[apt1]> :  <[todo1]>
+    <p>
+    Would you like to continue to arrange another business (yes or no)?
+    <input type="text" name="cont" size=5>
+  </body> </html>;
+const html ShowDates3 = <html> <body>
+    <h1>Your arrangement for (FULL):</h1>
+    <p>
+    <[apt0]> :  <[todo0]>
+    <p>
+    <[apt1]> :  <[todo1]>
+    <p>
+    <[apt2]> :  <[todo2]>
+    <p>
+    <h1>Today's arrangement is full.</h1>
+    Would you like to rearrange (yes or no)?
+    <input type="text" name="sreset" size=5>
+  </body> </html>;
+
+  
+  const html ByeBye = <html> <body>
+    <h1>Thank you for using this arrangement book</h1>
+  </body> </html>;
+
+    string apt0 , apt1,apt2;
+    string todo0,todo1,todo2;
+
+  session Calendar() {
+    string sdate,smt;
+    string continue;
+    continue = "yes";
+    while (continue =="yes") {
+      show Arrange receive [sdate = sdate, smt = smatter];
+      if (sdate!="" && smt!="") {
+         
+		if (apt0 == "") 
+		{
+		    apt0 = sdate;
+		    todo0 = smt;
+	            show plug ShowDates1[apt0 = apt0,  todo0 = todo0] 
+                                       receive[continue = cont];
+		    
+		}
+		else if (apt1 == "")
+		{
+		    apt1 = sdate;
+		    todo1 = smt;
+	            show plug ShowDates2[apt0 = apt0,  todo0 = todo0,
+                                                  apt1 = apt1,  todo1 = todo1]
+                                                  receive[continue = cont];
+		}
+		else if (apt2 == "") 
+		{  
+		    apt2 = sdate;
+		    todo2 = smt;
+                    show plug ShowDates3[apt0 = apt0,  todo0 = todo0,
+                                                  apt1 = apt1,  todo1 = todo1,
+                                                  apt2 = apt2,  todo2 = todo2] 
+                                                  receive[continue = sreset];
+ 		    if (continue == "yes")
+	            {
+                       apt0 = "";
+		       apt1 = "";
+		       apt2 = "";
+	            } 
+                }
+	}
+    }
+    exit  ByeBye;
+  }
+}
+

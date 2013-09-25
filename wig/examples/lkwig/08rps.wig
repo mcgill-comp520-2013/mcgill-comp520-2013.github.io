@@ -1,0 +1,256 @@
+// Justin Hui (110136121)
+// Mathieu Petitpas (110248279)
+// Marine Roero (110232163)
+// WIG service - Rock-Paper-Scissors game series against the server
+// Inspired from game.wig
+
+service {
+  // The move selection page.
+  const html Choice = <html> <body>
+    <h1><b>Rock-Paper-Scissors Game</b></h1>
+    Score so far: <[points]> out of <[maxPoints]><br>
+    <br>
+    What's your choice?<br>
+      <input name="playerChoice" type="radio" value="0">Rock<br>
+      <input name="playerChoice" type="radio" value="1">Paper<br>
+      <input name="playerChoice" type="radio" value="2">Scissors<br>
+  </body> </html>;
+
+  // The result display page.
+  const html Result = <html> <body>
+    Your choice = <[playerChoiceString]><br>
+    My choice = <[serverChoiceString]><br>
+    Result: <b><[result]></b><br>
+    <br>
+    You have <[playerPoints]> out of a possible <[possiblePoints]>.<br>
+    <br>
+    You get:
+    <ul>
+      <li>0 points for a loss</li>
+      <li>1 point for a draw</li>
+      <li>2 points for a win</li>
+    </ul>
+    One more game?<br>
+      <input name="playAgain" type="radio" value="0">Yes<br>
+      <input name="playAgain" type="radio" value="1">No<br>
+  </body> </html>;
+
+  // Prompt for player's name.
+  // Adapted from game.wig
+  const html Name = <html> <body>
+    <b>Congratulations! You made it to the Top 3!</b><br>
+    <br>
+    Your name? <input name="positioned" type = "text" size = 20><br>
+  </body> </html>;
+
+  // Rankings display.
+  const html Positioned = <html><body>
+    <h1><center><b><u> Top 3</u></b></center></h1>
+    <ol>
+    <li> <[name1]> has <[points1]> points out of a possible <[maxPoints1]> (<[percentage1]>)
+    <li> <[name2]> has <[points2]> points out of a possible <[maxPoints2]> (<[percentage2]>)
+    <li> <[name3]> has <[points3]> points out of a possible <[maxPoints3]> (<[percentage3]>)
+    </ol>
+  </body></html>;
+
+
+  // Global variables
+
+  // Random number generator seed
+  int seed;
+
+  // Variables used to hold the top 3 position holders and their stats.
+  string top1, top2, top3;
+  int percentage1, percentage2, percentage3;
+  int points1, points2, points3;
+  int maxPoints1, maxPoints2, maxPoints3;
+
+
+  // Computes the next random number used to compute the server's move.
+  // Adapted from game.wig
+  int nextRandom() {
+    seed = (25173 * seed + 13849) % 65536;
+    return (seed);
+  }
+
+  // Converts a numercial value between 0 and 2 inclusively
+  // to the string representation of an option in the game.
+  // 0 = rock
+  // 1 = paper
+  // 2 = scissors
+  string toString(int choice) {
+  	string stringResult;
+
+  	if (choice == 0) {
+		stringResult = "rock";
+	}
+	if (choice == 1) {
+		stringResult = "paper";
+	}
+	if (choice == 2) {
+		stringResult = "scissors";
+	}
+	return stringResult;
+  }
+
+  // The game session
+  session Play() {
+    // We use the following number to represent the options in the game.
+    // 0 - Rock
+    // 1 - Paper
+    // 2 - Scissors
+
+    int serverChoice;
+    string serverChoiceString;
+
+    int playerChoice;
+    string playerChoiceString;
+
+    string gameResult;
+    int points;
+    int possiblePoints;
+    int percentage;
+
+    int playAgain;
+
+    string playerName;
+
+
+    // Set the seed to 5 (which incidentally allows a player to always win
+    // if they know the PRNG and the seed).
+    seed = 5;
+
+    // Initialize the points and the possible points.
+    playAgain = 0;
+    points = 0;
+    possiblePoints = 0;
+
+    // While the player chooses to play again
+    while (playAgain == 0) {
+
+      // Have the server make choose its move.
+      serverChoice = nextRandom() % 3;
+
+      // Display the current point totals and ask the player to make its move.
+      show plug Choice[points = points, maxPoints = possiblePoints]
+        receive[playerChoice=playerChoice];
+
+      // Determine the winner from both the server's and the player's move.
+      // The numerical constants for the move are attributed in such a way
+      // that a move is beaten by move whose numerical value is one more and
+      // beats a move whose numerical value is one less, all modulo 3.
+      // A win is worth 2 points, a tie, 1, and a loss, 0.
+      if (serverChoice == playerChoice) {
+        gameResult = "tie";
+        points = points + 1;
+      } else {
+        if (((playerChoice + 1) % 3) == serverChoice) {
+          gameResult = "loss";
+        } else {
+          gameResult = "win";
+          points = points + 2;
+        }
+      }
+
+      // Increment the number of possible points.
+      possiblePoints = possiblePoints + 2;
+
+      // Generate the string representation of both the server's and the
+      // player's move.
+      serverChoiceString = toString(serverChoice);
+      playerChoiceString = toString(playerChoice);
+
+      // Display the result of thje game, and ask the user if s/he wants to play
+      // again.
+      show plug Result[playerChoiceString = playerChoiceString,
+		       serverChoiceString = serverChoiceString,
+		       result = gameResult,
+		       playerPoints = points,
+		       possiblePoints = possiblePoints]
+		       receive [playAgain = playAgain];
+    }
+
+    // Update the top 3.
+    // Compute the percentage of this player.
+    percentage = (points * 100) / possiblePoints;
+
+    // If this player's percentage is better than the third place holder,
+    // or it is the same for more games played, then we have at least a new
+    // third place holder.
+    if ((percentage > percentage3) ||
+        ((percentage == percentage3) && (possiblePoints > maxPoints3))) {
+
+      // Prompt the user for their name.
+      show Name receive[playerName = positioned];
+
+      // Check if this player is better than the current second place holder.
+      if ((percentage > percentage2) ||
+          ((percentage == percentage2) && (possiblePoints > maxPoints2))) {
+	// The second position holder becomes the third position holder.
+        top3 = top2;
+        percentage3 = percentage2;
+        maxPoints3 = maxPoints2;
+        points3 = points2;
+
+	// Check if this player is better than the current first place holder.
+        if ((percentage > percentage1) ||
+	    ((percentage == percentage1) && (possiblePoints > maxPoints1))) {
+	  // The current first place holder becomes the second place holder.
+	  top2 = top1;
+          percentage2 = percentage1;
+          maxPoints2 = maxPoints1;
+	  points2 = points1;
+
+	  // The current player takes first place.
+	  top1 = playerName;
+	  percentage1 = percentage;
+	  maxPoints1 = possiblePoints;
+	  points1 = points;
+	} else {
+	  // The current player takes second place.
+	  top2 = playerName;
+	  percentage2 = percentage;
+	  maxPoints2 = possiblePoints;
+	  points2 = points;
+	}
+      } else {
+        // The current player takes third place.
+        top3 = playerName;
+	percentage3 = percentage;
+	maxPoints3 = possiblePoints;
+	points3 = points;
+      }
+    }
+
+    // Finish the session by displaying the rankings.
+    exit plug Positioned [ name1 = top1,
+                           points1 = points1,
+                           maxPoints1 = maxPoints1,
+                           percentage1 = percentage1,
+                           name2 = top2,
+                           points2 = points2,
+                           maxPoints2 = maxPoints2,
+                           percentage2 = percentage2,
+                           name3 = top3,
+                           points3 = points3,
+                           maxPoints3 = maxPoints3,
+                           percentage3 = percentage3];
+  }
+
+  session Top3(){
+    // Simply display the rankings.
+    exit plug Positioned [ name1 = top1,
+                           points1 = points1,
+                           maxPoints1 = maxPoints1,
+                           percentage1 = percentage1,
+                           name2 = top2,
+                           points2 = points2,
+                           maxPoints2 = maxPoints2,
+                           percentage2 = percentage2,
+                           name3 = top3,
+                           points3 = points3,
+                           maxPoints3 = maxPoints3,
+                           percentage3 = percentage3];
+    }
+
+}

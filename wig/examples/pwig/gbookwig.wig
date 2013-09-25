@@ -1,0 +1,75 @@
+service{
+
+	const html signbook = <html>
+	  <h1>Please Sign My Guestbook</h1>
+	  <p>Name<br>
+	  <input name="name" type="text" size=30><br>
+	  <p>Message<br>
+	  <input name="msg" type="text" size=60>
+	  </html>;
+
+	const html readbook = <html>
+	  <h1>My Guestbook</h1>
+	  <p><b>Name</b><br>
+	  <[name1]><br>
+	  <p><b>Message</b><br>
+	  <[msg1]><br><hr>
+	  <p><b>Name</b><br>
+	  <[name2]><br>
+	  <p><b>Message</b><br>
+	  <[msg2]><br><hr>
+	  <p><b>Name</b><br>
+	  <[name3]><br>
+	  <p><b>Message</b><br>
+	  <[msg3]><br><hr>
+	  <p><b>Name</b><br>
+	  <[name4]><br>
+	  <p><b>Message</b><br>
+	  <[msg4]><br><hr>
+	  <p><b>Name</b><br>
+	  <[name5]><br>
+	  <p><b>Message</b><br>
+	  <[msg5]><br><hr>
+	  <p><[count]> people have signed my guestbook so far!
+	  </html>
+	  ;
+
+	string name1, name2, name3, name4, name5;
+	string msg1, msg2, msg3, msg4, msg5;
+
+	int count;
+
+	session Read(){
+		exit plug readbook[name1 = name1, msg1 = msg1,
+		                   name2 = name2, msg2 = msg2,
+		                   name3 = name3, msg3 = msg3,
+		                   name4 = name4, msg4 = msg4,
+		                   name5 = name5, msg5 = msg5,
+			           count = count];
+	}
+
+	session Sign(){
+		string name, msg;
+
+		show signbook receive[name=name, msg=msg];
+		name5 = name4;
+		msg5 = msg4;
+		name4 = name3;
+		msg4 = msg3;
+		name3 = name2;
+		msg3 = msg2;
+		name2 = name1;
+		msg2 = msg1;
+		name1 = name;
+		msg1 = msg;;
+
+		count = count + 1;
+
+		exit plug readbook[name1 = name1, msg1 = msg1,
+		                   name2 = name2, msg2 = msg2,
+		                   name3 = name3, msg3 = msg3,
+		                   name4 = name4, msg4 = msg4,
+		                   name5 = name5, msg5 = msg5,
+			           count = count];
+	}
+}

@@ -1,0 +1,48 @@
+service {
+  const html Setup = <html> <body>
+    <h1>A Simple Plus Minus Calculator</h1>
+    <p>
+    Enter your operator (+ or -):
+    <input type="text" name="operator" size=1>
+    <p>
+    Enter the first integer (-99 to 999):
+    <input type="text" name="int1" size=3>
+    <p>
+    Enter the second integer (-99 to 999):
+    <input type="text" name="int2" size=3>
+  </body> </html>;
+
+  const html Return = <html> <body>
+    <h1>The Answer</h1>
+    <p>
+    <b>Your answer is : <[Ans]> </b>
+    <p>
+    Would you like to do another calculation (yes or no)?
+    <input type="text" name="YorN" size=5>
+  </body> </html>;
+
+  const html ByeBye = <html> <body>
+    <h1>Thank you for using this calculator</h1>
+  </body> </html>;
+
+  int Ans;
+
+  session Calculate() {
+    string YorN;
+    int int1, int2;
+    string operator;
+    
+    YorN = "";
+    while (YorN != "no")
+    { show Setup receive[operator = operator, int1 = int1, int2 = int2];
+      if (operator=="+")
+         Ans = int1 + int2;
+      if (operator=="-")
+         Ans = int1 - int2;
+
+      show plug Return[Ans = Ans] receive[YorN = YorN];
+    }
+    exit ByeBye;
+  }
+}
+

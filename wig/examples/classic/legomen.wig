@@ -1,0 +1,172 @@
+service {
+
+	const html Init = <html> <body bgcolor="#4400ff">
+		<br>
+		<center>
+		<h1>WELCOME!!!!</h1>
+		<br>
+		<table border=2 cellspacing=5 cellpadding=10 bgcolor="#CCCCCC" text="#000000">
+		<tr><td><center>
+		<img src="http://www.cs.mcgill.ca/~hendren/Images/LEGO_RED.gif">
+		</td></tr>
+		<tr><td>
+		<br><center>
+		Select the lego man of your choice below:
+  		<br><br>
+		<input type="radio" name="man" value="1">Red Man
+                <br>
+		<input type="radio" name="man" value="2">Blue Man
+		<br>
+		<input type="radio" name="man" value="3">Green Man
+                <br>
+		<input type="radio" name="man" value="4">Purple Man
+		<br>
+		<input type="radio" name="man" value="5">Exit
+		</table>
+		<br>
+		<br>
+		</center>
+	</body></html>;
+
+
+	const html Red = <html> <body bgcolor="#ff0000">
+		<br>
+		<center>
+		<h1>RED LEGO MAN!!</h1>
+		<br>
+		<table border=2 cellspacing=5 cellpadding=10 bgcolor="#CCCCCC" text="#000000">
+		<tr><td><center>
+		<img src="http://www.cs.mcgill.ca/~hendren/Images/LEGO_RED.gif">
+		</td></tr>
+		<tr><td>
+		<br><center>
+		Select the lego man of your choice below:
+		<br><br>
+		<input type="radio" name="man" value="1">Red Man
+                <br>
+		<input type="radio" name="man" value="2">Blue Man
+		<br>
+		<input type="radio" name="man" value="3">Green Man
+                <br>
+		<input type="radio" name="man" value="4">Purple Man
+		<br>
+		<input type="radio" name="man" value="5">Exit
+		</table>
+		<br>
+		<br>
+		</center>
+	</body></html>;
+
+
+	const html Blue = <html> <body bgcolor="#4400ff">
+		<br>
+		<center>
+		<h1>BLUE LEGO MAN!!</h1>
+		<br>
+		<table border=2 cellspacing=5 cellpadding=10 bgcolor="#CCCCCC" text="#000000">
+		<tr><td><center>
+		<img src="http://www.cs.mcgill.ca/~hendren/Images/LEGO_BLUE.gif">
+		</td></tr>
+		<tr><td>
+		<br><center>
+		Select the lego man of your choice below:
+		<br><br>
+		<input type="radio" name="man" value="1">Red Man
+                <br>
+		<input type="radio" name="man" value="2">Blue Man
+		<br>
+		<input type="radio" name="man" value="3">Green Man
+                <br>
+		<input type="radio" name="man" value="4">Purple Man
+		<br>
+		<input type="radio" name="man" value="5">Exit
+		</table>
+		<br>
+		<br>
+		</center>
+	</body></html>;
+
+
+	const html Green = <html> <body bgcolor="#22ff22">
+		<br>
+		<center>
+		<h1>GREEN LEGO MAN!!</h1>
+		<br>
+		<table border=2 cellspacing=5 cellpadding=10 bgcolor="#CCCCCC" text="#000000">
+		<tr><td><center>
+		<img src="http://www.cs.mcgill.ca/~hendren/Images/LEGO_GREEN.gif">
+		</td></tr>
+		<tr><td>
+		<br><center>
+		Select the lego man of your choice below:
+		<br><br>
+		<input type="radio" name="man" value="1">Red Man
+                <br>
+		<input type="radio" name="man" value="2">Blue Man
+		<br>
+		<input type="radio" name="man" value="3">Green Man
+                <br>
+		<input type="radio" name="man" value="4">Purple Man
+		<br>
+		<input type="radio" name="man" value="5">Exit
+		</table>
+		<br>
+		<br>
+		</center>
+	</body></html>;
+
+	const html Purple = <html> <body bgcolor="#880099">
+		<br>
+		<center>
+		<h1>PURPLE LEGO MAN!!</h1>
+		<br>
+		<table border=2 cellspacing=5 cellpadding=10 bgcolor="#CCCCCC" text="#000000">
+		<tr><td><center>
+		<img src="http://www.cs.mcgill.ca/~hendren/Images/LEGO_PURPLE.gif">
+		</td></tr>
+		<tr><td>
+		<br><center>
+		Select the lego man of your choice below:
+		<br><br>
+		<input type="radio" name="man" value="1">Red Man
+                <br>
+		<input type="radio" name="man" value="2">Blue Man
+		<br>
+		<input type="radio" name="man" value="3">Green Man
+                <br>
+		<input type="radio" name="man" value="4">Purple Man
+		<br>
+		<input type="radio" name="man" value="5">Exit
+		</table>
+		<br>
+		<br>
+		</center>
+	</body></html>;
+
+	const html End = <html> <body bgcolor="#334433">
+        	<br>
+		<center>
+                <br><br><br><br>
+		<h1>GOODBYE!</h1>
+		<br>
+		</center>
+	</body></html>;
+
+
+	session Access() {
+		int man;
+                show Init receive[man=man];
+
+		while(man != 5)	{
+			if(man==1)
+				show Red receive[man=man];
+			else if(man==2)
+				show Blue receive[man=man];
+			else if(man==3)
+				show Green receive[man=man];
+			else if(man==4)
+				show Purple receive[man=man];
+		}
+		exit End;
+	}
+}

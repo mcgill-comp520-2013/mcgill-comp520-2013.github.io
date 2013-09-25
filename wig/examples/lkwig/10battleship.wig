@@ -1,0 +1,2158 @@
+service 
+{
+   const html Join = <html><body>
+       <h1>Welcome to WIG BattleShip</h1>
+       Please enter your player name:
+       <input name="name" type="text" size=25>
+   </body></html>;   
+   
+   const html ResetPage = <html><body>
+       <h1>The game has been reset!<[var]></h1>
+   </body></html>;      
+
+   const html GameWillStart = <html><body>
+       <h1>The game will soon start!</h1>
+       <[instructions]>
+   </body></html>;         
+   
+   const html Ship = <html><body>
+   <center><br>
+   Please put your battleship on the field<br>
+   <[ship_msg]><br>
+   Ship 1 is at <[ship1_pos]><br>
+   Ship 2 is at <[ship2a_pos]> and <[ship2B_pos]> <br>
+   Ship 3 is at <[ship3a_pos]><br>
+        <table border="1">
+        <tr>
+        <td ALIGN="center">up<br><input name="direction" type="radio" value="up"></td>
+        <td ALIGN="center">right<br><input name="direction" type="radio" value="right"></td>
+        <td ALIGN="center">down<br><input name="direction" type="radio" value="down"></td>
+        <td ALIGN="center">left<br><input name="direction" type="radio" value="left"></td>
+        </tr></table><br>
+
+   <table border="1">
+        <tr>
+        <td ALIGN="center"></td>
+        <td ALIGN="center">0</td>
+        <td ALIGN="center">1</td>
+        <td ALIGN="center">2</td>
+        <td ALIGN="center">3</td>
+        <td ALIGN="center">4</td>
+        <td ALIGN="center">5</td>
+   </tr>
+        <tr>
+        <td ALIGN="center">A</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">B</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">C</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">D</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">E</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">F</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx5"></td>
+        </tr>
+        </table>
+   </body></html>;   
+ 
+   const html Update = <html> <[metatag]> <body>
+       <center><br>
+
+   <h2><b>It is <[turnname]>'s turn.</b></h2>
+   <br>
+   <h3><[hit]></h3>
+   <br>
+       
+   Your name is <[name]><br><br>   
+   Ship1 is at <[ship1_pos]> face <[ship1_dir]>.<br>
+   Ship2 is at <[ship2a_pos]> <[ship2B_pos]> and  face <[ship2_dir]>.<br>
+   Ship3 is at <[ship3a_pos]> face <[ship3_dir]>.<br>
+
+   <table border="1" width="100" height="100">
+   <tr><[Ax0]></td><[Ax1]></td><[Ax2]></td><[Ax3]></td><[Ax4]></td><[Ax5]></td></tr>
+   <tr><[Bx0]></td><[Bx1]></td><[Bx2]></td><[Bx3]></td><[Bx4]></td><[Bx5]></td></tr>
+   <tr><[Cx0]></td><[Cx1]></td><[Cx2]></td><[Cx3]></td><[Cx4]></td><[Cx5]></td></tr>
+   <tr><[Dx0]></td><[Dx1]></td><[Dx2]></td><[Dx3]></td><[Dx4]></td><[Dx5]></td></tr>
+   <tr><[Ex0]></td><[Ex1]></td><[Ex2]></td><[Ex3]></td><[Ex4]></td><[Ex5]></td></tr>
+   <tr><[Fx0]></td><[Fx1]></td><[Fx2]></td><[Fx3]></td><[Fx4]></td><[Fx5]></td></tr>
+   </table>
+
+   Just just fire at <[pos]>!!!<br>
+      <hr>
+   <table border="1" width="100">
+        <tr>
+        <td ALIGN="center"></td>
+        <td ALIGN="center">0</td>
+        <td ALIGN="center">1</td>
+        <td ALIGN="center">2</td>
+        <td ALIGN="center">3</td>
+        <td ALIGN="center">4</td>
+        <td ALIGN="center">5</td>
+   </tr>
+        <tr>
+        <td ALIGN="center">A</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ax5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">B</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Bx5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">C</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Cx5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">D</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Dx5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">E</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Ex5"></td>
+        </tr>
+        <tr>
+        <td ALIGN="center">F</td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx0"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx1"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx2"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx3"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx4"></td>
+        <td ALIGN="center"><input name="pos" type="radio" value="Fx5"></td>
+        </tr>
+        </table>
+
+       <input name="quit" type="radio" value="yes"> Quit now
+   </body></html>;
+
+   const html FullGame = <html><body>
+      <h1>Sorry, a game is still being played by <[p1name]> and <[p2name]>. </h1>
+      </body></html>;
+   
+   const html Quit = <html><body>
+      <h1>Thanks for playing battlefield!</h1>
+       You made <[conns]> connections
+   </body> </html>;
+
+   string blue_cell, red_cell, grey_cell, white_cell;
+   string P1_name, P2_name;
+   string P1_gb_pos, P2_gb_pos, quit;
+   string P1_metatag, P2_metatag;
+   string P1_starttag, P2_starttag, formclose;
+   
+   string P1_ship_msg;
+   string P1_ship1_pos, P1_ship1_dir, P1_ship2a_pos, P1_ship2B_pos, P1_ship2_dir;
+   string P1_ship3a_pos, P1_ship3b_pos, P1_ship3c_pos, P1_ship3_dir;
+   string P1_Ax0, P1_Ax1, P1_Ax2, P1_Ax3, P1_Ax4, P1_Ax5;
+   string P1_Bx0, P1_Bx1, P1_Bx2, P1_Bx3, P1_Bx4, P1_Bx5;
+   string P1_Cx0, P1_Cx1, P1_Cx2, P1_Cx3, P1_Cx4, P1_Cx5;
+   string P1_Dx0, P1_Dx1, P1_Dx2, P1_Dx3, P1_Dx4, P1_Dx5;
+   string P1_Ex0, P1_Ex1, P1_Ex2, P1_Ex3, P1_Ex4, P1_Ex5;
+   string P1_Fx0, P1_Fx1, P1_Fx2, P1_Fx3, P1_Fx4, P1_Fx5;
+   bool P1_ship1_ok, P1_ship2_ok, P1_ship3_ok;
+
+   string P2_ship_msg;
+   string P2_ship1_pos, P2_ship1_dir, P2_ship2a_pos, P2_ship2B_pos, P2_ship2_dir;
+   string P2_ship3a_pos, P2_ship3b_pos, P2_ship3c_pos, P2_ship3_dir;
+   string P2_Ax0, P2_Ax1, P2_Ax2, P2_Ax3, P2_Ax4, P2_Ax5;
+   string P2_Bx0, P2_Bx1, P2_Bx2, P2_Bx3, P2_Bx4, P2_Bx5;
+   string P2_Cx0, P2_Cx1, P2_Cx2, P2_Cx3, P2_Cx4, P2_Cx5;
+   string P2_Dx0, P2_Dx1, P2_Dx2, P2_Dx3, P2_Dx4, P2_Dx5;
+   string P2_Ex0, P2_Ex1, P2_Ex2, P2_Ex3, P2_Ex4, P2_Ex5;
+   string P2_Fx0, P2_Fx1, P2_Fx2, P2_Fx3, P2_Fx4, P2_Fx5;
+   bool P2_ship1_ok, P2_ship2_ok, P2_ship3_ok;
+
+   int connections;
+   
+   string turn;
+   string playersTurnName;
+   
+   
+   session Play() 
+   {      
+      int written, error;
+      int player;
+   
+      connections = 0;
+      P1_metatag="<meta http-equiv=\"refresh\" content=\"5\"; url=\"battleship10.cgi?RefreshP1\">";
+      P2_metatag="<meta http-equiv=\"refresh\" content=\"5\"; url=\"battleship10.cgi?RefreshP2\">";
+      P1_starttag="Please start the RefreshP1 service to start the game.";
+      P2_starttag="Please start the RefreshP2 service to start the game.";
+      formclose = "<br><input type=\"submit\" value=\"Start\"></form>";
+      
+      blue_cell="<td bgcolor=\"#0000FF\">";
+      grey_cell="<td bgcolor=\"#888888\">";
+      red_cell="<td bgcolor=\"#FF0000\">";
+      white_cell="<td bgcolor=\"#FFFFFF\">";
+
+
+      if (P1_name!="" && P2_name!="")
+      {
+         exit plug FullGame[p1name = P1_name, p2name = P2_name];
+      }
+      else if (P1_name!="")
+      {                     
+         error = 0;
+         connections = 0;
+         written = 0; 
+         quit = "no";
+         player = 2;
+         
+         show Join receive [P2_name = name];
+ 
+         P2_ship1_pos = "N/A";
+         P2_ship2a_pos = "N/A";
+         P2_ship2B_pos = "N/A";
+         P2_ship3a_pos = "N/A";      
+      
+         P2_Ax0="0"; P2_Ax1="0"; P2_Ax2="0"; P2_Ax3="0"; P2_Ax4="0"; P2_Ax5="0";
+         P2_Bx0="0"; P2_Bx1="0"; P2_Bx2="0"; P2_Bx3="0"; P2_Bx4="0"; P2_Bx5="0";
+         P2_Cx0="0"; P2_Cx1="0"; P2_Cx2="0"; P2_Cx3="0"; P2_Cx4="0"; P2_Cx5="0";
+         P2_Dx0="0"; P2_Dx1="0"; P2_Dx2="0"; P2_Dx3="0"; P2_Dx4="0"; P2_Dx5="0";
+         P2_Ex0="0"; P2_Ex1="0"; P2_Ex2="0"; P2_Ex3="0"; P2_Ex4="0"; P2_Ex5="0";
+         P2_Fx0="0"; P2_Fx1="0"; P2_Fx2="0"; P2_Fx3="0"; P2_Fx4="0"; P2_Fx5="0";
+   
+         P2_ship_msg = "Ship 1, of size 1 (1,1)";
+         P2_ship1_ok = false;
+      
+         while(!P2_ship1_ok)   
+         {
+            show plug Ship [ship_msg = P2_ship_msg, ship1_pos = P2_ship1_pos, ship2a_pos = P2_ship2a_pos, 
+               ship2B_pos = P2_ship2B_pos, ship3a_pos = P2_ship3a_pos]
+            receive[P2_ship1_pos = pos, P2_ship1_dir = direction];
+   
+            if(P2_ship1_pos == "Ax0"){P2_Ax0 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ax1"){P2_Ax1 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ax2"){P2_Ax2 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ax3"){P2_Ax3 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ax4"){P2_Ax4 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ax5"){P2_Ax5 = "1"; P2_ship1_ok = true;}
+         
+            else if(P2_ship1_pos == "Bx0"){P2_Bx0 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Bx1"){P2_Bx1 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Bx2"){P2_Bx2 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Bx3"){P2_Bx3 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Bx4"){P2_Bx4 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Bx5"){P2_Bx5 = "1"; P2_ship1_ok = true;}
+            
+            else if(P2_ship1_pos == "Cx0"){P2_Cx0 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Cx1"){P2_Cx1 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Cx2"){P2_Cx2 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Cx3"){P2_Cx3 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Cx4"){P2_Cx4 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Cx5"){P2_Cx5 = "1"; P2_ship1_ok = true;}
+            
+            else if(P2_ship1_pos == "Dx0"){P2_Dx0 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Dx1"){P2_Dx1 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Dx2"){P2_Dx2 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Dx3"){P2_Dx3 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Dx4"){P2_Dx4 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Dx5"){P2_Dx5 = "1"; P2_ship1_ok = true;}
+            
+            else if(P2_ship1_pos == "Ex0"){P2_Ex0 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ex1"){P2_Ex1 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ex2"){P2_Ex2 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ex3"){P2_Ex3 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ex4"){P2_Ex4 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Ex5"){P2_Ex5 = "1"; P2_ship1_ok = true;}
+         
+            else if(P2_ship1_pos == "Fx0"){P2_Fx0 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Fx1"){P2_Fx1 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Fx2"){P2_Fx2 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Fx3"){P2_Fx3 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Fx4"){P2_Fx4 = "1"; P2_ship1_ok = true;}
+            else if(P2_ship1_pos == "Fx5"){P2_Fx5 = "1"; P2_ship1_ok = true;}
+         }
+   
+         P2_ship_msg = "Ship 2, of size 2 (1,2)";
+         P2_ship2_ok = false;
+      
+         while(!P2_ship2_ok)
+         {
+            show plug Ship [ship_msg = P2_ship_msg, ship1_pos = P2_ship1_pos, 
+               ship2a_pos = P2_ship2a_pos, ship2B_pos = P2_ship2B_pos, ship3a_pos = P2_ship3a_pos]
+            receive[P2_ship2a_pos = pos, P2_ship2_dir = direction];
+            error = 0;
+      
+            if(P2_ship2a_pos == P2_ship1_pos)
+            {
+               P2_ship2_ok = false;
+               error = 1;
+            }
+            else if(P2_ship2_dir == "")
+            {
+               P2_ship2_ok = false;
+               error = 3;
+            }
+            else
+            {
+               if(P2_ship2a_pos == "Ax0"){
+                  if(P2_ship2_dir == "down" || P2_ship2_dir == "right"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ax1"){P2_Ax0 = "2"; P2_Ax1 = "2"; P2_ship2B_pos = "Ax1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Bx0"){P2_Ax0 = "2"; P2_Bx0 = "2"; P2_ship2B_pos = "Bx0"; P2_ship2_ok = true;}
+               } 
+               else if(P2_ship2a_pos == "Ax1"){
+                  if(P2_ship2_dir == "down"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ax0"){P2_Ax1 = "2"; P2_Ax0 = "2"; P2_ship2B_pos = "Ax0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ax2"){P2_Ax1 = "2"; P2_Ax2 = "2"; P2_ship2B_pos = "Ax2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Bx1"){P2_Ax1 = "2"; P2_Bx1 = "2"; P2_ship2B_pos = "Bx1"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ax2"){
+                  if(P2_ship2_dir == "down"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ax1"){P2_Ax2 = "2"; P2_Ax1 = "2"; P2_ship2B_pos = "Ax1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ax3"){P2_Ax2 = "2"; P2_Ax3 = "2"; P2_ship2B_pos = "Ax3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Bx2"){P2_Ax2 = "2"; P2_Bx2 = "2"; P2_ship2B_pos = "Bx2"; P2_ship2_ok = true;}
+               }   
+               else if(P2_ship2a_pos == "Ax3"){
+                  if(P2_ship2_dir == "down"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ax2"){P2_Ax3 = "2"; P2_Ax2 = "2"; P2_ship2B_pos = "Ax2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ax4"){P2_Ax3 = "2"; P2_Ax4 = "2"; P2_ship2B_pos = "Ax4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Bx3"){P2_Ax3 = "2"; P2_Bx3 = "2"; P2_ship2B_pos = "Bx3"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ax4"){
+                  if(P2_ship2_dir == "down"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ax3"){P2_Ax4 = "2"; P2_Ax3 = "2"; P2_ship2B_pos = "Ax3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ax5"){P2_Ax4 = "2"; P2_Ax5 = "2"; P2_ship2B_pos = "Ax5"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Bx4"){P2_Ax4 = "2"; P2_Bx4 = "2"; P2_ship2B_pos = "Bx4"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ax5"){
+                  if(P2_ship2_dir == "down" || P2_ship2a_pos == "left"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ax4"){P2_Ax5 = "2"; P2_Ax4 = "2"; P2_ship2B_pos = "Ax4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Bx5"){P2_Ax5 = "2"; P2_Bx5 = "2"; P2_ship2B_pos = "Bx5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Bx0"){
+                  if(P2_ship2_dir == "right"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Cx0"){P2_Bx0 = "2"; P2_Cx0 = "2"; P2_ship2B_pos = "Cx0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Bx1"){P2_Bx0 = "2"; P2_Bx1 = "2"; P2_ship2B_pos = "Bx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Ax0"){P2_Bx0 = "2"; P2_Ax0 = "2"; P2_ship2B_pos = "Ax0"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Bx1"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Cx1"){P2_Bx1 = "2"; P2_Cx1 = "2"; P2_ship2B_pos = "Cx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Bx0"){P2_Bx1 = "2"; P2_Bx0 = "2"; P2_ship2B_pos = "Bx0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Ax1"){P2_Bx1 = "2"; P2_Ax1 = "2"; P2_ship2B_pos = "Ax1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Bx2"){P2_Bx1 = "2"; P2_Bx2 = "2"; P2_ship2B_pos = "Bx2"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Bx2"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Cx2"){P2_Bx2 = "2"; P2_Cx2 = "2"; P2_ship2B_pos = "Cx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Bx1"){P2_Bx2 = "2"; P2_Bx1 = "2"; P2_ship2B_pos = "Bx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Ax2"){P2_Bx2 = "2"; P2_Ax2 = "2"; P2_ship2B_pos = "Ax2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Bx3"){P2_Bx2 = "2"; P2_Bx3 = "2"; P2_ship2B_pos = "Bx3"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Bx3"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Cx3"){P2_Bx3 = "2"; P2_Cx3 = "2"; P2_ship2B_pos = "Cx3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Bx2"){P2_Bx3 = "2"; P2_Bx2 = "2"; P2_ship2B_pos = "Bx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Ax3"){P2_Bx3 = "2"; P2_Ax3 = "2"; P2_ship2B_pos = "Ax3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Bx4"){P2_Bx3 = "2"; P2_Bx4 = "2"; P2_ship2B_pos = "Bx4"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Bx4"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Cx4"){P2_Bx4 = "2"; P2_Cx4 = "2"; P2_ship2B_pos = "Cx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Bx3"){P2_Bx4 = "2"; P2_Bx3 = "2"; P2_ship2B_pos = "Bx3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Ax4"){P2_Bx4 = "2"; P2_Ax4 = "2"; P2_ship2B_pos = "Ax4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Bx5"){P2_Bx4 = "2"; P2_Bx5 = "2"; P2_ship2B_pos = "Bx5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Bx5"){
+                  if(P2_ship2_dir == "left"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Cx5"){P2_Bx5 = "2"; P2_Cx5 = "2"; P2_ship2B_pos = "Cx5"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Bx4"){P2_Bx5 = "2"; P2_Bx4 = "2"; P2_ship2B_pos = "Bx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Ax5"){P2_Bx5 = "2"; P2_Ax5 = "2"; P2_ship2B_pos = "Ax5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Cx0"){
+                  if(P2_ship2_dir == "right"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Dx0"){P2_Cx0 = "2"; P2_Dx0 = "2"; P2_ship2B_pos = "Dx0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Cx1"){P2_Cx0 = "2"; P2_Cx1 = "2"; P2_ship2B_pos = "Cx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Bx0"){P2_Cx0 = "2"; P2_Bx0 = "2"; P2_ship2B_pos = "Bx0"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Cx1"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Dx1"){P2_Cx1 = "2"; P2_Dx1 = "2"; P2_ship2B_pos = "Dx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Cx0"){P2_Cx1 = "2"; P2_Cx0 = "2"; P2_ship2B_pos = "Cx0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Bx1"){P2_Cx1 = "2"; P2_Bx1 = "2"; P2_ship2B_pos = "Bx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Cx2"){P2_Cx1 = "2"; P2_Cx2 = "2"; P2_ship2B_pos = "Cx2"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Cx2"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Dx2"){P2_Cx2 = "2"; P2_Dx2 = "2"; P2_ship2B_pos = "Dx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Cx1"){P2_Cx2 = "2"; P2_Cx1 = "2"; P2_ship2B_pos = "Cx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Bx2"){P2_Cx2 = "2"; P2_Bx2 = "2"; P2_ship2B_pos = "Bx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Cx3"){P2_Cx2 = "2"; P2_Cx3 = "2"; P2_ship2B_pos = "Cx3"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Cx3"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Dx3"){P2_Cx3 = "2"; P2_Dx3 = "2"; P2_ship2B_pos = "Dx3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Cx2"){P2_Cx3 = "2"; P2_Cx2 = "2"; P2_ship2B_pos = "Cx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Bx3"){P2_Cx3 = "2"; P2_Bx3 = "2"; P2_ship2B_pos = "Bx3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Cx4"){P2_Cx3 = "2"; P2_Cx4 = "2"; P2_ship2B_pos = "Cx4"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Cx4"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Dx4"){P2_Cx4 = "2"; P2_Dx4 = "2"; P2_ship2B_pos = "Dx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Cx3"){P2_Cx4 = "2"; P2_Cx3 = "2"; P2_ship2B_pos = "Cx3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Bx4"){P2_Cx4 = "2"; P2_Bx4 = "2"; P2_ship2B_pos = "Bx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Cx5"){P2_Cx4 = "2"; P2_Cx5 = "2"; P2_ship2B_pos = "Cx5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Cx5"){
+                  if(P2_ship2_dir == "left"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Dx5"){P2_Cx5 = "2"; P2_Dx5 = "2"; P2_ship2B_pos = "Dx5"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Cx4"){P2_Cx5 = "2"; P2_Cx4 = "2"; P2_ship2B_pos = "Cx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Bx5"){P2_Cx5 = "2"; P2_Bx5 = "2"; P2_ship2B_pos = "Bx5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Dx0"){
+                  if(P2_ship2_dir == "right"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Ex0"){P2_Dx0 = "2"; P2_Ex0 = "2"; P2_ship2B_pos = "Ex0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Dx1"){P2_Dx0 = "2"; P2_Dx1 = "2"; P2_ship2B_pos = "Dx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Cx0"){P2_Dx0 = "2"; P2_Cx0 = "2"; P2_ship2B_pos = "Cx0"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Dx1"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Ex1"){P2_Dx1 = "2"; P2_Ex1 = "2"; P2_ship2B_pos = "Ex1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Dx0"){P2_Dx1 = "2"; P2_Dx0 = "2"; P2_ship2B_pos = "Dx0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Cx1"){P2_Dx1 = "2"; P2_Cx1 = "2"; P2_ship2B_pos = "Cx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Dx2"){P2_Dx1 = "2"; P2_Dx2 = "2"; P2_ship2B_pos = "Dx2"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Dx2"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Ex2"){P2_Dx2 = "2"; P2_Ex2 = "2"; P2_ship2B_pos = "Ex2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Dx1"){P2_Dx2 = "2"; P2_Dx1 = "2"; P2_ship2B_pos = "Dx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Cx2"){P2_Dx2 = "2"; P2_Cx2 = "2"; P2_ship2B_pos = "Cx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Dx3"){P2_Dx2 = "2"; P2_Dx3 = "2"; P2_ship2B_pos = "Dx3"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Dx3"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Ex3"){P2_Dx3 = "2"; P2_Ex3 = "2"; P2_ship2B_pos = "Ex3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Dx2"){P2_Dx3 = "2"; P2_Dx2 = "2"; P2_ship2B_pos = "Dx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Cx3"){P2_Dx3 = "2"; P2_Cx3 = "2"; P2_ship2B_pos = "Cx3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Dx4"){P2_Dx3 = "2"; P2_Dx4 = "2"; P2_ship2B_pos = "Dx4"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Dx4"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Ex4"){P2_Dx4 = "2"; P2_Ex4 = "2"; P2_ship2B_pos = "Ex4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Dx3"){P2_Dx4 = "2"; P2_Dx3 = "2"; P2_ship2B_pos = "Dx3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Cx4"){P2_Dx4 = "2"; P2_Cx4 = "2"; P2_ship2B_pos = "Cx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Dx5"){P2_Dx4 = "2"; P2_Dx5 = "2"; P2_ship2B_pos = "Dx5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Dx5"){
+                  if(P2_ship2_dir == "left"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Ex5"){P2_Dx5 = "2"; P2_Ex5 = "2"; P2_ship2B_pos = "Ex5"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Dx4"){P2_Dx5 = "2"; P2_Dx4 = "2"; P2_ship2B_pos = "Dx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Cx5"){P2_Dx5 = "2"; P2_Cx5 = "2"; P2_ship2B_pos = "Cx5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ex0"){
+                  if(P2_ship2_dir == "right"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Fx0"){P2_Ex0 = "2"; P2_Fx0 = "2"; P2_ship2B_pos = "Fx0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir   == "left" && P2_ship1_pos != "Ex1"){P2_Ex0 = "2"; P2_Ex1 = "2"; P2_ship2B_pos = "Ex1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Dx1"){P2_Ex0 = "2"; P2_Dx1 = "2"; P2_ship2B_pos = "Dx1"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ex1"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Fx1"){P2_Ex1 = "2"; P2_Fx1 = "2"; P2_ship2B_pos = "Fx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ex0"){P2_Ex1 = "2"; P2_Ex0 = "2"; P2_ship2B_pos = "Ex0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Dx1"){P2_Ex1 = "2"; P2_Dx1 = "2"; P2_ship2B_pos = "Dx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ex2"){P2_Ex1 = "2"; P2_Ex2 = "2"; P2_ship2B_pos = "Ex2"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ex2"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Fx2"){P2_Ex2 = "2"; P2_Fx2 = "2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ex1"){P2_Ex2 = "2"; P2_Ex1 = "2"; P2_ship2B_pos = "Ex1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Dx2"){P2_Ex2 = "2"; P2_Dx2 = "2"; P2_ship2B_pos = "Dx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ex3"){P2_Ex2 = "2"; P2_Ex3 = "2"; P2_ship2B_pos = "Ex3"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ex3"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Fx2"){P2_Ex2 = "2"; P2_Fx2 = "2"; P2_ship2B_pos = "Fx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ex1"){P2_Ex2 = "2"; P2_Ex1 = "2"; P2_ship2B_pos = "Ex1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Dx2"){P2_Ex2 = "2"; P2_Dx2 = "2"; P2_ship2B_pos = "Dx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ex3"){P2_Ex2 = "2"; P2_Ex3 = "2"; P2_ship2B_pos = "Ex3"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ex4"){
+                  if(P2_ship2_dir == "up" && P2_ship1_pos != "Fx4"){P2_Ex4 = "2"; P2_Fx4 = "2"; P2_ship2B_pos = "Fx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ex3"){P2_Ex4 = "2"; P2_Ex3 = "2"; P2_ship2B_pos = "Ex3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Dx4"){P2_Ex4 = "2"; P2_Dx4 = "2"; P2_ship2B_pos = "Dx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != "Ex5"){P2_Ex4 = "2"; P2_Ex5 = "2"; P2_ship2B_pos = "Ex5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Ex5"){
+                  if(P2_ship2_dir == "left"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "up" && P2_ship1_pos != "Fx5"){P2_Ex5 = "2"; P2_Fx5 = "2"; P2_ship2B_pos = "Fx5"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != "Ex4"){P2_Ex5 = "2"; P2_Ex4 = "2"; P2_ship2B_pos = "Ex4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Dx5"){P2_Ex5 = "2"; P2_Dx5 = "2"; P2_ship2B_pos = "Dx5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Fx0"){
+                  if(P2_ship2_dir == "right" || P2_ship2_dir == "up"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir   == "left" && P2_ship1_pos != "Fx1"){P2_Fx0 = "2"; P2_Fx1 = "2"; P2_ship2B_pos = "Fx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != "Ex1"){P2_Fx0 = "2"; P2_Ex1 = "2"; P2_ship2B_pos = "Ex1"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Fx1"){
+                  if(P2_ship2_dir == "up"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != P2_Fx0){P2_Fx1 = "2"; P2_Fx0 = "2"; P2_ship2B_pos = "Fx0"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != P2_Ex1){P2_Fx1 = "2"; P2_Ex1 = "2"; P2_ship2B_pos = "Ex1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != P2_Fx2){P2_Fx1 = "2"; P2_Fx2 = "2"; P2_ship2B_pos = "Fx2"; P2_ship2_ok = true;}   
+               }
+               else if(P2_ship2a_pos == "Fx2"){
+                  if(P2_ship2_dir == "up"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != P2_Fx1){P2_Fx2 = "2"; P2_Fx1 = "2"; P2_ship2B_pos = "Fx1"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != P2_Ex2){P2_Fx2 = "2"; P2_Ex2 = "2"; P2_ship2B_pos = "Ex2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != P2_Fx3){P2_Fx2 = "2"; P2_Fx3 = "2"; P2_ship2B_pos = "Fx3"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Fx3"){
+                  if(P2_ship2_dir == "up"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != P2_Fx2){P2_Fx3 = "2"; P2_Fx2 = "2"; P2_ship2B_pos = "Fx2"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != P2_Ex3){P2_Fx3 = "2"; P2_Ex3 = "2"; P2_ship2B_pos = "Ex3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != P2_Fx4){P2_Fx3 = "2"; P2_Fx4 = "2"; P2_ship2B_pos = "Fx4"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Fx4"){
+                  if(P2_ship2_dir == "up"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != P2_Fx3){P2_Fx4 = "2"; P2_Fx3 = "2"; P2_ship2B_pos = "Fx3"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != P2_Ex4){P2_Fx4 = "2"; P2_Ex4 = "2"; P2_ship2B_pos = "Ex4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "left" && P2_ship1_pos != P2_Fx5){P2_Fx4 = "2"; P2_Fx5 = "2"; P2_ship2B_pos = "Fx5"; P2_ship2_ok = true;}
+               }
+               else if(P2_ship2a_pos == "Fx5"){
+                  if(P2_ship2_dir == "up" || P2_ship2_dir == "left"){P2_ship2_ok = false; error = 2;}
+                  else if(P2_ship2_dir == "right" && P2_ship1_pos != P2_Fx4){P2_Fx5 = "2"; P2_Fx4 = "2"; P2_ship2B_pos = "Fx4"; P2_ship2_ok = true;}
+                  else if(P2_ship2_dir == "down" && P2_ship1_pos != P2_Ex5){P2_Fx5 = "2"; P2_Ex5 = "2"; P2_ship2B_pos = "Ex5"; P2_ship2_ok = true;}
+               }
+            }
+            
+            if(!P2_ship2_ok)
+            {
+               if(error == 0)
+                  P2_ship_msg = "Invalid Input! Ship 2 can't face ("+ P2_ship2_dir + ") Ship 1 is already at (" + P2_ship1_pos + ").";
+               else if(error == 1)
+                  P2_ship_msg = "Invalid Input! Ship 1 is already at (" + P2_ship2a_pos + ").";
+               else if(error == 2)
+                  P2_ship_msg = "Invalid Input! Ship 2 is out of range.";
+               else if(error == 3)
+                  P2_ship_msg = "Invalid Input! Please select one direction of P2_ship2 is facing.";
+            }
+         }
+      
+         P2_ship_msg = "Ship 3, of size 1 (1,3)";
+         P2_ship3_ok = false;
+         
+         while(!P2_ship3_ok)
+         {
+            show plug Ship [ship_msg = P2_ship_msg, ship1_pos = P2_ship1_pos, ship2a_pos = P2_ship2a_pos, ship2B_pos = P2_ship2B_pos, 
+               ship3a_pos = P2_ship3a_pos]
+            receive[P2_ship3a_pos = pos, P2_ship3_dir = direction];
+            error = 0;
+      
+            if(P2_ship3a_pos == P2_ship1_pos)
+            {
+               P2_ship3_ok = false;
+               error = 1;
+            }
+            else if(P2_ship3a_pos == P2_ship2a_pos)
+            {
+               P2_ship3_ok = false;
+               error = 2;
+            }
+            else if(P2_ship3_dir == "")
+            {
+               P2_ship3_ok = false;
+               error = 3;
+            }
+            else
+            {
+               if(P2_ship3a_pos == "Ax0"){
+                  if(P2_ship3_dir == "down" || P2_ship3_dir == "right") {P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="up" && P2_Ax0=="0" && P2_Bx0=="0" && P2_Cx0=="0")
+                     {P2_Ax0="3"; P2_Bx0="3"; P2_Cx0="3"; P2_ship3a_pos="Ax0"; P2_ship3b_pos="Bx0"; P2_ship3c_pos="Cx0"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Ax0=="0" && P2_Ax1=="0" && P2_Ax2=="0")
+                     {P2_Ax0="3"; P2_Ax1="3"; P2_Ax2="3"; P2_ship3a_pos="Ax0"; P2_ship3b_pos="Ax1"; P2_ship3c_pos="Ax2"; P2_ship3_ok=true;} 
+               }
+               else if(P2_ship3a_pos == "Ax1"){
+                  if(P2_ship3_dir == "down" || P2_ship3_dir == "right"){P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="up" && P2_Ax1=="0" && P2_Bx1=="0" && P2_Cx1=="0")
+                     {P2_Ax1="3"; P2_Bx1="3"; P2_Cx1="3"; P2_ship3a_pos="Ax1"; P2_ship3b_pos="Bx1"; P2_ship3c_pos="Cx1"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Ax1=="0" && P2_Ax2=="0" && P2_Ax3=="0")
+                     {P2_Ax1="3"; P2_Ax2="3"; P2_Ax3="3"; P2_ship3a_pos="Ax1"; P2_ship3b_pos="Ax2"; P2_ship3c_pos="Ax3"; P2_ship3_ok=true;} 
+               }
+               else if(P2_ship3a_pos == "Ax2"){
+                  if(P2_ship3_dir == "down"){P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="up" && P2_Ax2=="0" && P2_Bx2=="0" && P2_Cx2=="0")
+                     {P2_Ax2="3"; P2_Bx2="3"; P2_Cx2="3"; P2_ship3a_pos="Ax2"; P2_ship3b_pos="Bx2"; P2_ship3c_pos="Cx2"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="right" && P2_Ax0=="0" && P2_Ax1=="0" && P2_Ax2=="0")
+                     {P2_Ax0="3"; P2_Ax1="3"; P2_Ax2="3"; P2_ship3a_pos="Ax2"; P2_ship3b_pos="Ax1"; P2_ship3c_pos="Ax0"; P2_ship3_ok=true;} 
+                  else if(P2_ship3_dir=="left" && P2_Ax2=="0" && P2_Ax3=="0" && P2_Ax4=="0")
+                     {P2_Ax2="3"; P2_Ax3="3"; P2_Ax4="3"; P2_ship3a_pos="Ax2"; P2_ship3b_pos="Ax3"; P2_ship3c_pos="Ax4"; P2_ship3_ok=true;} 
+               } 
+               else if(P2_ship3a_pos == "Ax3"){
+                  if(P2_ship3_dir == "down"){P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="up" && P2_Ax3=="0" && P2_Bx3=="0" && P2_Cx3=="0")
+                     {P2_Ax3="3"; P2_Bx3="3"; P2_Cx3="3"; P2_ship3a_pos="Ax3"; P2_ship3b_pos="Bx3"; P2_ship3c_pos="Cx3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="right" && P2_Ax3=="0" && P2_Ax2=="0" && P2_Ax1=="0")
+                     {P2_Ax3="3"; P2_Ax2="3"; P2_Ax1="3"; P2_ship3a_pos="Ax3"; P2_ship3b_pos="Ax2"; P2_ship3c_pos="Ax1"; P2_ship3_ok=true;} 
+                  else if(P2_ship3_dir=="left" && P2_Ax3=="0" && P2_Ax4=="0" && P2_Ax5=="0")
+                     {P2_Ax3="3"; P2_Ax4="3"; P2_Ax5="3"; P2_ship3a_pos="Ax3"; P2_ship3b_pos="Ax4"; P2_ship3c_pos="Ax5"; P2_ship3_ok=true;} 
+               }     
+               else if(P2_ship3a_pos == "Ax4"){
+                  if(P2_ship3_dir == "down" || P2_ship3_dir =="left"){P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="up" && P2_Ax4=="0" && P2_Bx4=="0" && P2_Cx4=="0")
+                     {P2_Ax4="3"; P2_Bx4="3"; P2_Cx4="3"; P2_ship3a_pos="Ax4"; P2_ship3b_pos="Bx4"; P2_ship3c_pos="Cx4"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="right" && P2_Ax4=="0" && P2_Ax3=="0" && P2_Ax2=="0")
+                     {P2_Ax4="3"; P2_Ax3="3"; P2_Ax2="3"; P2_ship3a_pos="Ax4"; P2_ship3b_pos="Ax3"; P2_ship3c_pos="Ax2"; P2_ship3_ok=true;} 
+               }          
+               else if(P2_ship3a_pos == "Ax5"){
+                  if(P2_ship3_dir == "down" || P2_ship3_dir =="left"){P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="up" && P2_Ax5=="0" && P2_Bx5=="0" && P2_Cx5=="0")
+                     {P2_Ax5="3"; P2_Bx5="3"; P2_Cx5="3"; P2_ship3a_pos="Ax5"; P2_ship3b_pos="Bx5"; P2_ship3c_pos="Cx5"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="right" && P2_Ax5=="0" && P2_Ax4=="0" && P2_Ax3=="0")
+                     {P2_Ax5="3"; P2_Ax4="3"; P2_Ax3="3"; P2_ship3a_pos="Ax5"; P2_ship3b_pos="Ax4"; P2_ship3c_pos="Ax3"; P2_ship3_ok=true;} 
+               }          
+         
+               else if(P2_ship3a_pos == "Bx0"){
+                  if(P2_ship3_dir == "down" || P2_ship3_dir == "right") {P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="up" && P2_Bx0=="0" && P2_Cx0=="0" && P2_Dx0=="0")
+                     {P2_Bx0="3"; P2_Cx0="3"; P2_Dx0="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Bx0=="0" && P2_Bx1=="0" && P2_Bx2=="0")
+                     {P2_Bx0="3"; P2_Bx1="3"; P2_Bx2="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Bx1"){
+                  if(P2_ship3_dir == "down" || P2_ship3_dir == "right") {P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="up" && P2_Bx1=="0" && P2_Cx1=="0" && P2_Dx1=="0")
+                     {P2_Bx1="3"; P2_Cx1="3"; P2_Dx1="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Bx1=="0" && P2_Bx2=="0" && P2_Bx3=="0")
+                     {P2_Bx1="3"; P2_Bx2="3"; P2_Bx3="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Bx2"){
+                  if(P2_ship3_dir == "down") {P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="right" && P2_Bx0=="0" && P2_Bx1=="0" && P2_Bx2=="0")
+                     {P2_Bx0="3"; P2_Bx1="3"; P2_Bx2="3"; P2_ship3_ok=true;}                  
+                  else if(P2_ship3_dir=="up" && P2_Bx2=="0" && P2_Cx2=="0" && P2_Dx2=="0")
+                     {P2_Bx2="3"; P2_Cx2="3"; P2_Dx2="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Bx2=="0" && P2_Bx3=="0" && P2_Bx4=="0")
+                     {P2_Bx2="3"; P2_Bx3="3"; P2_Bx4="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Bx3"){
+                  if(P2_ship3_dir == "down") {P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="right" && P2_Bx1=="0" && P2_Bx2=="0" && P2_Bx3=="0")
+                     {P2_Bx1="3"; P2_Bx2="3"; P2_Bx3="3"; P2_ship3_ok=true;}                  
+                  else if(P2_ship3_dir=="up" && P2_Bx3=="0" && P2_Cx3=="0" && P2_Dx3=="0")
+                     {P2_Bx3="3"; P2_Cx3="3"; P2_Dx3="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Bx3=="0" && P2_Bx4=="0" && P2_Bx5=="0")
+                     {P2_Bx3="3"; P2_Bx4="3"; P2_Bx5="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Bx4") {
+                  if(P2_ship3_dir == "down" || P2_ship3_dir == "left") {P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="right" && P2_Bx2=="0" && P2_Bx3=="0" && P2_Bx4=="0")
+                     {P2_Bx2="3"; P2_Bx3="3"; P2_Bx4="3"; P2_ship3_ok=true;}                  
+                  else if(P2_ship3_dir=="up" && P2_Bx4=="0" && P2_Cx4=="0" && P2_Dx4=="0")
+                     {P2_Bx4="3"; P2_Cx4="3"; P2_Dx4="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Bx5") {
+                  if(P2_ship3_dir == "down" || P2_ship3_dir == "left") {P2_ship3_ok = false; error = 4;}
+                  else if(P2_ship3_dir=="right" && P2_Bx3=="0" && P2_Bx4=="0" && P2_Bx5=="0")
+                     {P2_Bx3="3"; P2_Bx4="3"; P2_Bx5="3"; P2_ship3_ok=true;}                  
+                  else if(P2_ship3_dir=="up" && P2_Bx5=="0" && P2_Cx5=="0" && P2_Dx5=="0")
+                     {P2_Bx5="3"; P2_Cx5="3"; P2_Dx5="3"; P2_ship3_ok=true;}
+               }
+               
+               else if(P2_ship3a_pos == "Cx0"){
+                  if(P2_ship3_dir == "right") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Cx0=="0" && P2_Bx0=="0" && P2_Ax0=="0")
+                     {P2_Cx0="3"; P2_Bx0="3"; P2_Ax0="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Cx0=="0" && P2_Dx0=="0" && P2_Ex0=="0")
+                     {P2_Cx0="3"; P2_Dx0="3"; P2_Ex0="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Cx0=="0" && P2_Cx1=="0" && P2_Cx2=="0")
+                     {P2_Cx0="3"; P2_Cx1="3"; P2_Cx2="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Cx1"){
+                  if(P2_ship3_dir == "right") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Cx1=="0" && P2_Bx1=="0" && P2_Ax1=="0")
+                     {P2_Cx1="3"; P2_Bx1="3"; P2_Ax1="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Cx1=="0" && P2_Dx1=="0" && P2_Ex1=="0")
+                     {P2_Cx1="3"; P2_Dx1="3"; P2_Ex1="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Cx1=="0" && P2_Cx2=="0" && P2_Cx3=="0")
+                     {P2_Cx1="3"; P2_Cx2="3"; P2_Cx3="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Cx2"){
+                  if(P2_ship3_dir == "right" && P2_Cx0=="0" && P2_Cx1=="0" && P2_Cx2=="0") 
+                     {P2_Cx0="3"; P2_Cx1="3"; P2_Cx2="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="down" && P2_Cx2=="0" && P2_Bx2=="0" && P2_Ax2=="0")
+                     {P2_Cx2="3"; P2_Bx2="3"; P2_Ax2="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Cx2=="0" && P2_Dx2=="0" && P2_Ex2=="0")
+                     {P2_Cx2="3"; P2_Dx2="3"; P2_Ex2="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Cx2=="0" && P2_Cx3=="0" && P2_Cx4=="0")
+                     {P2_Cx2="3"; P2_Cx3="3"; P2_Cx4="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Cx3"){
+                  if(P2_ship3_dir == "right" && P2_Cx1=="0" && P2_Cx2=="0" && P2_Cx3=="0") 
+                     {P2_Cx1="3"; P2_Cx2="3"; P2_Cx3="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="down" && P2_Cx3=="0" && P2_Bx3=="0" && P2_Ax3=="0")
+                     {P2_Cx3="3"; P2_Bx3="3"; P2_Ax3="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Cx3=="0" && P2_Dx3=="0" && P2_Ex3=="0")
+                     {P2_Cx3="3"; P2_Dx3="3"; P2_Ex3="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Cx3=="0" && P2_Cx4=="0" && P2_Cx5=="0")
+                     {P2_Cx3="3"; P2_Cx4="3"; P2_Cx5="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Cx4"){
+                  if(P2_ship3_dir=="right" && P2_Cx2=="0" && P2_Cx3=="0" && P2_Cx4=="0") 
+                     {P2_Cx2="3"; P2_Cx3="3"; P2_Cx4="3"; P2_ship3_ok=true;} 
+                  else if (P2_ship3_dir=="down" && P2_Cx4=="0" && P2_Bx4=="0" && P2_Ax4=="0")
+                     {P2_Cx4="3"; P2_Bx4="3"; P2_Ax4="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Cx4=="0" && P2_Dx4=="0" && P2_Ex4=="0")
+                     {P2_Cx4="3"; P2_Dx4="3"; P2_Ex4="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left")
+                     {P2_ship3_ok = false; error = 4;}
+               }
+               else if(P2_ship3a_pos == "Cx5"){
+                  if(P2_ship3_dir=="right" && P2_Cx3=="0" && P2_Cx4=="0" && P2_Cx5=="0") 
+                     {P2_Cx3="3"; P2_Cx4="3"; P2_Cx5="3"; P2_ship3_ok=true;} 
+                  else if (P2_ship3_dir=="down" && P2_Cx5=="0" && P2_Bx5=="0" && P2_Ax5=="0")
+                     {P2_Cx5="3"; P2_Bx5="3"; P2_Ax5="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Cx5=="0" && P2_Dx5=="0" && P2_Ex5=="0")
+                     {P2_Cx5="3"; P2_Dx5="3"; P2_Ex5="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left")
+                     {P2_ship3_ok = false; error = 4;}
+               }
+               
+               else if(P2_ship3a_pos == "Dx0"){
+                  if(P2_ship3_dir == "right") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Dx0=="0" && P2_Cx0=="0" && P2_Bx0=="0")
+                     {P2_Dx0="3"; P2_Cx0="3"; P2_Bx0="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Dx0=="0" && P2_Ex0=="0" && P2_Fx0=="0")
+                     {P2_Dx0="3"; P2_Ex0="3"; P2_Fx0="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Dx0=="0" && P2_Dx1=="0" && P2_Dx2=="0")
+                     {P2_Dx0="3"; P2_Dx1="3"; P2_Dx2="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Dx1"){
+                  if(P2_ship3_dir == "right") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Dx1=="0" && P2_Cx1=="0" && P2_Bx1=="0")
+                     {P2_Dx1="3"; P2_Cx1="3"; P2_Bx1="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Dx1=="0" && P2_Ex1=="0" && P2_Fx1=="0")
+                     {P2_Dx1="3"; P2_Ex1="3"; P2_Fx1="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Dx1=="0" && P2_Dx2=="0" && P2_Dx3=="0")
+                     {P2_Dx1="3"; P2_Dx2="3"; P2_Dx3="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Dx2"){
+                  if(P2_ship3_dir=="right" && P2_Dx0=="0" && P2_Dx1=="0" && P2_Dx2=="0")
+                     {P2_Dx0="3"; P2_Dx1="3"; P2_Dx2="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="down" && P2_Dx2=="0" && P2_Cx2=="0" && P2_Bx2=="0")
+                     {P2_Dx2="3"; P2_Cx2="3"; P2_Bx2="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Dx2=="0" && P2_Ex2=="0" && P2_Fx2=="0")
+                     {P2_Dx2="3"; P2_Ex2="3"; P2_Fx2="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Dx2=="0" && P2_Dx3=="0" && P2_Dx4=="0")
+                     {P2_Dx2="3"; P2_Dx3="3"; P2_Dx4="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Dx3"){
+                  if(P2_ship3_dir=="right" && P2_Dx1=="0" && P2_Dx2=="0" && P2_Dx3=="0")
+                     {P2_Dx1="3"; P2_Dx2="3"; P2_Dx3="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="down" && P2_Dx3=="0" && P2_Cx3=="0" && P2_Bx3=="0")
+                     {P2_Dx3="3"; P2_Cx3="3"; P2_Bx3="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Dx3=="0" && P2_Ex3=="0" && P2_Fx3=="0")
+                     {P2_Dx3="3"; P2_Ex3="3"; P2_Fx3="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left" && P2_Dx3=="0" && P2_Dx4=="0" && P2_Dx5=="0")
+                     {P2_Dx3="3"; P2_Dx4="3"; P2_Dx5="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Dx4"){
+                  if(P2_ship3_dir=="right" && P2_Dx2=="0" && P2_Dx3=="0" && P2_Dx4=="0")
+                     {P2_Dx2="3"; P2_Dx3="3"; P2_Dx4="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="down" && P2_Dx4=="0" && P2_Cx4=="0" && P2_Bx4=="0")
+                     {P2_Dx4="3"; P2_Cx4="3"; P2_Bx4="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Dx4=="0" && P2_Ex4=="0" && P2_Fx4=="0")
+                     {P2_Dx4="3"; P2_Ex4="3"; P2_Fx4="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left")
+                     {P2_ship3_ok = false; error = 4;}
+               }
+               else if(P2_ship3a_pos == "Dx5"){
+                  if(P2_ship3_dir=="right" && P2_Dx3=="0" && P2_Dx4=="0" && P2_Dx5=="0")
+                     {P2_Dx3="3"; P2_Dx4="3"; P2_Dx5="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="down" && P2_Dx5=="0" && P2_Cx5=="0" && P2_Bx5=="0")
+                     {P2_Dx5="3"; P2_Cx5="3"; P2_Bx5="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="up" && P2_Dx5=="0" && P2_Ex5=="0" && P2_Fx5=="0")
+                     {P2_Dx5="3"; P2_Ex5="3"; P2_Fx5="3"; P2_ship3_ok=true;}
+                  else if(P2_ship3_dir=="left")
+                     {P2_ship3_ok = false; error = 4;}
+               }
+               
+               else if(P2_ship3a_pos == "Ex0"){
+                  if(P2_ship3_dir == "right" || P2_ship3_dir=="up") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Ex0=="0" && P2_Dx0=="0" && P2_Cx0=="0")
+                     {P2_Ex0="3"; P2_Dx0="3"; P2_Cx0="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="left" && P2_Ex0=="0" && P2_Ex1=="0" && P2_Ex2=="0")
+                     {P2_Ex0="3"; P2_Ex1="3"; P2_Ex2="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Ex1"){
+                  if(P2_ship3_dir == "right" || P2_ship3_dir=="up") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Ex1=="0" && P2_Dx1=="0" && P2_Cx1=="0")
+                     {P2_Ex1="3"; P2_Dx1="3"; P2_Cx1="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="left" && P2_Ex1=="0" && P2_Ex2=="0" && P2_Ex3=="0")
+                     {P2_Ex1="3"; P2_Ex2="3"; P2_Ex3="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Ex2"){
+                  if(P2_ship3_dir=="up") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Ex2=="0" && P2_Dx2=="0" && P2_Cx2=="0")
+                     {P2_Ex2="3"; P2_Dx2="3"; P2_Cx2="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="right" && P2_Ex0=="0" && P2_Ex1=="0" && P2_Ex2=="0")
+                     {P2_Ex0="3"; P2_Ex1="3"; P2_Ex2="3"; P2_ship3_ok=true;}                  
+                  else if (P2_ship3_dir=="left" && P2_Ex2=="0" && P2_Ex3=="0" && P2_Ex4=="0")
+                     {P2_Ex2="3"; P2_Ex3="3"; P2_Ex4="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Ex3"){
+                  if(P2_ship3_dir=="up") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Ex3=="0" && P2_Dx3=="0" && P2_Cx3=="0")
+                     {P2_Ex3="3"; P2_Dx3="3"; P2_Cx3="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="right" && P2_Ex1=="0" && P2_Ex2=="0" && P2_Ex3=="0")
+                     {P2_Ex1="3"; P2_Ex2="3"; P2_Ex3="3"; P2_ship3_ok=true;}                  
+                  else if (P2_ship3_dir=="left" && P2_Ex3=="0" && P2_Ex4=="0" && P2_Ex5=="0")
+                     {P2_Ex3="3"; P2_Ex4="3"; P2_Ex5="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Ex4"){
+                  if(P2_ship3_dir=="up" || P2_ship3_dir=="left") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Ex4=="0" && P2_Dx4=="0" && P2_Cx4=="0")
+                     {P2_Ex4="3"; P2_Dx4="3"; P2_Cx4="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="right" && P2_Ex2=="0" && P2_Ex3=="0" && P2_Ex4=="0")
+                     {P2_Ex2="3"; P2_Ex3="3"; P2_Ex4="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Ex5"){
+                  if(P2_ship3_dir=="up" || P2_ship3_dir=="left") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Ex5=="0" && P2_Dx5=="0" && P2_Cx5=="0")
+                     {P2_Ex5="3"; P2_Dx5="3"; P2_Cx5="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="right" && P2_Ex3=="0" && P2_Ex4=="0" && P2_Ex5=="0")
+                     {P2_Ex3="3"; P2_Ex4="3"; P2_Ex5="3"; P2_ship3_ok=true;}
+               }
+               
+               else if(P2_ship3a_pos == "Fx0"){
+                  if(P2_ship3_dir == "right" || P2_ship3_dir=="up") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Fx0=="0" && P2_Ex0=="0" && P2_Dx0=="0")
+                     {P2_Fx0="3"; P2_Ex0="3"; P2_Dx0="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="left" && P2_Fx0=="0" && P2_Fx1=="0" && P2_Fx2=="0")
+                     {P2_Fx0="3"; P2_Fx1="3"; P2_Fx2="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Fx1"){
+                  if(P2_ship3_dir == "right" || P2_ship3_dir=="up") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Fx1=="0" && P2_Ex1=="0" && P2_Dx1=="0")
+                     {P2_Fx1="3"; P2_Ex1="3"; P2_Dx1="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="left" && P2_Fx1=="0" && P2_Fx2=="0" && P2_Fx3=="0")
+                     {P2_Fx1="3"; P2_Fx2="3"; P2_Fx3="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Fx2"){
+                  if(P2_ship3_dir=="up") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Fx2=="0" && P2_Ex2=="0" && P2_Dx2=="0")
+                     {P2_Fx2="3"; P2_Ex2="3"; P2_Dx2="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="right" && P2_Fx0=="0" && P2_Fx1=="0" && P2_Fx2=="0")
+                     {P2_Fx0="3"; P2_Fx1="3"; P2_Fx2="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="left" && P2_Fx2=="0" && P2_Fx3=="0" && P2_Fx4=="0")
+                     {P2_Fx2="3"; P2_Fx3="3"; P2_Fx4="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Fx3"){
+                  if(P2_ship3_dir=="up") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Fx3=="0" && P2_Ex3=="0" && P2_Dx3=="0")
+                     {P2_Fx3="3"; P2_Ex3="3"; P2_Dx3="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="right" && P2_Fx1=="0" && P2_Fx2=="0" && P2_Fx3=="0")
+                     {P2_Fx1="3"; P2_Fx2="3"; P2_Fx3="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="left" && P2_Fx3=="0" && P2_Fx4=="0" && P2_Fx5=="0")
+                     {P2_Fx3="3"; P2_Fx4="3"; P2_Fx5="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Fx4"){
+                  if(P2_ship3_dir=="up" || P2_ship3_dir=="left") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Fx4=="0" && P2_Ex4=="0" && P2_Dx4=="0")
+                     {P2_Fx4="3"; P2_Ex4="3"; P2_Dx4="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="right" && P2_Fx2=="0" && P2_Fx3=="0" && P2_Fx4=="0")
+                     {P2_Fx2="3"; P2_Fx3="3"; P2_Fx4="3"; P2_ship3_ok=true;}
+               }
+               else if(P2_ship3a_pos == "Fx5"){
+                  if(P2_ship3_dir=="up" || P2_ship3_dir=="left") {P2_ship3_ok = false; error = 4;}
+                  else if (P2_ship3_dir=="down" && P2_Fx5=="0" && P2_Ex5=="0" && P2_Dx5=="0")
+                     {P2_Fx5="3"; P2_Ex5="3"; P2_Dx5="3"; P2_ship3_ok=true;}
+                  else if (P2_ship3_dir=="right" && P2_Fx3=="0" && P2_Fx4=="0" && P2_Fx5=="0")
+                     {P2_Fx3="3"; P2_Fx4="3"; P2_Fx5="3"; P2_ship3_ok=true;}
+               }
+   
+            }
+         
+            if(!P2_ship3_ok)
+            {
+               if(error == 0)
+                  P2_ship_msg = "Invalid Input! Ship 3 can't face ("+ P2_ship3_dir + ") Ship 1 or Ship 2 are on the way.";
+               else if(error == 1)
+                  P2_ship_msg = "Invalid Input! Ship 1 is already at (" + P2_ship2a_pos + ").";
+               else if(error == 2)
+                  P2_ship_msg = "Invalid Input! Ship 2 is out of range.";
+               else if(error == 3)
+                  P2_ship_msg = "Invalid Input! Please select one direction of P2_ship2 is facing.";
+               else if(error == 4)
+                  P2_ship_msg = "Invalid Input! Ship 3 is out of range.";
+               else
+                  P2_ship_msg = "Error!";
+            }
+         }         
+      }
+      else
+      {
+         error = 0;
+         connections = 0;
+         written = 0; 
+         quit = "no";
+         player = 2;
+
+         show Join receive [P1_name = name];
+
+         P1_ship1_pos = "N/A";
+         P1_ship2a_pos = "N/A";
+         P1_ship2B_pos = "N/A";
+         P1_ship3a_pos = "N/A";      
+         
+         player = 1;
+      
+         P1_Ax0="0"; P1_Ax1="0"; P1_Ax2="0"; P1_Ax3="0"; P1_Ax4="0"; P1_Ax5="0";
+         P1_Bx0="0"; P1_Bx1="0"; P1_Bx2="0"; P1_Bx3="0"; P1_Bx4="0"; P1_Bx5="0";
+         P1_Cx0="0"; P1_Cx1="0"; P1_Cx2="0"; P1_Cx3="0"; P1_Cx4="0"; P1_Cx5="0";
+         P1_Dx0="0"; P1_Dx1="0"; P1_Dx2="0"; P1_Dx3="0"; P1_Dx4="0"; P1_Dx5="0";
+         P1_Ex0="0"; P1_Ex1="0"; P1_Ex2="0"; P1_Ex3="0"; P1_Ex4="0"; P1_Ex5="0";
+         P1_Fx0="0"; P1_Fx1="0"; P1_Fx2="0"; P1_Fx3="0"; P1_Fx4="0"; P1_Fx5="0";
+   
+         P1_ship_msg = "Ship 1, of size 1 (1,1)";
+         P1_ship1_ok = false;
+      
+         while(!P1_ship1_ok)   
+         {
+            show plug Ship [ship_msg = P1_ship_msg, ship1_pos = P1_ship1_pos, ship2a_pos = P1_ship2a_pos, 
+               ship2B_pos = P1_ship2B_pos, ship3a_pos = P1_ship3a_pos]
+            receive[P1_ship1_pos = pos, P1_ship1_dir = direction];
+   
+            if(P1_ship1_pos == "Ax0"){P1_Ax0 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ax1"){P1_Ax1 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ax2"){P1_Ax2 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ax3"){P1_Ax3 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ax4"){P1_Ax4 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ax5"){P1_Ax5 = "1"; P1_ship1_ok = true;}
+         
+            else if(P1_ship1_pos == "Bx0"){P1_Bx0 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Bx1"){P1_Bx1 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Bx2"){P1_Bx2 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Bx3"){P1_Bx3 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Bx4"){P1_Bx4 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Bx5"){P1_Bx5 = "1"; P1_ship1_ok = true;}
+            
+            else if(P1_ship1_pos == "Cx0"){P1_Cx0 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Cx1"){P1_Cx1 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Cx2"){P1_Cx2 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Cx3"){P1_Cx3 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Cx4"){P1_Cx4 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Cx5"){P1_Cx5 = "1"; P1_ship1_ok = true;}
+            
+            else if(P1_ship1_pos == "Dx0"){P1_Dx0 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Dx1"){P1_Dx1 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Dx2"){P1_Dx2 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Dx3"){P1_Dx3 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Dx4"){P1_Dx4 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Dx5"){P1_Dx5 = "1"; P1_ship1_ok = true;}
+            
+            else if(P1_ship1_pos == "Ex0"){P1_Ex0 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ex1"){P1_Ex1 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ex2"){P1_Ex2 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ex3"){P1_Ex3 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ex4"){P1_Ex4 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Ex5"){P1_Ex5 = "1"; P1_ship1_ok = true;}
+         
+            else if(P1_ship1_pos == "Fx0"){P1_Fx0 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Fx1"){P1_Fx1 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Fx2"){P1_Fx2 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Fx3"){P1_Fx3 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Fx4"){P1_Fx4 = "1"; P1_ship1_ok = true;}
+            else if(P1_ship1_pos == "Fx5"){P1_Fx5 = "1"; P1_ship1_ok = true;}
+         }
+   
+         P1_ship_msg = "Ship 2, of size 2 (1,2)";
+         P1_ship2_ok = false;
+      
+         while(!P1_ship2_ok)
+         {
+            show plug Ship [ship_msg = P1_ship_msg, ship1_pos = P1_ship1_pos, 
+               ship2a_pos = P1_ship2a_pos, ship2B_pos = P1_ship2B_pos, ship3a_pos = P1_ship3a_pos]
+            receive[P1_ship2a_pos = pos, P1_ship2_dir = direction];
+            error = 0;
+      
+            if(P1_ship2a_pos == P1_ship1_pos)
+            {
+               P1_ship2_ok = false;
+               error = 1;
+            }
+            else if(P1_ship2_dir == "")
+            {
+               P1_ship2_ok = false;
+               error = 3;
+            }
+            else
+            {
+               if(P1_ship2a_pos == "Ax0"){
+                  if(P1_ship2_dir == "down" || P1_ship2_dir == "right"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ax1"){P1_Ax0 = "2"; P1_Ax1 = "2"; P1_ship2B_pos = "Ax1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Bx0"){P1_Ax0 = "2"; P1_Bx0 = "2"; P1_ship2B_pos = "Bx0"; P1_ship2_ok = true;}
+               } 
+               else if(P1_ship2a_pos == "Ax1"){
+                  if(P1_ship2_dir == "down"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ax0"){P1_Ax1 = "2"; P1_Ax0 = "2"; P1_ship2B_pos = "Ax0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ax2"){P1_Ax1 = "2"; P1_Ax2 = "2"; P1_ship2B_pos = "Ax2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Bx1"){P1_Ax1 = "2"; P1_Bx1 = "2"; P1_ship2B_pos = "Bx1"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ax2"){
+                  if(P1_ship2_dir == "down"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ax1"){P1_Ax2 = "2"; P1_Ax1 = "2"; P1_ship2B_pos = "Ax1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ax3"){P1_Ax2 = "2"; P1_Ax3 = "2"; P1_ship2B_pos = "Ax3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Bx2"){P1_Ax2 = "2"; P1_Bx2 = "2"; P1_ship2B_pos = "Bx2"; P1_ship2_ok = true;}
+               }   
+               else if(P1_ship2a_pos == "Ax3"){
+                  if(P1_ship2_dir == "down"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ax2"){P1_Ax3 = "2"; P1_Ax2 = "2"; P1_ship2B_pos = "Ax2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ax4"){P1_Ax3 = "2"; P1_Ax4 = "2"; P1_ship2B_pos = "Ax4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Bx3"){P1_Ax3 = "2"; P1_Bx3 = "2"; P1_ship2B_pos = "Bx3"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ax4"){
+                  if(P1_ship2_dir == "down"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ax3"){P1_Ax4 = "2"; P1_Ax3 = "2"; P1_ship2B_pos = "Ax3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ax5"){P1_Ax4 = "2"; P1_Ax5 = "2"; P1_ship2B_pos = "Ax5"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Bx4"){P1_Ax4 = "2"; P1_Bx4 = "2"; P1_ship2B_pos = "Bx4"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ax5"){
+                  if(P1_ship2_dir == "down" || P1_ship2a_pos == "left"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ax4"){P1_Ax5 = "2"; P1_Ax4 = "2"; P1_ship2B_pos = "Ax4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Bx5"){P1_Ax5 = "2"; P1_Bx5 = "2"; P1_ship2B_pos = "Bx5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Bx0"){
+                  if(P1_ship2_dir == "right"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Cx0"){P1_Bx0 = "2"; P1_Cx0 = "2"; P1_ship2B_pos = "Cx0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Bx1"){P1_Bx0 = "2"; P1_Bx1 = "2"; P1_ship2B_pos = "Bx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Ax0"){P1_Bx0 = "2"; P1_Ax0 = "2"; P1_ship2B_pos = "Ax0"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Bx1"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Cx1"){P1_Bx1 = "2"; P1_Cx1 = "2"; P1_ship2B_pos = "Cx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Bx0"){P1_Bx1 = "2"; P1_Bx0 = "2"; P1_ship2B_pos = "Bx0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Ax1"){P1_Bx1 = "2"; P1_Ax1 = "2"; P1_ship2B_pos = "Ax1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Bx2"){P1_Bx1 = "2"; P1_Bx2 = "2"; P1_ship2B_pos = "Bx2"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Bx2"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Cx2"){P1_Bx2 = "2"; P1_Cx2 = "2"; P1_ship2B_pos = "Cx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Bx1"){P1_Bx2 = "2"; P1_Bx1 = "2"; P1_ship2B_pos = "Bx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Ax2"){P1_Bx2 = "2"; P1_Ax2 = "2"; P1_ship2B_pos = "Ax2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Bx3"){P1_Bx2 = "2"; P1_Bx3 = "2"; P1_ship2B_pos = "Bx3"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Bx3"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Cx3"){P1_Bx3 = "2"; P1_Cx3 = "2"; P1_ship2B_pos = "Cx3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Bx2"){P1_Bx3 = "2"; P1_Bx2 = "2"; P1_ship2B_pos = "Bx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Ax3"){P1_Bx3 = "2"; P1_Ax3 = "2"; P1_ship2B_pos = "Ax3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Bx4"){P1_Bx3 = "2"; P1_Bx4 = "2"; P1_ship2B_pos = "Bx4"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Bx4"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Cx4"){P1_Bx4 = "2"; P1_Cx4 = "2"; P1_ship2B_pos = "Cx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Bx3"){P1_Bx4 = "2"; P1_Bx3 = "2"; P1_ship2B_pos = "Bx3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Ax4"){P1_Bx4 = "2"; P1_Ax4 = "2"; P1_ship2B_pos = "Ax4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Bx5"){P1_Bx4 = "2"; P1_Bx5 = "2"; P1_ship2B_pos = "Bx5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Bx5"){
+                  if(P1_ship2_dir == "left"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Cx5"){P1_Bx5 = "2"; P1_Cx5 = "2"; P1_ship2B_pos = "Cx5"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Bx4"){P1_Bx5 = "2"; P1_Bx4 = "2"; P1_ship2B_pos = "Bx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Ax5"){P1_Bx5 = "2"; P1_Ax5 = "2"; P1_ship2B_pos = "Ax5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Cx0"){
+                  if(P1_ship2_dir == "right"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Dx0"){P1_Cx0 = "2"; P1_Dx0 = "2"; P1_ship2B_pos = "Dx0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Cx1"){P1_Cx0 = "2"; P1_Cx1 = "2"; P1_ship2B_pos = "Cx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Bx0"){P1_Cx0 = "2"; P1_Bx0 = "2"; P1_ship2B_pos = "Bx0"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Cx1"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Dx1"){P1_Cx1 = "2"; P1_Dx1 = "2"; P1_ship2B_pos = "Dx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Cx0"){P1_Cx1 = "2"; P1_Cx0 = "2"; P1_ship2B_pos = "Cx0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Bx1"){P1_Cx1 = "2"; P1_Bx1 = "2"; P1_ship2B_pos = "Bx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Cx2"){P1_Cx1 = "2"; P1_Cx2 = "2"; P1_ship2B_pos = "Cx2"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Cx2"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Dx2"){P1_Cx2 = "2"; P1_Dx2 = "2"; P1_ship2B_pos = "Dx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Cx1"){P1_Cx2 = "2"; P1_Cx1 = "2"; P1_ship2B_pos = "Cx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Bx2"){P1_Cx2 = "2"; P1_Bx2 = "2"; P1_ship2B_pos = "Bx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Cx3"){P1_Cx2 = "2"; P1_Cx3 = "2"; P1_ship2B_pos = "Cx3"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Cx3"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Dx3"){P1_Cx3 = "2"; P1_Dx3 = "2"; P1_ship2B_pos = "Dx3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Cx2"){P1_Cx3 = "2"; P1_Cx2 = "2"; P1_ship2B_pos = "Cx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Bx3"){P1_Cx3 = "2"; P1_Bx3 = "2"; P1_ship2B_pos = "Bx3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Cx4"){P1_Cx3 = "2"; P1_Cx4 = "2"; P1_ship2B_pos = "Cx4"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Cx4"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Dx4"){P1_Cx4 = "2"; P1_Dx4 = "2"; P1_ship2B_pos = "Dx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Cx3"){P1_Cx4 = "2"; P1_Cx3 = "2"; P1_ship2B_pos = "Cx3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Bx4"){P1_Cx4 = "2"; P1_Bx4 = "2"; P1_ship2B_pos = "Bx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Cx5"){P1_Cx4 = "2"; P1_Cx5 = "2"; P1_ship2B_pos = "Cx5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Cx5"){
+                  if(P1_ship2_dir == "left"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Dx5"){P1_Cx5 = "2"; P1_Dx5 = "2"; P1_ship2B_pos = "Dx5"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Cx4"){P1_Cx5 = "2"; P1_Cx4 = "2"; P1_ship2B_pos = "Cx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Bx5"){P1_Cx5 = "2"; P1_Bx5 = "2"; P1_ship2B_pos = "Bx5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Dx0"){
+                  if(P1_ship2_dir == "right"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Ex0"){P1_Dx0 = "2"; P1_Ex0 = "2"; P1_ship2B_pos = "Ex0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Dx1"){P1_Dx0 = "2"; P1_Dx1 = "2"; P1_ship2B_pos = "Dx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Cx0"){P1_Dx0 = "2"; P1_Cx0 = "2"; P1_ship2B_pos = "Cx0"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Dx1"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Ex1"){P1_Dx1 = "2"; P1_Ex1 = "2"; P1_ship2B_pos = "Ex1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Dx0"){P1_Dx1 = "2"; P1_Dx0 = "2"; P1_ship2B_pos = "Dx0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Cx1"){P1_Dx1 = "2"; P1_Cx1 = "2"; P1_ship2B_pos = "Cx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Dx2"){P1_Dx1 = "2"; P1_Dx2 = "2"; P1_ship2B_pos = "Dx2"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Dx2"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Ex2"){P1_Dx2 = "2"; P1_Ex2 = "2"; P1_ship2B_pos = "Ex2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Dx1"){P1_Dx2 = "2"; P1_Dx1 = "2"; P1_ship2B_pos = "Dx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Cx2"){P1_Dx2 = "2"; P1_Cx2 = "2"; P1_ship2B_pos = "Cx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Dx3"){P1_Dx2 = "2"; P1_Dx3 = "2"; P1_ship2B_pos = "Dx3"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Dx3"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Ex3"){P1_Dx3 = "2"; P1_Ex3 = "2"; P1_ship2B_pos = "Ex3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Dx2"){P1_Dx3 = "2"; P1_Dx2 = "2"; P1_ship2B_pos = "Dx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Cx3"){P1_Dx3 = "2"; P1_Cx3 = "2"; P1_ship2B_pos = "Cx3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Dx4"){P1_Dx3 = "2"; P1_Dx4 = "2"; P1_ship2B_pos = "Dx4"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Dx4"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Ex4"){P1_Dx4 = "2"; P1_Ex4 = "2"; P1_ship2B_pos = "Ex4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Dx3"){P1_Dx4 = "2"; P1_Dx3 = "2"; P1_ship2B_pos = "Dx3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Cx4"){P1_Dx4 = "2"; P1_Cx4 = "2"; P1_ship2B_pos = "Cx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Dx5"){P1_Dx4 = "2"; P1_Dx5 = "2"; P1_ship2B_pos = "Dx5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Dx5"){
+                  if(P1_ship2_dir == "left"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Ex5"){P1_Dx5 = "2"; P1_Ex5 = "2"; P1_ship2B_pos = "Ex5"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Dx4"){P1_Dx5 = "2"; P1_Dx4 = "2"; P1_ship2B_pos = "Dx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Cx5"){P1_Dx5 = "2"; P1_Cx5 = "2"; P1_ship2B_pos = "Cx5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ex0"){
+                  if(P1_ship2_dir == "right"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Fx0"){P1_Ex0 = "2"; P1_Fx0 = "2"; P1_ship2B_pos = "Fx0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir   == "left" && P1_ship1_pos != "Ex1"){P1_Ex0 = "2"; P1_Ex1 = "2"; P1_ship2B_pos = "Ex1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Dx1"){P1_Ex0 = "2"; P1_Dx1 = "2"; P1_ship2B_pos = "Dx1"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ex1"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Fx1"){P1_Ex1 = "2"; P1_Fx1 = "2"; P1_ship2B_pos = "Fx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ex0"){P1_Ex1 = "2"; P1_Ex0 = "2"; P1_ship2B_pos = "Ex0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Dx1"){P1_Ex1 = "2"; P1_Dx1 = "2"; P1_ship2B_pos = "Dx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ex2"){P1_Ex1 = "2"; P1_Ex2 = "2"; P1_ship2B_pos = "Ex2"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ex2"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Fx2"){P1_Ex2 = "2"; P1_Fx2 = "2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ex1"){P1_Ex2 = "2"; P1_Ex1 = "2"; P1_ship2B_pos = "Ex1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Dx2"){P1_Ex2 = "2"; P1_Dx2 = "2"; P1_ship2B_pos = "Dx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ex3"){P1_Ex2 = "2"; P1_Ex3 = "2"; P1_ship2B_pos = "Ex3"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ex3"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Fx2"){P1_Ex2 = "2"; P1_Fx2 = "2"; P1_ship2B_pos = "Fx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ex1"){P1_Ex2 = "2"; P1_Ex1 = "2"; P1_ship2B_pos = "Ex1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Dx2"){P1_Ex2 = "2"; P1_Dx2 = "2"; P1_ship2B_pos = "Dx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ex3"){P1_Ex2 = "2"; P1_Ex3 = "2"; P1_ship2B_pos = "Ex3"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ex4"){
+                  if(P1_ship2_dir == "up" && P1_ship1_pos != "Fx4"){P1_Ex4 = "2"; P1_Fx4 = "2"; P1_ship2B_pos = "Fx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ex3"){P1_Ex4 = "2"; P1_Ex3 = "2"; P1_ship2B_pos = "Ex3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Dx4"){P1_Ex4 = "2"; P1_Dx4 = "2"; P1_ship2B_pos = "Dx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != "Ex5"){P1_Ex4 = "2"; P1_Ex5 = "2"; P1_ship2B_pos = "Ex5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Ex5"){
+                  if(P1_ship2_dir == "left"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "up" && P1_ship1_pos != "Fx5"){P1_Ex5 = "2"; P1_Fx5 = "2"; P1_ship2B_pos = "Fx5"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != "Ex4"){P1_Ex5 = "2"; P1_Ex4 = "2"; P1_ship2B_pos = "Ex4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Dx5"){P1_Ex5 = "2"; P1_Dx5 = "2"; P1_ship2B_pos = "Dx5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Fx0"){
+                  if(P1_ship2_dir == "right" || P1_ship2_dir == "up"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir   == "left" && P1_ship1_pos != "Fx1"){P1_Fx0 = "2"; P1_Fx1 = "2"; P1_ship2B_pos = "Fx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != "Ex1"){P1_Fx0 = "2"; P1_Ex1 = "2"; P1_ship2B_pos = "Ex1"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Fx1"){
+                  if(P1_ship2_dir == "up"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != P1_Fx0){P1_Fx1 = "2"; P1_Fx0 = "2"; P1_ship2B_pos = "Fx0"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != P1_Ex1){P1_Fx1 = "2"; P1_Ex1 = "2"; P1_ship2B_pos = "Ex1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != P1_Fx2){P1_Fx1 = "2"; P1_Fx2 = "2"; P1_ship2B_pos = "Fx2"; P1_ship2_ok = true;}   
+               }
+               else if(P1_ship2a_pos == "Fx2"){
+                  if(P1_ship2_dir == "up"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != P1_Fx1){P1_Fx2 = "2"; P1_Fx1 = "2"; P1_ship2B_pos = "Fx1"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != P1_Ex2){P1_Fx2 = "2"; P1_Ex2 = "2"; P1_ship2B_pos = "Ex2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != P1_Fx3){P1_Fx2 = "2"; P1_Fx3 = "2"; P1_ship2B_pos = "Fx3"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Fx3"){
+                  if(P1_ship2_dir == "up"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != P1_Fx2){P1_Fx3 = "2"; P1_Fx2 = "2"; P1_ship2B_pos = "Fx2"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != P1_Ex3){P1_Fx3 = "2"; P1_Ex3 = "2"; P1_ship2B_pos = "Ex3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != P1_Fx4){P1_Fx3 = "2"; P1_Fx4 = "2"; P1_ship2B_pos = "Fx4"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Fx4"){
+                  if(P1_ship2_dir == "up"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != P1_Fx3){P1_Fx4 = "2"; P1_Fx3 = "2"; P1_ship2B_pos = "Fx3"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != P1_Ex4){P1_Fx4 = "2"; P1_Ex4 = "2"; P1_ship2B_pos = "Ex4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "left" && P1_ship1_pos != P1_Fx5){P1_Fx4 = "2"; P1_Fx5 = "2"; P1_ship2B_pos = "Fx5"; P1_ship2_ok = true;}
+               }
+               else if(P1_ship2a_pos == "Fx5"){
+                  if(P1_ship2_dir == "up" || P1_ship2_dir == "left"){P1_ship2_ok = false; error = 2;}
+                  else if(P1_ship2_dir == "right" && P1_ship1_pos != P1_Fx4){P1_Fx5 = "2"; P1_Fx4 = "2"; P1_ship2B_pos = "Fx4"; P1_ship2_ok = true;}
+                  else if(P1_ship2_dir == "down" && P1_ship1_pos != P1_Ex5){P1_Fx5 = "2"; P1_Ex5 = "2"; P1_ship2B_pos = "Ex5"; P1_ship2_ok = true;}
+               }
+            }
+            
+            if(!P1_ship2_ok)
+            {
+               if(error == 0)
+                  P1_ship_msg = "Invalid Input! Ship 2 can't face ("+ P1_ship2_dir + ") Ship 1 is already at (" + P1_ship1_pos + ").";
+               else if(error == 1)
+                  P1_ship_msg = "Invalid Input! Ship 1 is already at (" + P1_ship2a_pos + ").";
+               else if(error == 2)
+                  P1_ship_msg = "Invalid Input! Ship 2 is out of range.";
+               else if(error == 3)
+                  P1_ship_msg = "Invalid Input! Please select one direction of P1_ship2 is facing.";
+            }
+         }
+      
+         P1_ship_msg = "Ship 3, of size 1 (1,3)";
+         P1_ship3_ok = false;
+         
+         while(!P1_ship3_ok)
+         {
+            show plug Ship [ship_msg = P1_ship_msg, ship1_pos = P1_ship1_pos, ship2a_pos = P1_ship2a_pos, ship2B_pos = P1_ship2B_pos, 
+               ship3a_pos = P1_ship3a_pos]
+            receive[P1_ship3a_pos = pos, P1_ship3_dir = direction];
+            error = 0;
+      
+            if(P1_ship3a_pos == P1_ship1_pos)
+            {
+               P1_ship3_ok = false;
+               error = 1;
+            }
+            else if(P1_ship3a_pos == P1_ship2a_pos)
+            {
+               P1_ship3_ok = false;
+               error = 2;
+            }
+            else if(P1_ship3_dir == "")
+            {
+               P1_ship3_ok = false;
+               error = 3;
+            }
+            else
+            {
+               if(P1_ship3a_pos == "Ax0"){
+                  if(P1_ship3_dir == "down" || P1_ship3_dir == "right") {P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="up" && P1_Ax0=="0" && P1_Bx0=="0" && P1_Cx0=="0")
+                     {P1_Ax0="3"; P1_Bx0="3"; P1_Cx0="3"; P1_ship3a_pos="Ax0"; P1_ship3b_pos="Bx0"; P1_ship3c_pos="Cx0"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Ax0=="0" && P1_Ax1=="0" && P1_Ax2=="0")
+                     {P1_Ax0="3"; P1_Ax1="3"; P1_Ax2="3"; P1_ship3a_pos="Ax0"; P1_ship3b_pos="Ax1"; P1_ship3c_pos="Ax2"; P1_ship3_ok=true;} 
+               }
+               else if(P1_ship3a_pos == "Ax1"){
+                  if(P1_ship3_dir == "down" || P1_ship3_dir == "right"){P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="up" && P1_Ax1=="0" && P1_Bx1=="0" && P1_Cx1=="0")
+                     {P1_Ax1="3"; P1_Bx1="3"; P1_Cx1="3"; P1_ship3a_pos="Ax1"; P1_ship3b_pos="Bx1"; P1_ship3c_pos="Cx1"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Ax1=="0" && P1_Ax2=="0" && P1_Ax3=="0")
+                     {P1_Ax1="3"; P1_Ax2="3"; P1_Ax3="3"; P1_ship3a_pos="Ax1"; P1_ship3b_pos="Ax2"; P1_ship3c_pos="Ax3"; P1_ship3_ok=true;} 
+               }
+               else if(P1_ship3a_pos == "Ax2"){
+                  if(P1_ship3_dir == "down"){P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="up" && P1_Ax2=="0" && P1_Bx2=="0" && P1_Cx2=="0")
+                     {P1_Ax2="3"; P1_Bx2="3"; P1_Cx2="3"; P1_ship3a_pos="Ax2"; P1_ship3b_pos="Bx2"; P1_ship3c_pos="Cx2"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="right" && P1_Ax0=="0" && P1_Ax1=="0" && P1_Ax2=="0")
+                     {P1_Ax0="3"; P1_Ax1="3"; P1_Ax2="3"; P1_ship3a_pos="Ax2"; P1_ship3b_pos="Ax1"; P1_ship3c_pos="Ax0"; P1_ship3_ok=true;} 
+                  else if(P1_ship3_dir=="left" && P1_Ax2=="0" && P1_Ax3=="0" && P1_Ax4=="0")
+                     {P1_Ax2="3"; P1_Ax3="3"; P1_Ax4="3"; P1_ship3a_pos="Ax2"; P1_ship3b_pos="Ax3"; P1_ship3c_pos="Ax4"; P1_ship3_ok=true;} 
+               } 
+               else if(P1_ship3a_pos == "Ax3"){
+                  if(P1_ship3_dir == "down"){P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="up" && P1_Ax3=="0" && P1_Bx3=="0" && P1_Cx3=="0")
+                     {P1_Ax3="3"; P1_Bx3="3"; P1_Cx3="3"; P1_ship3a_pos="Ax3"; P1_ship3b_pos="Bx3"; P1_ship3c_pos="Cx3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="right" && P1_Ax3=="0" && P1_Ax2=="0" && P1_Ax1=="0")
+                     {P1_Ax3="3"; P1_Ax2="3"; P1_Ax1="3"; P1_ship3a_pos="Ax3"; P1_ship3b_pos="Ax2"; P1_ship3c_pos="Ax1"; P1_ship3_ok=true;} 
+                  else if(P1_ship3_dir=="left" && P1_Ax3=="0" && P1_Ax4=="0" && P1_Ax5=="0")
+                     {P1_Ax3="3"; P1_Ax4="3"; P1_Ax5="3"; P1_ship3a_pos="Ax3"; P1_ship3b_pos="Ax4"; P1_ship3c_pos="Ax5"; P1_ship3_ok=true;} 
+               }     
+               else if(P1_ship3a_pos == "Ax4"){
+                  if(P1_ship3_dir == "down" || P1_ship3_dir =="left"){P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="up" && P1_Ax4=="0" && P1_Bx4=="0" && P1_Cx4=="0")
+                     {P1_Ax4="3"; P1_Bx4="3"; P1_Cx4="3"; P1_ship3a_pos="Ax4"; P1_ship3b_pos="Bx4"; P1_ship3c_pos="Cx4"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="right" && P1_Ax4=="0" && P1_Ax3=="0" && P1_Ax2=="0")
+                     {P1_Ax4="3"; P1_Ax3="3"; P1_Ax2="3"; P1_ship3a_pos="Ax4"; P1_ship3b_pos="Ax3"; P1_ship3c_pos="Ax2"; P1_ship3_ok=true;} 
+               }          
+               else if(P1_ship3a_pos == "Ax5"){
+                  if(P1_ship3_dir == "down" || P1_ship3_dir =="left"){P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="up" && P1_Ax5=="0" && P1_Bx5=="0" && P1_Cx5=="0")
+                     {P1_Ax5="3"; P1_Bx5="3"; P1_Cx5="3"; P1_ship3a_pos="Ax5"; P1_ship3b_pos="Bx5"; P1_ship3c_pos="Cx5"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="right" && P1_Ax5=="0" && P1_Ax4=="0" && P1_Ax3=="0")
+                     {P1_Ax5="3"; P1_Ax4="3"; P1_Ax3="3"; P1_ship3a_pos="Ax5"; P1_ship3b_pos="Ax4"; P1_ship3c_pos="Ax3"; P1_ship3_ok=true;} 
+               }          
+         
+               else if(P1_ship3a_pos == "Bx0"){
+                  if(P1_ship3_dir == "down" || P1_ship3_dir == "right") {P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="up" && P1_Bx0=="0" && P1_Cx0=="0" && P1_Dx0=="0")
+                     {P1_Bx0="3"; P1_Cx0="3"; P1_Dx0="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Bx0=="0" && P1_Bx1=="0" && P1_Bx2=="0")
+                     {P1_Bx0="3"; P1_Bx1="3"; P1_Bx2="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Bx1"){
+                  if(P1_ship3_dir == "down" || P1_ship3_dir == "right") {P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="up" && P1_Bx1=="0" && P1_Cx1=="0" && P1_Dx1=="0")
+                     {P1_Bx1="3"; P1_Cx1="3"; P1_Dx1="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Bx1=="0" && P1_Bx2=="0" && P1_Bx3=="0")
+                     {P1_Bx1="3"; P1_Bx2="3"; P1_Bx3="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Bx2"){
+                  if(P1_ship3_dir == "down") {P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="right" && P1_Bx0=="0" && P1_Bx1=="0" && P1_Bx2=="0")
+                     {P1_Bx0="3"; P1_Bx1="3"; P1_Bx2="3"; P1_ship3_ok=true;}                  
+                  else if(P1_ship3_dir=="up" && P1_Bx2=="0" && P1_Cx2=="0" && P1_Dx2=="0")
+                     {P1_Bx2="3"; P1_Cx2="3"; P1_Dx2="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Bx2=="0" && P1_Bx3=="0" && P1_Bx4=="0")
+                     {P1_Bx2="3"; P1_Bx3="3"; P1_Bx4="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Bx3"){
+                  if(P1_ship3_dir == "down") {P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="right" && P1_Bx1=="0" && P1_Bx2=="0" && P1_Bx3=="0")
+                     {P1_Bx1="3"; P1_Bx2="3"; P1_Bx3="3"; P1_ship3_ok=true;}                  
+                  else if(P1_ship3_dir=="up" && P1_Bx3=="0" && P1_Cx3=="0" && P1_Dx3=="0")
+                     {P1_Bx3="3"; P1_Cx3="3"; P1_Dx3="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Bx3=="0" && P1_Bx4=="0" && P1_Bx5=="0")
+                     {P1_Bx3="3"; P1_Bx4="3"; P1_Bx5="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Bx4") {
+                  if(P1_ship3_dir == "down" || P1_ship3_dir == "left") {P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="right" && P1_Bx2=="0" && P1_Bx3=="0" && P1_Bx4=="0")
+                     {P1_Bx2="3"; P1_Bx3="3"; P1_Bx4="3"; P1_ship3_ok=true;}                  
+                  else if(P1_ship3_dir=="up" && P1_Bx4=="0" && P1_Cx4=="0" && P1_Dx4=="0")
+                     {P1_Bx4="3"; P1_Cx4="3"; P1_Dx4="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Bx5") {
+                  if(P1_ship3_dir == "down" || P1_ship3_dir == "left") {P1_ship3_ok = false; error = 4;}
+                  else if(P1_ship3_dir=="right" && P1_Bx3=="0" && P1_Bx4=="0" && P1_Bx5=="0")
+                     {P1_Bx3="3"; P1_Bx4="3"; P1_Bx5="3"; P1_ship3_ok=true;}                  
+                  else if(P1_ship3_dir=="up" && P1_Bx5=="0" && P1_Cx5=="0" && P1_Dx5=="0")
+                     {P1_Bx5="3"; P1_Cx5="3"; P1_Dx5="3"; P1_ship3_ok=true;}
+               }
+               
+               else if(P1_ship3a_pos == "Cx0"){
+                  if(P1_ship3_dir == "right") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Cx0=="0" && P1_Bx0=="0" && P1_Ax0=="0")
+                     {P1_Cx0="3"; P1_Bx0="3"; P1_Ax0="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Cx0=="0" && P1_Dx0=="0" && P1_Ex0=="0")
+                     {P1_Cx0="3"; P1_Dx0="3"; P1_Ex0="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Cx0=="0" && P1_Cx1=="0" && P1_Cx2=="0")
+                     {P1_Cx0="3"; P1_Cx1="3"; P1_Cx2="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Cx1"){
+                  if(P1_ship3_dir == "right") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Cx1=="0" && P1_Bx1=="0" && P1_Ax1=="0")
+                     {P1_Cx1="3"; P1_Bx1="3"; P1_Ax1="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Cx1=="0" && P1_Dx1=="0" && P1_Ex1=="0")
+                     {P1_Cx1="3"; P1_Dx1="3"; P1_Ex1="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Cx1=="0" && P1_Cx2=="0" && P1_Cx3=="0")
+                     {P1_Cx1="3"; P1_Cx2="3"; P1_Cx3="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Cx2"){
+                  if(P1_ship3_dir == "right" && P1_Cx0=="0" && P1_Cx1=="0" && P1_Cx2=="0") 
+                     {P1_Cx0="3"; P1_Cx1="3"; P1_Cx2="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="down" && P1_Cx2=="0" && P1_Bx2=="0" && P1_Ax2=="0")
+                     {P1_Cx2="3"; P1_Bx2="3"; P1_Ax2="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Cx2=="0" && P1_Dx2=="0" && P1_Ex2=="0")
+                     {P1_Cx2="3"; P1_Dx2="3"; P1_Ex2="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Cx2=="0" && P1_Cx3=="0" && P1_Cx4=="0")
+                     {P1_Cx2="3"; P1_Cx3="3"; P1_Cx4="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Cx3"){
+                  if(P1_ship3_dir == "right" && P1_Cx1=="0" && P1_Cx2=="0" && P1_Cx3=="0") 
+                     {P1_Cx1="3"; P1_Cx2="3"; P1_Cx3="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="down" && P1_Cx3=="0" && P1_Bx3=="0" && P1_Ax3=="0")
+                     {P1_Cx3="3"; P1_Bx3="3"; P1_Ax3="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Cx3=="0" && P1_Dx3=="0" && P1_Ex3=="0")
+                     {P1_Cx3="3"; P1_Dx3="3"; P1_Ex3="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Cx3=="0" && P1_Cx4=="0" && P1_Cx5=="0")
+                     {P1_Cx3="3"; P1_Cx4="3"; P1_Cx5="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Cx4"){
+                  if(P1_ship3_dir=="right" && P1_Cx2=="0" && P1_Cx3=="0" && P1_Cx4=="0") 
+                     {P1_Cx2="3"; P1_Cx3="3"; P1_Cx4="3"; P1_ship3_ok=true;} 
+                  else if (P1_ship3_dir=="down" && P1_Cx4=="0" && P1_Bx4=="0" && P1_Ax4=="0")
+                     {P1_Cx4="3"; P1_Bx4="3"; P1_Ax4="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Cx4=="0" && P1_Dx4=="0" && P1_Ex4=="0")
+                     {P1_Cx4="3"; P1_Dx4="3"; P1_Ex4="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left")
+                     {P1_ship3_ok = false; error = 4;}
+               }
+               else if(P1_ship3a_pos == "Cx5"){
+                  if(P1_ship3_dir=="right" && P1_Cx3=="0" && P1_Cx4=="0" && P1_Cx5=="0") 
+                     {P1_Cx3="3"; P1_Cx4="3"; P1_Cx5="3"; P1_ship3_ok=true;} 
+                  else if (P1_ship3_dir=="down" && P1_Cx5=="0" && P1_Bx5=="0" && P1_Ax5=="0")
+                     {P1_Cx5="3"; P1_Bx5="3"; P1_Ax5="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Cx5=="0" && P1_Dx5=="0" && P1_Ex5=="0")
+                     {P1_Cx5="3"; P1_Dx5="3"; P1_Ex5="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left")
+                     {P1_ship3_ok = false; error = 4;}
+               }
+               
+               else if(P1_ship3a_pos == "Dx0"){
+                  if(P1_ship3_dir == "right") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Dx0=="0" && P1_Cx0=="0" && P1_Bx0=="0")
+                     {P1_Dx0="3"; P1_Cx0="3"; P1_Bx0="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Dx0=="0" && P1_Ex0=="0" && P1_Fx0=="0")
+                     {P1_Dx0="3"; P1_Ex0="3"; P1_Fx0="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Dx0=="0" && P1_Dx1=="0" && P1_Dx2=="0")
+                     {P1_Dx0="3"; P1_Dx1="3"; P1_Dx2="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Dx1"){
+                  if(P1_ship3_dir == "right") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Dx1=="0" && P1_Cx1=="0" && P1_Bx1=="0")
+                     {P1_Dx1="3"; P1_Cx1="3"; P1_Bx1="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Dx1=="0" && P1_Ex1=="0" && P1_Fx1=="0")
+                     {P1_Dx1="3"; P1_Ex1="3"; P1_Fx1="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Dx1=="0" && P1_Dx2=="0" && P1_Dx3=="0")
+                     {P1_Dx1="3"; P1_Dx2="3"; P1_Dx3="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Dx2"){
+                  if(P1_ship3_dir=="right" && P1_Dx0=="0" && P1_Dx1=="0" && P1_Dx2=="0")
+                     {P1_Dx0="3"; P1_Dx1="3"; P1_Dx2="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="down" && P1_Dx2=="0" && P1_Cx2=="0" && P1_Bx2=="0")
+                     {P1_Dx2="3"; P1_Cx2="3"; P1_Bx2="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Dx2=="0" && P1_Ex2=="0" && P1_Fx2=="0")
+                     {P1_Dx2="3"; P1_Ex2="3"; P1_Fx2="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Dx2=="0" && P1_Dx3=="0" && P1_Dx4=="0")
+                     {P1_Dx2="3"; P1_Dx3="3"; P1_Dx4="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Dx3"){
+                  if(P1_ship3_dir=="right" && P1_Dx1=="0" && P1_Dx2=="0" && P1_Dx3=="0")
+                     {P1_Dx1="3"; P1_Dx2="3"; P1_Dx3="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="down" && P1_Dx3=="0" && P1_Cx3=="0" && P1_Bx3=="0")
+                     {P1_Dx3="3"; P1_Cx3="3"; P1_Bx3="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Dx3=="0" && P1_Ex3=="0" && P1_Fx3=="0")
+                     {P1_Dx3="3"; P1_Ex3="3"; P1_Fx3="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left" && P1_Dx3=="0" && P1_Dx4=="0" && P1_Dx5=="0")
+                     {P1_Dx3="3"; P1_Dx4="3"; P1_Dx5="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Dx4"){
+                  if(P1_ship3_dir=="right" && P1_Dx2=="0" && P1_Dx3=="0" && P1_Dx4=="0")
+                     {P1_Dx2="3"; P1_Dx3="3"; P1_Dx4="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="down" && P1_Dx4=="0" && P1_Cx4=="0" && P1_Bx4=="0")
+                     {P1_Dx4="3"; P1_Cx4="3"; P1_Bx4="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Dx4=="0" && P1_Ex4=="0" && P1_Fx4=="0")
+                     {P1_Dx4="3"; P1_Ex4="3"; P1_Fx4="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left")
+                     {P1_ship3_ok = false; error = 4;}
+               }
+               else if(P1_ship3a_pos == "Dx5"){
+                  if(P1_ship3_dir=="right" && P1_Dx3=="0" && P1_Dx4=="0" && P1_Dx5=="0")
+                     {P1_Dx3="3"; P1_Dx4="3"; P1_Dx5="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="down" && P1_Dx5=="0" && P1_Cx5=="0" && P1_Bx5=="0")
+                     {P1_Dx5="3"; P1_Cx5="3"; P1_Bx5="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="up" && P1_Dx5=="0" && P1_Ex5=="0" && P1_Fx5=="0")
+                     {P1_Dx5="3"; P1_Ex5="3"; P1_Fx5="3"; P1_ship3_ok=true;}
+                  else if(P1_ship3_dir=="left")
+                     {P1_ship3_ok = false; error = 4;}
+               }
+               
+               else if(P1_ship3a_pos == "Ex0"){
+                  if(P1_ship3_dir == "right" || P1_ship3_dir=="up") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Ex0=="0" && P1_Dx0=="0" && P1_Cx0=="0")
+                     {P1_Ex0="3"; P1_Dx0="3"; P1_Cx0="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="left" && P1_Ex0=="0" && P1_Ex1=="0" && P1_Ex2=="0")
+                     {P1_Ex0="3"; P1_Ex1="3"; P1_Ex2="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Ex1"){
+                  if(P1_ship3_dir == "right" || P1_ship3_dir=="up") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Ex1=="0" && P1_Dx1=="0" && P1_Cx1=="0")
+                     {P1_Ex1="3"; P1_Dx1="3"; P1_Cx1="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="left" && P1_Ex1=="0" && P1_Ex2=="0" && P1_Ex3=="0")
+                     {P1_Ex1="3"; P1_Ex2="3"; P1_Ex3="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Ex2"){
+                  if(P1_ship3_dir=="up") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Ex2=="0" && P1_Dx2=="0" && P1_Cx2=="0")
+                     {P1_Ex2="3"; P1_Dx2="3"; P1_Cx2="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="right" && P1_Ex0=="0" && P1_Ex1=="0" && P1_Ex2=="0")
+                     {P1_Ex0="3"; P1_Ex1="3"; P1_Ex2="3"; P1_ship3_ok=true;}                  
+                  else if (P1_ship3_dir=="left" && P1_Ex2=="0" && P1_Ex3=="0" && P1_Ex4=="0")
+                     {P1_Ex2="3"; P1_Ex3="3"; P1_Ex4="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Ex3"){
+                  if(P1_ship3_dir=="up") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Ex3=="0" && P1_Dx3=="0" && P1_Cx3=="0")
+                     {P1_Ex3="3"; P1_Dx3="3"; P1_Cx3="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="right" && P1_Ex1=="0" && P1_Ex2=="0" && P1_Ex3=="0")
+                     {P1_Ex1="3"; P1_Ex2="3"; P1_Ex3="3"; P1_ship3_ok=true;}                  
+                  else if (P1_ship3_dir=="left" && P1_Ex3=="0" && P1_Ex4=="0" && P1_Ex5=="0")
+                     {P1_Ex3="3"; P1_Ex4="3"; P1_Ex5="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Ex4"){
+                  if(P1_ship3_dir=="up" || P1_ship3_dir=="left") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Ex4=="0" && P1_Dx4=="0" && P1_Cx4=="0")
+                     {P1_Ex4="3"; P1_Dx4="3"; P1_Cx4="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="right" && P1_Ex2=="0" && P1_Ex3=="0" && P1_Ex4=="0")
+                     {P1_Ex2="3"; P1_Ex3="3"; P1_Ex4="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Ex5"){
+                  if(P1_ship3_dir=="up" || P1_ship3_dir=="left") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Ex5=="0" && P1_Dx5=="0" && P1_Cx5=="0")
+                     {P1_Ex5="3"; P1_Dx5="3"; P1_Cx5="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="right" && P1_Ex3=="0" && P1_Ex4=="0" && P1_Ex5=="0")
+                     {P1_Ex3="3"; P1_Ex4="3"; P1_Ex5="3"; P1_ship3_ok=true;}
+               }
+               
+               else if(P1_ship3a_pos == "Fx0"){
+                  if(P1_ship3_dir == "right" || P1_ship3_dir=="up") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Fx0=="0" && P1_Ex0=="0" && P1_Dx0=="0")
+                     {P1_Fx0="3"; P1_Ex0="3"; P1_Dx0="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="left" && P1_Fx0=="0" && P1_Fx1=="0" && P1_Fx2=="0")
+                     {P1_Fx0="3"; P1_Fx1="3"; P1_Fx2="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Fx1"){
+                  if(P1_ship3_dir == "right" || P1_ship3_dir=="up") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Fx1=="0" && P1_Ex1=="0" && P1_Dx1=="0")
+                     {P1_Fx1="3"; P1_Ex1="3"; P1_Dx1="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="left" && P1_Fx1=="0" && P1_Fx2=="0" && P1_Fx3=="0")
+                     {P1_Fx1="3"; P1_Fx2="3"; P1_Fx3="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Fx2"){
+                  if(P1_ship3_dir=="up") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Fx2=="0" && P1_Ex2=="0" && P1_Dx2=="0")
+                     {P1_Fx2="3"; P1_Ex2="3"; P1_Dx2="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="right" && P1_Fx0=="0" && P1_Fx1=="0" && P1_Fx2=="0")
+                     {P1_Fx0="3"; P1_Fx1="3"; P1_Fx2="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="left" && P1_Fx2=="0" && P1_Fx3=="0" && P1_Fx4=="0")
+                     {P1_Fx2="3"; P1_Fx3="3"; P1_Fx4="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Fx3"){
+                  if(P1_ship3_dir=="up") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Fx3=="0" && P1_Ex3=="0" && P1_Dx3=="0")
+                     {P1_Fx3="3"; P1_Ex3="3"; P1_Dx3="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="right" && P1_Fx1=="0" && P1_Fx2=="0" && P1_Fx3=="0")
+                     {P1_Fx1="3"; P1_Fx2="3"; P1_Fx3="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="left" && P1_Fx3=="0" && P1_Fx4=="0" && P1_Fx5=="0")
+                     {P1_Fx3="3"; P1_Fx4="3"; P1_Fx5="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Fx4"){
+                  if(P1_ship3_dir=="up" || P1_ship3_dir=="left") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Fx4=="0" && P1_Ex4=="0" && P1_Dx4=="0")
+                     {P1_Fx4="3"; P1_Ex4="3"; P1_Dx4="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="right" && P1_Fx2=="0" && P1_Fx3=="0" && P1_Fx4=="0")
+                     {P1_Fx2="3"; P1_Fx3="3"; P1_Fx4="3"; P1_ship3_ok=true;}
+               }
+               else if(P1_ship3a_pos == "Fx5"){
+                  if(P1_ship3_dir=="up" || P1_ship3_dir=="left") {P1_ship3_ok = false; error = 4;}
+                  else if (P1_ship3_dir=="down" && P1_Fx5=="0" && P1_Ex5=="0" && P1_Dx5=="0")
+                     {P1_Fx5="3"; P1_Ex5="3"; P1_Dx5="3"; P1_ship3_ok=true;}
+                  else if (P1_ship3_dir=="right" && P1_Fx3=="0" && P1_Fx4=="0" && P1_Fx5=="0")
+                     {P1_Fx3="3"; P1_Fx4="3"; P1_Fx5="3"; P1_ship3_ok=true;}
+               }
+   
+            }
+         
+            if(!P1_ship3_ok)
+            {
+               if(error == 0)
+                  P1_ship_msg = "Invalid Input! Ship 3 can't face ("+ P1_ship3_dir + ") Ship 1 or Ship 2 are on the way.";
+               else if(error == 1)
+                  P1_ship_msg = "Invalid Input! Ship 1 is already at (" + P1_ship2a_pos + ").";
+               else if(error == 2)
+                  P1_ship_msg = "Invalid Input! Ship 2 is out of range.";
+               else if(error == 3)
+                  P1_ship_msg = "Invalid Input! Please select one direction of P1_ship2 is facing.";
+               else if(error == 4)
+                  P1_ship_msg = "Invalid Input! Ship 3 is out of range.";
+               else
+                  P1_ship_msg = "Error!";
+            }
+         }                   
+      }
+   
+       
+      
+         // leave this idle... 
+         // but keep the session open to preserve global values
+
+         if (player == 1) 
+         {
+            string A0_col, A1_col, A2_col, A3_col, A4_col, A5_col;
+            string B0_col, B1_col, B2_col, B3_col, B4_col, B5_col;
+            string C0_col, C1_col, C2_col, C3_col, C4_col, C5_col;
+            string D0_col, D1_col, D2_col, D3_col, D4_col, D5_col;
+            string E0_col, E1_col, E2_col, E3_col, E4_col, E5_col;
+            string F0_col, F1_col, F2_col, F3_col, F4_col, F5_col;
+   
+            playersTurnName = "(Not Started)";                                 
+   
+            if (P1_Ax0=="0") A0_col= blue_cell; else if (P1_Ax0=="5") A0_col= red_cell; else A0_col= grey_cell;         
+            if (P1_Ax1=="0") A1_col= blue_cell; else if (P1_Ax1=="5") A1_col= red_cell; else A1_col= grey_cell;         
+            if (P1_Ax2=="0") A2_col= blue_cell; else if (P1_Ax2=="5") A2_col= red_cell; else A2_col= grey_cell;         
+            if (P1_Ax3=="0") A3_col= blue_cell; else if (P1_Ax3=="5") A3_col= red_cell; else A3_col= grey_cell;         
+            if (P1_Ax4=="0") A4_col= blue_cell; else if (P1_Ax4=="5") A4_col= red_cell; else A4_col= grey_cell;         
+            if (P1_Ax5=="0") A5_col= blue_cell; else if (P1_Ax5=="5") A5_col= red_cell; else A5_col= grey_cell;         
+            if (P1_Bx0=="0") B0_col= blue_cell; else if (P1_Bx0=="5") B0_col= red_cell; else B0_col= grey_cell;         
+            if (P1_Bx1=="0") B1_col= blue_cell; else if (P1_Bx1=="5") B1_col= red_cell; else B1_col= grey_cell;         
+            if (P1_Bx2=="0") B2_col= blue_cell; else if (P1_Bx2=="5") B2_col= red_cell; else B2_col= grey_cell;         
+            if (P1_Bx3=="0") B3_col= blue_cell; else if (P1_Bx3=="5") B3_col= red_cell; else B3_col= grey_cell;         
+            if (P1_Bx4=="0") B4_col= blue_cell; else if (P1_Bx4=="5") B4_col= red_cell; else B4_col= grey_cell;         
+            if (P1_Bx5=="0") B5_col= blue_cell; else if (P1_Bx5=="5") B5_col= red_cell; else B5_col= grey_cell;         
+            if (P1_Cx0=="0") C0_col= blue_cell; else if (P1_Cx0=="5") C0_col= red_cell; else C0_col= grey_cell;         
+            if (P1_Cx1=="0") C1_col= blue_cell; else if (P1_Cx1=="5") C1_col= red_cell; else C1_col= grey_cell;         
+            if (P1_Cx2=="0") C2_col= blue_cell; else if (P1_Cx2=="5") C2_col= red_cell; else C2_col= grey_cell;         
+            if (P1_Cx3=="0") C3_col= blue_cell; else if (P1_Cx3=="5") C3_col= red_cell; else C3_col= grey_cell;         
+            if (P1_Cx4=="0") C4_col= blue_cell; else if (P1_Cx4=="5") C4_col= red_cell; else C4_col= grey_cell;         
+            if (P1_Cx5=="0") C5_col= blue_cell; else if (P1_Cx5=="5") C5_col= red_cell; else C5_col= grey_cell;         
+            if (P1_Dx0=="0") D0_col= blue_cell; else if (P1_Dx0=="5") D0_col= red_cell; else D0_col= grey_cell;         
+            if (P1_Dx1=="0") D1_col= blue_cell; else if (P1_Dx1=="5") D1_col= red_cell; else D1_col= grey_cell;         
+            if (P1_Dx2=="0") D2_col= blue_cell; else if (P1_Dx2=="5") D2_col= red_cell; else D2_col= grey_cell;         
+            if (P1_Dx3=="0") D3_col= blue_cell; else if (P1_Dx3=="5") D3_col= red_cell; else D3_col= grey_cell;         
+            if (P1_Dx4=="0") D4_col= blue_cell; else if (P1_Dx4=="5") D4_col= red_cell; else D4_col= grey_cell;         
+            if (P1_Dx5=="0") D5_col= blue_cell; else if (P1_Dx5=="5") D5_col= red_cell; else D5_col= grey_cell;         
+            if (P1_Ex0=="0") E0_col= blue_cell; else if (P1_Ex0=="5") E0_col= red_cell; else E0_col= grey_cell;         
+            if (P1_Ex1=="0") E1_col= blue_cell; else if (P1_Ex1=="5") E1_col= red_cell; else E1_col= grey_cell;         
+            if (P1_Ex2=="0") E2_col= blue_cell; else if (P1_Ex2=="5") E2_col= red_cell; else E2_col= grey_cell;         
+            if (P1_Ex3=="0") E3_col= blue_cell; else if (P1_Ex3=="5") E3_col= red_cell; else E3_col= grey_cell;         
+            if (P1_Ex4=="0") E4_col= blue_cell; else if (P1_Ex4=="5") E4_col= red_cell; else E4_col= grey_cell;         
+            if (P1_Ex5=="0") E5_col= blue_cell; else if (P1_Ex5=="5") E5_col= red_cell; else E5_col= grey_cell;         
+            if (P1_Fx0=="0") F0_col= blue_cell; else if (P1_Fx0=="5") F0_col= red_cell; else F0_col= grey_cell;         
+            if (P1_Fx1=="0") F1_col= blue_cell; else if (P1_Fx1=="5") F1_col= red_cell; else F1_col= grey_cell;         
+            if (P1_Fx2=="0") F2_col= blue_cell; else if (P1_Fx2=="5") F2_col= red_cell; else F2_col= grey_cell;         
+            if (P1_Fx3=="0") F3_col= blue_cell; else if (P1_Fx3=="5") F3_col= red_cell; else F3_col= grey_cell;         
+            if (P1_Fx4=="0") F4_col= blue_cell; else if (P1_Fx4=="5") F4_col= red_cell; else F4_col= grey_cell;         
+            if (P1_Fx5=="0") F5_col= blue_cell; else if (P1_Fx5=="5") F5_col= red_cell; else F5_col= grey_cell;         
+                            
+            show plug GameWillStart[instructions = P1_starttag];                            
+                            
+            //show plug Update[metatag = P1_metatag, name = P1_name, pos = P1_gb_pos, 
+            //   turnname = playersTurnName,
+            //   ship1_pos = P1_ship1_pos, ship1_dir = P1_ship1_dir, 
+            //   ship2a_pos = P1_ship2a_pos, ship2B_pos = P1_ship2B_pos, ship2_dir = P1_ship2_dir, 
+            //   ship3a_pos = P1_ship3a_pos, ship3_dir = P1_ship3_dir,
+            //   Ax0=A0_col, Ax1=A1_col, Ax2=A2_col, Ax3=A3_col, Ax4=A4_col, Ax5=A5_col,
+            //   Bx0=B0_col, Bx1=B1_col, Bx2=B2_col, Bx3=B3_col, Bx4=B4_col, Bx5=B5_col,
+            //   Cx0=C0_col, Cx1=C1_col, Cx2=C2_col, Cx3=C3_col, Cx4=C4_col, Cx5=C5_col,
+            //   Dx0=D0_col, Dx1=D1_col, Dx2=D2_col, Dx3=D3_col, Dx4=D4_col, Dx5=D5_col,
+            //   Ex0=E0_col, Ex1=E1_col, Ex2=E2_col, Ex3=E3_col, Ex4=E4_col, Ex5=E5_col,
+            //   Fx0=F0_col, Fx1=F1_col, Fx2=F2_col, Fx3=F3_col, Fx4=F4_col, Fx5=F5_col]
+            //receive[P1_gb_pos = pos, quit = quit];      
+               
+         }         
+         else if (player == 2) 
+         {         
+            string A0_col, A1_col, A2_col, A3_col, A4_col, A5_col;
+            string B0_col, B1_col, B2_col, B3_col, B4_col, B5_col;
+            string C0_col, C1_col, C2_col, C3_col, C4_col, C5_col;
+            string D0_col, D1_col, D2_col, D3_col, D4_col, D5_col;
+            string E0_col, E1_col, E2_col, E3_col, E4_col, E5_col;
+            string F0_col, F1_col, F2_col, F3_col, F4_col, F5_col;
+   
+            playersTurnName = "(Not Started)";                        
+   
+            if (P2_Ax0=="0") A0_col= blue_cell; else if (P2_Ax0=="5") A0_col= red_cell; else A0_col= grey_cell;         
+            if (P2_Ax1=="0") A1_col= blue_cell; else if (P2_Ax1=="5") A1_col= red_cell; else A1_col= grey_cell;         
+            if (P2_Ax2=="0") A2_col= blue_cell; else if (P2_Ax2=="5") A2_col= red_cell; else A2_col= grey_cell;         
+            if (P2_Ax3=="0") A3_col= blue_cell; else if (P2_Ax3=="5") A3_col= red_cell; else A3_col= grey_cell;         
+            if (P2_Ax4=="0") A4_col= blue_cell; else if (P2_Ax4=="5") A4_col= red_cell; else A4_col= grey_cell;         
+            if (P2_Ax5=="0") A5_col= blue_cell; else if (P2_Ax5=="5") A5_col= red_cell; else A5_col= grey_cell;         
+            if (P2_Bx0=="0") B0_col= blue_cell; else if (P2_Bx0=="5") B0_col= red_cell; else B0_col= grey_cell;         
+            if (P2_Bx1=="0") B1_col= blue_cell; else if (P2_Bx1=="5") B1_col= red_cell; else B1_col= grey_cell;         
+            if (P2_Bx2=="0") B2_col= blue_cell; else if (P2_Bx2=="5") B2_col= red_cell; else B2_col= grey_cell;         
+            if (P2_Bx3=="0") B3_col= blue_cell; else if (P2_Bx3=="5") B3_col= red_cell; else B3_col= grey_cell;         
+            if (P2_Bx4=="0") B4_col= blue_cell; else if (P2_Bx4=="5") B4_col= red_cell; else B4_col= grey_cell;         
+            if (P2_Bx5=="0") B5_col= blue_cell; else if (P2_Bx5=="5") B5_col= red_cell; else B5_col= grey_cell;         
+            if (P2_Cx0=="0") C0_col= blue_cell; else if (P2_Cx0=="5") C0_col= red_cell; else C0_col= grey_cell;         
+            if (P2_Cx1=="0") C1_col= blue_cell; else if (P2_Cx1=="5") C1_col= red_cell; else C1_col= grey_cell;         
+            if (P2_Cx2=="0") C2_col= blue_cell; else if (P2_Cx2=="5") C2_col= red_cell; else C2_col= grey_cell;         
+            if (P2_Cx3=="0") C3_col= blue_cell; else if (P2_Cx3=="5") C3_col= red_cell; else C3_col= grey_cell;         
+            if (P2_Cx4=="0") C4_col= blue_cell; else if (P2_Cx4=="5") C4_col= red_cell; else C4_col= grey_cell;         
+            if (P2_Cx5=="0") C5_col= blue_cell; else if (P2_Cx5=="5") C5_col= red_cell; else C5_col= grey_cell;         
+            if (P2_Dx0=="0") D0_col= blue_cell; else if (P2_Dx0=="5") D0_col= red_cell; else D0_col= grey_cell;         
+            if (P2_Dx1=="0") D1_col= blue_cell; else if (P2_Dx1=="5") D1_col= red_cell; else D1_col= grey_cell;         
+            if (P2_Dx2=="0") D2_col= blue_cell; else if (P2_Dx2=="5") D2_col= red_cell; else D2_col= grey_cell;         
+            if (P2_Dx3=="0") D3_col= blue_cell; else if (P2_Dx3=="5") D3_col= red_cell; else D3_col= grey_cell;         
+            if (P2_Dx4=="0") D4_col= blue_cell; else if (P2_Dx4=="5") D4_col= red_cell; else D4_col= grey_cell;         
+            if (P2_Dx5=="0") D5_col= blue_cell; else if (P2_Dx5=="5") D5_col= red_cell; else D5_col= grey_cell;         
+            if (P2_Ex0=="0") E0_col= blue_cell; else if (P2_Ex0=="5") E0_col= red_cell; else E0_col= grey_cell;         
+            if (P2_Ex1=="0") E1_col= blue_cell; else if (P2_Ex1=="5") E1_col= red_cell; else E1_col= grey_cell;         
+            if (P2_Ex2=="0") E2_col= blue_cell; else if (P2_Ex2=="5") E2_col= red_cell; else E2_col= grey_cell;         
+            if (P2_Ex3=="0") E3_col= blue_cell; else if (P2_Ex3=="5") E3_col= red_cell; else E3_col= grey_cell;         
+            if (P2_Ex4=="0") E4_col= blue_cell; else if (P2_Ex4=="5") E4_col= red_cell; else E4_col= grey_cell;         
+            if (P2_Ex5=="0") E5_col= blue_cell; else if (P2_Ex5=="5") E5_col= red_cell; else E5_col= grey_cell;         
+            if (P2_Fx0=="0") F0_col= blue_cell; else if (P2_Fx0=="5") F0_col= red_cell; else F0_col= grey_cell;         
+            if (P2_Fx1=="0") F1_col= blue_cell; else if (P2_Fx1=="5") F1_col= red_cell; else F1_col= grey_cell;         
+            if (P2_Fx2=="0") F2_col= blue_cell; else if (P2_Fx2=="5") F2_col= red_cell; else F2_col= grey_cell;         
+            if (P2_Fx3=="0") F3_col= blue_cell; else if (P2_Fx3=="5") F3_col= red_cell; else F3_col= grey_cell;         
+            if (P2_Fx4=="0") F4_col= blue_cell; else if (P2_Fx4=="5") F4_col= red_cell; else F4_col= grey_cell;         
+            if (P2_Fx5=="0") F5_col= blue_cell; else if (P2_Fx5=="5") F5_col= red_cell; else F5_col= grey_cell;         
+   
+            turn = "P1";
+            
+            show plug GameWillStart[instructions = P2_starttag];
+            
+            //show plug Update[metatag = P2_metatag, name = P2_name, pos = P2_gb_pos, 
+            //   turnname = playersTurnName,
+            //   ship1_pos = P2_ship1_pos, ship1_dir = P2_ship1_dir, 
+            //   ship2a_pos = P2_ship2a_pos, ship2B_pos = P2_ship2B_pos, ship2_dir = P2_ship2_dir, 
+            //   ship3a_pos = P2_ship3a_pos, ship3_dir = P2_ship3_dir,
+            //   Ax0=A0_col, Ax1=A1_col, Ax2=A2_col, Ax3=A3_col, Ax4=A4_col, Ax5=A5_col,
+            //   Bx0=B0_col, Bx1=B1_col, Bx2=B2_col, Bx3=B3_col, Bx4=B4_col, Bx5=B5_col,
+            //   Cx0=C0_col, Cx1=C1_col, Cx2=C2_col, Cx3=C3_col, Cx4=C4_col, Cx5=C5_col,
+            //   Dx0=D0_col, Dx1=D1_col, Dx2=D2_col, Dx3=D3_col, Dx4=D4_col, Dx5=D5_col,
+            //   Ex0=E0_col, Ex1=E1_col, Ex2=E2_col, Ex3=E3_col, Ex4=E4_col, Ex5=E5_col,
+            //   Fx0=F0_col, Fx1=F1_col, Fx2=F2_col, Fx3=F3_col, Fx4=F4_col, Fx5=F5_col]
+            //receive[P2_gb_pos = pos, quit = quit];      
+   
+            
+         }
+                        
+      //if (player == 1)
+      //   exit plug GameWillStart[metatag = P1_metatag];
+      //else (player == 1)
+      //   exit plug GameWillStart[metatag = P1_metatag];
+   }
+     
+   session Reset()
+   {
+      P1_name = ""; P2_name = "";   
+      quit = "yes";
+      exit plug ResetPage[var = P1_name];
+   }
+   
+   session RefreshP1()
+   {
+      string A0_col, A1_col, A2_col, A3_col, A4_col, A5_col;
+      string B0_col, B1_col, B2_col, B3_col, B4_col, B5_col;
+      string C0_col, C1_col, C2_col, C3_col, C4_col, C5_col;
+      string D0_col, D1_col, D2_col, D3_col, D4_col, D5_col;
+      string E0_col, E1_col, E2_col, E3_col, E4_col, E5_col;
+      string F0_col, F1_col, F2_col, F3_col, F4_col, F5_col;      
+      string P1_hit;
+      int hits;      
+      
+      P1_hit="";
+      hits=0;
+      
+      if (P1_name == "")
+      {
+         exit plug ResetPage[var = P1_name];
+      }
+
+      if (turn == "P1") playersTurnName = P1_name; 
+      else if (turn == "P2") playersTurnName = P2_name;
+      else playersTurnName = "(Not Started)";
+
+      
+      if (P1_Ax0=="0") A0_col= blue_cell; else if (P1_Ax0=="5") A0_col= red_cell; else A0_col= grey_cell;         
+      if (P1_Ax1=="0") A1_col= blue_cell; else if (P1_Ax1=="5") A1_col= red_cell; else A1_col= grey_cell;         
+      if (P1_Ax2=="0") A2_col= blue_cell; else if (P1_Ax2=="5") A2_col= red_cell; else A2_col= grey_cell;         
+      if (P1_Ax3=="0") A3_col= blue_cell; else if (P1_Ax3=="5") A3_col= red_cell; else A3_col= grey_cell;         
+      if (P1_Ax4=="0") A4_col= blue_cell; else if (P1_Ax4=="5") A4_col= red_cell; else A4_col= grey_cell;         
+      if (P1_Ax5=="0") A5_col= blue_cell; else if (P1_Ax5=="5") A5_col= red_cell; else A5_col= grey_cell;         
+      if (P1_Bx0=="0") B0_col= blue_cell; else if (P1_Bx0=="5") B0_col= red_cell; else B0_col= grey_cell;         
+      if (P1_Bx1=="0") B1_col= blue_cell; else if (P1_Bx1=="5") B1_col= red_cell; else B1_col= grey_cell;         
+      if (P1_Bx2=="0") B2_col= blue_cell; else if (P1_Bx2=="5") B2_col= red_cell; else B2_col= grey_cell;         
+      if (P1_Bx3=="0") B3_col= blue_cell; else if (P1_Bx3=="5") B3_col= red_cell; else B3_col= grey_cell;         
+      if (P1_Bx4=="0") B4_col= blue_cell; else if (P1_Bx4=="5") B4_col= red_cell; else B4_col= grey_cell;         
+      if (P1_Bx5=="0") B5_col= blue_cell; else if (P1_Bx5=="5") B5_col= red_cell; else B5_col= grey_cell;         
+      if (P1_Cx0=="0") C0_col= blue_cell; else if (P1_Cx0=="5") C0_col= red_cell; else C0_col= grey_cell;         
+      if (P1_Cx1=="0") C1_col= blue_cell; else if (P1_Cx1=="5") C1_col= red_cell; else C1_col= grey_cell;         
+      if (P1_Cx2=="0") C2_col= blue_cell; else if (P1_Cx2=="5") C2_col= red_cell; else C2_col= grey_cell;         
+      if (P1_Cx3=="0") C3_col= blue_cell; else if (P1_Cx3=="5") C3_col= red_cell; else C3_col= grey_cell;         
+      if (P1_Cx4=="0") C4_col= blue_cell; else if (P1_Cx4=="5") C4_col= red_cell; else C4_col= grey_cell;         
+      if (P1_Cx5=="0") C5_col= blue_cell; else if (P1_Cx5=="5") C5_col= red_cell; else C5_col= grey_cell;         
+      if (P1_Dx0=="0") D0_col= blue_cell; else if (P1_Dx0=="5") D0_col= red_cell; else D0_col= grey_cell;         
+      if (P1_Dx1=="0") D1_col= blue_cell; else if (P1_Dx1=="5") D1_col= red_cell; else D1_col= grey_cell;         
+      if (P1_Dx2=="0") D2_col= blue_cell; else if (P1_Dx2=="5") D2_col= red_cell; else D2_col= grey_cell;         
+      if (P1_Dx3=="0") D3_col= blue_cell; else if (P1_Dx3=="5") D3_col= red_cell; else D3_col= grey_cell;         
+      if (P1_Dx4=="0") D4_col= blue_cell; else if (P1_Dx4=="5") D4_col= red_cell; else D4_col= grey_cell;         
+      if (P1_Dx5=="0") D5_col= blue_cell; else if (P1_Dx5=="5") D5_col= red_cell; else D5_col= grey_cell;         
+      if (P1_Ex0=="0") E0_col= blue_cell; else if (P1_Ex0=="5") E0_col= red_cell; else E0_col= grey_cell;         
+      if (P1_Ex1=="0") E1_col= blue_cell; else if (P1_Ex1=="5") E1_col= red_cell; else E1_col= grey_cell;         
+      if (P1_Ex2=="0") E2_col= blue_cell; else if (P1_Ex2=="5") E2_col= red_cell; else E2_col= grey_cell;         
+      if (P1_Ex3=="0") E3_col= blue_cell; else if (P1_Ex3=="5") E3_col= red_cell; else E3_col= grey_cell;         
+      if (P1_Ex4=="0") E4_col= blue_cell; else if (P1_Ex4=="5") E4_col= red_cell; else E4_col= grey_cell;         
+      if (P1_Ex5=="0") E5_col= blue_cell; else if (P1_Ex5=="5") E5_col= red_cell; else E5_col= grey_cell;         
+      if (P1_Fx0=="0") F0_col= blue_cell; else if (P1_Fx0=="5") F0_col= red_cell; else F0_col= grey_cell;         
+      if (P1_Fx1=="0") F1_col= blue_cell; else if (P1_Fx1=="5") F1_col= red_cell; else F1_col= grey_cell;         
+      if (P1_Fx2=="0") F2_col= blue_cell; else if (P1_Fx2=="5") F2_col= red_cell; else F2_col= grey_cell;         
+      if (P1_Fx3=="0") F3_col= blue_cell; else if (P1_Fx3=="5") F3_col= red_cell; else F3_col= grey_cell;         
+      if (P1_Fx4=="0") F4_col= blue_cell; else if (P1_Fx4=="5") F4_col= red_cell; else F4_col= grey_cell;         
+      if (P1_Fx5=="0") F5_col= blue_cell; else if (P1_Fx5=="5") F5_col= red_cell; else F5_col= grey_cell;         
+      
+      // calculate hits      
+      if (P1_Ax0=="5") hits = hits + 1;
+      if (P1_Ax1=="5") hits = hits + 1;
+      if (P1_Ax2=="5") hits = hits + 1;
+      if (P1_Ax3=="5") hits = hits + 1;
+      if (P1_Ax4=="5") hits = hits + 1;
+      if (P1_Ax5=="5") hits = hits + 1;
+      if (P1_Bx0=="5") hits = hits + 1;
+      if (P1_Bx1=="5") hits = hits + 1;
+      if (P1_Bx2=="5") hits = hits + 1;
+      if (P1_Bx3=="5") hits = hits + 1;
+      if (P1_Bx4=="5") hits = hits + 1;
+      if (P1_Bx5=="5") hits = hits + 1;
+      if (P1_Cx0=="5") hits = hits + 1;
+      if (P1_Cx1=="5") hits = hits + 1;
+      if (P1_Cx2=="5") hits = hits + 1;
+      if (P1_Cx3=="5") hits = hits + 1;
+      if (P1_Cx4=="5") hits = hits + 1;
+      if (P1_Cx5=="5") hits = hits + 1;
+      if (P1_Dx0=="5") hits = hits + 1;
+      if (P1_Dx1=="5") hits = hits + 1;
+      if (P1_Dx2=="5") hits = hits + 1;
+      if (P1_Dx3=="5") hits = hits + 1;
+      if (P1_Dx4=="5") hits = hits + 1;
+      if (P1_Dx5=="5") hits = hits + 1;
+      if (P1_Ex0=="5") hits = hits + 1;
+      if (P1_Ex1=="5") hits = hits + 1;
+      if (P1_Ex2=="5") hits = hits + 1;
+      if (P1_Ex3=="5") hits = hits + 1;
+      if (P1_Ex4=="5") hits = hits + 1;
+      if (P1_Ex5=="5") hits = hits + 1;
+      if (P1_Fx0=="5") hits = hits + 1;
+      if (P1_Fx1=="5") hits = hits + 1;
+      if (P1_Fx2=="5") hits = hits + 1;
+      if (P1_Fx3=="5") hits = hits + 1;
+      if (P1_Fx4=="5") hits = hits + 1;
+      if (P1_Fx5=="5") hits = hits + 1;
+      
+      if (hits == 6) P1_hit = (P2_name + " has won the game.");
+      
+      
+      show plug Update[metatag = P1_metatag, name = P1_name, pos = P1_gb_pos, 
+         turnname = playersTurnName,
+         hit = P1_hit,
+         ship1_pos = P1_ship1_pos, ship1_dir = P1_ship1_dir, 
+         ship2a_pos = P1_ship2a_pos, ship2B_pos = P1_ship2B_pos, ship2_dir = P1_ship2_dir, 
+         ship3a_pos = P1_ship3a_pos, ship3_dir = P1_ship3_dir,
+         Ax0=A0_col, Ax1=A1_col, Ax2=A2_col, Ax3=A3_col, Ax4=A4_col, Ax5=A5_col,
+         Bx0=B0_col, Bx1=B1_col, Bx2=B2_col, Bx3=B3_col, Bx4=B4_col, Bx5=B5_col,
+         Cx0=C0_col, Cx1=C1_col, Cx2=C2_col, Cx3=C3_col, Cx4=C4_col, Cx5=C5_col,
+         Dx0=D0_col, Dx1=D1_col, Dx2=D2_col, Dx3=D3_col, Dx4=D4_col, Dx5=D5_col,
+         Ex0=E0_col, Ex1=E1_col, Ex2=E2_col, Ex3=E3_col, Ex4=E4_col, Ex5=E5_col,
+         Fx0=F0_col, Fx1=F1_col, Fx2=F2_col, Fx3=F3_col, Fx4=F4_col, Fx5=F5_col]
+      receive[P1_gb_pos = pos, quit = quit];  
+      
+      if (quit == "yes")
+      {
+         P1_name = ""; P2_name = "";   
+         quit = "yes";
+         exit plug Quit[conns = connections];
+      }
+      
+      if (turn == "P2")
+      {
+         P1_hit = "It is not your turn!";
+         
+         show plug Update[metatag = P1_metatag, name = P1_name, pos = P1_gb_pos, 
+            turnname = playersTurnName,
+            hit = P1_hit,
+            ship1_pos = P1_ship1_pos, ship1_dir = P1_ship1_dir, 
+            ship2a_pos = P1_ship2a_pos, ship2B_pos = P1_ship2B_pos, ship2_dir = P1_ship2_dir, 
+            ship3a_pos = P1_ship3a_pos, ship3_dir = P1_ship3_dir,
+            Ax0=A0_col, Ax1=A1_col, Ax2=A2_col, Ax3=A3_col, Ax4=A4_col, Ax5=A5_col,
+            Bx0=B0_col, Bx1=B1_col, Bx2=B2_col, Bx3=B3_col, Bx4=B4_col, Bx5=B5_col,
+            Cx0=C0_col, Cx1=C1_col, Cx2=C2_col, Cx3=C3_col, Cx4=C4_col, Cx5=C5_col,
+            Dx0=D0_col, Dx1=D1_col, Dx2=D2_col, Dx3=D3_col, Dx4=D4_col, Dx5=D5_col,
+            Ex0=E0_col, Ex1=E1_col, Ex2=E2_col, Ex3=E3_col, Ex4=E4_col, Ex5=E5_col,
+            Fx0=F0_col, Fx1=F1_col, Fx2=F2_col, Fx3=F3_col, Fx4=F4_col, Fx5=F5_col];
+      }      
+      
+      if (P1_gb_pos == "Ax0" && P2_Ax0!="0") { P2_Ax0="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ax1" && P2_Ax1!="0") { P2_Ax1="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ax2" && P2_Ax2!="0") { P2_Ax2="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ax3" && P2_Ax3!="0") { P2_Ax3="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ax4" && P2_Ax4!="0") { P2_Ax4="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ax5" && P2_Ax5!="0") { P2_Ax5="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Bx0" && P2_Bx0!="0") { P2_Bx0="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Bx1" && P2_Bx1!="0") { P2_Bx1="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Bx2" && P2_Bx2!="0") { P2_Bx2="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Bx3" && P2_Bx3!="0") { P2_Bx3="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Bx4" && P2_Bx4!="0") { P2_Bx4="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Bx5" && P2_Bx5!="0") { P2_Bx5="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Cx0" && P2_Cx0!="0") { P2_Cx0="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Cx1" && P2_Cx1!="0") { P2_Cx1="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Cx2" && P2_Cx2!="0") { P2_Cx2="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Cx3" && P2_Cx3!="0") { P2_Cx3="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Cx4" && P2_Cx4!="0") { P2_Cx4="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Cx5" && P2_Cx5!="0") { P2_Cx5="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Dx0" && P2_Dx0!="0") { P2_Dx0="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Dx1" && P2_Dx1!="0") { P2_Dx1="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Dx2" && P2_Dx2!="0") { P2_Dx2="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Dx3" && P2_Dx3!="0") { P2_Dx3="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Dx4" && P2_Dx4!="0") { P2_Dx4="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Dx5" && P2_Dx5!="0") { P2_Dx5="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ex0" && P2_Ex0!="0") { P2_Ex0="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ex1" && P2_Ex1!="0") { P2_Ex1="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ex2" && P2_Ex2!="0") { P2_Ex2="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ex3" && P2_Ex3!="0") { P2_Ex3="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ex4" && P2_Ex4!="0") { P2_Ex4="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Ex5" && P2_Ex5!="0") { P2_Ex5="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Fx0" && P2_Fx0!="0") { P2_Fx0="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Fx1" && P2_Fx1!="0") { P2_Fx1="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Fx2" && P2_Fx2!="0") { P2_Fx2="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Fx3" && P2_Fx3!="0") { P2_Fx3="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Fx4" && P2_Fx4!="0") { P2_Fx4="5"; P1_hit="Hit!"; }
+      if (P1_gb_pos == "Fx5" && P2_Fx5!="0") { P2_Fx5="5"; P1_hit="Hit!"; }
+      
+      if (P1_hit != "Hit!") P1_hit="Miss!";
+      
+      turn = "P2";
+
+      show plug Update[metatag = P1_metatag, name = P1_name, pos = P1_gb_pos, 
+         turnname = playersTurnName,
+         hit = P1_hit,
+         ship1_pos = P1_ship1_pos, ship1_dir = P1_ship1_dir, 
+         ship2a_pos = P1_ship2a_pos, ship2B_pos = P1_ship2B_pos, ship2_dir = P1_ship2_dir, 
+         ship3a_pos = P1_ship3a_pos, ship3_dir = P1_ship3_dir,
+         Ax0=A0_col, Ax1=A1_col, Ax2=A2_col, Ax3=A3_col, Ax4=A4_col, Ax5=A5_col,
+         Bx0=B0_col, Bx1=B1_col, Bx2=B2_col, Bx3=B3_col, Bx4=B4_col, Bx5=B5_col,
+         Cx0=C0_col, Cx1=C1_col, Cx2=C2_col, Cx3=C3_col, Cx4=C4_col, Cx5=C5_col,
+         Dx0=D0_col, Dx1=D1_col, Dx2=D2_col, Dx3=D3_col, Dx4=D4_col, Dx5=D5_col,
+         Ex0=E0_col, Ex1=E1_col, Ex2=E2_col, Ex3=E3_col, Ex4=E4_col, Ex5=E5_col,
+         Fx0=F0_col, Fx1=F1_col, Fx2=F2_col, Fx3=F3_col, Fx4=F4_col, Fx5=F5_col];
+   }
+   
+   session RefreshP2()
+   {
+      string A0_col, A1_col, A2_col, A3_col, A4_col, A5_col;
+      string B0_col, B1_col, B2_col, B3_col, B4_col, B5_col;
+      string C0_col, C1_col, C2_col, C3_col, C4_col, C5_col;
+      string D0_col, D1_col, D2_col, D3_col, D4_col, D5_col;
+      string E0_col, E1_col, E2_col, E3_col, E4_col, E5_col;
+      string F0_col, F1_col, F2_col, F3_col, F4_col, F5_col;
+      string P2_hit;
+      int hits;      
+      
+      P2_hit="";
+      hits=0;
+      
+      // check that the game's been externally reset
+      if (P2_name == "")
+      {
+         exit plug ResetPage[var = P1_name];
+      }
+   
+      if (turn == "P1") playersTurnName = P1_name; 
+      else if (turn == "P2") playersTurnName = P2_name;
+      else playersTurnName = "(Not Started)";
+   
+      // construct colored board
+      if (P2_Ax0=="0") A0_col= blue_cell; else if (P2_Ax0=="5") A0_col= red_cell; else A0_col= grey_cell;         
+      if (P2_Ax1=="0") A1_col= blue_cell; else if (P2_Ax1=="5") A1_col= red_cell; else A1_col= grey_cell;         
+      if (P2_Ax2=="0") A2_col= blue_cell; else if (P2_Ax2=="5") A2_col= red_cell; else A2_col= grey_cell;         
+      if (P2_Ax3=="0") A3_col= blue_cell; else if (P2_Ax3=="5") A3_col= red_cell; else A3_col= grey_cell;         
+      if (P2_Ax4=="0") A4_col= blue_cell; else if (P2_Ax4=="5") A4_col= red_cell; else A4_col= grey_cell;         
+      if (P2_Ax5=="0") A5_col= blue_cell; else if (P2_Ax5=="5") A5_col= red_cell; else A5_col= grey_cell;         
+      if (P2_Bx0=="0") B0_col= blue_cell; else if (P2_Bx0=="5") B0_col= red_cell; else B0_col= grey_cell;         
+      if (P2_Bx1=="0") B1_col= blue_cell; else if (P2_Bx1=="5") B1_col= red_cell; else B1_col= grey_cell;         
+      if (P2_Bx2=="0") B2_col= blue_cell; else if (P2_Bx2=="5") B2_col= red_cell; else B2_col= grey_cell;         
+      if (P2_Bx3=="0") B3_col= blue_cell; else if (P2_Bx3=="5") B3_col= red_cell; else B3_col= grey_cell;         
+      if (P2_Bx4=="0") B4_col= blue_cell; else if (P2_Bx4=="5") B4_col= red_cell; else B4_col= grey_cell;         
+      if (P2_Bx5=="0") B5_col= blue_cell; else if (P2_Bx5=="5") B5_col= red_cell; else B5_col= grey_cell;         
+      if (P2_Cx0=="0") C0_col= blue_cell; else if (P2_Cx0=="5") C0_col= red_cell; else C0_col= grey_cell;         
+      if (P2_Cx1=="0") C1_col= blue_cell; else if (P2_Cx1=="5") C1_col= red_cell; else C1_col= grey_cell;         
+      if (P2_Cx2=="0") C2_col= blue_cell; else if (P2_Cx2=="5") C2_col= red_cell; else C2_col= grey_cell;         
+      if (P2_Cx3=="0") C3_col= blue_cell; else if (P2_Cx3=="5") C3_col= red_cell; else C3_col= grey_cell;         
+      if (P2_Cx4=="0") C4_col= blue_cell; else if (P2_Cx4=="5") C4_col= red_cell; else C4_col= grey_cell;         
+      if (P2_Cx5=="0") C5_col= blue_cell; else if (P2_Cx5=="5") C5_col= red_cell; else C5_col= grey_cell;         
+      if (P2_Dx0=="0") D0_col= blue_cell; else if (P2_Dx0=="5") D0_col= red_cell; else D0_col= grey_cell;         
+      if (P2_Dx1=="0") D1_col= blue_cell; else if (P2_Dx1=="5") D1_col= red_cell; else D1_col= grey_cell;         
+      if (P2_Dx2=="0") D2_col= blue_cell; else if (P2_Dx2=="5") D2_col= red_cell; else D2_col= grey_cell;         
+      if (P2_Dx3=="0") D3_col= blue_cell; else if (P2_Dx3=="5") D3_col= red_cell; else D3_col= grey_cell;         
+      if (P2_Dx4=="0") D4_col= blue_cell; else if (P2_Dx4=="5") D4_col= red_cell; else D4_col= grey_cell;         
+      if (P2_Dx5=="0") D5_col= blue_cell; else if (P2_Dx5=="5") D5_col= red_cell; else D5_col= grey_cell;         
+      if (P2_Ex0=="0") E0_col= blue_cell; else if (P2_Ex0=="5") E0_col= red_cell; else E0_col= grey_cell;         
+      if (P2_Ex1=="0") E1_col= blue_cell; else if (P2_Ex1=="5") E1_col= red_cell; else E1_col= grey_cell;         
+      if (P2_Ex2=="0") E2_col= blue_cell; else if (P2_Ex2=="5") E2_col= red_cell; else E2_col= grey_cell;         
+      if (P2_Ex3=="0") E3_col= blue_cell; else if (P2_Ex3=="5") E3_col= red_cell; else E3_col= grey_cell;         
+      if (P2_Ex4=="0") E4_col= blue_cell; else if (P2_Ex4=="5") E4_col= red_cell; else E4_col= grey_cell;         
+      if (P2_Ex5=="0") E5_col= blue_cell; else if (P2_Ex5=="5") E5_col= red_cell; else E5_col= grey_cell;         
+      if (P2_Fx0=="0") F0_col= blue_cell; else if (P2_Fx0=="5") F0_col= red_cell; else F0_col= grey_cell;         
+      if (P2_Fx1=="0") F1_col= blue_cell; else if (P2_Fx1=="5") F1_col= red_cell; else F1_col= grey_cell;         
+      if (P2_Fx2=="0") F2_col= blue_cell; else if (P2_Fx2=="5") F2_col= red_cell; else F2_col= grey_cell;         
+      if (P2_Fx3=="0") F3_col= blue_cell; else if (P2_Fx3=="5") F3_col= red_cell; else F3_col= grey_cell;         
+      if (P2_Fx4=="0") F4_col= blue_cell; else if (P2_Fx4=="5") F4_col= red_cell; else F4_col= grey_cell;         
+      if (P2_Fx5=="0") F5_col= blue_cell; else if (P2_Fx5=="5") F5_col= red_cell; else F5_col= grey_cell;         
+      
+      // calculate hits
+      
+      if (P2_Ax0=="5") hits = hits + 1;
+      if (P2_Ax1=="5") hits = hits + 1;
+      if (P2_Ax2=="5") hits = hits + 1;
+      if (P2_Ax3=="5") hits = hits + 1;
+      if (P2_Ax4=="5") hits = hits + 1;
+      if (P2_Ax5=="5") hits = hits + 1;
+      if (P2_Bx0=="5") hits = hits + 1;
+      if (P2_Bx1=="5") hits = hits + 1;
+      if (P2_Bx2=="5") hits = hits + 1;
+      if (P2_Bx3=="5") hits = hits + 1;
+      if (P2_Bx4=="5") hits = hits + 1;
+      if (P2_Bx5=="5") hits = hits + 1;
+      if (P2_Cx0=="5") hits = hits + 1;
+      if (P2_Cx1=="5") hits = hits + 1;
+      if (P2_Cx2=="5") hits = hits + 1;
+      if (P2_Cx3=="5") hits = hits + 1;
+      if (P2_Cx4=="5") hits = hits + 1;
+      if (P2_Cx5=="5") hits = hits + 1;
+      if (P2_Dx0=="5") hits = hits + 1;
+      if (P2_Dx1=="5") hits = hits + 1;
+      if (P2_Dx2=="5") hits = hits + 1;
+      if (P2_Dx3=="5") hits = hits + 1;
+      if (P2_Dx4=="5") hits = hits + 1;
+      if (P2_Dx5=="5") hits = hits + 1;
+      if (P2_Ex0=="5") hits = hits + 1;
+      if (P2_Ex1=="5") hits = hits + 1;
+      if (P2_Ex2=="5") hits = hits + 1;
+      if (P2_Ex3=="5") hits = hits + 1;
+      if (P2_Ex4=="5") hits = hits + 1;
+      if (P2_Ex5=="5") hits = hits + 1;
+      if (P2_Fx0=="5") hits = hits + 1;
+      if (P2_Fx1=="5") hits = hits + 1;
+      if (P2_Fx2=="5") hits = hits + 1;
+      if (P2_Fx3=="5") hits = hits + 1;
+      if (P2_Fx4=="5") hits = hits + 1;
+      if (P2_Fx5=="5") hits = hits + 1;
+      
+      if (hits == 6) P2_hit = (P1_name + " has won the game.");
+      
+      show plug Update[metatag = P2_metatag, name = P2_name, pos = P2_gb_pos, 
+         turnname = playersTurnName,
+         hit = P2_hit,
+         ship1_pos = P2_ship1_pos, ship1_dir = P2_ship1_dir, 
+         ship2a_pos = P2_ship2a_pos, ship2B_pos = P2_ship2B_pos, ship2_dir = P2_ship2_dir, 
+         ship3a_pos = P2_ship3a_pos, ship3_dir = P2_ship3_dir,
+         Ax0=A0_col, Ax1=A1_col, Ax2=A2_col, Ax3=A3_col, Ax4=A4_col, Ax5=A5_col,
+         Bx0=B0_col, Bx1=B1_col, Bx2=B2_col, Bx3=B3_col, Bx4=B4_col, Bx5=B5_col,
+         Cx0=C0_col, Cx1=C1_col, Cx2=C2_col, Cx3=C3_col, Cx4=C4_col, Cx5=C5_col,
+         Dx0=D0_col, Dx1=D1_col, Dx2=D2_col, Dx3=D3_col, Dx4=D4_col, Dx5=D5_col,
+         Ex0=E0_col, Ex1=E1_col, Ex2=E2_col, Ex3=E3_col, Ex4=E4_col, Ex5=E5_col,
+         Fx0=F0_col, Fx1=F1_col, Fx2=F2_col, Fx3=F3_col, Fx4=F4_col, Fx5=F5_col]
+      receive[P2_gb_pos = pos, quit = quit]; 
+      
+      if (quit == "yes")
+      {
+         P1_name = ""; P2_name = "";   
+         quit = "yes";
+         exit plug Quit[conns = connections];
+      }
+
+      if (turn == "P1")
+      {
+         P2_hit = "It is not your turn!";
+         
+         show plug Update[metatag = P2_metatag, name = P2_name, pos = P2_gb_pos, 
+            turnname = playersTurnName,
+            hit = P2_hit,
+            ship1_pos = P2_ship1_pos, ship1_dir = P2_ship1_dir, 
+            ship2a_pos = P2_ship2a_pos, ship2B_pos = P2_ship2B_pos, ship2_dir = P2_ship2_dir, 
+            ship3a_pos = P2_ship3a_pos, ship3_dir = P2_ship3_dir,
+            Ax0=A0_col, Ax1=A1_col, Ax2=A2_col, Ax3=A3_col, Ax4=A4_col, Ax5=A5_col,
+            Bx0=B0_col, Bx1=B1_col, Bx2=B2_col, Bx3=B3_col, Bx4=B4_col, Bx5=B5_col,
+            Cx0=C0_col, Cx1=C1_col, Cx2=C2_col, Cx3=C3_col, Cx4=C4_col, Cx5=C5_col,
+            Dx0=D0_col, Dx1=D1_col, Dx2=D2_col, Dx3=D3_col, Dx4=D4_col, Dx5=D5_col,
+            Ex0=E0_col, Ex1=E1_col, Ex2=E2_col, Ex3=E3_col, Ex4=E4_col, Ex5=E5_col,
+            Fx0=F0_col, Fx1=F1_col, Fx2=F2_col, Fx3=F3_col, Fx4=F4_col, Fx5=F5_col];
+         //receive[P2_gb_pos = pos, quit = quit];
+      }      
+      
+      if (P2_gb_pos == "Ax0" && P1_Ax0!="0") { P1_Ax0="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ax1" && P1_Ax1!="0") { P1_Ax1="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ax2" && P1_Ax2!="0") { P1_Ax2="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ax3" && P1_Ax3!="0") { P1_Ax3="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ax4" && P1_Ax4!="0") { P1_Ax4="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ax5" && P1_Ax5!="0") { P1_Ax5="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Bx0" && P1_Bx0!="0") { P1_Bx0="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Bx1" && P1_Bx1!="0") { P1_Bx1="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Bx2" && P1_Bx2!="0") { P1_Bx2="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Bx3" && P1_Bx3!="0") { P1_Bx3="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Bx4" && P1_Bx4!="0") { P1_Bx4="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Bx5" && P1_Bx5!="0") { P1_Bx5="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Cx0" && P1_Cx0!="0") { P1_Cx0="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Cx1" && P1_Cx1!="0") { P1_Cx1="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Cx2" && P1_Cx2!="0") { P1_Cx2="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Cx3" && P1_Cx3!="0") { P1_Cx3="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Cx4" && P1_Cx4!="0") { P1_Cx4="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Cx5" && P1_Cx5!="0") { P1_Cx5="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Dx0" && P1_Dx0!="0") { P1_Dx0="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Dx1" && P1_Dx1!="0") { P1_Dx1="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Dx2" && P1_Dx2!="0") { P1_Dx2="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Dx3" && P1_Dx3!="0") { P1_Dx3="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Dx4" && P1_Dx4!="0") { P1_Dx4="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Dx5" && P1_Dx5!="0") { P1_Dx5="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ex0" && P1_Ex0!="0") { P1_Ex0="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ex1" && P1_Ex1!="0") { P1_Ex1="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ex2" && P1_Ex2!="0") { P1_Ex2="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ex3" && P1_Ex3!="0") { P1_Ex3="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ex4" && P1_Ex4!="0") { P1_Ex4="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Ex5" && P1_Ex5!="0") { P1_Ex5="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Fx0" && P1_Fx0!="0") { P1_Fx0="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Fx1" && P1_Fx1!="0") { P1_Fx1="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Fx2" && P1_Fx2!="0") { P1_Fx2="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Fx3" && P1_Fx3!="0") { P1_Fx3="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Fx4" && P1_Fx4!="0") { P1_Fx4="5"; P2_hit="Hit!"; }
+      if (P2_gb_pos == "Fx5" && P1_Fx5!="0") { P1_Fx5="5"; P2_hit="Hit!"; }
+      
+      if (P2_hit != "Hit!") P2_hit="Miss!";
+      
+      turn = "P1";      
+
+      show plug Update[metatag = P2_metatag, name = P2_name, pos = P2_gb_pos, 
+         turnname = playersTurnName,
+         hit = P2_hit,
+         ship1_pos = P2_ship1_pos, ship1_dir = P2_ship1_dir, 
+         ship2a_pos = P2_ship2a_pos, ship2B_pos = P2_ship2B_pos, ship2_dir = P2_ship2_dir, 
+         ship3a_pos = P2_ship3a_pos, ship3_dir = P2_ship3_dir,
+         Ax0=A0_col, Ax1=A1_col, Ax2=A2_col, Ax3=A3_col, Ax4=A4_col, Ax5=A5_col,
+         Bx0=B0_col, Bx1=B1_col, Bx2=B2_col, Bx3=B3_col, Bx4=B4_col, Bx5=B5_col,
+         Cx0=C0_col, Cx1=C1_col, Cx2=C2_col, Cx3=C3_col, Cx4=C4_col, Cx5=C5_col,
+         Dx0=D0_col, Dx1=D1_col, Dx2=D2_col, Dx3=D3_col, Dx4=D4_col, Dx5=D5_col,
+         Ex0=E0_col, Ex1=E1_col, Ex2=E2_col, Ex3=E3_col, Ex4=E4_col, Ex5=E5_col,
+         Fx0=F0_col, Fx1=F1_col, Fx2=F2_col, Fx3=F3_col, Fx4=F4_col, Fx5=F5_col];
+      //receive[P2_gb_pos = pos, quit = quit];  
+      
+   }
+   
+   
+}

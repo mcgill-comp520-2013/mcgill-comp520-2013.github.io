@@ -1,0 +1,164 @@
+
+service {
+  const html Logon = <html> <body>
+  <h1>Welcome to Group06 WigWiki </h1>
+  <hr>
+  Please enter your desired login name and password:
+  <br><br>
+  login: <input name="name" type="text" size=25>
+  <br><br>
+  password: <input name="password" type="text" size=8>
+  </body> </html>;
+
+  const html IndexPage = <html> <body>
+    <h1>Group06 WigWiki - Index Page at your service</h1>
+    <hr>
+    In this WigWiki you can view and edit the content of following pages:
+    <hr>
+    <input name="action" type="radio" value="1" checked> Page 1: <[pageName1]><br>
+    <input name="action" type="radio" value="2"> Page 2: <[pageName2]><br>
+    <input name="action" type="radio" value="3"> Page 3: <[pageName3]><br>
+    <input name="action" type="radio" value="4"> Page 4: <[pageName4]><br>
+    <input name="action" type="radio" value="5"> Page 5: <[pageName5]><br>
+    <hr>
+    <p>
+    <input name="action" type="radio" value="quit"> Quit now
+  </body> </html>;
+
+  const html DisplayPage = <html> <body>
+    <h1>Group06 WigWiki - page display</h1>
+    <h2><[pageName]></h2>
+    <hr>
+    <[pageContent]>
+    <hr>
+    <input name="action" type="radio" value="next" checked>Next Page<br>
+    <input name="action" type="radio" value="edit" >Edit this page<br>
+    <input name="action" type="radio" value="index" >Show Index page<br>
+    <hr>
+    <input name="action" type="radio" value="quit"> Quit now
+  </body> </html>;
+  
+  const html EditPage = <html> <body>
+    <h1>Group06 WigWiki - page edition </h1>
+    <hr>
+    <h3>Old content of the page: <[pageName]></h3>
+    <p><[pageContent]></p>
+    <hr>
+    <h3>Enter new content of the page</h3>
+    <p><input name="pageNewName" type="text" value="" size="20" length="20"><br>
+    <input name="pageNewContent" type="text" value="" size="100" length="200"></p>
+    <hr>
+    <input name="action" type="radio" value="cancel" > Cancel<br>
+    <input name="action" type="radio" value="save" checked> Save
+    <hr>
+    <hr>
+    <input name="action" type="radio" value="quit"> Quit now
+   <p>
+  </body> </html>;
+  
+  
+  const html ByeBye = <html> <body>
+    <h1>Thanks for using The Group06 WigWiki</h1>
+    You used username <[name]> with password <[password]>.
+  </body> </html>;
+
+  const html Error = <html> <body>
+    <h1>Error using The Group06 WigWiki</h1>
+    There was an error handling the data you sent to the WigWiki
+    for user <[name]>.
+  </body> </html>;
+
+// Program logic starts here
+
+  schema pageDef {
+    string no;
+    string name;
+    string content;
+    string next;
+  }
+ 
+  tuple pageDef page1, page2, page3, page4, page5;
+  
+  session Login() {
+    tuple pageDef current;
+    string name, password, action, pageContent, pageName;
+    int pageNo;
+ 
+    page1 = tuple { no = "1", name = "Page 1", content = "", next = "2"};
+    page2 = tuple { no = "2", name = "Page 2", content = "", next = "3"};
+    page3 = tuple { no = "3", name = "Page 3", content = "", next = "4"};
+    page4 = tuple { no = "4", name = "Page 4", content = "", next = "5"};
+    page5 = tuple { no = "5", name = "Page 5", content = "", next = "1"};
+
+    show Logon
+      receive[name = name, password = password];
+
+    action = "index";
+    pageNo = 0;
+
+    while (action != "quit") {
+
+      if (action == "index") {
+        show plug IndexPage[
+	      pageName1 = page1.name,
+	      pageName2 = page2.name,
+	      pageName3 = page3.name,
+	      pageName4 = page4.name,
+	      pageName5 = page5.name]
+        receive[ action = action ];
+      } else if (action == "1") {
+	current = page1;
+	show plug DisplayPage[
+	      pageName = page1.name,
+	      pageContent = page1.content]
+        receive[ action = action ];
+      } else if (action == "2") {
+	current = page2;
+	show plug DisplayPage[
+	      pageName = page2.name,
+	      pageContent = page2.content]
+        receive[ action = action ];
+      } else if (action == "3") {
+	current = page3;
+	show plug DisplayPage[
+	      pageName = page3.name,
+	      pageContent = page3.content]
+        receive[ action = action ];
+      } else if (action == "4") {
+	current = page4;
+	show plug DisplayPage[
+	      pageName = page4.name,
+	      pageContent = page4.content]
+        receive[ action = action ];
+      } else if (action == "5") {
+	current = page5;
+	show plug DisplayPage[
+	      pageName = page5.name,
+	      pageContent = page5.content]
+        receive[ action = action ];
+      } else if ( action == "edit" ) {
+        show plug EditPage[
+		pageName = current.name,
+		pageContent = current.content]
+	receive[
+		current.name = pageNewName,
+		current.content = pageNewContent];
+	action = current.no;
+	if ( current.no == page1.no ) { page1 = current; }
+	if ( current.no == page2.no ) { page2 = current; }
+	if ( current.no == page3.no ) { page3 = current; }
+	if ( current.no == page4.no ) { page4 = current; }
+	if ( current.no == page5.no ) { page5 = current; }
+	
+      } else if ( action == "next") {
+        action = current.next;
+      } else {
+        exit plug Error[name = name];
+      }
+      
+    }
+    exit plug ByeBye[name = name, password = password];
+  }
+
+}
+

@@ -1,0 +1,376 @@
+service {
+  const html WelcomeMagic = <html> <body>
+    <H3> Welcome to the magic room!</H3>
+    <p>
+    <H3> I will show you 5 cards, you will choose one and
+         concentrate on it.  I will read in your mind to know
+	 which card you chose...  Ready?</H3>
+	 
+  </body> </html>;
+  
+  const html ShowCards1 = <html> <body>
+    <H3>Now choose a card and concentrate on it.  You not have to
+        click on your card, I will get it in your mind!</H3>
+    <p>
+    <center> <img src= "cards3.gif" > </center>
+  </body> </html>;
+  
+  const html Wait = <html> <body>
+    <H3>Please let me few seconds to read in your mind and click
+        continue.</H3>
+  </body> </html>;
+  
+  const html ShowCards2 = <html> <body>
+    <H3>I saw the card in your mind and I removed it from the 
+        stack... </H3>
+    <p>
+    <center> <img src= "cards4.gif" > </center>
+    
+    <p> 
+    <H3> Are you impress?  </H3>
+    
+  </body> </html>;
+  
+  const html ComputerPlay = <html> <body>
+    <H3>I take <[computer]> picks...</H3>
+  </body> </html>;
+  
+  const html ShowPicks21 = <html> <body>
+    <br>
+    <H3> There are 21 toothpicks left... </H3>
+    <center> <img src="toothpicks21.jpg" > </center>
+    
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks20 = <html> <body>
+    <br>
+    <H3> There are 20 toothpicks left... </H3>
+    <center> <img src= "toothpicks20.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks19 = <html> <body>
+    <br>
+    <H3> There are 19 toothpicks left... </H3>
+    <center> <img src= "toothpicks19.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks18 = <html> <body>
+    <br>
+    <H3> There are 18 toothpicks left... </H3>
+    <center> <img src= "toothpicks18.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks17 = <html> <body>
+    <br>
+    <H3> There are 17 toothpicks left... </H3>
+    <center> <img src= "toothpicks17.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks16 = <html> <body>
+    <br>
+    <H3> There are 16 toothpicks left... </H3>
+    <center> <img src= "toothpicks16.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks15 = <html> <body>
+    <br>
+    <H3> There are 15 toothpicks left... </H3>
+    <center> <img src= "toothpicks15.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks14 = <html> <body>
+    <br>
+    <H3> There are 14 toothpicks left... </H3>
+    <center> <img src= "toothpicks14.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks13 = <html> <body>
+    <br>
+    <H3> There are 13 toothpicks left... </H3>
+    <center> <img src= "toothpicks13.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks12 = <html> <body>
+    <br>
+    <H3> There are 12 toothpicks left... </H3>
+    <center> <img src= "toothpicks12.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks11 = <html> <body>
+    <br>
+    <H3> There are 11 toothpicks left... </H3>
+    <center> <img src= "toothpicks11.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks10 = <html> <body>
+    <br>
+    <H3> There are 10 toothpicks left... </H3>
+    <center> <img src= "toothpicks10.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks9 = <html> <body>
+    <br>
+    <H3> There are 9 toothpicks left... </H3>
+    <center> <img src= "toothpicks09.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks8 = <html> <body>
+    <br>
+    <H3> There are 8 toothpicks left... </H3>
+    <center> <img src= "toothpicks08.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks7 = <html> <body>
+    <br>
+    <H3> There are 7 toothpicks left... </H3>
+    <center> <img src= "toothpicks07.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks6 = <html> <body>
+    <br>
+    <H3> There are 6 toothpicks left... </H3>
+    <center> <img src= "toothpicks06.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks5 = <html> <body>
+    <br>
+    <H3> There are 5 toothpicks left... </H3>
+    <center> <img src= "toothpicks05.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks4 = <html> <body>
+    <br>
+    <H3>  There are 4 toothpicks left...</H3>
+    <center> <img src= "toothpicks04.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2,3 or 4)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks3 = <html> <body>
+    <br>
+    <H3>  There are 3 toothpicks left...</H3>
+    <center> <img src= "toothpicks03.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1,2 or 3)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ShowPicks2 = <html> <body>
+    <br>
+    <H3> There are 2 toothpicks left... </H3>
+    <center> <img src= "toothpicks02.jpg" > </center>
+	 <center> <H3> How many picks do want to get (1 or 2)? </H3>
+    <input name = "toothpicks" type="text" size=4>
+    </center>
+  </body> </html>;
+  
+  const html ComputerBegin = <html> <body>
+    <br>
+    <H3> Since I begin, I will take 1 toothpick... </H3>
+  </body> </html>;
+  
+  const html ComputerLost = <html> <body>
+    <br>
+    <H3> Oups... you have win.  I will take a revenge anytime!!!! </H3>
+    
+  </body> </html>;
+    
+  const html PlayerLost = <html> <body>
+    <br>
+    <H3> You lose!!!!!!.  </H3>
+    
+  </body> </html>;  
+  
+  const html Welcome = <html> <body>
+    <br>
+	 <H3> How to play: </H3>
+	 <H3>      1) It is a two players game </H3>
+	 <H3>      2) Start with 21 toothpicks, arranged in a line. </H3>
+	 <H3>      3) On each turn, a player may remove between 1 and 4 toothpicks. </H3>
+	 <H3>      4) The winner is the player who get the last toothpick. </H3>
+	 <br>
+    
+  </body> </html>;  
+  
+  const html ShowStats = <html> <body>
+    <br>
+    <H3> Number of compter win  : <[win]> </H3>
+	 <H3> Number of compter lost : <[lost]> </H3>
+    
+  </body> </html>;  
+  
+  const html Restart = <html> <body>
+    <br>
+    <H3> I have now win  <[win]> games and lost <[lost]> games.</H3>
+    <H3> Click <A HREF="http://www.cs.mcgill.ca/~pcardi1/cgi-bin/games10.cgi?Play">here </A>	 to play another game. </H3>
+  </body> </html>; 
+   int lost;
+	int win;
+	
+	int GetComputerMove(int x)
+  	{
+   	int returnVal;
+		
+		returnVal = 4;
+		
+		if(x==2)
+      	return 2;
+		if(x==3)
+			return 3;
+		if(x==4)
+			return 4;
+		if(x==1)
+			return 1;
+		
+  		while(returnVal>1 && (x-returnVal)%5 != 0)
+			returnVal = returnVal-1;		
+		
+    	return returnVal;
+    
+  }
+
+	session Magic(){
+	  show WelcomeMagic;
+	  show ShowCards1;
+	  show Wait;
+	  show ShowCards2;
+	}
+	
+	session Stats(){
+	  exit plug ShowStats[win=win,lost=lost];	
+	}  
+	
+	session Play() {
+   	int count;
+     	int val;
+     	int winner;
+		int computerMove;
+		string begin;
+			
+		count  = 21;
+     	val    = 5;
+		winner = 0;    
+		
+		show Welcome;
+				
+		while(count != 0){
+		   while(winner==0 && (val<0 || val>4 || (count-val) < 0)){
+				if(count == 21)
+					show ShowPicks21 receive[val=toothpicks];
+				if(count == 20)
+					show ShowPicks20 receive[val=toothpicks];
+				if(count == 19)
+					show ShowPicks19 receive[val=toothpicks];
+				if(count == 18)
+					show ShowPicks18 receive[val=toothpicks];
+				if(count == 17)
+					show ShowPicks17 receive[val=toothpicks];
+				if(count == 16)
+					show ShowPicks16 receive[val=toothpicks];
+				if(count == 15)
+					show ShowPicks15 receive[val=toothpicks];
+				if(count == 14)
+					show ShowPicks14 receive[val=toothpicks];
+				if(count == 13)
+					show ShowPicks13 receive[val=toothpicks];
+				if(count == 12)
+					show ShowPicks12 receive[val=toothpicks];
+				if(count == 11)
+					show ShowPicks11 receive[val=toothpicks];
+				if(count == 10)
+					show ShowPicks10 receive[val=toothpicks];
+				if(count == 9)
+					show ShowPicks9 receive[val=toothpicks];
+				if(count == 8)
+					show ShowPicks8 receive[val=toothpicks];
+				if(count == 7)
+					show ShowPicks7 receive[val=toothpicks];
+				if(count == 6)
+					show ShowPicks6 receive[val=toothpicks];
+				if(count == 5)
+					show ShowPicks5 receive[val=toothpicks];
+				if(count == 4)
+					show ShowPicks4 receive[val=toothpicks];
+				if(count == 3)
+					show ShowPicks3 receive[val=toothpicks];
+				if(count == 2)
+					show ShowPicks2 receive[val=toothpicks];
+			}
+		count = count-val;
+		
+		if(count==0)
+		  winner = 1;
+		else{
+			computerMove = GetComputerMove(count);
+			show plug ComputerPlay[computer=computerMove];
+			count = count-computerMove;
+		   if(count==0)
+				winner = 2;	
+		}
+		val   = 5;
+		}
+		
+		if(winner==1){
+	     show ComputerLost;
+		  lost = lost+1;
+		  }
+		else{
+		  show PlayerLost;
+		  win = win+1;
+		  }
+		exit plug Restart[win=win,lost=lost];
+  }
+}
+

@@ -1,0 +1,823 @@
+service{
+
+	const html Welcome = <html>
+			<body bgcolor="336699">
+    			<font color="FFFFFF">
+	 	   <h1>Welcome to the TicTakTow Game</h1>
+		   This is a <b>Group 04</b> presentation.</body></html>;
+	
+	const html ShowClip = <html><body>	
+			<body bgcolor="336699">
+    			<font color="FFFFFF">
+		<h3>Grid:</h3>
+	   <pre><b>      1      2      3
+	        <p>      4      5      6
+		<p>      7      8      9
+		</b></pre><p><p>
+		Please Select a slot <input name="choice" type="text" size=1>
+			     </body></html>;
+
+	const html Done = <html><body bgcolor="336699">
+    				<font color="FFFFFF">
+				<[msg]>
+			   <A href="/~okhali1/cgi-bin/tictaktow10.cgi?PlayGame">BACK</A> 
+			  </body></html>;
+	
+	const html Retry = <html><body bgcolor="336699">
+    				<font color="FFFFFF">
+				That was not a valid input. Select a number from the screen.
+			   </body></html>;
+		
+	const html UpdatedClip =  <html>
+			<body bgcolor="336699">
+    			<font color="FFFFFF">
+			<h3>Grid:</h3>
+			<b><[ln1]><p><[ln2]><p><[ln3]>
+			</b><p><[msg]><p>
+			Please Select a slot 
+				<input name="choice" type="text" size=1>
+			    </body></html>;
+	const html FinalClip = 	<html><body bgcolor="336699">
+    				<font color="FFFFFF">
+				<h3>Final Grid </h3>
+				<b><[ln1]><p><[ln2]><p><[ln3]>
+				</b><p></body></html>;
+	
+	const html List = <html><body bgcolor="336699">
+    				<font color="FFFFFF">
+				<[m1]><[n1]>
+				<[m2]><[n2]><p>
+				<[m3]><[n3]><p>
+				<[m4]><[n4]><[m5]>
+			   </body></html>;
+
+	const html DEBUG = <html><body bgcolor="336699">
+    				<font color="FFFFFF">
+				<[mesg]>
+			   </body></html>;
+	
+	
+	const html DEBUG_INT = <html>
+			<body bgcolor="336699">
+    			<font color="FFFFFF">
+			<[mesg]><[num]></body></html>;
+	//Schemas 
+	schema ROW{
+		int rowNo;
+		bool first;
+		bool second;
+		bool third;	
+	}
+	
+	schema RECORD{
+		int row1a;
+		int row1b;
+		int row1c;
+		int row2d;
+		int row2e;
+		int row2f;
+		int row3g;
+		int row3h;
+		int row3i;
+	}
+
+	//Globals
+	tuple RECORD slotRecord;
+	tuple ROW First;
+	tuple ROW Second;
+	tuple ROW Third;
+	int choice;
+	string board;
+	int machineWinCount;
+	int UserWinCount;
+	int drawCount;
+	int plays;
+	//&nbsp;
+	
+	//Functions
+	bool isValid(int selection){
+		if ((selection==1)&&
+		    (slotRecord.row1a==0))
+			return (true);
+		else  if((selection==2)&&
+			 (slotRecord.row1b==0))
+				return (true);
+		   else  if((selection==3)&&
+			    (slotRecord.row1c==0))
+				return (true);
+		 	 else  if((selection==4)&&
+				  (slotRecord.row2d==0))
+					return (true);
+			       else  if((selection==5)&&
+				        (slotRecord.row2e==0))
+						return (true);
+				     else  if((selection==6)&&
+					      (slotRecord.row2f==0))
+					   	return (true);
+					   else if((selection==7)&&
+						   (slotRecord.row3g==0))
+							return (true);
+						else if((selection==8)&&
+							(slotRecord.row3h==0))
+							 return (true);
+						     else if((selection==9)&&
+							     (slotRecord.row3i==0))
+								return (true);
+		
+							  else 
+								return (false);
+	}
+	void setSlot(int selection, int selectedBy){
+		//if selectedBy is 1 than its the user
+		//if selectedBy is 2 its set by the machine
+		
+		if (selection==1)
+			slotRecord.row1a=selectedBy;
+		else if(selection==2)
+			slotRecord.row1b=selectedBy;
+		     else if(selection==3)
+				slotRecord.row1c=selectedBy;
+			  else if(selection==4)
+				slotRecord.row2d=selectedBy;
+			       else if(selection==5)
+				    	slotRecord.row2e=selectedBy;
+				    else  if(selection==6)
+					    slotRecord.row2f=selectedBy;
+					  else if(selection==7)
+						       slotRecord.row3g=selectedBy;
+					       else if(selection==8)
+							    slotRecord.row3h=selectedBy;
+						    else if(selection==9)
+								slotRecord.row3i=selectedBy;
+							 else return;
+	}
+	
+	string getUpdatedLine(int lineNo){
+		string ret;
+		ret = "";
+		if (lineNo == 1){
+			if (slotRecord.row1a==1)
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row1a==10)
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			     	else
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				
+			if (slotRecord.row1b==1)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row1b==10)
+	ret=ret+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				else
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			if (slotRecord.row1c==1)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row1c==10)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				else
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			
+			return (ret);
+		}
+
+		if(lineNo == 2){
+			if (slotRecord.row2d==1)
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row2d==10)
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				else
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				
+			if (slotRecord.row2e==1)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row2e==10)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				else
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				
+			if (slotRecord.row2f==1)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row2f==10)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				else
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			
+			return (ret);				
+		}
+
+		if(lineNo == 3){
+			if (slotRecord.row3g==1)
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row3g==10)
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				else
+	ret="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				
+			if (slotRecord.row3h==1)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row3h==10)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				else 
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				
+			if (slotRecord.row3i==1)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			else	if (slotRecord.row3i==10)
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				else
+	ret=ret+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+				
+			return (ret);				
+		}
+	}
+
+	bool isCenterTaken(){
+		return (slotRecord.row2e!=0);
+	}
+
+	bool allCornersTaken(){
+		return 	((slotRecord.row1a!=0)&&
+			(slotRecord.row1c!=0)&&
+			(slotRecord.row3g!=0)&&
+			(slotRecord.row3i!=0));
+	}
+
+	void takeCenter(){
+		slotRecord.row2e=10;
+	}
+	void takeAnyCorner(){
+		if (slotRecord.row1a==0)
+			slotRecord.row1a=10;
+		else	if (slotRecord.row1c==0)
+				slotRecord.row1c=10;
+		    	else	if (slotRecord.row3g==0)
+					slotRecord.row3g=10;
+				else	
+					slotRecord.row3i=10;
+	}
+	
+	void takeSlot(int selection){
+
+	if (selection==1)
+		slotRecord.row1a=10;
+	else  if(selection==2)
+		slotRecord.row1b=10;
+	      else  if(selection==3)
+		    	slotRecord.row1c=10;
+	 	    else  if(selection==4)
+			  	slotRecord.row2d=10;
+		       	  else  if(selection==5)
+			        	slotRecord.row2e=10;
+			        else  if(selection==6)
+				      	slotRecord.row2f=10;
+               		 	      else if(selection==7)
+					   	slotRecord.row3g=10;
+				 	   else if(selection==8)
+						     slotRecord.row3h=10;
+					     	else if(selection==9)
+						     	slotRecord.row3i=10;
+						     else 
+							return;
+ 	}
+
+	int checkCornerHazardCase(){
+		int value;
+		value = slotRecord.row1b + 
+			slotRecord.row1c + 
+			slotRecord.row2f;
+		if ((value==2)&&(slotRecord.row1c!=1)){
+			return 3;
+		}else{
+			value = slotRecord.row1a + 
+				slotRecord.row1b + 
+				slotRecord.row2d;
+			if ((value == 2)&&(slotRecord.row1a!=1)){
+				return 1;
+			}else{
+				value = slotRecord.row2d + 
+					slotRecord.row3g + 
+					slotRecord.row3h;
+				if ((value==2)&&(slotRecord.row3g!=1)){
+					return 7;
+				}else{
+					value = slotRecord.row2f + 
+						slotRecord.row3h + 
+						slotRecord.row3i;
+					if ((value==2)&&(slotRecord.row3i!=1)){
+						return 9;
+					}else{
+						return (-1);
+					}
+				}
+			}
+		}
+	}
+	
+	int checkFromRows(){
+		int value;
+		value = slotRecord.row1a +
+			slotRecord.row1b + 
+			slotRecord.row1c;
+		if (value==20 || value==2){
+			return 1;
+		}else{
+			value = slotRecord.row2d +
+				slotRecord.row2e + 
+				slotRecord.row2f;
+			if (value==20 || value==2){
+				return 2;
+			}else{
+				value = slotRecord.row3g +
+					slotRecord.row3h + 
+					slotRecord.row3i;
+				if (value==2 || value==20){
+					return 3;
+				}else{
+					return -1;
+				}
+			}
+		}
+	}
+
+	int checkFromCols(){
+		int value;
+		value = slotRecord.row1a +
+			slotRecord.row2d + 
+			slotRecord.row3g;
+		if (value==20 || value==2){
+			return 1;
+		}else{
+			value = slotRecord.row1b +
+				slotRecord.row2e + 
+				slotRecord.row3h;
+			if (value==20 || value==2){
+				return 2;
+			}else{
+				value = slotRecord.row1c +
+					slotRecord.row2f + 
+					slotRecord.row3i;
+				if (value==2 || value==20){
+					return 3;
+				}else{
+					return -1;
+				}
+			}
+		}
+	}
+	
+	int checkFromDiag(){
+		int value;
+		value = slotRecord.row1a +
+			slotRecord.row2e + 
+			slotRecord.row3i;
+		if (value==2 || value==20){
+			return 1;
+		}else{
+			value = slotRecord.row1c + 
+				slotRecord.row2e + 
+				slotRecord.row3g;
+			if (value==2 || value==20){
+				return 2;
+			}else{
+				return -1;
+			}
+		}
+
+	}
+	
+	int findSlotInDia(int diaNo){
+		
+		if (diaNo == 1){
+			if (slotRecord.row1a==0){
+				return 1;
+			}else{
+				if (slotRecord.row2e==0){
+					return 5;
+				}else{
+					return 9;
+				}
+			}
+				
+		}else {
+			if (slotRecord.row1c==0){
+				return 3;
+			}else{
+				if (slotRecord.row2e==0){
+					return 5;
+				}else{
+					return 7;
+				}
+			}
+		}
+		
+	}
+	int findSlotInCol(int colNo){
+		if (colNo==1){
+			if (slotRecord.row1a==0){
+				return 1;
+			}else{
+				if (slotRecord.row2d==0){
+					return 4;
+				}else{
+					return 7;
+				}
+			}
+
+		}else{
+			if (colNo==2){
+				if (slotRecord.row1b==0){
+					return 2;
+				}else{
+					if (slotRecord.row2e==0){
+						return 5;
+					}else{
+						return  8;
+					}
+				}
+			}else{
+				if (slotRecord.row1c==0){
+					return 3;
+				}else{
+					if (slotRecord.row2f==0){
+						return 6;
+					}else{
+						return 9;
+					}
+				}
+			}
+		}
+		return -1;
+	}
+
+	int findSlotInRow(int rowNo){
+		if (rowNo==1){
+			if (slotRecord.row1a==0){
+				return 1;
+			}else{
+				if (slotRecord.row1b==0){
+					return 2;
+				}else{
+					return 3;
+				}
+			}
+		}else{
+			if (rowNo==2){
+				if (slotRecord.row2d==0){
+					return 4;
+				}else{
+					if (slotRecord.row2e==0){
+						return 5;
+					}else{
+						return 6;
+					}
+				}
+			}else{
+				if (slotRecord.row3g==0){
+					return 7;
+				}else{
+					if (slotRecord.row3h==0){
+						return 8;
+					}else{
+						return 9;
+					}
+				}
+			}
+		}
+	}
+
+	int pickAnyRandomSlot(){
+	//Not really Random, it just picks the 
+	//one available going from 1 to 9
+	if (slotRecord.row1a==0){
+		return 1;
+	}else{
+		if (slotRecord.row1b==0){
+			return 2;
+		}else{
+			if (slotRecord.row1c==0){
+				return 3;
+		     	}else{
+			  	if (slotRecord.row2d==0){
+					return 4;
+			    	}else{
+					if (slotRecord.row2e==0){
+				   		return 5;
+					}else {
+				   		if (slotRecord.row2f==0){
+							return 6;
+				   		}else{
+				      			if (slotRecord.row3g==0){
+								return 7;
+				      			}else{
+								if (slotRecord.row3h==0){
+					   				return 8;
+								}else{	
+								     if (slotRecord.row3i==0)
+								        return 9;
+								     else 
+									return (-1);
+								}
+				      			}
+				  	 	}
+					}
+			  	}
+			}
+	      	}
+	}
+      }
+
+	int getCleverSlot(){
+		//search for possible success for the user
+		//and try to block his/her success
+		//defensive program......
+		int ret;
+		int value;
+		ret = checkCornerHazardCase();
+		
+		if (ret<0){
+			board = board + "RetValue by Hazard Corner Checker is <0&&";
+			ret = checkFromRows();
+			if (ret<0){
+				board = board + "Check Row returned <0&&";
+				ret = checkFromCols();
+				if (ret<0){
+					board = board + "Check Cols returned < 0&&";
+					ret = checkFromDiag();
+					if (ret<0){	
+						board = board + "Check Diagonals returned < 0&&";
+						ret = pickAnyRandomSlot();
+						if (ret<0){
+							return (-1);
+						}else{
+							return ret;
+						}
+					}else{
+						value = findSlotInDia(ret);
+						board = board + "returning value from Dia &&";
+						return value;
+					}
+				}else{
+					board = board + "returning value by cols&& ";
+					value = findSlotInCol(ret);
+					return value;
+				}
+			}else{	board = board + "Returning value by Check Rows &&";
+				value = findSlotInRow(ret);
+				return value;
+			}
+		}else{	board = board + "Returning value by Harzard Checker &&";
+			return ret;
+		}
+	
+	}
+
+	int machineTurn(){
+		int pickedSlot;
+		board = "";
+		if (isCenterTaken()){
+			if (allCornersTaken()){
+				pickedSlot = getCleverSlot();
+				//takeSlot(pickedSlot);
+				if (pickedSlot<0){
+					return pickedSlot;
+				}else{
+					setSlot(pickedSlot, 10);
+					return pickedSlot;
+				}
+			}else{
+				pickedSlot = getCleverSlot();
+				//takeSlot(pickedSlot);
+				setSlot(pickedSlot, 10);
+				return pickedSlot;
+			}	
+		}else{
+			takeCenter();
+			return 5;
+		}
+	}
+
+	int getRowWinner(){
+		int value;
+		value = slotRecord.row1a +
+			slotRecord.row1b + 
+			slotRecord.row1c;
+		if (value==3){
+			return 1;
+		}else if(value==30){
+			return 2;
+		}
+		value = slotRecord.row2d +
+			slotRecord.row2e + 
+			slotRecord.row2f;
+		if (value==3){
+			return 1;
+		}else if(value==30){
+			return 2;
+		}
+
+		value = slotRecord.row3g +
+			slotRecord.row3h + 
+			slotRecord.row3i;
+		if (value==3){
+			return 1;
+		}else if(value==30){
+			return 2;
+		}		
+	   return (-1);
+	}
+	
+	int getColWinner(){
+		int value;
+		//board = "";
+		value = slotRecord.row1a +
+			slotRecord.row2d + 
+			slotRecord.row3g;
+		if (value==3){
+			return 1;
+		}else if(value==30){
+			return 2;
+		}
+		value = slotRecord.row1b +
+			slotRecord.row2e + 
+			slotRecord.row3h;
+		if (value==3){
+			return 1;
+		}else if(value==30){
+			return 2;
+		}
+
+		value = slotRecord.row1c +
+			slotRecord.row2f + 
+			slotRecord.row3i;
+		if (value==3){
+			return 1;
+		}else if(value==30){
+			return 2;
+		}		
+	   return (-1);
+	}
+	
+	int getDiaWinner(){
+		int value;
+		value = slotRecord.row1a + 
+			slotRecord.row2e + 
+			slotRecord.row3i;
+		if (value == 3){
+			return 1;
+		}else if(value == 30){
+			return 2;
+		}
+		
+		value = slotRecord.row1c + 
+			slotRecord.row2e + 
+			slotRecord.row3g;
+		if (value == 3){
+			return 1;
+		}else if(value == 30){
+			return 2;
+		}
+	   return (-1);
+	}
+	int getWinner(){
+		int retVal;
+		//board = "";
+		retVal  = getRowWinner();
+		if (retVal<0){
+			//board = "Not a RowWinner&&";
+			retVal = getColWinner();
+			if (retVal<0){
+				//board = board + "Not a ColWinner &&";
+				retVal = getDiaWinner();
+				if (retVal<0){
+					//board = board + "Not a Diagonal Winner&&";
+					return (-1);
+				}else{	
+					//board = board + "Diagonal Winner &&";
+					return retVal;
+				}
+			}else{
+				//board = board + "Col Winner &&";
+				return retVal;
+			}
+		}else{	
+			//board = board + "Row Winner&&";
+			return retVal;
+		}
+	}
+	session PlayGame(){
+		int count;
+		int selection;
+		int winner;
+		bool done;
+		string message;
+		string line1, line2, line3;
+		count = 0;
+		done = false;
+		selection = -1;
+		board = "";	
+		slotRecord = tuple {row1a=0, row1b=0, row1c=0, 
+				    row2d=0, row2e=0, row2f=0,
+			            row3g=0, row3h=0, row3i=0};
+
+		First = tuple{rowNo=1, first=false, second=false, third=false};
+		Second = tuple {rowNo=2,first=false, second=false, third=false};
+		Third = tuple {rowNo=3, first=false, second=false, third=false};
+		
+		plays = plays + 1;
+	
+		show Welcome;
+		show ShowClip receive [selection=choice];
+
+		//While the selection is invalid, keep retrying
+		while ((selection>9)||(selection<1)){
+			show Retry;
+			show ShowClip receive [selection=choice];
+		}
+		//valid input
+		//show plug DEBUG_INT [mesg="Selection = ", num=selection];
+		//if (isValid(selection))
+			// show plug DEBUG [mesg="That was a valid input"];
+		//else 
+		//	show plug DEBUG [mesg="That was a not valid input. <b>Select a number
+		//				from the screen.</b>"];
+	
+		while (isValid(selection)&&(!done)){
+			//show plug DEBUG [mesg="That was a valid input"];
+			count = count + 2;
+			setSlot(selection, 1);
+			selection = machineTurn();
+				
+			//show plug DEBUG_INT [mesg="Machine Picked = ", num=selection];
+			//show plug DEBUG_INT [mesg="Count = ", num=count];
+			//
+			winner = getWinner();
+			//show plug DEBUG_INT [mesg="Winner = ", num=winner];
+			//show plug DEBUG [mesg=board];
+			if (winner==1){
+				line1 = getUpdatedLine(1);
+				line2 = getUpdatedLine(2);
+				line3 = getUpdatedLine(3);
+				show plug FinalClip [ln1=line1, ln2=line2, ln3=line3];
+				show plug DEBUG [mesg = "Congrats, You have won the Game"];
+				done = true;
+				UserWinCount = UserWinCount + 1;
+			}
+			if (winner==2){				
+				line1 = getUpdatedLine(1);
+				line2 = getUpdatedLine(2);
+				line3 = getUpdatedLine(3);
+				show plug FinalClip [ln1=line1, ln2=line2, ln3=line3];
+				show plug DEBUG [mesg = "The Machine has Won the Game.."];
+				done = true;
+				machineWinCount = machineWinCount + 1;
+			}
+
+			if (count>=9 && (!done)){
+				drawCount = drawCount + 1;
+				done = true;
+				line1 = getUpdatedLine(1);
+				line2 = getUpdatedLine(2);
+				line3 = getUpdatedLine(3);
+				show plug FinalClip [ln1=line1, ln2=line2, ln3=line3];
+				show plug DEBUG [mesg=" This Game is a DRAW"];
+			}
+			if (!done){
+				line1 = getUpdatedLine(1);
+				//show plug DEBUG [mesg=line1];
+				line2 = getUpdatedLine(2);
+				//show plug DEBUG [mesg=line2];
+				line3 = getUpdatedLine(3);
+				//show plug DEBUG [mesg=line3];
+				
+				show plug UpdatedClip [ ln1=line1, ln2=line2, 
+							ln3=line3, 
+					msg="O=Machine&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X=You"]
+					receive [selection=choice];
+			}
+			while(!isValid(selection)&&(!done)){
+				show Retry;
+				line1 = getUpdatedLine(1);
+				//show plug DEBUG [mesg=line1];
+				line2 = getUpdatedLine(2);
+				//show plug DEBUG [mesg=line2];
+				line3 = getUpdatedLine(3);
+				//show plug DEBUG [mesg=line3];
+				
+				show plug UpdatedClip [ ln1=line1, ln2=line2, 
+							ln3=line3, 
+					msg="O=Machine&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X=You"]
+					receive [selection=choice];
+			}
+		}
+		message = "Please try again...";	
+		exit plug Done [msg=message];
+	}
+
+	session History(){
+		exit plug List [m1="In a Total of&nbsp;&nbsp;", n1=plays, 
+				m2=" games, the User won&nbsp;&nbsp;", n2=UserWinCount, 
+				m3="The machine won&nbsp;&nbsp;", n3=machineWinCount,
+				m4="With&nbsp;&nbsp;", n4=drawCount, 
+				m5="&nbsp;&nbsp;number of Draws"];
+
+	}
+}

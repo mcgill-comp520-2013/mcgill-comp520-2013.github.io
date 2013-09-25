@@ -1,0 +1,156 @@
+service {
+
+const html Intro = <html><title>The Wig Game Nobody Wants to Play!
+	</title><body bgcolor="99CCFF"><center><h1>
+	Welcome To The Wiggy Walking Game!
+	</h1></center><br><br>
+
+	Hi, welcome to my little game where all you have to
+	do is to find the "golden key".
+
+	Pick a direction and walk until you find the key.
+	Fewest trys gets onto hi-score list!
+	<br><br>
+	Enter the you date of birth (YYMMDD)
+	<input name="year" type="text" size=2>
+	<input name="month" type="text" size=2>
+	<input name="day" type="text" size=2>
+	
+	<br><br></body></html>;
+
+const html Bye = <html><body bgcolor="99CCFF">
+	<br><br>Please continue on playing....
+	<br><br><a href="http://www.cs.mcgill.ca/~elo3/cgi-bin/newgame10.cgi?StartPlay">Please click this link to continue....don't click 'Continue' button</a>
+	<br><br></body></html>;
+
+const html StartMsg = <html><h2>Begin...</h2><br><body bgcolor="99CCFF">
+	<br><br>Hey, s'up...got some bad news....
+	the world is being taken over by a millions of insane
+	Bill Gate clones. The key is for a special black box for
+	which all the clones will parish if opened.
+	<p>
+	The fate of the world lies in your hands, please find that key
+	and save us....you have two weeks (ie 14 chances) before we all rot in 
+	Microsoft hell....<br><br>
+	Your are currently in the middle of McGill...where do you want to go?
+	<br>
+	<input type="radio" name="dir" value="up">Go straight one step<br>
+	<input type="radio" name="dir" value="left">Go left one step<br>
+	<input type="radio" name="dir" value="right">Go right one step<br>
+	<input type="radio" name="dir" value="down">Go back one step<br><br>
+	</body></html>;
+
+const html Prompt1 = <html><h3><br>......looking.....</h3>
+	<body bgcolor="99CCFF"><br><br>
+	Nothing is here at (<[xpos]>,<[ypos]>).....keep on looking....
+	where to next?
+	<p>
+	<input type="radio" name="dir" value="up">Go straight one step<br>
+	<input type="radio" name="dir" value="left">Go left one step<br>
+        <input type="radio" name="dir" value="right">Go right one step<br>
+        <input type="radio" name="dir" value="down">Go back one step<br><br>
+        </body></html>;
+
+const html Found = <html><h3>........looking....found something</h3>
+	<body bgcolor="99CCFF"><br>
+	Upon closer inspection you see something partially buried behind
+	a tree.
+	<p>
+	Digging into the ground for it....a key appears!<br>
+	This is the golden key! Congratulations....you have saved
+	this world from Microsoft domination....<br>
+	You are now famous.....everyone loves you.....you are more
+	popular than god himself....
+	<br><br><br>
+	Thank you for playing this god aweful game....cya soon!</body></html>;
+
+const html NotFound = <html><h3><br>....AAAHHHHHHHH!......</h3>
+	<body bgcolor="CC0000"><br><br>
+	You messed up.....can't even find a stupid little key....now 
+	you have screwed us and everybody else in the world....
+	Bill Gates clones are everywhere.....run for you life......
+	<p>
+	GAME OVER!<br><br>
+	</body></html>;
+
+const html ReachBounds = <html><h3><br>Reached Edge of World!!!!....</h3>
+	<body bgcolor="99CCFF"><p>
+	Please pick another direction to go....<br><br>
+	<input type="radio" name="dir" value="up">Go straight one step<br>
+	<input type="radio" name="dir" value="left">Go left one step<br>
+	<input type="radio" name="dir" value="right">Go right one step<br>
+	<input type="radio" name="dir" value="down">Go back one step<br><br>
+	</body></html>;
+	
+schema Position {  //using tuples for x,y coordinates....
+ int x;
+ int y;
+}
+
+int seed1,seed2;
+int day;
+
+session begin() {             //get seed numbers from birthday
+ show Intro receive[seed1 = year,seed2 = month,day=day];
+ exit Bye;
+}
+	
+session StartPlay() {   //start the game session
+
+tuple Position p;
+int num1,num2;  //x, y coordinate of key
+int max;        //max 
+int i,limit;
+string dir;  //direction
+
+limit = 14; //max limit of guesses
+
+num1 = ((12233 * seed1 + 132) % 65536) % 4;//generate x and y coordinates
+num2 = ((11233 * seed2 + 102) % 65536) % 4;
+
+if (day > 0 && day < 8)      //generates whether x,y positive or negative
+ num1 = num1 * -1;
+if (day >= 8 && day < 16)
+ num2 = num2 * -1;
+if (day > 15 && day < 23) {
+ num1 = num1 * -1;
+ num2 = num2 * -1;
+}
+
+show StartMsg receive[dir=dir];  //show start, user picks direction
+
+p = tuple { x=0, y=0 };    //origin
+max = 3;                   //bounds
+i = 0;                     //increment
+while (i < limit) {        //direction user wants to go  
+  if (dir == "left")
+   p.x = p.x - 1;
+  if (dir == "right")
+   p.x = p.x + 1;
+  if (dir == "up")
+   p.y = p.y + 1;
+  if (dir == "down")
+   p.y = p.y - 1;
+   
+  if (p.x == num1 && p.y == num2)  //if position matches key coordinates, user wins
+   exit Found;                            
+  else
+   show plug Prompt1[xpos=p.x,ypos=p.y] receive[dir=dir];  //show where they, try again
+  
+  if (p.x == max && dir == "right")       //tell user they reached the bounds
+   show ReachBounds receive[dir=dir];
+  if (p.x == (max * -1) && dir == "left")
+   show ReachBounds receive[dir=dir];
+  if (p.y == max && dir == "up")
+   show ReachBounds receive[dir=dir];
+  if (p.y == (max * -1) && dir == "down")
+   show ReachBounds receive[dir=dir];
+ i = i + 1;
+}
+exit NotFound;        //if over limit of tries, then player loses
+}
+				    
+
+
+       
+}

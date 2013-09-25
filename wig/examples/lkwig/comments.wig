@@ -1,0 +1,29 @@
+/* comment
+ * comment */
+// more comment
+service {
+  const html Welcome = <html> <body>
+    Welcome!
+  </body> </html>;
+
+  const html Pledge = <html> <body>
+    How much do you want to contribute?
+    <input name="contribution" type="text" size=4>
+  </body> </html>;
+
+  const html Total = <html> <body>
+    The total is now <[total]>.
+  </body> </html>;
+
+  int amount;
+
+  session Contribute() {
+     int i;
+     i= 87;
+     show Welcome;
+     show Pledge receive[i = contribution];
+     amount = amount + i;
+     exit plug Total[total = amount];
+  }
+}
+

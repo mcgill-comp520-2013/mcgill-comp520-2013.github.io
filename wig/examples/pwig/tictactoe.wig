@@ -1,0 +1,177 @@
+service {
+  const html Logon = <html> <body>
+    <h1>Welcome to The Tic-Tac-Toe Game</h1>
+    Please enter your on-line names:<br>
+     Player 1: <input name="name_player_1" type="text" value="Player 1" size=25> Your mark is X <br>
+     Player 2: <input name="name_player_2" type="text" value="Player 2" size=25> Your Mark is 0
+  </body> </html>;
+  
+  const html OddGame = <html> <body>
+    <h1>Odd Game!</h1>
+  </body> </html>;
+
+  const html PlayTurn = <html> <body>
+    <h1><font color="red"><[ERREUR]></font></h1><br>
+    <h1><[name_player_turn]>, you play !</h1><br>
+    <h2>There is the grid:<br><br></h2>
+   
+    <table>
+    	<tr>
+		<td><[r1c1]></td><td><[r1c2]></td><td><[r1c3]></td>
+    	</tr>
+    	<tr>
+    		<td><[r2c1]></td><td><[r2c2]></td><td><[r2c3]></td>
+    	</tr>
+    	<tr>
+    		<td><[r3c1]></td><td><[r3c2]></td><td><[r3c3]></td>
+    	</tr>
+    </table>
+    </h2>
+
+    Choose the box where you want to put your mark:<br>
+    <table>
+     <tr>
+	<td>Row :</td>
+        <td><input name="row" type="text" size=5></td>
+     </tr>
+     <tr>
+	<td>Column :</td>
+	<td><input name="column" type="text" size=5></td>
+     </tr>
+     <tr>
+     	<td>Quit ?</td>
+	<td><input name="quit" type="radio" value="yes"></td>
+     </tr>
+    </table>
+  </body> </html>;
+
+  const html ByeBye = <html> <body>
+    <h1>Congratulations <[winner]>, You Won !</h1>
+  </body> </html>;
+    
+  string r1c1;
+  string r1c2;
+  string r1c3;
+  string r2c1;
+  string r2c2;
+  string r2c3;
+  string r3c1;
+  string r3c2;
+  string r3c3;
+
+  void insert( string r, string c, string mark)
+    {
+	if (r=="1")
+	{
+		if (c=="1") r1c1=mark;
+		if (c=="2") r1c2=mark;
+		if (c=="3") r1c3=mark;
+	}
+	if (r=="2")
+	{
+		if (c=="1") r2c1=mark;
+		if (c=="2") r2c2=mark;
+		if (c=="3") r2c3=mark;
+	}
+	if (r=="3")
+	{
+		if (c=="1") r3c1=mark;
+		if (c=="2") r3c2=mark;
+		if (c=="3") r3c3=mark;
+	}
+    }
+  
+  string getmark( string r, string c)
+    {
+	if (r=="1")
+	{
+		if (c=="1") return r1c1;
+		if (c=="2") return r1c2;
+		if (c=="3") return r1c3;
+	}
+	if (r=="2")
+	{
+		if (c=="1") return r2c1;
+		if (c=="2") return r2c2;
+		if (c=="3") return r2c3;
+	}
+	if (r=="3")
+	{
+		if (c=="1") return r3c1;
+		if (c=="2") return r3c2;
+		if (c=="3") return r3c3;
+	}
+	return "";
+    }
+
+  int winn()
+  {
+        if ( ((r1c1==r1c2) && (r1c2==r1c3)) && ((r1c1=="X") || (r1c1=="0")) ) return 1;
+        if ( ((r2c1==r2c2) && (r2c2==r2c3)) && ((r2c1=="X") || (r2c1=="0")) ) return 1;
+        if ( ((r3c1==r3c2) && (r3c2==r3c3)) && ((r3c1=="X") || (r3c1=="0")) ) return 1;
+        
+	if ( ((r1c1==r2c1) && (r2c1==r3c1)) && ((r1c1=="X") || (r1c1=="0")) ) return 1;
+	if ( ((r1c2==r2c2) && (r2c2==r3c2)) && ((r1c2=="X") || (r1c2=="0")) ) return 1;
+	if ( ((r1c3==r2c3) && (r2c3==r3c3)) && ((r1c3=="X") || (r1c3=="0")) ) return 1;
+	
+	if ( ((r1c1==r2c2) && (r2c2==r3c3)) && ((r1c1=="X") || (r1c1=="0")) ) return 1;
+	if ( ((r3c1==r2c2) && (r2c2==r1c3)) && ((r3c1=="X") || (r3c1=="0")) ) return 1;
+	
+	return 0;
+  }
+
+  session Tictactoe()
+  {
+    string name_player_1,name_player_2,name_player_turn,quit,row,column,mark_player,ERREUR;
+    int win;
+    int insertions;
+    
+    win=0;
+    insertions=0;
+
+    r1c1=r1c2=r1c3=r2c1=r2c2=r2c3=r3c1=r3c2=r3c3=".";
+
+    show Logon receive [name_player_1 = name_player_1 , name_player_2 = name_player_2];
+    name_player_turn=name_player_1;
+
+    while ((quit!="yes") && (win==0))
+	{
+      		show plug PlayTurn[name_player_turn = name_player_turn,
+			ERREUR = ERREUR,
+			r1c1 = r1c1, 
+			r1c2 = r1c2,
+			r1c3 = r1c3,
+			r2c1 = r2c1,
+			r2c2 = r2c2,
+			r2c3 = r2c3,
+			r3c1 = r3c1,
+			r3c2 = r3c2,
+			r3c3 = r3c3]
+      			receive[quit = quit, row = row, column = column]; 
+
+		if ( (row>"3") || (row<"1") || (column>"3") || (column<"1") )
+			ERREUR="Sorry but you made a mistake when choosing the line or column number";
+		else
+			if ((getmark(row,column)=="X") || (getmark(row,column)=="0")) ERREUR="Sorry the box has already been checked !";
+			else 
+			{
+				ERREUR=""; 
+				if (name_player_turn==name_player_1)
+					mark_player="X";
+				else
+					mark_player="0";
+				insert(row, column, mark_player);
+				insertions=insertions+1;
+				if ((win=winn())==1) exit plug ByeBye[winner = name_player_turn];
+				else
+				{
+					if ( insertions==9 ) exit OddGame;
+					if(name_player_turn==name_player_1)
+						name_player_turn=name_player_2;
+					else
+						name_player_turn=name_player_1; 
+				}
+			}
+    	}
+  }
+}

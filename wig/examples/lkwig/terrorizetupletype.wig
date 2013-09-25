@@ -1,0 +1,74 @@
+/* really b0rked wigcode destined to provoke the tuple part of type analysis */
+service {
+	const html Tuple = <html>Foo foo <[a]> <[b]> <[c]> <[d]> </html>;
+
+	schema Schumm{
+		int s;
+		string t;
+		bool u;
+		int v;
+	}
+
+	schema NotSchumm {
+		string v;
+		string x;
+		bool y;
+		int z;
+	}
+
+	schema SubSchumm{
+		int s;
+		bool u;
+	}
+
+	schema SupSchumm{
+		string foo;
+		bool u;
+		int v;
+		int s;
+		string t;
+		bool f;
+	}
+
+	schema Blumm{
+		string foo;
+		int t;
+		bool f;
+	}
+		
+	tuple Schumm s1, s2;
+	tuple SubSchumm subs;
+	tuple SupSchumm sups;
+	tuple NotSchumm ns;
+
+	int a, b ,c;
+	bool x, y, z;
+	string w,u,v;
+
+	
+	tuple Schumm invalid(int foo1, tuple NotSchumm s1, tuple SubSchumm e2){
+		tuple Schumm soo;
+		tuple Blumm blo;
+		tuple SupSchumm sup;
+		foo1 = s1;
+		s1 = foo1;
+		e2 = s1 \+ (x,y,z); /* incompatible */
+		e2 = soo \+ (s,u); /* works */
+		e2 = soo \- (v,t); /* also works */
+		e2 = s1 \+ (r,g,b); /* not there */
+		sup = soo << blo; /* doesn't work, t is of wrong type */
+		sup = blo << soo; /* should work */
+		sup = (3 - 4 / 2 % 4) << (s1 \+ (r,g,b));
+		s1 = (3 - 4 / 2 % 4) \+ a;
+		s1.v = true; /* incorrect type */
+		if (s1.v){
+			return ((s1 << e2) \- (s,z)); /* not consistent */
+		}else{
+			return (sup \- foo) \+ (s,t,u,v); /* works, trust me */
+		}
+	}
+
+	session see(){
+		exit Tuple;
+	}
+}

@@ -1,0 +1,82 @@
+service {
+
+  const html Login = <html> <body>
+    <h1>Welcome to The Talk Room</h1>
+    <p>
+    Enter your user name:
+    <input name="username" type="text" size=25>
+    <p>
+    Enter your password:
+    <input name="password" type="text" size=25>
+  </body> </html>;
+
+  const html incorrect = <html> <body>
+    <h1>I'm sorry <[username]>, permission denied! </h1>
+
+  </body> </html>;
+
+  const html Update = <html> <body>
+    <h1>The Talk Room Service</h1>
+    <hr>
+    <b>Messages so far:</b>
+    <p>
+    <[msg0]><p><[msg1]><p><[msg2]><p>
+    <hr>
+    <b>Your new message:</b>
+    <p>
+    <input name="msg" type="text" size=70>
+    <p>
+    <hr>
+    <p>
+    <input name="quit" type="radio" value="yes"> Quit now
+  </body> </html>;
+
+  const html ByeBye = <html> <body>
+    <h1>Thanks for visiting, <[username]>. </h1>
+    There have been <[conns]> connections so far.
+     <p>
+    You wrote <[msgs]> messages this time.
+  </body> </html>;
+
+  string msg0,msg1,msg2;
+  int connections;
+
+  session Talk() {
+    string username,password,msg,quit;
+    int written;
+    bool correct;
+     
+    connections = connections+1;
+    correct = false;
+    written = 0;
+
+    while (!correct)
+    {
+       show Login receive [username = username, password = password];
+       if ((username == "Ebrahim" && password == "group5") ||
+           (username == "Abbas" && password == "password") ||
+           (username == "guest" && password == "guest"))
+          correct = true;
+ 
+       if (!correct)
+         show plug incorrect [username = username];
+    }
+    
+    quit = "no";
+    while (quit!="yes") {
+      show plug Update[msg0 = msg0, 
+                       msg1 = msg1, 
+                       msg2 = msg2]
+      receive[msg = msg, quit = quit]; 
+            if (msg!="") {
+        written = written+1;
+        msg0 = msg1;
+        msg1 = msg2;
+        msg2 = username + "> " + msg;
+      }
+    }
+    exit plug ByeBye[username = username, conns = connections,
+                     msgs = written];
+  }
+}
+

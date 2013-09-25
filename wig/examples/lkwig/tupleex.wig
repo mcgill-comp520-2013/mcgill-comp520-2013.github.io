@@ -1,0 +1,68 @@
+service {
+  schema Scm1 {
+    bool b;
+    int i;
+    float f;
+    string s;
+  }
+
+  schema Scm2 {
+    bool b;
+    int i;
+  }
+
+  tuple Scm1 t1;
+  tuple Scm2 t2, t3;
+
+  session S() {
+    t1 = tuple { b=true, i=87, f=3.14, s="foo" };
+    t2 = (t1 \+ b, i);    /* keep b and i */
+    t3 = (t1 \- f, s);    /* throw away f and s */
+
+    /* here: t2 and t3 are equal! */
+  }
+
+}
+
+The operators: << and >> are also on tuple expressions!
+
+service {
+  schema Scm1 {
+    bool b;
+    int i;
+    float f;
+  }
+
+  schema Scm2 {
+    bool b;
+    int i;
+    string s;
+  }
+
+  schema Scm3 {
+    bool b;
+    int i;
+    float f;
+    string s;
+  }
+
+  tuple Scm1 t1;
+  tuple Scm2 t2;
+  tuple Scm3 t3;
+
+ session S() {
+    t1 = tuple { b=true, i=87, f=3.14 };
+    t2 = tuple { b=false, i=42, s="foo" };
+    t3 = (t1 << t2);
+
+    /* t1 and t2 must agree on the types of attributes
+       they both have!
+       t3 will contain the `union' of the two, where t2
+       wins whenever they agree on attributes!
+       That is, t3 is equal to the following:
+         tuple { b=false, i=42, f=3.14, s="foo" }
+     */
+  }
+
+}
+

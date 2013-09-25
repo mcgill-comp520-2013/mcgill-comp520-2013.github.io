@@ -1,0 +1,124 @@
+service {
+
+   const html AdminPass = <html> <body>
+	You will need a password to change the values:<br>
+	password:	
+	<input name = "pass" type="text" size=8><br>
+     </body></html>;
+
+   const html PassWrong = <html> <body>
+	Don't try that again!!!
+     </body></html>;
+
+   const html AdminUpdate = <html> <body>
+	Hi Master:<p>
+	component1:
+	<input name = "comp1" type="text" size=15>
+	<input name = "price1" type="text" size=5>	
+	component2:
+	<input name = "comp2" type="text" size=15>
+	<input name = "price2" type="text" size=5>	
+	component3:
+	<input name = "comp3" type="text" size=15>
+	<input name = "price3" type="text" size=5>	
+	component4:
+	<input name = "comp4" type="text" size=15>
+	<input name = "price4" type="text" size=5>	
+   </body></html>;
+
+   const html Prices = <html> <body>
+	<ul>
+		<li> <[comp1]> <[price1]>
+		<li> <[comp2]> <[price2]>
+		<li> <[comp3]> <[price3]>
+		<li> <[comp4]> <[price4]>
+	</ul>
+	<p>
+	If you have a better price don't hesitate to give us a better price:<br>
+	You have found a better price for component:
+	<input name ="comp" type="text" size=15>
+      </body> </html>;
+
+   const html Update = <html> <body>
+	So you have found a better price for <[comp]>:
+	Feel free to give us your new price:
+	<input name="newPrice" type="text" size=5>
+   </body></html>;
+
+   const html Done = <html> <body>
+	The price was updated.
+    </body> </html>;
+
+   const html DoneAdmin = <html> <body>
+	The prices and names were updated.
+    </body> </html>;
+
+   const html Kidding = <html> <body>
+	You are kidding? The old price was better!
+   </body></html>;
+
+   string comp1, comp2, comp3, comp4;
+   int price1, price2, price3, price4;
+
+   session Admin() {
+	string pass;
+	
+	show AdminPass receive [pass=pass];
+	if (pass != "pass")
+		show PassWrong;
+	else
+	{
+          show AdminUpdate receive [comp1 = comp1, comp2 = comp2, comp3 = comp3, comp4 = comp4, price1 = price1, price2 = price2, price3 = price3, price4 = price4];
+	}   
+   }
+
+   session Price() {
+     string comp;
+     int newPrice;
+
+     while(true) {
+
+	show plug Prices[comp1 = comp1, comp2 = comp2, comp3 = comp3, comp4 = comp4, price1 = price1, price2 = price2, price3 = price3, price4 = price4] receive [comp = comp];
+	
+	if (comp == comp1) {
+	  show plug Update[comp = comp] receive [newPrice = newPrice];
+		if (newPrice <= price1) {
+			price1=newPrice;
+			show Done;
+			}
+		else
+			show Kidding;
+	}
+
+	if (comp == comp2) {
+	  show plug Update[comp = comp] receive [newPrice = newPrice];
+		if (newPrice <= price2) {
+			price2=newPrice;
+			show Done;
+			}
+		else
+			show Kidding;
+	}
+
+	if (comp == comp3) {
+	  show plug Update[comp = comp] receive [newPrice = newPrice];
+		if (newPrice <= price3) {
+			price3=newPrice;
+			show Done;
+			}
+		else
+			show Kidding;
+	}
+	
+	if (comp == comp4) {
+	  show plug Update[comp = comp] receive [newPrice = newPrice];
+		if (newPrice <= price4) {
+			price4=newPrice;
+			show Done;
+			}
+		else
+			show Kidding;
+	}
+     }
+   }
+}

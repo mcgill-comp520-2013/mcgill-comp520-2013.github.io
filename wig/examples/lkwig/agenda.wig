@@ -1,0 +1,234 @@
+service {
+
+    const html Init =
+        <html>
+
+        <head>
+        <title> Political Survey </title>
+        <link rel="stylesheet" type="text/css" href="mystyle.css"></link>
+        </head>
+
+        <body>
+
+        <p>
+        Personal Agenda
+        <br><br><br>
+
+        <table border=1>
+            <tr>
+                <td>
+                </td>
+                <td>
+	                 <p>Monday
+                </td>
+                <td>
+	                 <p>Tuesday
+                </td>
+                <td>
+	                 <p>Wednesday
+                </td>
+                <td>
+	                 <p>Thursday
+                </td>
+                <td>
+	                 <p>Friday
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Morning
+                </td>
+                <td>
+	                <p><[MorningMonday]>
+                </td>
+                <td>
+	                <p><[MorningTuesday]>
+                </td>
+                <td>
+	                <p><[MorningWednesday]>
+                </td>
+                <td>
+	                <p><[MorningThursday]>
+                </td>
+                <td>
+	                <p><[MorningFriday]>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Afternoon
+                </td>
+                <td>
+	                <p><[AfternoonMonday]>
+                </td>
+                <td>
+	                <p><[AfternoonTuesday]>
+                </td>
+                <td>
+	                <p><[AfternoonWednesday]>
+                </td>
+                <td>
+	                <p><[AfternoonThursday]>
+                </td>
+                <td>
+	                <p><[AfternoonFriday]>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Evening
+                </td>
+                <td>
+	                <p><[EveningMonday]>
+                </td>
+                <td>
+	                <p><[EveningTuesday]>
+                </td>
+                <td>
+	                <p><[EveningWednesday]>
+                </td>
+                <td>
+	                <p><[EveningThursday]>
+                </td>
+                <td>
+	                <p><[EveningFriday]>
+                </td>
+            </tr>
+        </table><br><br>
+    </body>
+    </html>;
+
+    const html Add = 
+    <html>
+    <head>
+        <title>Add an activity to the schedule</title>
+        <link rel="stylesheet" type="text/css" href="mystyle.css"></link>
+    <body>
+        <table border=0>
+          <tr>
+            <td>Activity:</td>
+            <td><input name="actName" type="text" size=15></td>
+          </tr>
+          <tr>
+            <td>Day:</td> 
+            <td> <select name="actDay">
+                   <option>Monday</option>
+                   <option>Tuesday</option>
+                   <option>Wednesday</option>
+                   <option>Thursday</option>
+                   <option>Friday</option>
+                   </select></td>
+          </tr>
+          <tr>
+            <td>Part of Day:</td>
+            <td> <select name="dayPart">
+                   <option>Morning</option>
+                   <option>Afternoon</option>
+                   <option>Evening</option>
+                 </select></td>
+          </tr>
+          <tr>
+            <td>Start Time (24-hrs format hh:mm):</td>
+            <td><input name="startTime" type="text" size=5></td>
+          </tr>
+          <tr>
+            <td>End Time (24-hrs format hh:mm):</td>
+            <td><input name="endTime" type="text" size=5></td>
+          </tr>
+        </table>
+    </body>
+    </html>;
+
+    string MorningMon, MorningTu, MorningWed, MorningTh, MorningFri;
+    string AfternoonMon, AfternoonTu, AfternoonWed, AfternoonTh, AfternoonFri;
+    string EveningMon, EveningTu, EveningWed, EveningTh, EveningFri;
+
+    session AddActivity()
+    {
+      string actDay, actSTime, actETime, actName, daysection;
+     
+      show Add receive [actName = actName, 
+                        actDay = actDay, 
+                        daysection = dayPart, 
+                        actSTime = startTime, 
+                        actETime = endTime];
+      
+      if (actDay == "Monday") {
+          if (daysection == "Morning")
+              MorningMon = MorningMon + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+          else if (daysection == "Afternoon")
+              AfternoonMon = AfternoonMon + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+	      else
+              EveningMon = EveningMon + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+      }
+      else if (actDay == "Tuesday") {
+            if (daysection == "Morning")
+                MorningTu = MorningTu + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+            else if (daysection == "Afternoon")
+                AfternoonTu = AfternoonTu + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+	        else
+                EveningTu = EveningTu + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+      }
+      else if (actDay == "Wednesday") {
+            if (daysection == "Morning")
+                MorningWed = MorningWed + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+            else if (daysection == "Afternoon")
+                AfternoonWed = AfternoonWed + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+	        else
+                EveningWed = EveningWed + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+      }
+      else if (actDay == "Thursday") {
+            if (daysection == "Morning")
+                MorningTh = MorningTh + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+            else if (daysection == "Afternoon")
+                AfternoonTh = AfternoonTh + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+	        else
+                EveningTh = EveningTh + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+      }
+      else if (actDay == "Friday") {
+            if (daysection == "Morning")
+                MorningFri = MorningFri + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+            else if (daysection == "Afternoon")
+                AfternoonFri = AfternoonFri + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+	        else
+                EveningFri = EveningFri + actSTime + "-" + actETime + "<br>" + actName + "<br>";
+      }
+
+      if (MorningMon=="") MorningMon = "<br>";
+      if (MorningTu=="") MorningTu = "<br>";
+      if (MorningWed=="") MorningWed = "<br>";
+      if (MorningTh=="") MorningTh = "<br>";
+      if (MorningFri=="") MorningFri = "<br>";
+
+      if (AfternoonMon=="") AfternoonMon = "<br>";
+      if (AfternoonTu=="") AfternoonTu = "<br>";
+      if (AfternoonWed=="") AfternoonWed = "<br>";
+      if (AfternoonTh=="") AfternoonTh = "<br>";
+      if (AfternoonFri=="") AfternoonFri = "<br>";
+
+      if (EveningMon=="") EveningMon = "<br>";
+      if (EveningTu=="") EveningTu = "<br>";
+      if (EveningWed=="") EveningWed = "<br>";
+      if (EveningTh=="") EveningTh = "<br>";
+      if (EveningFri=="") EveningFri = "<br>";
+
+
+      show plug Init[MorningMonday=MorningMon,
+                     MorningTuesday=MorningTu,
+                     MorningWednesday=MorningWed, 
+                     MorningThursday=MorningTh,
+                     MorningFriday=MorningFri,
+                     AfternoonMonday=AfternoonMon,
+                     AfternoonTuesday=AfternoonTu,
+                     AfternoonWednesday=AfternoonWed, 
+                     AfternoonThursday=AfternoonTh,
+                     AfternoonFriday=AfternoonFri,
+                     EveningMonday=EveningMon,
+                     EveningTuesday=EveningTu,
+                     EveningWednesday=EveningWed, 
+                     EveningThursday=EveningTh,
+                     EveningFriday=EveningFri];
+    }
+
+
+}

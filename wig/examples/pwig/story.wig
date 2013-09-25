@@ -1,0 +1,93 @@
+service {
+  const html Welcome = <html><body>
+    <P>Welcome!  Here is the beginning of a story written by generations of
+    dedicated men and women.  You now have the opportunity to contribute to
+    this great worldwide effort to produce the best story ever.  Unleash
+    your creativity!  Type in the next sentence of the story.</P>
+    <P><[story]></P>
+    <P><input name="sentence" type="text" size="60"></P>
+    <P><input name="quit" type="radio" value="yes">Quit now</P>
+    </body> </html>;
+
+  const html Accept = <html><body>
+    <P>Thank you very much.  Your contribution is very important to the success
+    of this story.  Here is how it looks now.  You may type another sentence at
+    the bottom of this page.</P>
+    <P><[story]></P>
+    <P><input name="sentence" type="text" size="60"></P>
+    <P><input name="quit" type="radio" value="yes">Quit now</P>
+    </body></html>;
+
+  const html Reject = <html><body>
+    <P>Unfortunately, somebody submitted a sentence before you did.  But you
+    can still write the next sentence.  Try to be quick, this time.  Here is
+    how the story looks like now.</P>
+    <P><[story]></P>
+    <P><input name="sentence" type="text" size="60"></P>
+    <P><input name="quit" type="radio" value="yes">Quit now</P>
+    </body></html>;
+
+  const html GoodBye = <html><body>
+    <P>Thank you!  You are now part of a great work of art!</P>
+    </body></html>;
+
+  const html ConfirmReset = <html><body>
+    <P><input name="confirm" type="radio" value="yes">
+    	Really delete the story?</P>
+    </body></html>;
+
+  const html ResetDone = <html><body>
+    <P>OK, the story has been deleted.</P>
+    </body></html>;
+
+  const html ResetNotDone = <html><body>
+    <P>The story has not been deleted.</P>
+    </body></html>;
+
+   
+  string story;
+  int sentence_count;
+
+  session Reset() {
+    string confirm;
+
+    show ConfirmReset receive [confirm = confirm];
+    if (confirm == "yes")
+    {
+      story = "";
+      sentence_count = 0;
+      exit ResetDone;
+    }
+    else
+    {
+      exit ResetNotDone;
+    }
+  }
+
+  session Contribute() {
+    int mycount;
+    string quit, sentence;
+    
+    mycount = sentence_count;
+    show plug Welcome[story = story] receive [sentence = sentence, quit = quit];
+    while (quit != "yes")
+    {
+      if (mycount == sentence_count)
+      {
+	sentence_count = sentence_count + 1;
+	story = story + sentence;
+	show plug Accept[story = story] 
+	  receive [sentence = sentence, quit = quit];
+      }
+      else
+      {
+	show plug Reject[story = story]
+	  receive [sentence = sentence, quit = quit];
+      }
+    }
+    exit GoodBye;
+  }
+}
+	
+      
+    

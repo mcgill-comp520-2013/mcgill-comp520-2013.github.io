@@ -1,0 +1,65 @@
+service {
+  const html Welcome = <html> <body>
+    </form>
+    <form method="post" NAME="form2" onSubmit="return probe()">
+    <h1>Welcome!</h1>
+    What is your name?<br><input type="text" name="yourname"><br><br>
+    What is your quest?<br><input type="text" name="version"><br><br>
+    What is your favourite color?<br><input type="text" name="browser"><br><br>
+    Why did you come here?<br><input type="text" name="platform"><br><br>
+
+    <script language="Javascript">
+
+      // find the browser information and store it in javascript variables
+      var version, brVerId;
+      var browser = navigator.appName;
+      var platform = navigator.platform;
+      var reg = new RegExp('/');
+
+      if (browser == 'Microsoft Internet Explorer') {
+        brVerId = navigator.userAgent.indexOf('MSIE') + 5;
+        version = navigator.userAgent.substr(brVerId,3);
+      } else {
+        brVerId = navigator.userAgent.search(reg);
+        version = navigator.userAgent.substring(brVerId+1);
+      }
+
+      // make the new form go to the same place as the old form (to maintain the session)
+      document.form2.action = document.forms[0].action;
+
+      // when the form is submitted, change the values of the text input fields first then submit it. this is the alternative to using hidden inputs
+      function probe() {
+        document.form2.browser.value = browser;
+        document.form2.version.value = version;
+        document.form2.platform.value = platform;
+        return true;
+      }
+    </script>
+  </body> </html>;
+
+  const html Show = <html> <body>
+    <h1>You have been Probed!</h1>
+    Dear <[yourname]>, <br>
+    <br>
+    You are using <[browser]>, version <[version]> to view this page.<br>
+    You are running it on a <[platform]> platform.<br>
+  </body> </html>;
+
+  const html End = <html> <body>
+    <h1>The Probe!</h1>
+    <[numberofpeople]> people have been probed. You are unforunately not alone...<br>
+  </body> </html>;
+
+  int numberofpeople;
+
+  session Probe() {
+    string version, platform, browser, yourname;
+
+    show Welcome receive [yourname = yourname, browser = browser, version = version, platform = platform];
+
+    numberofpeople = numberofpeople + 1;
+    show plug Show[yourname = yourname, browser = browser, version = version, platform = platform];
+
+    exit plug End[numberofpeople = numberofpeople];
+  }
+}

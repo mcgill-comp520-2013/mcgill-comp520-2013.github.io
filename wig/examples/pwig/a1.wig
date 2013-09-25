@@ -1,0 +1,88 @@
+
+
+service {
+
+  const html Login = <html> <body>
+    <h1>Welcome to MyBookmakrs Area</h1>
+    <p>
+    Enter your user name:
+    <input name="username" type="text" size=25>
+    <p>
+    Enter your password:
+    <input name="password" type="text" size=25>
+  </body> </html>;
+
+  const html incorrect = <html> <body>
+    <h1>I'm sorry <[username]>, permission denied! </h1>
+
+  </body> </html>;
+
+  const html Update = <html> <body>
+    <h1>BookMark Service</h1>
+    <hr>
+    <b>BookMarks so far:</b><BR>
+    <[msg0l]><[msg0]></a><BR>
+    <[msg1l]><[msg1]></A><BR>
+    <[msg2l]><[msg2]></A><BR>
+    <hr>
+    <b>Add bookmark:</b>
+    <p>
+    <input name="msg" type="text" size=70>
+    <p>
+    <hr>
+    <p>
+    <input name="quit" type="radio" value="yes"> Quit now
+  </body> </html>;
+
+  const html ByeBye = <html> <body>
+    <h1>Thanks for visiting, <[username]>. </h1>
+    There have been <[conns]> connections so far.
+     <p>
+    You added <[msgs]> bookmarks this time.
+  </body> </html>;
+
+  string msg0,msg1,msg2, msg3;
+  int connections;
+
+  session Addr() {
+    string username,password,msg,quit;
+    int written;
+    bool correct;
+     
+    connections = connections+1;
+    correct = false;
+    written = 0;
+
+    while (!correct)
+    {
+       show Login receive [username = username, password = password];
+       if ((username == "qxu2" && password == "hello") ||
+           (username == "group1" && password == "group1") ||
+           (username == "guest" && password == "guest"))
+          correct = true;
+ 
+       if (!correct)
+         show plug incorrect [username = username];
+    }
+    
+    quit = "no";
+    while (quit!="yes") {
+      show plug Update[msg0 = msg0,
+                       msg0l = "<A HREF="+msg0+">",
+                       msg1 = msg1, 
+                       msg1l = "<A HREF="+msg1+">",
+                       msg2 = msg2,
+                       msg2l = "<A HREF="+msg2+">"]
+      receive[msg = msg, quit = quit]; 
+            if (msg!="") {
+        written = written+1;
+        msg0 = msg1;
+        msg1 = msg2;
+        msg2 = msg;
+      }
+    }
+    exit plug ByeBye[username = username, conns = connections,
+                     msgs = written];
+  }
+}
+

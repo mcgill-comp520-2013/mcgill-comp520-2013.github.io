@@ -1,0 +1,39 @@
+service {
+  html EnterDepth = <html>
+    Please select the depth of the genealogical tree:
+    <input type=text name=depth size=1 maxlength=1>
+  </html>;
+
+  html GenealogyDoc = <html>
+    <h1>Genealogical Tree</h1>
+    <hr>
+    For <[depth]> generation(s):
+    <p>
+    <b>You</b>
+    <[your_tree]>
+  </html>;
+
+  html GenerationDoc = <html>
+    <ul>
+      <li><[mother]>
+      <[mothers_tree]>
+      <li><[father]>
+      <[fathers_tree]>
+    </ul>
+  </html>;
+
+  html genTree(int depth, string s) {
+    if (depth==0) return <html></html>;
+    else return GenerationDoc <[mother = s+"mother",
+				mothers_tree = genTree(depth-1,s+"mother's "),
+			        father = s+"father",
+			        fathers_tree = genTree(depth-1,s+"father's ")];
+  }
+
+  session GenTree() {
+    int depth;
+
+    show EnterDepth receive [depth = depth];
+    exit GenealogyDoc <[depth = depth, your_tree = genTree(depth,"your ")];
+  }
+}

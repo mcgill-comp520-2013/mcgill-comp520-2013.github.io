@@ -1,0 +1,98 @@
+/* broken wigcode for type analysis error-provocation */
+
+service{ 
+	const html Number = <html> <head><title>Random Number</head><body>
+		The new number is: <[number]>
+		</body> </html>;
+	
+	schema Scm1{
+		int t;
+		string s;
+		bool b;
+	}
+	
+	int a, b;
+	string s1, s2;
+	bool bl;
+	
+
+	int INTFUNC1(int boo, bool foo, string str) {
+		return; /* must return int */
+	}
+	
+	/* return value not allowed in empty function */
+	void empty(int blah){
+		return blah;
+	}
+
+	int INTFUNC2 (string str, bool foo, int boo) {
+		a = 1;
+		s1 = "foo";
+		return s1; /* returning string instead of int */
+	}
+
+	string STRINGFUNC (int a, string s1) {
+		tuple Scm1 t1; 
+		t1 = tuple {b=true, s="foop", t=2 }; /* should work fine */
+		t1 = tuple {a="foo",b=false, s=4};  /* incompatible */
+		t1 = tuple {b="foo",t=false, s=4};  /* incompatible */
+		t1.t = "foo"; /* incompatible */
+		t1.b = "foo"; /* incompatible */
+		t1.s = "foo"; /* works */
+		t1.s = 4; /* incompatible */
+		a = 1;
+		b = 2;
+		s1 = "foo";
+		s2 = 1;
+		s2 = false + "bar"; /* should not work! */
+		s2 = "bar" + false; /* neither should this! */
+		s1 = a; /* assigns between string and int not allowed */
+		a = s1; /*       ""        ""              "" 	      */
+		bl = true;
+		if (a == s1) { /* should not allow this */
+			a < b;
+			a = b < a; /* should not let boolean be assigned to a */
+			return s1;
+		} else if (s1 >= s2) { /*this should be ok */
+			while (a) { /* condition must be boolean */ 
+				a = a+1;
+				return s2;
+			}
+
+			if (bl) {
+				return b; /* should not be allowed to return an int */
+			}
+
+			return s1;
+		}
+		return s1;
+	}
+
+	session phat() {
+		a = 2;
+		s1 = "foo";
+		if (a == a) {
+			if (a < s1) /* should not allow this */
+				s1 = s1 + a; /* string cat should be ok */
+				
+		}
+
+		bl = (bl && false); 
+		bl = (a && s1); /* and between int and string, not legit */
+		bl = (a || a); /* or between int and int, not legit */
+
+		a = INTFUNC1 (a, bl, s1); /* SHOULD BE FINE */
+		a = INTFUNC1 (bl, a, s1, a); /* too many args */
+		a = INTFUNC1 (a, bl); /* too few args */
+		a = INTFUNC1 (a, s1, bl); /* arg/param types not equivalent */
+		
+		b = INTFUNC2 (s1, bl, a);
+
+		s1 = bl; /* cannot assign a string to bool */
+		
+		s1 = STRINGFUNC(a, s1);
+		s1 = STRINGFUNC(s1, a); /* arg/param types not equivalent */ 
+		exit Number;
+	}
+}
+

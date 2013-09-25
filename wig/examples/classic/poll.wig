@@ -1,0 +1,59 @@
+service {
+  const html Setup = <html> <body>
+    <h1>The Polling Service</h1>
+    What is the question:
+    <input type="text" name="question" size=30>?
+  </body> </html>;
+
+  const html Form = <html> <body>
+    <h1>The Polling Service</h1>
+    <b><[question]></b>
+    <p>
+    <input type="radio" name="answer" value="yes"> Yes &nbsp;&nbsp;
+    <input type="radio" name="answer" value="no"> No
+  </body> </html>;
+
+  const html Chart = <html> <body>
+    <h1>The Polling Service</h1>
+    <b><[question]></b>
+    <p>
+    Yes <hr size=20 width=<[yes]> noshade><p>
+    No <hr size=20 width=<[no]> noshade>
+  </body> </html>;
+
+  string question;
+  int yes,no;
+
+  void do_Init() {
+    string q;
+      yes = no = 0;
+    show Setup receive[q = question];
+      question = q;
+  }
+
+  void do_Poll() {
+    string answer;
+    show plug Form[question = question] receive[answer = answer];
+      if (answer=="yes") yes = yes+1; else no = no+1;
+  }
+
+  void do_Result() {
+    exit plug Chart[question = question, 
+                    yes = (500*yes)/(yes+no), no = (500*no)/(yes+no)];
+  }
+
+  session Init() {
+    do_Init();
+    do_Poll();
+    do_Result();
+  }
+
+  session Poll() {
+    do_Poll();
+    do_Result();
+  }
+
+  session Result() {
+    do_Result();
+  }
+}

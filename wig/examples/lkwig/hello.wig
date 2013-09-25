@@ -1,0 +1,7 @@
+service {
+
+  session Hello() {
+    exit <html>Hello World!</html>;
+  }
+
+}

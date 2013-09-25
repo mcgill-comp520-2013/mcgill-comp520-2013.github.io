@@ -1,0 +1,41 @@
+service {
+  shared vector string guests;
+
+  html SignDoc = <html>
+    Enter your name: <input type=text name="name">
+  </html>;
+
+  html GuestBookDoc = <html>
+    <h1>Guestbook</h1>
+    <ul>
+    <[guests]>
+    </ul>
+  </html>;
+
+  html PersonDoc = <html>
+    <li><b><[name]></b>.
+    <[guests]>
+  </html>;
+
+  session Show() {
+    int i;
+    html H = GuestBookDoc;
+    vector string v;
+
+    v = guests;
+    i=0;
+    while (i<|v|) {
+      H = H <[guests = PersonDoc <[name = v[i]]];
+      i++;
+    }
+    exit H;
+  }
+
+  session Sign() {
+    string name;
+
+    show SignDoc receive [name = name];
+    guests = guests + vector { name };
+    Show();
+  }
+}

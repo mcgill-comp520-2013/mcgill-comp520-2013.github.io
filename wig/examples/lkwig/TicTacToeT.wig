@@ -1,0 +1,150 @@
+service {
+  const html Turn = <html> <body><[result]><table>
+    <tr>
+    <td><[h1]></td>
+    <td><[h2]></td>
+    <td><[h3]></td>
+    </tr>
+    <tr>
+    <td><[h4]></td>
+    <td><[h5]></td>
+    <td><[h6]></td>
+    </tr>
+    <tr>
+    <td><[h7]></td>
+    <td><[h8]></td>
+    <td><[h9]></td>
+    </tr>
+    </table>
+    where do you wanna play next? (1-9)
+    <input name="position" type="text" size=1>
+    </body> </html>;
+
+  string p1;
+  string p2;
+  string p3;
+  string p4;
+  string p5;
+  string p6;
+  string p7;
+  string p8;
+  string p9;
+
+  int play(int position, string player)
+  {
+    if(position < 1 || position > 9) return -1;
+    else if (position == 1)
+      if (p1 != "_") return -1;
+      else p1 = player;
+    else if (position == 2)
+      if (p2 != "_") return -1;
+      else p2 = player;
+    else if (position == 3)
+      if (p3 != "_") return -1;		
+      else p3 = player;                     
+    else if (position == 4)        
+      if (p4 != "_") return -1;
+      else p4 = player;
+    else if (position == 5)
+      if (p5 != "_") return -1;
+      else p5 = player;
+    else if (position == 6)
+      if (p6 != "_") return -1;
+      else p6 = player;
+    else if (position == 7)
+      if (p7 != "_") return -1;
+      else p7 = player;
+    else if (position == 8)
+      if (p8 != "_") return -1;
+      else p8 = player;
+    else if (position == 9)
+      if (p9 != "_") return -1;
+      else p9 = player;
+    return checkWin(player);
+  }
+
+  int checkWin(string player)
+  {	
+    if(p1 == player && p2 == player && p3 == player) return 1;
+    else if(p1 == player && p2 == player && p3 == player) return 1;
+    else if(p4 == player && p5 == player && p6 == player) return 1;
+    else if(p7 == player && p8 == player && p9 == player) return 1;
+    else if(p1 == player && p4 == player && p7 == player) return 1;
+    else if(p2 == player && p5 == player && p8 == player) return 1;
+    else if(p3 == player && p6 == player && p9 == player) return 1;
+    else if(p1 == player && p5 == player && p9 == player) return 1;
+    else if(p3 == player && p5 == player && p7 == player) return 1;
+    else if(  p1!="_"
+            &&p2!="_"
+            &&p3!="_"
+            &&p4!="_"
+            &&p5!="_"
+            &&p6!="_"
+            &&p7!="_"
+            &&p8!="_"
+            &&p9!="_") return 2;
+    return 0;
+  }	
+
+  string toggleplayer(string player)
+  {	if(player == "X") return "O";
+    return "X";
+  }
+
+  int compMove()
+  {	
+    int i;
+    int j;
+    i = 1;
+    j = -1;
+    while(j == -1) {
+      j = play(i,"O");
+      i = i +1;
+    }
+    return j;
+  }
+
+  session Move() {
+    int m;
+    int done;
+    string toggle;
+    string msg;
+    toggle = "X";
+    done = 0;
+    p1="_";
+    p2="_";
+    p3="_";
+    p4="_";
+    p5="_";
+    p6="_";
+    p7="_";
+    p8="_";
+    p9="_";
+
+    while(done <= 0)
+    {
+      show plug Turn[result="",h1=p1,h2=p2,h3=p3,h4=p4,h5=p5,h6=p6,h7=p7,h8=p8,h9=p9]
+        receive[m = position];
+
+      done = play(m, toggle);
+
+      while (done == -1) {
+        show plug Turn[result="Illegal Move",h1=p1,h2=p2,h3=p3,h4=p4,h5=p5,h6=p6,h7=p7,h8=p8,h9=p9]
+          receive[m = position];
+
+        done = play(m, toggle);
+      }
+      if (done == 0){
+        toggle = toggleplayer(toggle);
+        done = compMove();
+        if(done == 0) toggle=toggleplayer(toggle);
+      }
+    }
+
+    if(done==1 && toggle == "X") msg = "You Win!";
+    else if(done==1 && toggle == "O") msg = "You Lose!";
+    else if(done==2) msg = "Cat's Game!";
+
+    exit plug Turn[result=msg,h1=p1,h2=p2,h3=p3,h4=p4,h5=p5,h6=p6,h7=p7,h8=p8,h9=p9];
+  }
+}

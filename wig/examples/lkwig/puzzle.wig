@@ -1,0 +1,52 @@
+service {
+  const html Start = <html> <body align="center">
+    <h1>WIG script : word puzzle</h1>
+    <p>
+    Here are the letters : <b><[Letters]></b>
+    <p>
+    What is the word?<br>
+    <input type="text" name="answer" size=10><br>
+  </body> </html>;
+
+  const html Return = <html> <body align="center">
+    <p>
+    <b>Your answer is : <[eval]> </b> <br>
+    <p>
+    Would you like to do another word (yes or no)?
+    <input type="text" name="YorN" size=5><br>
+  </body> </html>;
+
+  const html Thanks = <html> <body align="center">
+    <h1>Thanks!</h1>
+  </body></html>;
+
+  string Letters;
+
+  session Construct() {
+    string YorN, eval;
+    string answer, Ranswer;
+    int i;
+    
+    YorN = "";
+    i = 1;
+    while (YorN != "no")
+    { if (i==1) {Letters = "vredi"; Ranswer = "drive";}
+	if (i==2) {Letters = "utipcer"; Ranswer = "picture";}
+	if (i==3) {Letters = "rwofle"; Ranswer = "flower";}
+
+	show plug Start [Letters=Letters] receive[answer = answer];
+      if (answer==Ranswer){
+         eval="right";
+	}
+	else {
+	   eval="wrong";
+	}
+
+      show plug Return[eval = eval] receive[YorN = YorN];
+	if (i<3) i = i+1; 
+	else i=1;
+    }
+  exit Thanks;
+  }
+}
+

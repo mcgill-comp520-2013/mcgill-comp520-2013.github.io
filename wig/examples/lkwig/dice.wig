@@ -1,0 +1,78 @@
+/*
+ * We used the chat.wig and game.wig examples of the wig10 compiler 
+ *   coming from Prof. Laurie Hendren 
+ *   as a starting point for our simple game.
+ * The web page to find this example is:
+ *           http://www.sable.mcgill.ca/~hendren/520/wigex.html
+ */
+service {
+  const html Logon = <html> <body>
+    <h1>Welcome to dice game</h1>
+    Please enter your nick name:
+    <input name="name" type="text" size=25>
+  </body></html>;
+
+  const html Play = <html> <body>
+    <h1>The dice game</h1>
+    <hr>
+    <p>This game is completely stupid because you need to find an random hidden value with a random dice.... GOOG LUCK...
+    <hr>
+    <p>Please, discover the hidden value...
+    <p>Dice is: <[dice]>
+    <hr>
+    <p>
+    <input name="roll" type="radio" value="yes"> Play now
+    <p>
+    <input name="quit" type="radio" value="yes"> Quit now
+  </body> </html>;
+
+  const html ByeBye = <html> <body>
+    <h1>Thanks <[name]> using This Amazing Dice Game</h1>
+    You roll <[count]> times the dice <[remark]>.
+    By the way, the hidden value was <[value]>.
+  </body> </html>;
+
+  int hidden_dice_value;
+  int dice;
+  int count;
+
+  /* Function to generate a random number between 1 and 6 */
+  int getRandom(int seed) {
+    return seed = 1 + ((25173 * seed + 13849) % 65536 );
+  }
+
+  session Game() {
+    string name, quit;
+    int success;
+    string roll;
+
+    success = 0;
+    roll    = "no";
+    quit    = "no";
+    count   = 0;
+
+    hidden_dice_value = getRandom(4);
+
+    /* Build the login page */
+    show Logon receive [name = name];
+
+    /* Choose abitrary values for dices */
+    dice = getRandom(1);
+
+    /* Play... */
+    while ((quit!="yes")&&(success!=1)) {
+      show plug Play[dice = dice]
+      receive[quit = quit, roll = roll]; 
+      if (roll=="yes") {
+        count = count + 1;  
+        dice = getRandom(dice);
+        if(dice==hidden_dice_value)
+          success=1;
+      }
+    }
+    if (success==1)
+      exit plug ByeBye[name=name, count=count, remark="to find the hidden dice value", value=hidden_dice_value];
+    else
+      exit plug ByeBye[name=name, count=count, remark="before leaving the game", value=hidden_dice_value];
+  }
+}

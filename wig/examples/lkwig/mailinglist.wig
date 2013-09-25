@@ -1,0 +1,157 @@
+service {
+  const html Welcome = <html> <body>
+    <h1>Welcome to our group!</h1>
+    <h2>You are the visiter number:<[counter]><h2>
+    <p>
+    <h3>Please Select:</h3>
+    <br><input name="choice" type="radio" value="joinus"> Join Us
+    <br><input name="choice" type="radio" value="showmember"> Show members
+    <br><input name="choice" type="radio" value="quit"> Quit Now
+    </p>
+  </body> </html>;
+
+  const html JoinUs = <html> <body>
+    <h1>Please leave your contact information.</h1>
+    <br>Name:
+    <input name="name" type="text" size=20>
+    <br>Phone:
+    <input name="phone" type="text" size=30>
+    <br>Email:
+    <input name="email" type="text" size=30>  
+    <p>
+    <h3>Please Select:</h3>
+    <br><input name="choice" type="radio" value="submit"> Submit
+    <br><input name="choice" type="radio" value="showmember"> Show members
+    <br><input name="choice" type="radio" value="quit"> Quit Now
+    </p>      
+  </body> </html>;
+
+  const html ReFillForm = <html> <body>
+    <h1>At least one field must be filled.</h1>
+    <br>Name:
+    <input name="name" type="text" size=20>
+    <br>Phone:
+    <input name="phone" type="text" size=30>
+    <br>Email:
+    <input name="email" type="text" size=30>  
+ 
+    <p>
+    <h3>Please Select:</h3>
+    <br><input name="choice" type="radio" value="submit"> Submit
+    <br><input name="choice" type="radio" value="showmember"> Show members
+    <br><input name="choice" type="radio" value="quit"> Quit Now
+    </p>
+  </body> </html>;
+
+  const html ShowMembers = <html> <body>
+    <h2>We have <[totalmembers]> members in our group now! </h2>
+    <p>The last three members are:</p>
+    
+    <table border="1" width="100%">
+  		<tr>
+    		<td width="34%">Name</td>
+    		<td width="33%">Phone</td>
+    		<td width="33%">Email</td>
+  		</tr>
+  		<tr>
+    		<td width="34%"><[name1]></td>
+    		<td width="33%"><[phone1]></td>
+    		<td width="33%"><[email1]></td>
+  		</tr>
+  		<tr>
+    		<td width="34%"><[name2]></td>
+    		<td width="33%"><[phone2]></td>
+    		<td width="33%"><[email2]></td>
+  		</tr>
+  		<tr>
+    		<td width="34%"><[name3]></td>
+    		<td width="33%"><[phone3]></td>
+    		<td width="33%"><[email3]></td>
+  		</tr>
+	</table>
+   
+    <P>
+    <h3>Please Select:</h3>
+    <br><input name="choice" type="radio" value="joinus"> Join Us
+    <br><input name="choice" type="radio" value="showmember"> Show members
+    <br><input name="choice" type="radio" value="quit"> Quit Now
+    </P>
+  </body> </html>;
+
+  const html Joined = <html> <body>
+    <h1>Welcome <[name]>, hope you have fun in our group</h1>
+    <h1>We have <[totalmembers]> members in our group now! </h1>
+    
+    <h3>Please Select:</h3>
+    <br><input name="choice" type="radio" value="joinus"> Join Us
+    <br><input name="choice" type="radio" value="showmember"> Show members
+    <br><input name="choice" type="radio" value="quit"> Quit Now
+  </body> </html>;
+
+  const html Quit = <html> <body>
+    <h2>Thank you for visiting our group.</h2>
+    <h2>Have a good day!</h2>
+  </body> </html>;
+
+  int totalmembers;
+  int counter;
+  string name1, name2, name3;
+  string phone1, phone2, phone3;
+  string email1, email2, email3;
+
+  session Home() {
+     string name;
+     string phone;
+     string email;
+     string choice;     
+     counter = counter + 1;
+     show plug Welcome[counter=counter] receive[choice=choice];
+     while(choice!="quit"){
+       if(choice=="joinus"){
+		show JoinUs receive[name = name, 
+					phone = phone, 
+					email = email,
+					choice = choice];
+		while(choice=="submit"){
+			if(name=="" && phone=="" && email==""){
+				show ReFillForm receive[name = name, 
+										phone = phone, 
+										email = email, 
+										choice = choice];
+			}
+			else{
+				totalmembers = totalmembers + 1;
+                name1=name2;
+				name2=name3;
+				name3=name;
+				phone1=phone2;
+				phone2=phone3;
+				phone3=phone;
+				email1=email2;
+				email2=email3;
+				email3=email;
+				
+                show plug Joined[ 
+                			name = name, 
+                			totalmembers = totalmembers
+						] receive[choice=choice];
+				}
+		}
+	}
+	if(choice=="showmember"){
+		show plug ShowMembers[ totalmembers = totalmembers,
+						name1 = name1,
+						phone1 = phone1,
+						email1 = email1,
+                		name2 = name2,
+                		phone2 = phone2,
+                		email2 = email2,
+                		name3 = name3,
+                		phone3 = phone3,
+                		email3 = email3
+				    ] receive[choice=choice];
+        }         
+     }
+     exit Quit;
+  }
+}

@@ -1,0 +1,1215 @@
+service {
+                                                                                                    const html Room = 
+    <html><head><link rel="StyleSheet" href="startrek.css"></head><body><h2><[charName]>
+, you are now in the <[roomName]></h2><h3><[description]></h3><p style="font-size: smaller"><a href="startrek4.cgi?Start">
+Start over and choose another character</a></p><p>
+You can go in the following directions:</p><[actDirS1]>
+    <input type="radio" name="action" value="0">
+South: <[roomS]><br><[actDirS2]><[actDirN1]>
+    <input type="radio" name="action" value="1">
+North: <[roomN]><br><[actDirN2]><[actDirE1]>
+    <input type="radio" name="action" value="2">
+East: <[roomE]><br><[actDirE2]><[actDirW1]>
+    <input type="radio" name="action" value="3">
+West: <[roomW]><br><[actDirW2]><p>
+You can also perfrom the following actions:</p>
+    <input type="radio" name="action" value="4" checked><[act1]><br>
+    <input type="radio" name="action" value="5"><[act2]><br>
+    <input type="radio" name="action" value="6"><[act3]><br>
+    <input type="radio" name="action" value="7"><[act4]><br></body></html>;
+
+  const html Redirect = 
+    <html><head><link rel="StyleSheet" href="startrek.css"></head><body><p><[statusText]></p><[anchorStart]>
+""<[url]>
+""<[urlTitle]></a></body></html>;
+
+  const html CharSelect = 
+    <html><head><link rel="StyleSheet" href="startrek.css"></head><body background="../img/back.gif"><embed src="../img/theme.mp3" hidden="true" autostart="true" autoplay="true" loop="true"><div align="center"><img height="300" width="282" src="../img/logo.gif"><h2>
+CHOOSE YOUR DESTINY</h2><img height="140" width="120" src="../img/picard.jpg"><br>
+    <input type="radio" name="actor" value="0" checked>
+Captain Jean-Luc Picard<br><img height="140" width="120" src="../img/data.jpg"><br>
+    <input type="radio" name="actor" value="1">
+Lieutenant Commander Data<br><img height="140" width="120" src="../img/crusher.jpg"><br>
+    <input type="radio" name="actor" value="2">
+Doctor Beverly Crusher<br></div></body></html>;
+
+
+  int picardComplete;
+  string roomRiker;
+  string roomTroi;
+  string roomCorridor3S;
+  string roomCorridor3M;
+  string roomCorridor3E;
+  string roomHolodeck1;
+  string roomLaforge;
+  string roomWorf;
+  string roomTurbolift1;
+  string roomCaptnOffice;
+  string roomTurbolift4;
+  string roomCorridor4S;
+  string roomCorridor4M;
+  string roomCorridor4E;
+  string roomTenForward;
+  string roomHolodeck2;
+  string roomTransporter;
+  string roomShuttleBay;
+  string roomPicard;
+  string roomBridge;
+  string roomCorridor2M;
+  string roomCorridor2E;
+  string roomCorridor2S;
+  string roomCrusher;
+  string roomData;
+  string roomEngineering;
+  string roomTurbolift2;
+  string roomTurbolift3;
+  string status1;
+  string status2;
+  string ahref;
+  string CHAR_PICARD, CHAR_CRUSHER, CHAR_DATA;
+  string charName;
+
+
+  void Init(){
+    picardComplete = 0;
+    roomRiker = "First Officer William Riker Quarters";
+    roomTroi = "Councilor Troi Quarters";
+    roomCorridor3S = "Beginning of the corridor on Deck 3";
+    roomCorridor3M = "Middle of the corridor on Deck 3";
+    roomCorridor3E = "End of the corridor on Deck 3";
+    roomLaforge = "Lt. Commander LaForge Quarters";
+    roomWorf = "Lieutenant Worf Quarters";
+    roomHolodeck1 = "Holodeck 1";
+    roomTurbolift1 = "Turbolift on the Bridge";
+    roomTurbolift3 = "Turbolift on Deck 3";
+    roomBridge = "Bridge of Starship Enterprise";
+    roomCaptnOffice = "Captain Picard's Office";
+    roomTurbolift4 = "Turbolift on Deck 4";
+    roomCorridor4S = "Beginning of the corridor on Deck 4";
+    roomCorridor4M = "Middle of the corridor on Deck 4";
+    roomCorridor4E = "End of the corridor on Deck 4";
+    roomTenForward = "Ten Forward";
+    roomHolodeck2 = "Holodeck 2";
+    roomTransporter = "Transporter on Deck 4";
+    roomShuttleBay = "Shuttle Bay on Deck 4";
+    CHAR_PICARD = "Cpt. Jean-Luc Picard";
+    CHAR_DATA = "Lt. Commander Data";
+    CHAR_CRUSHER = "Dr. Beverly Crusher";
+    charName = CHAR_PICARD;
+    roomPicard = "Jean-Luc Picard Quarters";
+    roomCorridor2M = "Middle of the corridor on Deck 2";
+    roomCorridor2E = "End of the corridor on Deck 2";
+    roomCorridor2S = "Beginning of the corridor on Deck 2";
+    roomCrusher = "Beverly Crusher Quarters";
+    roomData = "Lt. Commander Data Quarters";
+    roomEngineering = "Engineering";
+    roomTurbolift2 = "Turbolift on Deck 2";
+    status1 = "You are headed for";
+    status2 = "You do nothing and return to";
+    ahref = "<a href=";
+  }
+
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                                
+                
+                
+                
+                
+                
+                
+                            
+                
+                            
+                
+                                
+                
+                                
+                
+                
+                
+                                
+                                
+            
+  session Start()             {
+    int actor;
+    string rUrl, rTitle;
+
+    rUrl = "startrek4.cgi?Start";
+    rTitle = "Start Page";
+    Init();
+    show CharSelect receive [actor = actor];
+    if (actor == 0)
+    {
+      charName = CHAR_PICARD;
+      rUrl = "startrek4.cgi?PicardRoom";
+      rTitle = roomPicard;
+      exit plug Redirect [ statusText = "<h1><p>WARNING! WARNING!</h1><br>You wake up from a deep slumber to an irritaing sound of Red Alert.<br>&quotCaptain please report to the Bridge. We have a situation here!&quot you hear Riker's anxious voice. <br>&quotI'll be right there number one,&quot you answer calmly and get up from bed.</p>", anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+    }
+    else if (actor == 1)
+    {
+      charName = CHAR_DATA;
+      rUrl = "startrek4.cgi?DataRoom";
+      rTitle = roomData;
+      exit plug Redirect [ statusText = "Spot wakes you up.\nYou look at the cat with anger.", anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+    }
+    else if (actor == 2)
+    {
+      charName = CHAR_CRUSHER;
+      rUrl = "startrek4.cgi?CrusherRoom";
+      rTitle = roomCrusher;
+      exit plug Redirect [ statusText = "Doctor Crusher please respond.\nPaging Doctor Crusher...", anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+    }
+    else {
+      exit plug Redirect [ statusText = "You start in your room", anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+    }
+  }
+
+  session PicardRoom()                                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+    string act1, act2, act3, act4;
+
+    rStatus = status1;
+    rTitle = roomPicard;
+    rUrl = "startrek4.cgi?PicardRoom";
+    act1 = "Synthesize a cup of tea";
+    act2 = "Look around";
+    act3 = "Take a nap";
+    act4 = "Hide behind curtains";
+    if (charName == CHAR_PICARD)
+    {
+      act2 = "Play flute";
+      act4 = "Ask computer the location of Dr. Crusher";
+    }
+    show plug Room [ charName = charName, roomName = roomPicard, description = "", act1 = act1, act2 = act2, act3 = act3, act4 = act4, actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "", actDirE2 = "", roomE = roomCorridor2M, actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Corridor2M";
+      rTitle = roomCorridor2M;
+    }
+    else if (action == 4)
+    {
+      rStatus = "&quotComputer, one cup of Georgian Tea.&quot After a short wait you are able to drink the finest tea in the universe in the chair of";
+    }
+    else if (action == 5)
+    {
+      if (charName != CHAR_PICARD)
+      rStatus = "There is nothing but personal belongings of the Enterprise captain in";
+      else rStatus = "You play the flute for a while then stop. You are still in";
+    }
+    else if (action == 6)
+    {
+      if (charName == CHAR_CRUSHER)
+      {
+        rStatus = "An hour later you wake up to find yourself in the company of Lt. Worf. This time he won't report this behaviour but just send you to";
+        rUrl = "startrek4.cgi?CrusherRoom";
+        rTitle = roomCrusher;
+      }
+      else {
+        rStatus = "An hour later you wake up to find yourself still in";
+      }
+    }
+    else if (action == 7)
+    {
+      if (charName == CHAR_PICARD)
+      rStatus = "&quotDoctor Beverly Crusher is in her quarters&quot, - the computer responds";
+      else rStatus = "You stand there like an idiot for 30 minutes but nobody enters";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor2M()                                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+    string act1, act2, act3, act4;
+
+    act1 = "Ask Computer the location of the Bridge";
+    act2 = "Call security";
+    act3 = "Ask Computer where is Holodeck";
+    act4 = "Ask Computer to display the plan of this deck";
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor2M";
+    rTitle = roomCorridor2M;
+    show plug Room [ charName = charName, roomName = roomCorridor2M, description = "", act1 = act1, act2 = act2, act3 = act3, act4 = act4, actDirS1 = "", actDirS2 = "", roomS = roomCorridor2E, actDirN1 = "", actDirN2 = "", roomN = roomCrusher, actDirE1 = "", actDirE2 = "", roomE = roomCorridor2S, actDirW1 = "", actDirW2 = "", roomW = roomPicard ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Corridor2E";
+      rTitle = roomCorridor2E;
+    }
+    else if (action == 1)
+    {
+      rUrl = "startrek4.cgi?CrusherRoom";
+      rTitle = roomCrusher;
+      if (charName == CHAR_PICARD)
+      {
+        rStatus = "Naturally, Dr. Crusher can't refuse a friendly visit from the captain";
+      }
+      else if (charName != CHAR_CRUSHER)
+      {
+        rStatus = "You are not allowed in Dr. Crusher's room! Go back to";
+        rUrl = "startrek4.cgi?Corridor2M";
+        rTitle = roomCorridor2M;
+      }
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Corridor2S";
+      rTitle = roomCorridor2S;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?PicardRoom";
+      rTitle = roomPicard;
+    }
+    else if (action == 4)
+    {
+      rStatus = "&quotThe Bridge is located on Deck 1&quot. You are still in";
+    }
+    else if (action == 5)
+    {
+      if (charName != CHAR_PICARD)
+      rStatus = "&quotHaha! April's Fools&quot, you laugh at Lt. Worf. Your food rations for today are confiscated.";
+      else rStatus = "&quotMade you look!&quot, - Even Worf can't do anything against the Captain.";
+    }
+    else if (action == 6)
+    {
+      rStatus = "&quotThere are Holodecks on Decks 3 and 4&quot. You are still in";
+    }
+    else if (action == 7)
+    {
+      rStatus = "<img src=../img/deck2.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Turbolift4()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomTurbolift4, description = "", act1 = "Go to The Bridge", act2 = "Go to Deck 2", act3 = "Go to Deck 3", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "", actDirE2 = "", roomE = roomCorridor4S, actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Corridor4S";
+      rTitle = roomCorridor4S;
+    }
+    else if (action == 4)
+    {
+      rStatus = "The Bridge, - you say and the turbolift goes up";
+      rUrl = "startrek4.cgi?Turbolift1";
+      rTitle = roomTurbolift1;
+    }
+    else if (action == 5)
+    {
+      rStatus = "Deck 2, - you say and the turbolift goes up";
+      rUrl = "startrek4.cgi?Turbolift2";
+      rTitle = roomTurbolift2;
+    }
+    else if (action == 6)
+    {
+      rStatus = "Deck 3, - you say and the turbolift goes up";
+      rUrl = "startrek4.cgi?Turbolift3";
+      rTitle = roomTurbolift3;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?Turbolift4";
+      rTitle = roomTurbolift4;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor4S()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor4S";
+    rTitle = roomCorridor4S;
+    show plug Room [ charName = charName, roomName = roomCorridor4S, description = "", act1 = "Ask Computer to display the plan of this deck", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomHolodeck2, actDirN1 = "", actDirN2 = "", roomN = roomTenForward, actDirE1 = "", actDirE2 = "", roomE = roomCorridor4M, actDirW1 = "", actDirW2 = "", roomW = roomTurbolift4 ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Holodeck2";
+      rTitle = roomHolodeck2;
+    }
+    else if (action == 1)
+    {
+      rUrl = "startrek4.cgi?TenForward";
+      rTitle = roomTenForward;
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Corridor4M";
+      rTitle = roomCorridor4M;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Turbolift4";
+      rTitle = roomTurbolift4;
+    }
+    else if (action == 4)
+    {
+      rStatus = "<img src=../img/deck4.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session TenForward()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomTenForward, description = "", act1 = "Talk To Guinan", act2 = "Have A White Klingon", act3 = "Have A Borg-o Cola", act4 = "Play 3D Chess", actDirS1 = "", actDirS2 = "", roomS = roomCorridor4S, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Corridor4S";
+      rTitle = roomCorridor4S;
+    }
+    else if (action == 4 && charName == CHAR_PICARD)
+    {
+      rStatus = "<p> &quot Hello, Guinan! I'm in a hurry &quot <br> &quot I understand that you are needed at the Bridge, &quot Guinan says relaxed, &quot Whatever enemy it might be Picard, use its nature against it!&quot<br>You take the advice to heart.</p>";
+      rUrl = "startrek4.cgi?TenForward";
+      rTitle = roomTenForward;
+      if (picardComplete == 0)
+      {
+        picardComplete = 10;
+      }
+      else if (picardComplete == 1)
+      {
+        picardComplete == 11;
+      }
+    }
+    else if (action == 4)
+    {
+      rStatus = "Guinan smiles at you.<br>&quotDo you want something to drink&#63 I've got something for you!&quot";
+      rUrl = "startrek4.cgi?TenForward";
+      rTitle = roomTenForward;
+    }
+    else if (action == 5)
+    {
+      rStatus = "You order a glass of White Klingon, if there is such a thing. Soon, you find a full glass in front of you on the counter. You drink it and realize that you made the wrong choice - the drink tastes awful!";
+      rUrl = "startrek4.cgi?TenForward";
+      rTitle = roomTenForward;
+    }
+    else if (action == 6)
+    {
+      rStatus = "You order a glass of Borg-o Cola, a popular drink among the Borg Collective. It is made from screws, bolts, nails and nuts. Guinan raises her eyebrow at you. After some consideration, you decide it is not in your best interest to drink it.";
+      rUrl = "startrek4.cgi?TenForward";
+      rTitle = roomTenForward;
+    }
+    else if (action == 7)
+    {
+      rStatus = "You begin to play 3d chess, but soon you realize that this is not very entertaining. As you put pieces back to their original positions, a thought of visiting the Holodeck pops in your mind.";
+      rUrl = "startrek4.cgi?TenForward";
+      rTitle = roomTenForward;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?TenForward";
+      rTitle = roomTenForward;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Holodeck2()                                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+    string act1, act2, act3, act4;
+
+    act1 = "Play 'Star Wars' Program";
+    act2 = "Play 'Space Quest' Program";
+    act3 = "Play 'Dixon Hill' Program";
+    act4 = "Play 'Sherlock Holmes' Program";
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Holodeck2";
+    rTitle = roomHolodeck2;
+    show plug Room [ charName = charName, roomName = roomHolodeck2, description = "", act1 = act1, act2 = act2, act3 = act3, act4 = act4, actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomCorridor4S, actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor4S";
+      rTitle = roomCorridor4S;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?PicardRoom";
+      rTitle = roomPicard;
+    }
+    else if (action == 4)
+    {
+      rStatus = "In the interests of fairness, products from competitors are forbidden on the Enterprise.";
+    }
+    else if (action == 5)
+    {
+      rStatus = "This program is prohibited by the regulations of the star ship Enterprise. On the far stardate -328606.84, a naughty company Sierra released a series of games unjustly laughing at Federation in general and Enterprise in particular. They were officially banned on stardate 6606.43.";
+    }
+    else if (action == 6)
+    {
+      if (charName != CHAR_PICARD)
+      rStatus = "Access is restricted to Jean-Luc Picard.";
+      else rStatus = "The secretary Madeline tells you that today 4 fat Italian mobs passed by asking for protection money. Scared, you turn off the program.";
+    }
+    else if (action == 7)
+    {
+      if (charName != CHAR_DATA)
+      rStatus = "This program is prohibited without written or verbal authorization from Lt. Commander Data. Voice and optical Text Recognition technologies are brought to you by Microsoft Corporation.";
+      else rStatus = "Today you managed to solve yet another Pr. Moriarty's crime. You are like...super-human!";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor4M()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor4M";
+    rTitle = roomCorridor4M;
+    show plug Room [ charName = charName, roomName = roomCorridor4M, description = "", act1 = "Ask Computer to display the plan of this deck", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomTransporter, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "", actDirE2 = "", roomE = roomCorridor4E, actDirW1 = "", actDirW2 = "", roomW = roomCorridor4S ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Transporter";
+      rTitle = roomTransporter;
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Corridor4E";
+      rTitle = roomCorridor4E;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Corridor4S";
+      rTitle = roomCorridor4S;
+    }
+    else if (action == 4)
+    {
+      rStatus = "<img src=../img/deck4.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Transporter()                                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+    string act1, act2, act3, act4;
+
+    act1 = "Site-to-site transport: Deck 2";
+    act2 = "Site-to-site transport: Deck 3";
+    act3 = "Ask O'Brien how is life";
+    act4 = "Transport at coordinates 3 5 0 mark 5";
+    if (charName == CHAR_PICARD)
+    {
+      act3 = "Site-to-site transport: The Bridge";
+    }
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Transporter";
+    rTitle = roomTransporter;
+    show plug Room [ charName = charName, roomName = roomTransporter, description = "Miles O'Brien at your service!", act1 = act1, act2 = act2, act3 = act3, act4 = act4, actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomCorridor4M, actDirE1 = "", actDirE2 = "", roomE = roomShuttleBay, actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor4M";
+      rTitle = roomCorridor4M;
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?ShuttleBay";
+      rTitle = roomShuttleBay;
+    }
+    else if (action == 4)
+    {
+      rStatus = "&quotAye, aye&quot, - says the Irishman and in a second you are in the";
+      rUrl = "startrek4.cgi?Corridor2S";
+      rTitle = roomCorridor2S;
+    }
+    else if (action == 5)
+    {
+      rStatus = "With one bush of a button, Miles O'Brien send you to";
+      rUrl = "startrek4.cgi?Corridor3S";
+      rTitle = roomCorridor3S;
+    }
+    else if (action == 6)
+    {
+      if (charName == CHAR_PICARD)
+      {
+        rStatus = "&quotAye, aye&quot, - says the Irishman and in a second you are in the";
+        rUrl = "startrek4.cgi?Turbolift1";
+        rTitle = roomTurbolift1;
+      }
+      else {
+        rStatus = "&quotOh, I'm just fine! And Keyko with Molly are also doing very well. I'm thinking of settling somewhere permanently, actually. I already have an offer to transfer at Deep Space 9 from Benjamin Sisko.&quot";
+      }
+    }
+    else if (action == 7)
+    {
+      rStatus = "&quotNo way, suicides are not allowed on Enterprise&quot, - you hear in return.";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor4E()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor4E";
+    rTitle = roomCorridor4E;
+    show plug Room [ charName = charName, roomName = roomCorridor4E, description = "", act1 = "Ask Computer to display the plan of this deck", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomShuttleBay, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "", actDirW2 = "", roomW = roomCorridor4M ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?ShuttleBay";
+      rTitle = roomShuttleBay;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Corridor4M";
+      rTitle = roomCorridor4M;
+    }
+    else if (action == 4)
+    {
+      rStatus = "<img src=../img/deck4.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session ShuttleBay()                             {
+    int action;
+    string rStatus, rUrl, rTitle;
+    string act1, act2, act3;
+
+    act1 = "Depressurize the hall";
+    act2 = "Get into the shuttle craft and initiate the launch sequence";
+    act3 = "Ask the Computer what to do";
+    rUrl = "startrek4.cgi?ShuttleBay";
+    rTitle = roomShuttleBay;
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomShuttleBay, description = "", act1 = act1, act2 = act2, act3 = act3, act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomCorridor4E, actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "", actDirW2 = "", roomW = roomTransporter ]  receive [action = action];
+    if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor4E";
+      rTitle = roomCorridor4E;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Transporter";
+      rTitle = roomTransporter;
+    }
+    else if (action == 4)
+    {
+      rStatus = "You are kidding, right? Even the captain is not allowed to do that!";
+    }
+    else if (action == 5)
+    {
+      if (charName != CHAR_PICARD)
+      rStatus = "Meanwhile on The Bridge. Lt. Worf: &quotUnauthorized launch sequence in progress in Shuttle Bay - prevented&quot. Your puny attempt to escape the Enterprise didn't work. Lukily, they have their hands full on the Bridge so you escape unpunished.";
+      else rStatus = "Don't even think about escaping in such a tense situation. You are only one who can save this ship!";
+    }
+    else if (action == 6)
+    {
+      rStatus = "&quotPlease restate your question&quot, - you hear from the computer sounding suspiciously similar to the voice of the mother of Deanna Troi, Lwaxanna";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor2E()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor2E";
+    rTitle = roomCorridor2E;
+    show plug Room [ charName = charName, roomName = roomCorridor2E, description = "", act1 = "Ask Computer to display the plan of this deck", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomData, actDirN1 = "", actDirN2 = "", roomN = roomCorridor2M, actDirE1 = "", actDirE2 = "", roomE = roomEngineering, actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?DataRoom";
+      rTitle = roomData;
+    }
+    else if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor2M";
+      rTitle = roomCorridor2M;
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Engineering";
+      rTitle = roomEngineering;
+    }
+    else if (action == 4)
+    {
+      rStatus = "<img src=../img/deck2.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session CrusherRoom()                             {
+    int action;
+    string rStatus, rUrl, rTitle;
+    string act1, act2, desc;
+
+    act1 = "";
+    act2 = "";
+    desc = "";
+    if (charName == CHAR_PICARD)
+    {
+      act1 = "Order Doctor Crusher to report to Sickbay immediatly.";
+      act2 = "Ask Beverly to join you later in 'Dixon Hill' program on Holodeck 2";
+      desc = "The room is enlightened by the presence of Chief Medical Officer Beverly Crusher";
+    }
+    else if (charName == CHAR_CRUSHER)
+    {
+      act1 = "Read 'How I reinvented Computer Science' by Artem Khassanov (c) 2015";
+      act2 = "Continue your research for cure of Advanced Klingon Alergy";
+    }
+    rStatus = status1;
+    rUrl = "startrek4.cgi?CrusherRoom";
+    rTitle = roomCrusher;
+    show plug Room [ charName = charName, roomName = roomCrusher, description = desc, act1 = act1, act2 = act2, act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomCorridor2M, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Corridor2M";
+      rTitle = roomCorridor2M;
+    }
+    else if (action == 4)
+    {
+      if (charName == CHAR_PICARD)
+      rStatus = "&quotBut Captain, the Sickbay has been destroyed&quot, - you hear the surprised reply. &quotOh yeah, that's right. Well then, carry on!&quot";
+      else if (charName == CHAR_CRUSHER)
+      rStatus = "Despite this being the oldest book in your collection, you find that it also the best one you have ever read.";
+      else rStatus = status2;
+    }
+    else if (action == 5)
+    {
+      if (charName == CHAR_PICARD)
+      rStatus = "&quotSure!&quot, - enthusiastically replies the doctor.";
+      else if (charName == CHAR_CRUSHER)
+      rStatus = "As soon as you approach the smaple of hairs from a Klignon, you feel that you want to cough and sneeze. Maybe it's not such a good idea to work without Sickbay equipment.";
+      else rStatus = status2;
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Turbolift2()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomTurbolift2, description = "", act1 = "Go to the Bridge", act2 = "Go to Deck 3", act3 = "Go to Deck 4", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "", actDirW2 = "", roomW = roomCorridor2S ]  receive [action = action];
+    if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Corridor2S";
+      rTitle = roomCorridor2S;
+    }
+    else if (action == 4)
+    {
+      rStatus = "The Bridge, - you say and the turbolift goes up";
+      rUrl = "startrek4.cgi?Turbolift1";
+      rTitle = roomTurbolift1;
+    }
+    else if (action == 5)
+    {
+      rStatus = "Deck 3, - you say and the turbolift goes down";
+      rUrl = "startrek4.cgi?Turbolift3";
+      rTitle = roomTurbolift3;
+    }
+    else if (action == 6)
+    {
+      rStatus = "Deck 4, - you say and the turbolift goes down";
+      rUrl = "startrek4.cgi?Turbolift4";
+      rTitle = roomTurbolift4;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?Turbolift2";
+      rTitle = roomTurbolift2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session DataRoom()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomData, description = "", act1 = "", act2 = "", act3 = "", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomCorridor2E, actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor2E";
+      rTitle = roomCorridor2E;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?DataRoom";
+      rTitle = roomData;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor2S()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor2S";
+    rTitle = roomCorridor2S;
+    show plug Room [ charName = charName, roomName = roomCorridor2S, description = "", act1 = "Ask Computer to display the plan of this deck", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomEngineering, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "", actDirE2 = "", roomE = roomTurbolift2, actDirW1 = "", actDirW2 = "", roomW = roomCorridor2M ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Engineering";
+      rTitle = roomEngineering;
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Turbolift2";
+      rTitle = roomTurbolift2;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Corridor2M";
+      rTitle = roomCorridor2M;
+    }
+    else if (action == 4)
+    {
+      rStatus = "<img src=../img/deck2.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Engineering()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomEngineering, description = "", act1 = "", act2 = "", act3 = "", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomCorridor2S, actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "", actDirW2 = "", roomW = roomCorridor2E ]  receive [action = action];
+    if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor2S";
+      rTitle = roomCorridor2S;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Corridor2E";
+      rTitle = roomCorridor2E;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?Engineering";
+      rTitle = roomEngineering;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Turbolift1()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomTurbolift1, description = "", act1 = "Go to Deck 2", act2 = "Go to Deck 3", act3 = "Go to Deck 4", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomBridge, actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 1 && charName == CHAR_PICARD && (picardComplete == 0 || picardComplete == 10))
+    {
+      rStatus = "<p>Upon entering the Bridge you see ominous Borg cube on the viewscreen. It's menacing green countours remind you of your capture not so long ago.<br>&quotLocutus! We will assimilate this ship and everyone aboard!&quot<br>&quotThat familiar female voice...&quot, you think aloud.<br>Riker's voice dispells the trance.<br>&quotSir, what are we going to do?&quot";
+      rUrl = "startrek4.cgi?Bridge";
+      rTitle = roomBridge;
+      if (picardComplete == 0)
+      {
+        picardComplete = 1;
+      }
+      else {
+        picardComplete = 11;
+      }
+    }
+    else if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Bridge";
+      rTitle = roomBridge;
+    }
+    else if (action == 4)
+    {
+      rStatus = "Deck 2, - you say and the turbolift goes down";
+      rUrl = "startrek4.cgi?Turbolift2";
+      rTitle = roomTurbolift2;
+    }
+    else if (action == 5)
+    {
+      rStatus = "Deck 3, - you say and the turbolift goes down";
+      rUrl = "startrek4.cgi?Turbolift3";
+      rTitle = roomTurbolift3;
+    }
+    else if (action == 6)
+    {
+      rStatus = "Deck 4, - you say and the turbolift goes down";
+      rUrl = "startrek4.cgi?Turbolift4";
+      rTitle = roomTurbolift4;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?Turbolift1";
+      rTitle = roomTurbolift1;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Turbolift3()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomTurbolift3, description = "", act1 = "Go to The Bridge", act2 = "Go to Deck 2", act3 = "Go to Deck 4", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "", actDirW2 = "", roomW = roomCorridor3S ]  receive [action = action];
+    if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Corridor3S";
+      rTitle = roomCorridor3S;
+    }
+    else if (action == 4)
+    {
+      rStatus = "The Bridge, - you say and the turbolift goes up";
+      rUrl = "startrek4.cgi?Turbolift1";
+      rTitle = roomTurbolift1;
+    }
+    else if (action == 5)
+    {
+      rStatus = "Deck 2, - you say and the turbolift goes up";
+      rUrl = "startrek4.cgi?Turbolift2";
+      rTitle = roomTurbolift2;
+    }
+    else if (action == 6)
+    {
+      rStatus = "Deck 4, - you say and the turbolift goes down";
+      rUrl = "startrek4.cgi?Turbolift4";
+      rTitle = roomTurbolift4;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?Turbolift3";
+      rTitle = roomTurbolift3;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Bridge()                                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+    string act1, act2, act3, act4;
+
+    rStatus = status1;
+    if (picardComplete == 1 && charName == CHAR_PICARD)
+    {
+      act1 = "Fire Photon Torpedoes!";
+      act2 = "Fire Phasers!";
+      act3 = "Wait For Borg To Respond To Hails";
+      act4 = "";
+    }
+    else if (picardComplete == 11 && charName == CHAR_PICARD)
+    {
+      act1 = "Fire Photon Torpedoes!";
+      act2 = "Fire Phasers!";
+      act3 = "Wait For Borg To Respond To Hails";
+      act4 = "Send Computer Virus To Borg Ship";
+    }
+    else {
+      act1 = "";
+      act2 = "";
+      act3 = "";
+      act4 = "";
+    }
+    show plug Room [ charName = charName, roomName = roomBridge, description = "", act1 = act1, act2 = act2, act3 = act3, act4 = act4, actDirS1 = "", actDirS2 = "", roomS = roomTurbolift1, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "", actDirW2 = "", roomW = roomCaptnOffice ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Turbolift1";
+      rTitle = roomTurbolift1;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?CaptnOffice";
+      rTitle = roomCaptnOffice;
+    }
+    else if (action == 4 && charName == CHAR_PICARD)
+    {
+      rStatus = "<p>You command:&quot Mr.Worf prepare to fire Photon Torpedoes on my command!&quot</p><h1>&quotFIRE!!!&quot</h1><br>Lieutenant Commander Worf looks at the Borg cube in dismay.<br>&quotNo effect, Captain. They are beaming assimilation parties on board!&quot";
+      rUrl = "startrek4.cgi?Start";
+      rTitle = "Play Again?";
+    }
+    else if (action == 5 && charName == CHAR_PICARD)
+    {
+      rStatus = "<p>You command:&quot Mr.Worf prepare to fire all Phaser Banks on my command!&quot</p><h1>&quotFIRE!!!&quot</h1><br>Lieutenant Commander Worf looks at the Borg cube in disbelief.<br>&quotNo effect, Captain. They are beaming assimilation parties on board! I will show you what Klingons can do!!&quot";
+      rUrl = "startrek4.cgi?Start";
+      rTitle = "Play Again?";
+    }
+    else if (action == 6 && charName == CHAR_PICARD)
+    {
+      rStatus = "<p>You command:&quot Mr.Worf open hailing frequency!&quot</p>&quotFrequency open, sir.&quot<br>Lieutenant Commander Worf gives you a puzzled look.<br>&quotThey are not responding, Captain. They are beaming assimilation parties on board! It is all over!!&quot";
+      rUrl = "startrek4.cgi?Start";
+      rTitle = "Play Again?";
+    }
+    else if (action == 7 && charName == CHAR_PICARD && picardComplete == 2)
+    {
+      rStatus = "<p>You command:&quot Mr.Data commence operation Y2K!&quot</p>&quotMicrosoft software installed aboard their computers, sir.&quot<br>You burst into an evil laughter.<br>Everybody looks at you and take a step back.<br>&quotThey are not responding, Captain. The virus worked! It is all over!! We have won!&quot<br>You sit down in your chair and command:&quotSet course for Planet Hollywood, engage!&quot";
+      rUrl = "startrek4.cgi?Start";
+      rTitle = "You won! Play Again?";
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?Bridge";
+      rTitle = roomBridge;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session CaptnOffice()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomCaptnOffice, description = "", act1 = "", act2 = "", act3 = "", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "", actDirE2 = "", roomE = roomBridge, actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Bridge";
+      rTitle = roomBridge;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?CaptnOffice";
+      rTitle = roomCaptnOffice;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session RikerRoom()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomRiker, description = "", act1 = "", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomCorridor3E, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Corridor3E";
+      rTitle = roomCorridor3E;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?RikerRoom";
+      rTitle = roomRiker;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session TroiRoom()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomTroi, description = "", act1 = "", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomCorridor3M, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Corridor3M";
+      rTitle = roomCorridor3M;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?TroiRoom";
+      rTitle = roomTroi;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session LaforgeRoom()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomLaforge, description = "", act1 = "", act2 = "", act3 = "", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomCorridor3E, actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor3E";
+      rTitle = roomCorridor3E;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?LaforgeRoom";
+      rTitle = roomLaforge;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session WorfRoom()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomWorf, description = "", act1 = "", act2 = "", act3 = "", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomCorridor3S, actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor3S";
+      rTitle = roomCorridor3S;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?WorfRoom";
+      rTitle = roomWorf;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor3S()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor3S";
+    rTitle = roomCorridor3S;
+    show plug Room [ charName = charName, roomName = roomCorridor3S, description = "", act1 = "Ask Computer to display the plan of this deck", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomWorf, actDirN1 = "<!--", actDirN2 = "-->", roomN = "", actDirE1 = "", actDirE2 = "", roomE = roomTurbolift3, actDirW1 = "", actDirW2 = "", roomW = roomCorridor3M ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?WorfRoom";
+      rTitle = roomWorf;
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Turbolift3";
+      rTitle = roomTurbolift3;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Corridor3M";
+      rTitle = roomCorridor3M;
+    }
+    else if (action == 4)
+    {
+      rStatus = "<img src=../img/deck3.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor3M()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor3M";
+    rTitle = roomCorridor3M;
+    show plug Room [ charName = charName, roomName = roomCorridor3M, description = "", act1 = "Ask Computer to display the plan of this deck", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomHolodeck1, actDirN1 = "", actDirN2 = "", roomN = roomTroi, actDirE1 = "", actDirE2 = "", roomE = roomCorridor3S, actDirW1 = "", actDirW2 = "", roomW = roomCorridor3E ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?Holodeck1";
+      rTitle = roomHolodeck1;
+    }
+    else if (action == 1)
+    {
+      rUrl = "startrek4.cgi?TroiRoom";
+      rTitle = roomTroi;
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Corridor3S";
+      rTitle = roomCorridor3S;
+    }
+    else if (action == 3)
+    {
+      rUrl = "startrek4.cgi?Corridor3E";
+      rTitle = roomCorridor3E;
+    }
+    else if (action == 4)
+    {
+      rStatus = "<img src=../img/deck3.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Corridor3E()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    rUrl = "startrek4.cgi?Corridor3E";
+    rTitle = roomCorridor3E;
+    show plug Room [ charName = charName, roomName = roomCorridor3E, description = "", act1 = "Ask Computer to display the plan of this deck", act2 = "", act3 = "", act4 = "", actDirS1 = "", actDirS2 = "", roomS = roomLaforge, actDirN1 = "", actDirN2 = "", roomN = roomRiker, actDirE1 = "", actDirE2 = "", roomE = roomCorridor3M, actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 0)
+    {
+      rUrl = "startrek4.cgi?LaforgeRoom";
+      rTitle = roomLaforge;
+    }
+    else if (action == 1)
+    {
+      rUrl = "startrek4.cgi?RikerRoom";
+      rTitle = roomRiker;
+    }
+    else if (action == 2)
+    {
+      rUrl = "startrek4.cgi?Corridor3M";
+      rTitle = roomCorridor3M;
+    }
+    else if (action == 4)
+    {
+      rStatus = "<img src=../img/deck3.gif height=200 width=300>";
+    }
+    else {
+      rStatus = status2;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+  session Holodeck1()                 {
+    int action;
+    string rStatus, rUrl, rTitle;
+
+    rStatus = status1;
+    show plug Room [ charName = charName, roomName = roomHolodeck1, description = "", act1 = "", act2 = "", act3 = "", act4 = "", actDirS1 = "<!--", actDirS2 = "-->", roomS = "", actDirN1 = "", actDirN2 = "", roomN = roomCorridor3M, actDirE1 = "<!--", actDirE2 = "-->", roomE = "", actDirW1 = "<!--", actDirW2 = "-->", roomW = "" ]  receive [action = action];
+    if (action == 1)
+    {
+      rUrl = "startrek4.cgi?Corridor3M";
+      rTitle = roomCorridor3M;
+    }
+    else {
+      rStatus = status2;
+      rUrl = "startrek4.cgi?Holodeck1";
+      rTitle = roomHolodeck1;
+    }
+    exit plug Redirect [ statusText = rStatus, anchorStart = ahref, url = rUrl, urlTitle = rTitle ] ;
+  }
+
+} /* end service */

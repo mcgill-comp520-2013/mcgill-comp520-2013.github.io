@@ -1,0 +1,198 @@
+service { 
+
+  const html Welcome = <html> <body>
+    Welcome to the riddle game!
+  </body> </html>;     
+
+  const html Pick = <html> <body>
+    There are 5 riddles. You are allowed to make 3 choices.
+    <p> 
+    Please enter a number from 1 to 5:
+    <input name="choice" type="text" size=1>
+  </body> </html>;    
+
+  const html Trials = <html> <body>
+    Number of riddles read so far is: <[trials]>.
+  </body> </html>;
+
+  const html Retry = <html> <body> 
+    You have made an invalid choice!
+    <p>
+    Please enter a number between 1 and 5 only:
+   <input name="choice" type="text" size=1>    
+  </body> </html>; 
+
+  const html Riddle1 = <html> <body>
+   A man is standing in front of a painting of a man, and he
+  tells us the following: Brothers and sisters have I none, 
+  but this man's father is my fathers son. Who's on the painting?
+  <p>
+  a) The Son
+  <p> 
+  b) The Father
+  <p> 
+  c) Himself
+  </body> </html>;       
+
+  const html Riddle1Sol = <html> <body>
+    The Solution: His son
+  <p>
+    An Explanation
+  <p>
+  We can replace my fathers son by myself since he is 
+  the only child. Now remains: This man s father is myself,
+  so this man is his son.
+  <p>   
+   </body> </html>;
+                        
+  const html Riddle2 = <html> <body>
+  It is dark in my bedroom and I want to get two socks of the same color 
+  from my drawer, which contains 24 red and 24 blue socks. How many socks 
+  do I have to take from the drawer to get at least two socks of the same
+  color?
+  <p>
+  a) 2
+  <p> 
+  b) 3
+  <p> 
+  c) 48
+  <p> 
+  d) 25   
+  </body> </html>; 
+
+  const html Riddle2Sol = <html> <body>
+   The Solution: 3
+  <p>
+   An Explanation
+  <p>
+  It is clear that taking 0, 1, or 2 socks is not sufficient. But if you take
+  3 socks, then either the first and second sock you take have the same 
+  color, or the third sock you take from the drawer has the same color as 
+  one of the previous two.
+  <p>  
+  </body> </html>;            
+
+  const html Riddle3 = <html> <body>
+  A hunter leaves his cabin early in the morning and walks one mile due 
+  south. Here he sees a bear and starts chasing it for one mile due east 
+  before he is able to shoot the bear. After shooting the bear, he drags it 
+  one mile due north back to his cabin where he started that morning. What 
+  color is the bear?
+  <p>
+  a) Brown
+  <p> 
+  b) White
+  <p> 
+  c) Can not tell
+  </body> </html>;   
+
+  const html Riddle3Sol = <html> <body>
+  The Solution: White
+  <p>
+  An Explanation
+  <p>
+  He can walk one mile due south, then one mile due east and finally one mile
+  due north where he finds his cabin again. This means that his cabin can 
+  only be at the north pole, and for that reason the bear will be white.
+  <p>            
+  </body> </html>;
+   
+  const html Riddle4 = <html> <body>
+  One day Alice meets the Lion and the Unicorn in the Forest of 
+  Forgetfulness. She knows that the Lion lies on Mondays, Tuesdays, and 
+  Wednesdays, and tells the truth on the other days of the week. The 
+  Unicorn, on the other hand, lies on Thursdays, Fridays, and Saturdays, 
+  but tells the truth on the other days of the week. Now they make the 
+  following statements to Alice:
+  <p> 
+     [*] Lion: Yesterday was one of my lying days.
+  <p> 
+     [*] Unicorn: Yesterday was one of my lying days too.
+  <p>
+  What day is it?
+  <p> 
+  a) Sunday<br> 
+  b) Monday<br> 
+  c) Tuesday<br> 
+  d) Wednesday<br>             
+  e) Thursday<br> 
+  f) Friday<br> 
+  g) Saturday<br>                       
+  </body> </html>; 
+
+  const html Riddle4Sol = <html> <body>
+   The Solution: Thursday
+  <p>
+   An Explanation
+  <p>
+  The only days the Lion can say that he lied on the previous day are Mondays
+  and Thursdays. The only days the Unicorn can say this, are Thursdays and
+  Sundays. Therefore, the only day they both say that is on Thursday.
+  <p>          
+  </body> </html>;    
+
+  const html Riddle5 = <html> <body>
+   A certain street contains 100 buildings. They are numbered from 1 to 100.
+   How many 9 are used in these numbers?
+  <p>
+  a) 19
+  <p> 
+  b) 20
+  <p> 
+  c) 21     
+  </body> </html>; 
+
+  const html Riddle5Sol = <html> <body>
+   The Solution: 20
+  <p>
+   An Explanation
+  <p>
+  Just count the nines in the numbers: 9, 19, 29, 39, 49, 59, 69, 79, 89, 90,
+  91, 92, 93, 94, 95, 96, 97, 98, 99.      
+  <p>   
+  </body> </html>;
+
+  const html Fin = <html> <body>   
+  Thanks for playing this game!
+  <p>
+  <A href="/~mdini">BACK</A>                                                    
+  </body> </html>;   
+
+  int choice;
+
+  session Guess() {
+     int total;
+     int i;
+     total= 0;
+  while (total!=3) {    
+     show Welcome;
+     show Pick receive[i = choice];
+     while ((i>5) || (i==0))show Retry receive[i = choice];     
+     
+     if (i==1)
+      { show Riddle1;
+        show Riddle1Sol; }
+
+     if (i==2)
+      { show Riddle2;
+        show Riddle2Sol; }   
+
+     if (i==3)
+      { show Riddle3;
+        show Riddle3Sol; }   
+
+     if (i==4)
+      { show Riddle4;
+        show Riddle4Sol; }   
+
+     if (i==5)
+      { show Riddle5;
+        show Riddle5Sol; }   
+
+     total = total + 1;
+     show plug Trials[trials = total];
+     if (total ==3)
+     {exit Fin;}
+   }
+ }  
+}
