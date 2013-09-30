@@ -1,0 +1,63 @@
+When implementing the WIG scanner you may have to take into account the
+fact that WIG has multiple so-called lexical scopes. You already
+encountered lexical scopes when implementing multi-line comments for
+JOOS: inside comments, there exists a different set of tokens/keywords
+than outside comments. WIG has even more such scopes. Consider the
+following little WIG fragment:<br>
+      <br>
+      <pre>service {<br>  const html Compliment = <span
+ style="color: rgb(51, 51, 255);">&lt;html&gt; <span
+ style="color: rgb(0, 153, 0);">&lt;body&gt;</span></span><br
+ style="color: rgb(51, 51, 255);"><span style="color: rgb(51, 51, 255);">    This is a &lt;[<span
+ style="color: rgb(255, 0, 0);">fin</span>]&gt; great service, man!</span><br
+ style="color: rgb(51, 51, 255);"><span style="color: rgb(51, 51, 255);">  <span
+ style="color: rgb(0, 153, 0);">&lt;/body&gt;</span> &lt;/html&gt;</span>;<br><br>  const html Pledge = <span
+ style="color: rgb(51, 51, 255);">&lt;html&gt; <span
+ style="color: rgb(0, 153, 0);">&lt;body&gt;</span></span><br
+ style="color: rgb(51, 51, 255);"><span style="color: rgb(51, 51, 255);">    What is your name?</span><br
+ style="color: rgb(51, 51, 255);"><span style="color: rgb(51, 51, 255);">    <span
+ style="color: rgb(0, 153, 0);">&lt;input name=<span
+ style="color: rgb(255, 102, 0);">name</span> type="text" size=20&gt;</span></span><br
+ style="color: rgb(51, 51, 255);"><span style="color: rgb(51, 51, 255);">  <span
+ style="color: rgb(0, 153, 0);">&lt;/body&gt;</span> &lt;/html&gt;</span>;<br><br>  string name; //name is an id here, although it is a keyword inside HTML tags<br>               //inside HTML text, it's considered plain text<br><br>  session Contribute() {<br></pre>
+      <br>
+In this snippet I identified the following lexical scopes:<br>
+      <ul>
+        <li>WIG syntax: Here, stuff like service, const, html and so on
+are keywords. "name" is not a keyword.</li>
+        <li style="color: rgb(51, 51, 255);">HTML syntax:</li>
+        <ul>
+          <li>is entered when &lt;html&gt; is scanned and left when
+&lt;/html&gt; is scanned</li>
+          <li>unlike in WIG syntax, service, const etc. are <span
+ style="font-style: italic;">no</span> keywords</li>
+          <li>&gt; and &lt; have different meaning than in WIG syntax
+(although the scanner may not necessarily have to distinguish those)</li>
+        </ul>
+        <li><span style="color: rgb(0, 153, 0);">HTML Tags:</span> Here
+input, name etc. should be keywords so that the parser can recognize
+them specially.<br>
+        </li>
+        <li><span style="color: rgb(255, 0, 0);">Holes:</span> only
+allow for identifiers - <span style="font-style: italic;">any</span>
+identifiers in fact, including those that would be keywords in other
+scopes, e.g. &lt;[html]&gt; is valid<br>
+        </li>
+        <li><span style="color: rgb(255, 102, 0);">HTML right-hand side
+values:</span> It may be useful to have another scope here so that e.g.
+name is <span style="font-style: italic;">not</span> recognized as a
+keyword.</li>
+      </ul>
+      <br>
+Can you think of other lexical scopes? What about HTML comments? Do
+those exist in the benchmarks? If so, can HTML comments be nested?<br>
+      <br>
+You can extend a Flex scanner with lexical scopes using so-called <a
+ href="http://dinosaur.compilertools.net/lex/">start conditions</a>.
+You prefix a regular expression with &lt;c&gt; to denote that it should
+only be scanned when being in state c. You switch to a state c by
+calling BEGIN(c) in the scanner's action.<br>
+      <br>
+SableCC supports a similar mechanism using so-called states (<a
+ href="http://www.sable.mcgill.ca/publications/thesis/#gagnonMastersThesis">see
+pages 35 ff</a>).<br>
