@@ -1,0 +1,90 @@
+At this point in time you should:
+<p>
+
+<ul>
+<li>have implemented the WIG scanner; note that the scanner
+      probably <a href="WIGscanparse_lexer_states.html">has to have
+      multiple states</a> in order to avoid "keyword stealing"
+
+<li>have implemented the WIG parser;
+
+<li>have implemented the construction of WIG abstract syntax trees;
+
+<li>have implemented the WIG weeder; and
+
+<li>have implemented the WIG pretty printer; and
+
+<li>have tested your implementation, by using your pretty printer to
+test acceptance of existing benchmarks, and by using your weeder to
+test rejection of micro benchmarks that you write.
+</ul>
+<p>
+
+Checklist:
+<ul> 
+<li>have you handled HTML correctly, including META tags?
+<p>
+
+<li>does your scanner/parser run on <a href="../wig/examples/">these
+benchmarks</a>?  What about
+the <a href="../benchmarks/2004/wig/">2004<a/>,
+<a href="../benchmarks/2007/wig/">2007<a/>, and
+<a href="../benchmarks/2008/wig/">2008<a/> class WIG benchmarks?
+<p>
+
+<li>does <code>pretty(parse(pretty(parse(X)))) =
+pretty(parse(X))</code> for these benchmarks?
+<p>
+
+<li>does the output of the pretty printer compile on the
+<code>wig4</code>, <code>wig10</code>, <code>wig18</code>,
+<code>pwig</code>, or <code>lkwig</code> compilers for each of these
+benchmarks?  For the cases where it does not compile, is the original
+benchmark also rejected?
+<p>
+
+<li>have you created a suite of tiny <code>.wig</code> programs that
+are correctly rejected by your weeder?
+<p>
+
+<li>does your compiler have a friendly command-line interface with
+built-in documentation of useful switches, either available by default
+when no arguments are given or via the standard <code>--help</code>
+switch?  Can you do a better job than the <code>lkwig</code> compiler
+in this regard?
+<p>
+
+<li>do you have a GNU Make <code>Makefile</code> or Ant <code>build.xml</code> with the following targets:
+<p>
+<ul>
+<li><code>all</code> (default, builds and tests);
+<li><code>code</code> (builds);
+<li><code>check</code> (tests, simply depending on <code>weed</code>, <code>pretty</code>, and <code>unit</code> for now);
+<li><code>weed</code> (tests weeder);
+<li><code>pretty</code> (tests pretty printer); and
+<li><code>unit</code> (tests individual functions through unit testing, at least where constructing the input is straightforward)?
+</ul>
+<p>
+If you are developing a C program and decide you want to use the <a
+href="http://www-src.lip6.fr/homepages/Alexandre.Duret-Lutz/autotools.html">GNU
+Autotools</a> and <a href="http://check.sourceforge.net">Check</a> for
+your build system that is most excellent.
+<p>
+</ul>
+
+You should check in your source code to <code>group-X/wig/src</code>.
+You should also detail your progress for each of the steps above in
+<code>group-X/reports/scanparse.txt</code>.  Remember that if you
+write your milestone report well enough then you can likely reuse
+portions of it in your final project report.
+<p>
+
+This milestone is due on the Friday of Week 7.  It will count for 5%
+of your grade.  Marks will be generously deducted for late
+submissions.  It will not be considered complete until you can
+truthfully answer yes to all questions.  This is a fairly considerable
+milestone and you will not be able to finish it in one day.  Remember
+that successfully completing the milestones is a key factor in
+completing the WIG project, and that timely completion of milestones
+is part of the grade for the course.  Also remember that we expect to
+see all group members committing changes to the Subversion repository.

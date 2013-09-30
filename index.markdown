@@ -13,6 +13,10 @@ The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/
 
 Due before class on Monday 30th September 
 
+* [WIG Lexer and Parser] (wigparse.html)
+
+Due Sunday 13rd Octobre before midnight
+
 # Old material
 
 You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs520/2012/)
@@ -25,6 +29,7 @@ You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs52
 * [Lexer and Parser] (slides/scanparse.pdf)
 * [WIG] (slides/wig.pdf)
 * [Symbol Table] (slides/symbol.pdf)
+* [Typecheck] (slides/typecheck.pdf)
 
 
 # Interesting links
