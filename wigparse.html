@@ -3,7 +3,7 @@ At this point in time you should:
 
 <ul>
 <li>have implemented the WIG scanner; note that the scanner
-      probably <a href="WIGscanparse_lexer_states.html">has to have
+      probably <a href="wiglexer.html">has to have
       multiple states</a> in order to avoid "keyword stealing"
 
 <li>have implemented the WIG parser;
@@ -25,12 +25,8 @@ Checklist:
 <li>have you handled HTML correctly, including META tags?
 <p>
 
-<li>does your scanner/parser run on <a href="../wig/examples/">these
-benchmarks</a>?  What about
-the <a href="../benchmarks/2004/wig/">2004<a/>,
-<a href="../benchmarks/2007/wig/">2007<a/>, and
-<a href="../benchmarks/2008/wig/">2008<a/> class WIG benchmarks?
-<p>
+<li>does your scanner/parser run on <a href="https://github.com/mcgill-comp520-2013/mcgill-comp520-2013.github.io/tree/master/wig/examples">these
+benchmarks</a>?
 
 <li>does <code>pretty(parse(pretty(parse(X)))) =
 pretty(parse(X))</code> for these benchmarks?
@@ -38,7 +34,7 @@ pretty(parse(X))</code> for these benchmarks?
 
 <li>does the output of the pretty printer compile on the
 <code>wig4</code>, <code>wig10</code>, <code>wig18</code>,
-<code>pwig</code>, or <code>lkwig</code> compilers for each of these
+<code>pwig</code>, <code>mdwig</code> or <code>lkwig</code> compilers for each of these
 benchmarks?  For the cases where it does not compile, is the original
 benchmark also rejected?
 <p>
@@ -64,12 +60,6 @@ in this regard?
 <li><code>pretty</code> (tests pretty printer); and
 <li><code>unit</code> (tests individual functions through unit testing, at least where constructing the input is straightforward)?
 </ul>
-<p>
-If you are developing a C program and decide you want to use the <a
-href="http://www-src.lip6.fr/homepages/Alexandre.Duret-Lutz/autotools.html">GNU
-Autotools</a> and <a href="http://check.sourceforge.net">Check</a> for
-your build system that is most excellent.
-<p>
 </ul>
 
 You should check in your source code to <code>group-X/wig/src</code>.
@@ -77,14 +67,11 @@ You should also detail your progress for each of the steps above in
 <code>group-X/reports/scanparse.txt</code>.  Remember that if you
 write your milestone report well enough then you can likely reuse
 portions of it in your final project report.
-<p>
 
-This milestone is due on the Friday of Week 7.  It will count for 5%
-of your grade.  Marks will be generously deducted for late
+Marks will be generously deducted for late
 submissions.  It will not be considered complete until you can
 truthfully answer yes to all questions.  This is a fairly considerable
 milestone and you will not be able to finish it in one day.  Remember
 that successfully completing the milestones is a key factor in
 completing the WIG project, and that timely completion of milestones
-is part of the grade for the course.  Also remember that we expect to
-see all group members committing changes to the Subversion repository.
+is part of the grade for the course. 
