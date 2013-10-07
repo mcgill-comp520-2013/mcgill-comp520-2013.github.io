@@ -10,7 +10,7 @@ At this point in time you should:
 
 <li>have implemented the construction of WIG abstract syntax trees;
 
-<li>have implemented the WIG weeder; and
+<li>have implemented the WIG weeder (verify that each function and each session returns) ; and
 
 <li>have implemented the WIG pretty printer; and
 
@@ -40,17 +40,17 @@ benchmark also rejected?
 <p>
 
 <li>have you created a suite of tiny <code>.wig</code> programs that
-are correctly rejected by your weeder?
+are correctly rejected by your compiler ?
 <p>
 
 <li>does your compiler have a friendly command-line interface with
 built-in documentation of useful switches, either available by default
 when no arguments are given or via the standard <code>--help</code>
-switch?  Can you do a better job than the <code>lkwig</code> compiler
+switch?  Can you do a better job than the <code>mdlkwig</code> compiler
 in this regard?
 <p>
 
-<li>do you have a GNU Make <code>Makefile</code> or Ant <code>build.xml</code> with the following targets:
+<li>do you have a GNU Make <code>Makefile</code> or any automated build system with the following targets:
 <p>
 <ul>
 <li><code>all</code> (default, builds and tests);
@@ -62,15 +62,13 @@ in this regard?
 </ul>
 </ul>
 
-You should check in your source code to <code>group-X/wig/src</code>.
+You should check in your source code to <code>wig/src</code>.
 You should also detail your progress for each of the steps above in
-<code>group-X/reports/scanparse.txt</code>.  Remember that if you
+<code>reports/scanparse.txt</code>.  Remember that if you
 write your milestone report well enough then you can likely reuse
 portions of it in your final project report.
 
-Marks will be generously deducted for late
-submissions.  It will not be considered complete until you can
-truthfully answer yes to all questions.  This is a fairly considerable
+This is a fairly considerable
 milestone and you will not be able to finish it in one day.  Remember
 that successfully completing the milestones is a key factor in
 completing the WIG project, and that timely completion of milestones
