@@ -37,3 +37,4 @@ You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs52
 * [Stack overflow question comparing LL and LR] (http://stackoverflow.com/questions/4092280/what-advantages-do-ll-parsers-have-over-lr-parsers)
 * [GCC switchs from LALR to recursive descent] (http://gcc.gnu.org/gcc-3.4/changes.html#cplusplus)
 * [Clang recursive descent parser] (https://github.com/chapuni/clang/blob/master/lib/Parse/ParseExpr.cpp)
+* [On the cleverness of compilers] (http://alexey.radul.name/ideas/2013/cleverness-of-compilers/)
