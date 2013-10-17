@@ -30,6 +30,8 @@ You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs52
 * [WIG] (slides/wig.pdf)
 * [Symbol Table] (slides/symbol.pdf)
 * [Typecheck] (slides/typecheck.pdf)
+* [Virtual Machines] (slides/virtualmachines.pdf)
+* [Codegen] (slides/codegen.pdf)
 
 
 # Interesting links
