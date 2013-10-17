@@ -19,7 +19,7 @@ Due Sunday 13rd October before midnight
 
 * [WIG Symbol Table] (wigsymboltable.html)
 
-Due Sunday 27rd October before midnight
+Due Sunday 27th October before midnight
 
 # Old material
 
