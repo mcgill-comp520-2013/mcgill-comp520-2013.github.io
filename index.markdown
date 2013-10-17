@@ -3,8 +3,8 @@ title: COMP520 Compiler Design class (Fall 2013)
 ---
 
 # News
-
-The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/comp-520-compiler-design-1)
+* The midterm will be on Friday 25th October
+* The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/comp-520-compiler-design-1)
 
 # Assignments
 
@@ -15,7 +15,11 @@ Due before class on Monday 30th September
 
 * [WIG Lexer and Parser] (wigparse.html)
 
-Due Sunday 13rd Octobre before midnight
+Due Sunday 13rd October before midnight
+
+* [WIG Symbol Table] (wigsymboltable.html)
+
+Due Sunday 27rd October before midnight
 
 # Old material
 
