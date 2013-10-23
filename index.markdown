@@ -3,6 +3,7 @@ title: COMP520 Compiler Design class (Fall 2013)
 ---
 
 # News
+* NO CLASS ON WEDNESDAY 23rd OCTOBER
 * The midterm will be on Friday 25th October
 * The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/comp-520-compiler-design-1)
 
