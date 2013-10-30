@@ -22,6 +22,10 @@ Due Sunday 13rd October before midnight
 
 Due Sunday 27th October before midnight
 
+* [WIG Typecheck] (wigtypecheck.html)
+
+Due Friday 8th November before midnight
+
 # Old material
 
 You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs520/2012/)
