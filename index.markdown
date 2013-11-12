@@ -3,8 +3,7 @@ title: COMP520 Compiler Design class (Fall 2013)
 ---
 
 # News
-* NO CLASS ON WEDNESDAY 23rd OCTOBER
-* The midterm will be on Friday 25th October
+* The final is Friday 13th December, 9AM (last 3 hours)
 * The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/comp-520-compiler-design-1)
 
 # Assignments
@@ -37,10 +36,13 @@ You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs52
 * [Abstract Syntax Tree] (slides/ast.pdf) (I've mainly use the blackboard here so the slides are incomplete)
 * [Lexer and Parser] (slides/scanparse.pdf)
 * [WIG] (slides/wig.pdf)
+* [JOOS] (slides/joos.pdf)
 * [Symbol Table] (slides/symbol.pdf)
 * [Typecheck] (slides/typecheck.pdf)
 * [Virtual Machines] (slides/virtualmachines.pdf)
 * [Codegen] (slides/codegen.pdf)
+* [Static analysis] (slides/staticanalysis.pdf)
+* [Garbage collector] (slides/gc.pdf)
 
 
 # Interesting links
@@ -49,3 +51,4 @@ You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs52
 * [GCC switchs from LALR to recursive descent] (http://gcc.gnu.org/gcc-3.4/changes.html#cplusplus)
 * [Clang recursive descent parser] (https://github.com/chapuni/clang/blob/master/lib/Parse/ParseExpr.cpp)
 * [On the cleverness of compilers] (http://alexey.radul.name/ideas/2013/cleverness-of-compilers/)
+* [Description of a modern GC (Mono SGen)] (http://www.mono-project.com/Generational_GC)
