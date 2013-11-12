@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# compile JOOS programs using the A+ compiler.
+
+# assumes JOOSDIR is set properly
+# assumes JOOSDIR/bin is on PATH
+# assumes a binary for your machine type exists
+
+case $OSTYPE in
+    freebsd*)
+    $JOOSDIR/bin/joosa+-freebsd6.2 $* $JOOSDIR/joos/extern/*.joos
+    ;;
+    solaris*)
+    $JOOSDIR/bin/joosa+-solaris2.8 $* $JOOSDIR/joos/extern/*.joos
+    ;;
+    linux*)
+    $JOOSDIR/bin/joosa+-linux-gnu $* $JOOSDIR/joos/extern/*.joos
+    ;;
+    darwin*)
+    $JOOSDIR/bin/joosa+-darwin8.0 $* $JOOSDIR/joos/extern/*.joos
+    ;;
+    cygwin*)
+    $JOOSDIR/bin/joosa+-cygwin $* $JOOSDIR/joos/extern/*.joos
+    ;;
+    *)
+    echo Unknown system.  Please email your TA with specific details.
+    ;;
+esac

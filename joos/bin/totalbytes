@@ -1,0 +1,9 @@
+#!/usr/bin/env csh
+#  USAGE:  totalbytes <dirname>
+#  You must already have run the compileall script which will have 
+#    created a new subdirectory in each of the Benchmark directories.
+#  For example, if you had created the subdirectories A+, then
+#    use the command:  totalbytes A+
+#  The total number of bytes used in all the .sj files will be added
+#    and printed to stdout. 
+grep TOTAL */$1/*.sj | awk -F: '{sum=sum+$3;} END {print sum;}'

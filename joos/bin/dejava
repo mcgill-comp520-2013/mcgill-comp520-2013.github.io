@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# decompile Java .class files to corresponding Jasmin .j files
+
+case $OSTYPE in
+    freebsd*)
+	D_JAVA=${JOOSDIR}/bin/d-java-freebsd6.2
+    ;;
+    solaris*)
+	D_JAVA=${JOOSDIR}/bin/d-java-solaris2.8
+    ;;
+    linux*)
+	D_JAVA=${JOOSDIR}/bin/d-java-linux-gnu
+    ;;
+    darwin*)
+	D_JAVA=${JOOSDIR}/bin/d-java-darwin8.0
+    ;;
+    *)
+    echo Unknown system.  Please email your TA with specific details.
+    ;;
+esac
+
+for f in $*
+  do
+  ${D_JAVA} -o jasmin $f > `basename $f .class`.j 
+done

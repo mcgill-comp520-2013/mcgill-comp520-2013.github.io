@@ -1,0 +1,19 @@
+#!/usr/bin/env csh
+#
+# joosc: compiles JOOS source programs into class files using the A- JOOS compiler.
+#        this script assumes JOOSDIR/bin is on path
+#        joosa- script assumes `joos' on PATH is desired A- binary
+#        jasmin script assumes CLASSPATH is set
+#
+# usage:  joosc f1.java f2.java ... fn.joos
+#  
+# note:  you should name each source file for ordinary classes with
+#        .java extensions and all external classes with .joos extensions
+
+if ( { joosa- $* } )  then
+  foreach f ( $* )
+    if ( $f != "-O" && $f:e != "joos" ) then
+      jasmin $f:r.j 
+    endif
+  end
+endif
