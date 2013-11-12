@@ -1,0 +1,20 @@
+Joos Benchmark
+WIG Report Generator
+
+This program accepts a TeX file as input. It then replaces all text inside
+subsections (\subsection) with artificial sentences. Results may be hilarious,
+you have been warned.
+
+Our included input file allows us to produce a full WIG report. The resulting 
+LateX code can be used with the Makefile in public_html/wigreport for cs520 to
+produce a beautiful WIG report in pdf format.
+
+==== Compiling
+joosc TexGenerator.java WigGenerator.java SentenceGen.java Main.java
+
+==== Usage
+java Main < tex/wigreport-base.tex > tex/wigreport.tex
+
+Optional - Compile out.tex with LaTeX
+cd tex && make
+

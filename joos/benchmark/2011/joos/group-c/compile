@@ -1,0 +1,3 @@
+#!/bin/sh
+../peephole/joos *.java $JOOSDIR/joos/extern/*.joos *.joos
+jasmin *.j

@@ -1,0 +1,681 @@
+Maze number: 1
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s---0   e   
+    |   |   
+0---0   0   
+|       |   
+0---0---0   
+            
+
+Maze number: 2
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s   0---e   
+|   |       
+0   0---0   
+|       |   
+0---0---0   
+            
+
+Maze number: 3
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s---0---0   
+        |   
+0---e   0   
+|       |   
+0---0---0   
+            
+
+Maze number: 4
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s   0---0   
+|   |   |   
+0   e   0   
+|       |   
+0---0---0   
+            
+
+Maze number: 5
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s---0---0   
+        |   
+0---0   0   
+|   |   |   
+e   0---0   
+            
+
+Maze number: 6
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s   0---0   
+|   |   |   
+0---0   0   
+        |   
+e---0---0   
+            
+
+Maze number: 7
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s---0---0   
+        |   
+0---0---0   
+|           
+0---0---e   
+            
+
+Maze number: 8
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s   0---0   
+|   |   |   
+0   0   0   
+|   |   |   
+0---0   e   
+            
+
+Maze number: 9
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e---0   s   
+    |   |   
+0---0   0   
+|       |   
+0---0---0   
+            
+
+Maze number: 10
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e   0---s   
+|   |       
+0   0---0   
+|       |   
+0---0---0   
+            
+
+Maze number: 11
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0   s   
+|   |   |   
+0   e   0   
+|       |   
+0---0---0   
+            
+
+Maze number: 12
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---s   
+|           
+0   e---0   
+|       |   
+0---0---0   
+            
+
+Maze number: 13
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0   s   
+|   |   |   
+0   0   0   
+|   |   |   
+e   0---0   
+            
+
+Maze number: 14
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---s   
+|           
+0---0---0   
+        |   
+e---0---0   
+            
+
+Maze number: 15
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0   s   
+|   |   |   
+0   0---0   
+|           
+0---0---e   
+            
+
+Maze number: 16
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---s   
+|           
+0   0---0   
+|   |   |   
+0---0   e   
+            
+
+Maze number: 17
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e   0---0   
+|   |   |   
+0   s   0   
+|       |   
+0---0---0   
+            
+
+Maze number: 18
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e---0---0   
+        |   
+0---s   0   
+|       |   
+0---0---0   
+            
+
+Maze number: 19
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0   e   
+|   |   |   
+0   s   0   
+|       |   
+0---0---0   
+            
+
+Maze number: 20
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---e   
+|           
+0   s---0   
+|       |   
+0---0---0   
+            
+
+Maze number: 21
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0   s   0   
+|   |   |   
+e   0---0   
+            
+
+Maze number: 22
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0---s   0   
+        |   
+e---0---0   
+            
+
+Maze number: 23
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0   s---0   
+|           
+0---0---e   
+            
+
+Maze number: 24
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0   s   0   
+|   |   |   
+0---0   e   
+            
+
+Maze number: 25
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e---0---0   
+        |   
+0---0   0   
+|   |   |   
+s   0---0   
+            
+
+Maze number: 26
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e   0---0   
+|   |   |   
+0---0   0   
+        |   
+s---0---0   
+            
+
+Maze number: 27
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0   e   
+|   |   |   
+0   0   0   
+|   |   |   
+s   0---0   
+            
+
+Maze number: 28
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---e   
+|           
+0---0---0   
+        |   
+s---0---0   
+            
+
+Maze number: 29
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0   e   0   
+|   |   |   
+s   0---0   
+            
+
+Maze number: 30
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0---e   0   
+        |   
+s---0---0   
+            
+
+Maze number: 31
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0   0---0   
+|   |       
+s   0---e   
+            
+
+Maze number: 32
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0---0   0   
+    |   |   
+s---0   e   
+            
+
+Maze number: 33
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e   0---0   
+|   |   |   
+0   0   0   
+|   |   |   
+0---0   s   
+            
+
+Maze number: 34
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e---0---0   
+        |   
+0---0---0   
+|           
+0---0---s   
+            
+
+Maze number: 35
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---e   
+|           
+0   0---0   
+|   |   |   
+0---0   s   
+            
+
+Maze number: 36
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0   e   
+|   |   |   
+0   0---0   
+|           
+0---0---s   
+            
+
+Maze number: 37
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0   e   0   
+|   |   |   
+0---0   s   
+            
+
+Maze number: 38
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0   e---0   
+|           
+0---0---s   
+            
+
+Maze number: 39
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0---0   0   
+    |   |   
+e---0   s   
+            
+
+Maze number: 40
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0---0   
+|       |   
+0   0---0   
+|   |       
+e   0---s   
+            
+
+Final number of 3*3 unicursal mazes found is: 40

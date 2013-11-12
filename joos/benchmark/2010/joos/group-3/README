@@ -1,0 +1,67 @@
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Jianxun Dang and Raviv Cohen
+
+For the JOOS Benchmark, (after disscusing with jesse) we decided to implement
+the Befunge Lanauage Interpreter In Joos. The Specification for the befunge
+language can be found here: http://en.wikipedia.org/wiki/Befunge and
+http://esolangs.org/wiki/Befunge.
+
+We Did not implement all of the Befunge since there were four input characters
+and since user input was not allowed we removed them. Evething else is excatly
+the same.
+
+We thought this would be a solid test since we use:
+1. inhertance
+2. subtyping
+3. function calls
+4. complex statments
+5. return value increments
+and alot more (given the limitation of No GUI or real IO).
+
+Befunge requires two main Data Structures a stack and and a Canavas 
+(80*25 as defined by befunge wrapped around).
+
+We Implemented our own Stack + Canavas as follows:
+**We Only Used primitves such as char and int and object
+to implement nothing ready made was used.
+
+Node -> defined all links among nodes mainly Left Right Top Bottom
+CharNode -> inherts Node   add a char field and setters
+IntNode -> inherts Node    add a int fiels and setters.
+
+BefungeCanavas -> is a multidimesnoal linked list connecting a 80*25 all of 
+type charNode connected to all four fiels.As well as all convience and building
+functions
+
+BefungStack -> implements a stack of Type NODE and uses subtyping inorder to add
+either charNode or IntNode as needed some runtime checking on types is done as
+well
+
+BefungeCoder -> The Heart and sould of the Befunge engine. Here is where you
+will find all logic. It baiscally explores it was around the canvas. Deoending
+on the command it does what its told. Basically the languaes is defined like a
+drawing you gotta follow thw road and signs to get to the end.
+
+Inorder to Complile befunge all that is need is to either run:
+joosa- *.java (all the files provided in /joos/benchmark)
+than jasmin *.j
+
+Or
+
+joosc *.java
+
+To Run:
+
+Java Befunge < in > out
+
+or 
+
+Java Befunge < in (prints to the screen).
+
+We Have supplied a few examples files, they are pretty cool, you just need
+to change Java Befunge < in to Java Befunge < filename.
+Input files are (in1 - in5)
+Output files are (out1 - out5)
+**** in6 is a factorial calculator ****
+open the file and at the first line right after the zero enter the factorial
+you would like to calculate. currently set to 6.

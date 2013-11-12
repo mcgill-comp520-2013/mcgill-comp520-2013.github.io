@@ -1,0 +1,43 @@
+Email sent on Nov. 17th, 2007
+=============================
+
+Hi,
+
+Several comments about getting the scripts to work:
+
+1) You must follow the directions in public_html/howtojoosjava.html
+before beginning.  You will note that these tell you joosa- is a
+wrapper script that expects to find a binary called "joos" on your
+PATH.  This should now point to your peephole joos directory.
+
+2) The group-3 input/output appears to be a little wacky, I'm looking
+at it.
+
+3) Peng's instructions tell you all you really need to know about how
+to use the scripts.
+
+4) I moved the README file to README.2004 and created a new
+README.2007.  README.2004 still contains mostly useful information,
+but the references to the environment are outdated.  However, Peng has
+not significantly edited the scripts, and in particular the note about
+getting the group 08 benchmark from 2004 to work should apply, as
+should the various examples about how to debug things, use '2>&1 |
+tee', etc.
+
+5) Run svn up; svn log -v | less in public_html, refresh web pages,
+and try again if you are having problems before emailing.  So far I
+have not changed anything really significant, but have tried to make
+information easier to find.
+
+They work for me, so they should also work for you if you've set
+things up per the instructions.
+
+Chris
+
+Original contents:
+==================
+
+Peng has written new directions.  They are in
+../howtopeepholeopt.html.  Let us know if you encounter problems.  You
+need to have comments, increments, and for-loops working in your A-
+compiler for the benchmarks to compile.

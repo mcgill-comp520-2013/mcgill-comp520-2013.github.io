@@ -1,0 +1,15 @@
+// java.util.HashMap- 
+extern public class HashMap in "java.util" { // implements Cloneable
+  public HashMap(int initialCapacity);
+  public HashMap();
+  public void clear();
+  public Object clone();
+  public boolean containsKey( Object key);
+  public boolean containsValue( Object value);
+  public Object get(Object key);
+  public boolean isEmpty();
+  public Object put( Object key, Object value);
+  public Object remove(Object key);
+  public int size();
+}
+

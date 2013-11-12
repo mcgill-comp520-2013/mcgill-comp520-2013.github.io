@@ -1,0 +1,12 @@
+extern public class ArrayList in "java.util" {
+  public ArrayList(int sz);
+  public ArrayList();
+  public void add(Object obj);
+  public Object remove(Object obj);
+  public boolean contains(Object obj);
+  public Object get(int p);
+  public int size();
+  public void clear();
+  public boolean isEmpty();
+}
+

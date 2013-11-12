@@ -1,0 +1,35 @@
+
+extern public class ToolkitImage extends Image in "sun.awt.image" {
+  public ToolkitImage();
+  public BufferedImage getBufferedImage();
+}
+extern public class BufferedImage extends Image in "java.awt.image" {
+  public BufferedImage(int width, int height, int imageType);
+  public int getRGB(int x, int y);
+  public Graphics2D createGraphics();
+}
+
+extern public class Graphics2D in "java.awt" {
+  public Graphics2D();
+  public void drawImage(Image i, int x, int y, ImageObserver ob);
+}
+extern public class JFrame extends ImageObserver in "javax.swing" {
+  public JFrame();
+  public Image createImage(int width, int height);
+}
+extern public class ImageIcon in "javax.swing" {
+  public ImageIcon(String fileName);
+  public Image getImage();
+  public int getIconWidth();
+  public int getIconHeight();
+}
+
+extern public class ArrayList in "java.util" {
+  public ArrayList(int sz);
+  public void add(int p, Object obj);
+  public Object get(int p);
+}
+
+
+
+

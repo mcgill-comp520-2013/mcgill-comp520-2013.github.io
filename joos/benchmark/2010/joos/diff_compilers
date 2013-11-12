@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# This file takes as input any number of joos or java source files.
+# It will then compile them with joosa- and joosa+. It will also,
+# for the first file passed as input, move the compiled .j output 
+# of joosa- to $fname.j.mine, and will move the compiled .j output 
+# of joosa+ to $fname.j.theirs. It will then diff the two files,
+# and store the resulting (possibly empty) diff in $fname.result.
+# Finally, it will print out the file name and state success or
+# failure based on whether the diff returned true.
+
+fname=`echo $1 | sed -e 's/.joos$//' -e 's/.java$//'`
+joosa- $@;
+mv $fname.j $fname.j.mine;
+joosa+ $@;
+mv $fname.j $fname.j.theirs;
+diff $fname.j.theirs $fname.j.mine > $fname.result;
+if [ $? -eq 0 ];
+then echo $fname success
+else echo $fname failure
+fi;

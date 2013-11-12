@@ -1,0 +1,23 @@
+We design a Happy Farm game.
+There are a dog and a cat on the farm, and we have limited food.There are 
+water, fishes and bones. 
+A player plays the role of a farmer. The farmer has limited energy. The farmer
+can choose to play with the animals or to feed them with different kinds of 
+food. Feeding foods or playing contributes differently to the final score 
+depending on whether animals are happy about it. Also, different work takes 
+different amount of energy from the farmer. When the farmer is too tired, he will
+be judged according to his work.
+
+How to Play:
+joosc *.java
+java Farm
+
+The farmer can choose to deal with cat or dog by typing "cat" or "dog" at any
+time.
+The farmer can choose to play with or feed the animal selected by typing "play"
+or "feed". After typing "feed", the farmer can choose which food by typing the
+names as "fish","water" and "bone".
+
+Have fun on the Happy Farm and remember to be a diligent and smart farmer!
+
+

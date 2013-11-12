@@ -1,0 +1,121 @@
+Maze number: 1
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s   e   
+|   |   
+0---0   
+        
+
+Maze number: 2
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+s---0   
+    |   
+e---0   
+        
+
+Maze number: 3
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e   s   
+|   |   
+0---0   
+        
+
+Maze number: 4
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---s   
+|       
+0---e   
+        
+
+Maze number: 5
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+e---0   
+    |   
+s---0   
+        
+
+Maze number: 6
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0   
+|   |   
+s   e   
+        
+
+Maze number: 7
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---e   
+|       
+0---s   
+        
+
+Maze number: 8
+
+KEY: Node stands for room as well
+Reg Node: 0 
+Start Node: s 
+End Node: e
+East/West path: --- 
+North/South path: | 
+no path(spaces):   
+
+0---0   
+|   |   
+e   s   
+        
+
+Final number of 2*2 unicursal mazes found is: 8

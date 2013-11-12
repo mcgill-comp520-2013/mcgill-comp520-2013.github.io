@@ -1,0 +1,13 @@
+For the most part follow past READMEs and instructions. There are some
+special instructions though.
+
+INSTRUCTIONS
+
+in group-1 directory  javac lib/*.java
+
+in group-4/extern directory
+copy javalib.joos to overwrite the one in public_html. 
+
+
+
+group-1 benchmark seems to take a little time so be patient with it.

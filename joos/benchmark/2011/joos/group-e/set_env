@@ -1,0 +1,6 @@
+export JOOSDIR=$HOME/cs520/public_html/joos
+export CLASSPATH=.:$JOOSDIR/jooslib.jar:$CLASSPATH
+export PATH=$JAVADIR/bin:$JOOSDIR/bin:$PATH
+export PATH=$PATH:$HOME/cs520/public_html/joos/bin/:$HOME/cs520/public_html/joos/jasmin/bin
+export PATH=$PATH:$HOME/cs520/public_html/joos/a-
+export JAVADIR=/usr/lib/jvm/java-6-openjdk

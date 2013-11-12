@@ -1,0 +1,128 @@
+Update: Nov. 9th, 2004
+
+I added a compile_and_run_opt script that passes -O to all three
+compilers.  It doesn't make any difference for javac, but hey, it
+works.  These scripts use a fair amount of cloned code now; however,
+it's not totally trivial to compact them so I haven't yet.
+
+I also set environment variables at the top of each script.  I know
+this isn't the best way to do things, but basically, if you run these
+scripts on the lab7-<X> machines at McGill (remember to use ssh -X to
+run the Group08 benchmark), you won't have any problems.  
+
+$ ssh `whoami`@lab7-<X>.cs.mcgill.ca
+$ bash
+
+The one thing you need to do is put a symlink to your a-joos compiler
+in ${HOME}/bin:
+
+$ mkdir ${HOME}/bin
+$ ln -s ${HOME}/path/to/a-minus/joos ${HOME}/bin/a-joos
+
+Also, if you've built your a-joos on a non-linux machine, you need
+to do 'make clean' and 'make' to get it to run.
+
+Then, you should be able to do:
+
+$ ./compile_and_run_opt benchmark_list_joos 2>&1 | tee compile_and_run_opt.out2
+
+This puts .sj files in aminus-opt-classes, aplus-opt-classes,
+javac-opt-classes.  It also creates a file called frequencies which
+lists the number of times given patterns were applied.  For the A+
+compiler, the pattern names are omitted in the frequencies file.
+
+$ ./totalbytes_all
+
+This calls Laurie's totalbytes script for each of aminus-opt,
+aplus-opt, and javac-opt.
+
+If you want to cut out unnecessary parts of the scripts to save
+running time, feel free.  Remember, we will strike out any unsound
+patterns.  Please submit your peephole patterns contest deliverable
+based on the example deliverable sheet Laurie handed out in class.  I
+will not be generous to groups that do not follow the simple
+instructions therein.
+
+Cheers,
+Chris
+
+====================
+
+Hello 520 class of 2004.  These are your official JOOS benchmarks.  I
+removed syntactic sugar from them and did some general renaming and
+cleaning up, but mostly they're the same as the originals.
+
+So far this works on the Linux machines in Lab 7 in the Trottier
+building using bash.  Probably not much is required for other systems
+and shells, it's mostly just an environment thing.
+
+I had to do
+
+$ export HOSTTYPE=i386-linux
+
+to be able to use Laurie's binaries.  You might have to play with
+$HOSTTYPE wherever you are.  Additionally, you need your compiled
+a-joos binary on your PATH (it's helpful to create a symlink to it in
+~/bin and put ${HOME}/bin at the front of your PATH).
+
+To compile and run all eleven benchmarks:
+
+$ ./compile_and_run benchmark_list_joos
+
+This will put classes and jasmin files for each of javac, a-joos, and
+a+joos into separate javac-classes, aminus-classes, and aplus-classes
+directories.
+
+Let's say you just want to run benchmarks 01, 08, 10:
+
+$ grep -E '01|08|10' benchmark_list_joos > benchmark_list_causing_us_problems
+
+[ ... intense hackery ... ]
+
+$ ./compile_and_run benchmark_list_causing_us_problems
+
+Note that the columns in the benchmark list are tab-separated, should
+you choose to edit it (although there is really no need).  I could
+have used awk instead of cut in the script and avoided this.
+
+Group 08's benchmark requires an X server on the computer running the
+terminal application (i.e. the machine at which you are typing).  This
+means I personally need to log in with:
+
+$ ssh -X cpicke@lab7-1.cs.mcgill.ca
+
+instead of just
+
+$ ssh cpicke@lab7-1.cs.mcgill.ca
+
+to forward the display data to my X server.  I get the additional messages
+
+Note: /home/user/hendren/JOOS1.1/Lib/joos/lib/JoosConstants.java uses or overrides a deprecated API.
+Note: Recompile with -deprecation for details.
+
+and 
+
+Warning: Cannot convert string "-b&h-lucida-medium-r-normal-sans-*-140-*-*-p-*-iso8859-1" to type FontStruct
+
+on my machine but they shouldn't matter.  It also seems like the kind
+of thing that often works the first time but then fails until you log
+out and log back in (using ssh -X).
+
+The expected output from running all benchmarks is in compile_and_run.out1
+When you can do something like
+
+$ ./compile_and_run benchmark_list_joos | tee compile_and_run.out2
+$ diff -u compile_and_run.out1 compile_and_run.out2
+
+and have diff be silent, your changes to the a- compiler are
+considered safe.
+
+Finally 
+
+$ ./cleanup benchmark_list_joos
+
+will remove all generated files and directories.
+
+Any questions or bugs, please email me.
+
+Chris

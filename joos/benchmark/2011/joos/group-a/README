@@ -1,0 +1,23 @@
+Game of Life 
+Authors: Rafik Draoui and Vincent Magnoux
+
+An implementation of Conway's Game of Life 
+(http://en.wikipedia.org/wiki/Conway's_Game_of_Life)
+
+
+Input
+-----
+The first line of the input determines the board size. The second
+determines the number of generations to generate. The rest of the file
+should be a representation of board as the initial configuration. Dots
+('.') represents dead cells and zeros ('0') live cells. 
+
+
+Output
+------
+The board configuration is printed to stdout at each generation. For a
+better visual result, it is recommended that the size of the terminal
+window should be 2 pixels more than the board size. For example, a
+standard 80x24 terminal window is well-suited for displaying boards of
+size 22.
+

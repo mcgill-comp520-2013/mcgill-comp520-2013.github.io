@@ -1,0 +1,9 @@
+joosa+ *.java
+jasmin *.j
+java Main < in1 > out1
+
+Main will start a game of Pong. The input is described by the program and
+hopefully self explanatory. If you don't find infinite loops funny don't try
+another wall then the stone wall. We had those others walls working (with
+modified slopes) but somehow it broke at the end. Anyways, if you play Pong
+with the stone wall it should work fine. Have fun!

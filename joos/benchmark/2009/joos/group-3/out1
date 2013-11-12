@@ -1,0 +1,2 @@
+(plus (plus 1) 2 (plus) (plus 4 (plus 5 6)) 7 (plus (plus 8) 9))
+The answer is 42.

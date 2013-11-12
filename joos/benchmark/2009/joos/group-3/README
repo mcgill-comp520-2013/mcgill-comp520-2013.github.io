@@ -1,0 +1,2 @@
+The Benchmark is a very limited Lisp interpeter. It only accepts integers and the one function plus (written as "plus"). It doesn't handle syntax errors.
+For example, it would evaluate (plus 3 (plus) 4) to 7.

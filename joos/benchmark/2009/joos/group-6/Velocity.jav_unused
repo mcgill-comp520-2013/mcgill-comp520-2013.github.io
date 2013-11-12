@@ -1,0 +1,36 @@
+
+public class Velocity {
+	private double deltaX;
+	private double deltaY;
+	//DefaultConstructor intializes velocity to 0
+	public Velocity(){
+		deltaX = 0;
+		deltaY = 0;
+	}
+	
+	public Velocity(double dX, double dY){
+		deltaX = dX;
+		deltaY = dY;
+	}
+	
+	public double getDX(){
+		return deltaX;
+	}
+	
+	public double getDY(){
+		return deltaY;
+	}
+	
+	public void setDX(double dX){
+		deltaX = dX;
+	}
+	
+	public void setDY(double dY){
+		deltaY = dY;
+	}
+	
+	public void setVelocity(double dX, double dY){
+		deltaX = dX;
+		deltaY = dY;
+	}
+}

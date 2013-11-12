@@ -1,0 +1,8 @@
+!/usr/bin/env bash
+
+rm *.j *.class
+joosc *.java ./*joos
+
+
+
+

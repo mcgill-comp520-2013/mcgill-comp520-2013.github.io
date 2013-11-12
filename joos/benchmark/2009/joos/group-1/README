@@ -1,0 +1,15 @@
+JOOS Benchmark
+Group 1
+
+Our benchmark reads in a PNG image and outputs an HTML page with both a colored 
+and uncolored ASCII image.  It automatically scales the output so that the 
+longest edge is 150 characters.
+
+The image to ASCII conversion is done by first creating a temporary greyscale 
+image, and then with that we pick an appropriate character using the intensity 
+at each pixel.  The colored version wraps each character in a SPAN tag and 
+applies the proper color property using the RGB value of the associated pixel.
+
+Steps for compiling:
+1. # javac ./lib/*.java
+2. # joosc Main.java JoosImage.java ExternLibs.joos

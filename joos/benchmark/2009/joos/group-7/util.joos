@@ -1,0 +1,41 @@
+
+// -----------------------------------------------------------------
+// The following classes are defined in the standard java class
+//   libraries,  and are described in the book:
+//   "The Java(tm) Language Specification", by Gosling, Joy and Steele,
+//   published by Addison-Wesley.   On-line copies of the book are
+//   available via <http://java.sun.com/doc/language_specification.html>.
+// -----------------------------------------------------------------
+
+extern public class HashSet in "java.util" { 
+    public HashSet();
+    public HashSet(int initialCapacity); 
+    public final boolean add(Object o);
+    public final void clear();
+    public final Object clone();
+    public final boolean contains(Object o);
+    public final boolean isEmpty();
+    public final boolean remove(Object o);
+    public final int size();
+}
+
+extern public class HashMap in "java.util" { 
+    public HashMap();
+    public final void clear();
+    public final Object clone();
+    public final boolean containsKey(Object key);
+    public final boolean containsValue(Object value);
+    public final Object get(Object key);
+    public final boolean isEmpty();
+    public final Object	put(Object key, Object value);
+    public final Object	remove(Object key);
+    public final int size();
+}
+
+
+// java.lang.StringBuilder
+extern public class StringBuilder in "java.lang" {
+  public StringBuilder(String s);
+  public StringBuilder replace(int start, int end, String str);
+  public int indexOf(String str, int fromIndex);
+}

@@ -1,0 +1,23 @@
+Our benchmark is called Beep.  What it does is filter text for swear words
+defined in Lexicon.java and replaces them with less vulgar, and hopefully
+amusing words or terms.  You may wonder why the program name is Beep, but
+hopefully after you run it you'll understand.  If you are using Ubuntu on the
+lab machines, there is a terminal and a virtual terminal, please use the 
+non-virtual one.  
+
+If you want to use our run script, you will have to add the 'jus' script from 
+the group-5/bin/ directory to your $JOOSDIR/bin/ directory, which should be in 
+your path.  Our joos program should also be in your path as well.  The script 
+is written in bash, so please make sure you are running that as well.
+
+./run
+
+should do everything for you, including compiling with joos, jasmin, and 
+finally running with java.  Note that java should also be in your path, and we 
+didn't really bother with the $JAVADIR stuff.  Don't mind all the excess 
+messages from the output, it just makes us feel better when things work.
+
+If you were wondering, the input text is the "Uncle Fucker" song from the South
+Park movie.
+
+Enjoy.

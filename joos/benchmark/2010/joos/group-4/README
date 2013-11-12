@@ -1,0 +1,10 @@
+Our benchmark matches any pairs of boys and girls using Gale-Shapley algorithm.
+
+The input file should start with a integer N on a single line, which is the
+number of boys/girls. Then comes the preference list of boy 1, boy 2, and up to
+boy N, followed by preference list of girl 1, girl 2, up to girl N.
+
+A preference list is a ranking of boys/girls, from the most desirable to the
+least desirable. Boys and girls are represented by integers from 1 to N.
+
+To run the program, please `make' and then `make match'.

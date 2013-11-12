@@ -1,0 +1,23 @@
+Dungeon Crawl game rules:
+
+A player starts the game in a room in the dungeon.At each step the player could use one of the following commands:
+
+1) move < up|down|left|right > : Moves into the room up|down|left|right 
+                                 from the current room; Note that there 
+                                 might not be a room in one of those 
+                                 directions, in this case the move 
+                                 command fails;Also, if there is a monster 
+                                 in the room, the player cannot use a 
+                                 "move" command untill all monsters in the 
+                                 room are defeated.
+
+
+2) take: Used to pick up an item from the room.Only works if sn
+                     specified item is indeed in the room, otherwise the
+                     command fails.
+
+3) examine : The player could look around the room they're currently occupying; 
+             This command displays a description of the room, along with all
+             monsters and/or items inside.
+
+4) map : Shows a map of the dungeon.

@@ -1,0 +1,36 @@
+extern public class BufferedImage in "java.awt.image"
+{
+  public BufferedImage(int width, int height, int imagetype);
+  public int getWidth();
+  public int getHeight();
+  public int getRGB(int x, int y);
+  public void setRGB(int x, int y, int rgb);
+  public Graphics2D createGraphics();
+}
+
+extern public class Graphics2D in "java.awt"
+{
+  public Graphics2D();
+  public void setRenderingHint(Object hintKey, Object hintValue);
+  public boolean drawImage(BufferedImage image, int x, int y, int width, int height, ImageObserver observer);
+  public void dispose();
+}
+
+extern public class JoosImageIO in "lib"
+{
+  public JoosImageIO();
+  public BufferedImage read();
+  public boolean write(BufferedImage im);
+}
+
+extern public class JoosGraphics2D in "lib"
+{
+	public JoosGraphics2D();
+	public BufferedImage scaleImage(BufferedImage image, int newWidth, int newHeight);
+}
+
+extern public class JoosInt in "lib"
+{
+    public JoosInt();
+    public String toHexString(int i);
+}

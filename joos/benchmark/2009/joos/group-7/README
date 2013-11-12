@@ -1,0 +1,46 @@
+To run:
+
+If joosc is working then:
+
+  $ make run
+
+Should compile and run the program in interactive mode.
+
+  $ make runFile
+
+Should compile and run the file straight from inl. Redirect at will.
+
+To use Java:
+  
+ $ make runJava / runJavaFile
+
+Running 
+
+ $ make all 
+or
+ $ make java
+
+Will build the code using joosc, javac resepectively. Can run with ./run, ./run2 if you want to use inl.
+
+Commands are:
+look
+get
+move
+inventory
+what (not really functional yet)
+
+
+------ 
+Engine wise pretty much everything is in place but due to
+fights with joos the content itself is somewhat subdued which is sad
+as right now adding commands, locations, triggers, etc. is really
+simple. That's why the story will be continued! As it is, I think it
+is a pretty solid benchmark as it has a lot of subclassing and class
+interactions, and passing as arguments, going around.
+
+
+TO DO: 
+
+   To have fun commands
+
+   More places and the real, funny, story.
