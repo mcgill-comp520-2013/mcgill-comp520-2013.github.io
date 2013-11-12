@@ -1,0 +1,72 @@
+      <h1>How to compile and test peephole patterns </h1>
+      <h2>Introduction</h2>
+      <p> After checking out the latest public_html/ in the SVN
+repository, you will find the class benchmarks in <a
+ href="benchmarks/2004/joos">benchmarks/2004/joos</a>, <a
+ href="benchmarks/2007/joos">benchmarks/2007/joos</a> and <a
+ href="benchmarks/2008/joos">benchmarks/2008/joos</a>. The group-x
+folders contain benchmarks from each group, we will use them to
+benchmark your joos peephole optimizer. </p>
+      <ul>
+        <li>benchmark_list_joos is a plain text file listing thees
+benchmarks. This file is used by the scripts. Feel free to add your own
+benchmarks.</li>
+        <li>compile_and_run is a script that tries to (1) compile
+benchmarks using javac, joosa- and joosa+; (2) compiled code in
+different folders; then (3) run them one after another; and (4) compare
+the output files to check if the benchmarks behave exactly the same. In
+addition, this script decompiles the bytecode to jasmin to count the
+total bytes. This is what you will be judged on.<br>
+        </li>
+        <li>compile_and_run_opt is pretty similar to compile_and_run
+except the "-O" flag is passed to the three compilers so that
+optimization is turned on. Output files are checked in the end, to see
+if the benchmarks' behaviour does not change after your peephole
+optimization.</li>
+        <li>totalbytes_all is a script that will report the total size
+of the compiled files</li>
+        <li>cleanup is a script that will remove all the generated
+files.</li>
+      </ul>
+      <h2>Environment Settings</h2>
+      <p> Before running those scripts, make sure you have <a
+ href="howtojoosjava.html">set up your environment variables</a>. In
+particular, note that the joosa- wrapper expects to find a binary
+called joos on your PATH that implements your peephole optimizations.
+Also, <b>please note</b>: if you are not using bash as your shell you
+might need to replace instances of ${OSTYPE} and $OSTYPE in the scripts
+with a hard path to the binaries you want in $JOOSDIR/bin. </p>
+      <h2>Scripts Usage</h2>
+      <ul>
+        <li>compile_and_run / compile_and_run_opt:
+          <p>You should pass the benchmark list as the only parameter
+when running these scripts:</p>
+          <p><tt>./compile_and_run benchmark_list_joos</tt></p>
+          <p><tt>./compile_and_run_opt benchmark_list_joos</tt></p>
+        </li>
+        <li> totalbytes_all:
+          <p>You can run it by simply typing </p>
+          <p><tt>./totalbytes_all</tt></p>
+        </li>
+        <li>cleanup:</li>
+        <p>You should pass the benchmark list as the only parameter
+when running:</p>
+        <p><tt>./cleanup benchmark_list_joos</tt></p>
+        <li>totalbytes:
+          <p>Yet another script to help you calculate the size of your
+code, it is located in public_html/joos/bin, it can report the total
+size of the .sj files in the specified directory:</p>
+          <p><tt>totalbytes &lt;dir_name&gt;</tt> where <tt>&lt;dir_name&gt;</tt>
+is one of <tt>aminus-opt, aplus-opt, javac-opt</tt></p>
+        </li>
+      </ul>
+Finally, you might want to read the <a
+ href="benchmarks/2008/joos/benchmark_list_joos">README.2007</a> and <a
+ href="benchmarks/2008/joos/README.2004">README.2004</a> files
+if you want more insight as to how the scripts work and how you can
+use them to focus on specific problems.<br>
+      <br>
+      <span style="font-weight: bold;">Note: </span>Unfortunately we
+were unable to integrate group 4's benchmark from this year because it
+depends on some non-standard API. Also not that the benchmark of group
+1 throws a "joos.lib.JoosException" when being executed. This is normal.<br>
