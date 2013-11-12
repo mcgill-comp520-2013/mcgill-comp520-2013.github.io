@@ -1,0 +1,363 @@
+      <h1>How to run <IMG src="images/joos32.gif" width="64" height="32"> and Java programs</h1>
+      
+      <h2>1. Making sure prerequisites are installed</h2>
+
+      Your machine or the host you are logged in to must have these tools
+      correctly installed:
+      <p>
+      <ol>
+      <li> Java SDK, version 1.5
+
+      <li> Flex <a href="http://flex.sourceforge.net/">[download]</a>
+      <a href="http://flex.sourceforge.net/manual/">[manual]</a>
+
+      <li> Bison <a
+      href="http://ftp.gnu.org/gnu/bison/">[download]</a> <a
+      href="http://www.gnu.org/software/bison/manual/index.html">[manual]</a>
+      </ol>      
+
+      <h2>2. Setting up your environment</h2>
+
+      Some of the scripts in this course depend on certain
+      <i>environment variables</i> being set.  You will be able to run
+      the Java and JOOS tools on <code>mimi</code> (Sun Solaris) or
+      any of the Gentoo Linux or FreeBSD machines.  These instructions
+      work for both the default <code>tcsh</code> shell as well as
+      <code>bash</code>.  It is strongly recommended that you log in
+      to <code>mimi</code> and change your shell to <code>bash</code>
+      unless you have a particular affinity for <code>tcsh</code>:
+
+      <pre>
+      [mimi] [~] passwd -r nis -e
+      Enter existing login password: 
+      Old shell: /usr/local/bin/tcsh
+      New shell: /usr/local/bin/bash
+      passwd: password information changed for cpicke
+      </pre>
+
+      <h3>JAVADIR</h3>
+
+      This variable must point to the location of the directory
+      containing your desired installation of the Java SDK.
+      <p>
+
+      To set up a Java environment that will work on the
+      {FreeBSD,linux,solaris} machines in the <a
+      href="http://socsinfo.cs.mcgill.ca/wiki/Labs">SOCS labs</a>, you
+      can add some startup scripts that run when you log in.  If you
+      are using <code>tcsh</code> as your shell you can add the
+      following to your <code>.cshrc</code>:
+      <p>
+
+      <pre>
+      if ( $OSTYPE == FreeBSD ) then
+        setenv JAVADIR /usr/local/diablo-jdk1.5.0
+      else if ( $OSTYPE == solaris ) then
+        setenv JAVADIR /usr/local/jdk1.5.0_08
+      else if ( $OSTYPE == linux ) then
+        setenv JAVADIR /opt/sun-jdk-1.5.0.12
+      else
+        echo "Unable to set JAVADIR properly."
+      endif
+      </pre>
+      <p>
+      
+      Alternatively, if you are using <code>bash</code> you can add
+      the following to your <code>.bash_profile</code>:
+      <p>
+
+      <pre>
+      case $OSTYPE in
+        freebsd*)
+          JAVADIR=/usr/local/jdk1.5.0
+          ;;
+        solaris*)
+          JAVADIR=/usr/local/jdk1.5.0_08
+          ;;
+        linux*)
+          JAVADIR=/opt/sun-jdk-1.5.0.12
+          ;;
+        *)
+          JAVADIR=
+          ;;
+      esac
+      
+      if test -d $JAVADIR
+        then
+          export JAVADIR
+        else
+          echo "Unable to set JAVADIR properly."
+      fi
+      </pre>
+      <p>
+      
+      Notice that the <code>bash</code> code is actually a little bit
+      more robust, and will warn you properly on
+      <code>willy.cs.mcgill.ca</code> where Java 1.5 is not installed.
+      The reason we specify Java 1.5 is that you will actually analyse
+      the output of <code>javac</code> in the peephole contest and it
+      helps if everybody is using the same version.
+      <p>
+
+      You may want to add new cases to these scripts.  If you find
+      another lab machine at school with a Java 1.5 installation in a
+      different directory, please let us know about it.
+      <p>      
+            
+      <h3>JOOSDIR</h3>
+
+      This variable tells scripts where to find the JOOS binaries and
+      libraries.  Once you have <a href="howtosvn.html">checked out
+      the public_html</a> directory of the class SVN repository, and
+      assuming its in <code>$HOME/cs520/public_html/</code>, then you
+      should add the following to your <code>.cshrc</code>:
+      <p>
+
+      <pre>
+      setenv JOOSDIR $HOME/cs520/public_html/joos
+      </pre>
+      <p>
+
+      if you are using <code>tcsh</code>, or the following to your
+      <code>.bash_profile</code>:
+      <p>
+
+      <pre>
+      export JOOSDIR=$HOME/cs520/public_html/joos
+      </pre>
+      <p>
+            
+      if you are using <code>bash</code>.
+
+      <h3>CLASSPATH</h3>
+
+      This variable tells <code>javac</code> and <code>java</code>
+      where to find required libraries.  We would like to add the
+      current directory <code>.</code> to our CLASSPATH as well the
+      jar file containing the JOOS libraries,
+      <code>jooslib.jar</code>:
+
+      <pre>
+      setenv CLASSPATH .:$JOOSDIR/jooslib.jar:$CLASSPATH
+      </pre>
+            
+      or
+      <p>
+            
+      <pre>
+      export CLASSPATH=.:$JOOSDIR/jooslib.jar:$CLASSPATH
+      </pre>
+      <p>
+      
+      for <code>tcsh</code> and <code>bash</code> respectively.
+
+      <h3>PATH</h3>
+
+      Now you can add the JAVADIR and JOOSDIR binaries to your path using:
+      <p>
+
+      <pre>
+      setenv PATH $JAVADIR/bin:$JOOSDIR/bin:$PATH
+      </pre>
+            
+      or
+      <p>
+            
+      <pre>
+      export PATH=$JAVADIR/bin:$JOOSDIR/bin:$PATH
+      </pre>
+      <p>
+      
+      for <code>tcsh</code> and <code>bash</code> respectively.  Note
+      that since <code>$PATH</code> appears at the end of the string,
+      these directories will be searched for binaries before any of
+      the directories found in the old value of <code>PATH</code>.
+      <p>
+
+      Note: as you will be modifying the A- JOOS compiler, you may
+      find it convenient to place the directory containing your
+      modifications on your path as well.
+
+      <h2>3. Using the various tools </h2>
+
+      This section describes the use of the various tools needed for
+      the JOOS project.  It assumes that the environment variables in
+      the previous section have been set properly.
+
+      <h3>joosa+</h3>
+
+      This is the A+ JOOS compiler.  It is actually a wrapper script
+      around binaries for several different architectures that
+      looks at the value of <code>$HOSTTYPE</code> to determine
+      what to execute.
+      <p>
+
+      <i>Task</i>: compile JOOS programs using the A+ compiler into a similar 
+      collection of Jasmin files:
+      <p>
+
+      <pre>
+      $ joosa+ f1.java f2.java ... fn.java f1.joos f2.joos ... fn.joos
+      </pre>
+      <p>
+
+      Note that JOOS programs are really collections of regular
+      <code>.java</code> files (<code>f1.java</code> through
+      <code>fn.java</code>) along with special <i>externs</i> that
+      provide access to the Java class libraries (<code>f1.joos</code>
+      through <code>fn.joos</code>).  Many externs are already present
+      in <code>$JOOSDIR/joos/extern</code> and get pulled in
+      automatically by the script.  This means that quite possibly you
+      will not need to specify any of your own.  The
+      <code>.java</code> extension for JOOS classes is used so that
+      JOOS programs can also be compiled easily with
+      <code>javac</code>.
+      <p>
+
+      <h3>joos</h3> 
+
+      This is the A- JOOS compiler.  It converts Java source code
+      <code>.java</code> files to Jasmin assembler <code>.j</code>
+      files that contain human-readable representations of Java
+      bytecode.
+      <p>
+
+      The A- source code is in <code>$JOOSDIR/a-</code>, but you will
+      be copying it to your own group repository for the course
+      deliverables.  You should build the binary from the source
+      yourself by typing <code>make</code>.  You should then add the
+      source directory to your PATH so that <code>joos</code> is found
+      by the <code>joosa-</code> script described later.  Initially, it
+      is fine to add <code>$JOOSDIR/a-</code> to your PATH; just
+      remember that you can override it by
+      <i>prepending</i> additional directories in the future.
+      <p>
+
+      <i>Task</i>: set up PATH, compile <code>joos</code> for the
+      scanning and parsing deliverable, and then experiment with a
+      test program:
+
+      <pre>
+      $ export PATH=$HOME/cs520/group-X/joos/scanparse/:$PATH
+      $ cd $HOME/cs520/group-X/joos/scanparse/
+      $ make
+      $ cd tests
+      $ joos CheckForLoops.java $JOOSDIR/externs/*.joos
+      </pre>
+
+      Note that ideally the first step will go into your
+      <code>.bash_profile</code> and that you will define a <code>make
+      check</code> target that performs the last two steps for you,
+      converts the <code>.j</code> files to <code>.class</code> files,
+      and then verifies and executes the program.
+      
+      <h3>joosa-</h3>
+
+      This is a wrapper around the A- JOOS compiler.  It expects to
+      find a binary called <code>joos</code> on your PATH, and for the
+      <code>JOOSDIR</code> environment variable to be set.
+
+      <i>Task</i>: Compile a JOOS program using the
+      <code>joosa-</code> script:
+
+      <pre>
+      $ joos f1.java f2.java ... fn.java f1.joos f2.joos ... fn.joos
+      </pre>
+
+      Note that here the <code>.joos</code> extern files are ones that
+      you have written; the script already pulls in all of the externs
+      from the <code>$JOOSDIR/extern</code> directory.
+
+      <h3>jasmin</h3>
+
+      This is the Jasmin assembler.  It is actually a wrapper script
+      that calls <code>java</code> to execute <code>jasmin.Main</code>.
+      <p>
+
+      <i>Task</i>: convert the Jasmin <code>.j</code> files generated
+      by some JOOS compiler into real Java <code>.class</code> files:
+      <p>
+
+      <pre>
+      $ jasmin f1.j f2.j ... fn.j
+      </pre>
+
+      <h3>joosc</h3>
+
+      This is a convenience wrapper script that calls
+      <code>joosa-</code> and then calls <code>jasmin</code> for a JOOS
+      program.
+
+      <i>Task</i>: compile a JOOS program directly to Java bytecode:
+
+      <pre>
+      $ joosc f1.java f2.java ... fn.java f1.joos f2.joos ... fn.joos
+      </pre>
+
+      Note that this will also leave the intermediate <code>.j</code>
+      files in the current directory.
+
+      <h3>javac</h3>
+
+      This is the official Java compiler.  You can confirm that it is
+      version 1.5 by typing <code>java -version</code>.
+      <p>      
+
+      <i>Task</i>: compile JOOS programs, which are also Java
+      programs, into a similar collection of class files using the
+      official JDK:
+      <p>
+
+      <pre>
+      $ javac f1.java f2.java ... fn.java
+      </pre>
+      <p>
+
+      If your CLASSPATH is set properly this will work, because
+      <code>javac</code> will search the JOOS libraries as necessary.
+      Note that all files must end with <code>.java</code>.
+
+      <h3>dejava</h3>
+
+      This is the D-Java <code>.class</code> file disassembler.  It is
+      actually a wrapper script around binaries for several different
+      architectures that looks at the value of <code>$HOSTTYPE</code>
+      to determine what to execute.
+      <p>
+      
+      <i>Task</i>: disassemble a collection of Java
+      <code>.class</code> files that constitute a JOOS/Java program
+      into a collection of Jasmin assembler <code>.j</code> files:
+      <p>
+
+      <pre>
+      $ dejava f1.class f2.class ... fn.class
+      </pre>
+      <p>
+
+      <h3>java -verify</h3>
+
+      This is the Java virtual machine running with the class file
+      verifier turned on.  The verifier makes sure that the bytecode
+      obeys the rules of the <a
+      href="http://java.sun.com/docs/books/jvms/second_edition/html/VMSpecTOC.doc.html">Java
+      Virtual Machine Specification</a>.
+      <p>
+
+      <i>Task</i>: execute and verify <code>.class</code> files
+      containing Java bytecode:
+      <p>
+
+      <pre>
+      $ java -verify Main
+      </pre>
+      <p>
+
+      where Main is the main class of the application.  Note that you
+      must not use an extension here.  If your CLASSPATH is set
+      properly this will work, because <code>java</code> will search
+      the JOOS libraries as necessary.
+
+      <h2>4. Understanding the tool relationships</h2>      
+      <img src="images/howto.gif" width="361" height="261"> 
+      <p>
