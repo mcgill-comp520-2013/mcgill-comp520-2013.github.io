@@ -17,7 +17,16 @@
 
 extern int lineno;
 %}
+
+%x MULTILINECOMMENT
 %%
+
+
+<INITIAL>"/*"           BEGIN(MULTILINECOMMENT);
+<MULTILINECOMMENT>"*/"  BEGIN(INITIAL);
+<MULTILINECOMMENT>\n    lineno++;
+<MULTILINECOMMENT>.     {}; 
+
 [ \t]+                   /* ignore */;
 \n                       lineno++;
 \/\/[^\n]*\n             lineno++;
@@ -97,6 +106,7 @@ while                    return tWHILE;
 ","                      return ',';
 "."                      return '.';
 "++"                     return tINC;
+"--"                     return tDECR;
 '\\b'                  { yylval.charconst = '\b';
                          return tCHARCONST; }
 '\\t'                  { yylval.charconst = '\t';
@@ -135,3 +145,4 @@ false                  { yylval.boolconst = 0;
 "import "([a-zA-Z_][a-zA-Z0-9_]*".")*("*"|[a-zA-Z_][a-zA-Z0-9_]*); return tPATH;
 .                        return tERROR;
 %%
+

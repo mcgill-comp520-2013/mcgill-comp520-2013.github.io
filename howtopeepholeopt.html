@@ -1,12 +1,8 @@
       <h1>How to compile and test peephole patterns </h1>
       <h2>Introduction</h2>
-      <p> After checking out the latest public_html/ in the SVN
-repository, you will find the class benchmarks in <a
- href="benchmarks/2004/joos">benchmarks/2004/joos</a>, <a
- href="benchmarks/2007/joos">benchmarks/2007/joos</a> and <a
- href="benchmarks/2008/joos">benchmarks/2008/joos</a>. The group-x
-folders contain benchmarks from each group, we will use them to
-benchmark your joos peephole optimizer. </p>
+      You will find the benchmark from year 2009 (and other years, but those
+      aren't important) in the GitHub repository. It contains also
+      a bunch of scripts:
       <ul>
         <li>benchmark_list_joos is a plain text file listing thees
 benchmarks. This file is used by the scripts. Feel free to add your own
@@ -60,13 +56,5 @@ size of the .sj files in the specified directory:</p>
 is one of <tt>aminus-opt, aplus-opt, javac-opt</tt></p>
         </li>
       </ul>
-Finally, you might want to read the <a
- href="benchmarks/2008/joos/benchmark_list_joos">README.2007</a> and <a
- href="benchmarks/2008/joos/README.2004">README.2004</a> files
-if you want more insight as to how the scripts work and how you can
+Finally, you might want to read the provided READMEs if you want more insight as to how the scripts work and how you can
 use them to focus on specific problems.<br>
-      <br>
-      <span style="font-weight: bold;">Note: </span>Unfortunately we
-were unable to integrate group 4's benchmark from this year because it
-depends on some non-standard API. Also not that the benchmark of group
-1 throws a "joos.lib.JoosException" when being executed. This is normal.<br>

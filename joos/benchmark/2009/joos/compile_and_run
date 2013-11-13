@@ -8,13 +8,12 @@
 # command line inputs:
 # $1 : benchmark list filename
 
-#JAVADIR=/usr/localcc/pkgs/jdk1.5.0
 #JOOSDIR=/home/user/hendren/JOOS1.1
 #JJOOSDIR=/home/user/hendren/SableCC/JJOOS3
 #SABLECCDIR=/home/user/hendren/SableCC/sablecc-3-beta.3
 #WIGDIR=/home/user/hendren/WIG
 
-PATH=${PATH}:${HOME}/bin:$JOOSDIR/bin:$JAVADIR/bin:$WIGDIR/bin:${JOOSDIR}/a-
+PATH=${PATH}:${HOME}/bin:$JOOSDIR/bin:$WIGDIR/bin:${JOOSDIR}/a-
 CLASSPATH=.:$JOOSDIR/jasmin/classes:$JOOSDIR/jooslib.jar
 root_dir=`pwd`
 
@@ -37,8 +36,8 @@ for bench in `cat $1 | cut -f1 | xargs echo`
   mkdir javac-classes
 
   echo "  compiling with javac                     (.java --> .class)"
-  javac -source 1.4 -classpath ${CLASSPATH} -d javac-classes/ *.java
-  javac -source 1.4 -classpath ${CLASSPATH} -d . *.java
+  javac -Xlint:none -classpath ${CLASSPATH} -d javac-classes/ *.java
+  javac -Xlint:none -classpath ${CLASSPATH} -d . *.java
 
   cp -R javac-classes aminus-classes
   cp -R javac-classes aplus-classes
@@ -61,7 +60,7 @@ for bench in `cat $1 | cut -f1 | xargs echo`
   cd aminus-classes
   rm *.class
   echo "  assembling with jasmin                   (.j --> .class)"
-  ${JAVADIR}/bin/java -classpath ${CLASSPATH} jasmin.Main *.j > jasmin.out
+  java -classpath ${CLASSPATH} jasmin.Main *.j > jasmin.out
   echo "  disassembling with d-java                (.class --> .sj)"
   for file in *.class
     do
@@ -78,7 +77,7 @@ for bench in `cat $1 | cut -f1 | xargs echo`
   cd aplus-classes
   rm *.class
   echo "  assembling with jasmin                   (.j --> .class)"
-  ${JAVADIR}/bin/java -classpath ${CLASSPATH} jasmin.Main *.j > jasmin.out
+  java -classpath ${CLASSPATH} jasmin.Main *.j > jasmin.out
   echo "  disassembling with d-java                (.class --> .sj)"
   for file in *.class
     do

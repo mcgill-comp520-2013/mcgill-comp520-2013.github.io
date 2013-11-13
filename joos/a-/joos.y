@@ -11,7 +11,9 @@
  */
 
 %{
- 
+
+#define YYDEBUG 1
+  
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -49,7 +51,7 @@ extern CLASSFILE *theclassfile;
        tINTERFACE tLONG tMAIN tMAINARGV tNATIVE tNEW tNULL tPACKAGE 
        tPRIVATE tPROTECTED tPUBLIC tRETURN tSHORT tSTATIC tSUPER 
        tSWITCH tSYNCHRONIZED tTHIS tTHROW tTHROWS tTRANSIENT tTRY tVOID 
-       tVOLATILE tWHILE tEQ tLEQ tGEQ tNEQ tAND tOR tINC tPATH tERROR
+       tVOLATILE tWHILE tEQ tLEQ tGEQ tNEQ tAND tOR tINC tDECR tPATH tERROR
 
 %token <intconst> tINTCONST
 %token <boolconst> tBOOLCONST
@@ -65,12 +67,12 @@ extern CLASSFILE *theclassfile;
 %type <method> methods nemethods method 
 %type <method> externmethods externnemethods externmethod
 %type <formal> formals neformals formal
-%type <statement> statements nestatements statement simplestatement
-%type <statement> ifthenstatement whilestatement expressionstatement 
+%type <statement> statements nestatements statement simplestatement forassignstatement
+%type <statement> ifthenstatement whilestatement expressionstatement forstatement 
 %type <statement> ifthenelsestatement returnstatement statementnoshortif 
 %type <statement> ifthenelsestatementnoshortif whilestatementnoshortif 
 %type <statement> declaration
-%type <exp> statementexpression assignment methodinvocation
+%type <exp> forexpression statementexpression assignment methodinvocation
 %type <exp> classinstancecreation returnexpression expression orexpression 
 %type <exp> andexpression eqexpression relexpression addexpression 
 %type <exp> multexpression unaryexpression castexpression postfixexpression 
@@ -286,6 +288,8 @@ statement : simplestatement
             {$$ = $1;}
           | whilestatement
             {$$ = $1;}
+          | forstatement
+            {$$ = $1;}
 ;
 
 declaration : type idlist ';'
@@ -331,6 +335,24 @@ whilestatementnoshortif : tWHILE '(' expression ')' statementnoshortif
                           {$$ = makeSTATEMENTwhile($3,$5);}
 ;
 
+forstatement : tFOR '(' forassignstatement ';' forexpression ';' forassignstatement ')' statement
+	       //{ $$ = makeSTATEMENTsequence( makeSTATEMENTexp($3) , makeSTATEMENTwhile( $5 , makeSTATEMENTsequence($9, makeSTATEMENTexp($7) ))) ; }
+{ $$ = makeSTATEMENTsequence( $3 , makeSTATEMENTwhile( $5 , makeSTATEMENTsequence($9,$7 ))) ; }
+
+forexpression :
+/* empty */
+{ $$ = makeEXPboolconst(1) ;}
+|expression
+{ $$ = $1 ;}
+
+forassignstatement :
+              /* empty */ 
+             {$$ = NULL;}
+| assignment
+{ $$ = makeSTATEMENTexp($1) ; }
+              | assignment ',' assignment
+	      { $$ = makeSTATEMENTsequence ( makeSTATEMENTexp($1) , makeSTATEMENTexp($3)) ;}
+  
 expressionstatement : statementexpression ';'
                       {$$ = makeSTATEMENTexp($1);}
 ;
@@ -355,6 +377,10 @@ returnexpression : /* empty */
 
 assignment : tIDENTIFIER '=' expression
              {$$ = makeEXPassign($1,$3);}
+| tIDENTIFIER tINC
+{ $$ = makeEXPassign($1, makeEXPplus(makeEXPid($1) , makeEXPintconst(1))); }
+| tIDENTIFIER tDECR
+{ $$ = makeEXPassign($1, makeEXPminus( makeEXPid($1) , makeEXPintconst(1))); }
 ;
 
 expression : orexpression 
