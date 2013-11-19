@@ -29,6 +29,10 @@ Due Friday 8th November before midnight
 
 Due Friday 22th November before midnight
 
+* [WIG Codegen + Report + Final compiler] (wigcompiler.html)
+
+Due Friday 6th December before midnight
+
 # Old material
 
 You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs520/2012/)
