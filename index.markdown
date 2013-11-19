@@ -29,7 +29,7 @@ Due Friday 8th November before midnight
 
 Due Friday 22th November before midnight
 
-* [WIG Codegen + Report + Final compiler] (wigcompiler)
+* [WIG Codegen + Report + Final compiler] (wigcompiler.html)
 
 Due Friday 6th December before midnight
 
