@@ -1,0 +1,11 @@
+This directory contains all the files you need to make a latex wig
+report.  You may use a different text formatting system, but you must
+follow the sections as in this report.
+
+If you do want to use latex, there is a Makefile that will create .ps
+and .pdf files.  You can find a nice introduction on using latex in
+the file latex.ps.  There are many other documents available via the
+web about LaTeX use, and your TA and instructor are also quite familiar.
+
+LaTeX documents are source code too, so you should be using Subversion
+to manage them.
