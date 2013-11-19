@@ -27,7 +27,7 @@ Due Friday 8th November before midnight
 
 * [JOOS Peephole Patterns] (joospeephole.html)
 
-Due Wednesday 20th November before midnight
+Due Friday 22th November before midnight
 
 # Old material
 
