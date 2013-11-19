@@ -1,5 +1,5 @@
 group-1	./group-1	Main
-group-2	./group-2/transform	AsciiFunArt
+group-2	./group-2/      AsciiFunArt
 group-3	./group-3	Main
 group-4	./group-4	Maze
 group-5	./group-5	Beep
