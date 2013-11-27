@@ -3,6 +3,12 @@ title: COMP520 Compiler Design class (Fall 2013)
 ---
 
 # News
+* The final will be about :
+    * typecheking
+    * code generation
+    * static analysis
+    * garbage collection
+    * optimization
 * The final is Friday 13th December, 9AM (last 3 hours)
 * The coursepack is available, [you can order it](https://www.bookstore.mcgill.ca/comp-520-compiler-design-1)
 
@@ -60,3 +66,4 @@ You can find everything from previous years [here](http://www.cs.mcgill.ca/~cs52
 * [Clang recursive descent parser] (https://github.com/chapuni/clang/blob/master/lib/Parse/ParseExpr.cpp)
 * [On the cleverness of compilers] (http://alexey.radul.name/ideas/2013/cleverness-of-compilers/)
 * [Description of a modern GC (Mono SGen)] (http://www.mono-project.com/Generational_GC)
+* [Compiling Functional Languages] (http://pauillac.inria.fr/~xleroy/talks/compilation-agay.pdf)
