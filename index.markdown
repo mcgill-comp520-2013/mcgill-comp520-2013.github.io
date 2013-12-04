@@ -3,6 +3,7 @@ title: COMP520 Compiler Design class (Fall 2013)
 ---
 
 # News
+* Next week (9th to 13th), we will meet with each group to discuss your compiler.
 * The final will be about :
     * typecheking
     * code generation
@@ -37,7 +38,10 @@ Due Friday 22th November before midnight
 
 * [WIG Codegen + Report + Final compiler] (wigcompiler.html)
 
-Due Friday 6th December before midnight
+Due Sunday 8th December before midnight.
+Be careful, we will use the last commit BEFORE Sunday midnight
+for both the compiler and the report, and we will not be 
+accepting any fix after so don't work at the last minute!
 
 # Old material
 
